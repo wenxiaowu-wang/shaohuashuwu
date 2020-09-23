@@ -17,6 +17,9 @@ public class TestBackEnd {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * 测试推送
+     */
     @Test
     public void testFindAll(){
         List list = accountService.findAll();
