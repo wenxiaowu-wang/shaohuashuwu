@@ -13,7 +13,7 @@ import org.junit.Test;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class Test03SpringMabtis {
+public class TestBackEnd {
     @Autowired
     private AccountService accountService;
 
