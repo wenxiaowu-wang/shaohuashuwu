@@ -17,7 +17,7 @@ public class TestBackEnd {
     private AccountService accountService;
 
     /**
-     * 测试推送
+     * 测试推送 2
      */
     @Test
     public void testFindAll(){
@@ -30,6 +30,13 @@ public class TestBackEnd {
 
     @Test
     public void deleteTest(){
+        if (adminInfoService.deleteAdminInfo("334455")){
+            System.out.println("test over");
+        }
+    }
+
+    @Test
+    public void deleteTest1(){
         if (adminInfoService.deleteAdminInfo("334455")){
             System.out.println("test over");
         }
