@@ -40,6 +40,12 @@
     <input type="submit" value="提交">
 </form>
 
+<br>
+<br>
+
+<form action="account/作者专区" method="post">
+    <input type="submit" value="作者专区">
+</form>
 
 </body>
 </html>
