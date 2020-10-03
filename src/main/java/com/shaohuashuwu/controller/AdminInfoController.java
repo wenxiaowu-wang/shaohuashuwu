@@ -18,20 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(path = "/adminInfoController")
 public class AdminInfoController {
 
-    @Autowired
-    private AdminInfoService adminInfoService;
 
-    @RequestMapping(path = "/adminLogin")
-    public String adminLogin(AdminInfo adminInfo){
-            //POJO对象
-           // @RequestParam(value = "admin_id",required = true)String admin_id,
-           // @RequestParam(value = "admin_password",required = true)String admin_password){
-
-        String adminLoginResult = "loginFaile";
-        if (adminInfoService.isAdmainRight(adminInfo)){
-            adminLoginResult = "loginSuccess";
-        }
-        return adminLoginResult;
-    }
 
 }

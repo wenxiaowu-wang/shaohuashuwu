@@ -12,9 +12,6 @@ import org.apache.ibatis.annotations.Insert;
  */
 public interface ReportInfoDao {
 
-    //插入一条举报信息
-    @Insert("insert into report_info(report_id,user_id,chapter_id,report_reason,report_time,report_remarks)" +
-            "values(#{report_id},#{user_id},#{chapter_id},#{report_reason},#{report_time},#{report_remarks})")
-    public int insertReportInfo(ReportInfo reportInfo);
+
 
 }

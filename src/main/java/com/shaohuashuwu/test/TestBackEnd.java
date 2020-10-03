@@ -25,21 +25,6 @@ public class TestBackEnd {
         System.out.println(list);
     }
 
-    @Autowired
-    private AdminInfoService adminInfoService;
 
-    @Test
-    public void deleteTest(){
-        if (adminInfoService.deleteAdminInfo("334455")){
-            System.out.println("test over");
-        }
-    }
-
-    @Test
-    public void deleteTest1(){
-        if (adminInfoService.deleteAdminInfo("334455")){
-            System.out.println("test over");
-        }
-    }
     
 }

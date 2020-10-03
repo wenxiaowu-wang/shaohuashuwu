@@ -19,45 +19,4 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfoDao userInfoDao;
 
 
-    //更新用户金豆数（加减都有可能）
-    @Override
-    public boolean updateUserGoldBean(int user_id, int updateNum) {
-        boolean updateResult = false;
-        if (userInfoDao.updateGoldBeanNumByUserId(user_id,updateNum)!=(0)){
-            updateResult = true;
-        }
-        return updateResult;
-    }
-
-    //获取该用户当前金豆数
-    @Override
-    public int getGoldBeanNumOfUser(int user_id) {
-        return userInfoDao.selectUserInfoByUserId(user_id).getGold_bean_num();
-    }
-
-    //获取该用户当前推荐票数
-    @Override
-    public int getTicketNumOfUser(int user_id) {
-        return userInfoDao.selectUserInfoByUserId(user_id).getTicket_num();
-    }
-
-    //判断该用户是否已经是一位作者
-    @Override
-    public boolean isAlreadyBecameAuthor(int user_id) {
-        boolean isAlreadyBecame = false;
-        if (userInfoDao.selectUserInfoByUserId(user_id).getDouble_password() != null){
-            isAlreadyBecame = true;
-        }
-        return isAlreadyBecame;
-    }
-
-    //更新该用户(作者)的二级密码
-    @Override
-    public boolean updateAuthorDoublePassword(int user_id, String double_password) {
-        boolean updateResult = false;
-        if (userInfoDao.updateDoublePasswordByUserId(user_id,double_password)!=(0)){
-            updateResult = true;
-        }
-        return updateResult;
-    }
 }

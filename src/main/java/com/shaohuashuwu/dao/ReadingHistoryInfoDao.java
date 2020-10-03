@@ -16,12 +16,5 @@ import java.util.List;
  */
 public interface ReadingHistoryInfoDao {
 
-    //根据用户ID获取对应阅读历史信息
-    @Select("select * from reading_history_info where user_id = #{user_id}")
-    @Results(id = "readingHistoryInfo",value = {
-            @Result(id = true,column = "user_id",property = "user_id"),
-            @Result(column = "work_id",property = "work_id"),
-            @Result(column = "reading_time",property = "reading_time")
-    })
-    public List<ReadingHistoryInfo> selectReadingHistoryInfoByUserId(int user_id);
+
 }

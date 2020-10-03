@@ -11,9 +11,5 @@ import com.shaohuashuwu.domain.NoticeInfo;
  */
 public interface ChapterInfoService {
 
-    //智能判断举报是否成功
-    public int reportDetectionChapter(int chapter_id,int report_reason);
 
-    //下架对应章节并发送通知给对应作者
-    public boolean dealViolationChapterAndSendNotice(NoticeInfo noticeInfo,Integer chapter_id);
 }

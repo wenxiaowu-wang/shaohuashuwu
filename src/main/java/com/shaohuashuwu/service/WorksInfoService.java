@@ -13,6 +13,4 @@ import java.util.List;
  */
 public interface WorksInfoService {
 
-    //根据作者ID获取所有对应的作品信息
-    public List<WorksInfo> getWorkInfoOfAuthor(int user_id);
 }

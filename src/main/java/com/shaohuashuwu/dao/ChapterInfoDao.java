@@ -13,12 +13,5 @@ import org.apache.ibatis.annotations.Update;
  */
 public interface ChapterInfoDao {
 
-    //根据章节ID获取章节内容
-    @Select("select chapter_content from chapter_info where chapter_id = #{chapter_id}")
-    public String selectChapterContentByChapterId(int chapter_id);
-
-    //更新对应章节ID的章节状态为0（下架）
-    @Update("update chapter_info set chapter_state = 0 where chapter_id = #{chapter_id}")
-    public int updateChapterStateByChapterId(int chapter_id);
 
 }

@@ -21,9 +21,5 @@ public class WorksInfoServiceImpl implements WorksInfoService {
     @Autowired
     public WorksInfoDao worksInfoDao;
 
-    //根据作者ID获取所有对应的作品信息
-    @Override
-    public List<WorksInfo> getWorkInfoOfAuthor(int user_id) {
-        return worksInfoDao.selectAllByUserId(user_id);
-    }
+
 }

@@ -11,6 +11,5 @@ import com.shaohuashuwu.domain.ReportInfo;
  */
 public interface ReportInfoService {
 
-    //保存一条举报信息
-    public boolean addReportInfo(ReportInfo reportInfo);
+
 }
