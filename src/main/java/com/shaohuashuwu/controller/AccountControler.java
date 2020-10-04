@@ -64,6 +64,9 @@ public class AccountControler {
         System.out.println("跳转222222");
         return "authorMainFragment";
     }
+    /**
+     * test push
+     */
 
 
 //    @RequestMapping("/testtwo")
