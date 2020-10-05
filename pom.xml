@@ -141,8 +141,6 @@
       <version>0.9.1.2</version>
       <type>jar</type>
       <scope>compile</scope>
-
-
     </dependency>
 
     <!--      bootscrop和jquery-->
@@ -165,6 +163,24 @@
       <version>3.1.1</version>
 
     </dependency>
+
+    <!--Responsebody json转bean-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
   </dependencies>
 
 

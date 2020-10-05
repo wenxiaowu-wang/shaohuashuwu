@@ -62,4 +62,9 @@ public class AdminInfoServiceImpl implements AdminInfoService {
         }
         return updateResult;
     }
+
+    @Override
+    public AdminInfo getOneByName(String name) {
+        return adminInfoDao.selectAdminInfoByAdminId(name);
+    }
 }

@@ -22,4 +22,6 @@ public interface AdminInfoService {
 
     //更新管理员密码,该adminInfo为修改后的AdminInfo
     public boolean updateAdminPassword(AdminInfo adminInfo);
+
+    AdminInfo getOneByName(String name);
 }

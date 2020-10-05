@@ -34,12 +34,16 @@
 
 <p>/*********************************************/</p>
 
-<form action="adminInfoController/adminLogin" method="post">
+<form action="adminInfoController/adminLogin" method="post" enctype="multipart/form-data">
     账号：<input type="text" name="admin_id"/><br/>
     密码：<input type="text" name="admin_password"/><br/>
     <input type="submit" value="提交">
 </form>
+<p>/*********************************************/</p>
 
+<a href="elementTest.jsp">go to element ui test</a>
+<br>
+<a href="eletest.jsp">element ui test</a>
 
 </body>
 </html>

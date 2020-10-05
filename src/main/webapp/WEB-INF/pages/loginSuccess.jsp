@@ -10,8 +10,17 @@
 <html>
 <head>
     <title>登录成功</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <p align="center">恭喜您登录成功，但是现在啥都没有</p>
+<div id="admin" >
+<p>hello2</p>
+    <br>
+</div>
+
 </body>
 </html>
