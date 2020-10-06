@@ -18,7 +18,7 @@
     <!--配置的视图解析器-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
+<!--        <property name="suffix" value=".jsp"/>-->
     </bean>
 
 
@@ -36,17 +36,24 @@
 <!--    </bean>-->
 <!--    *******************************************    -->
     <!--过滤静态资源,mapping 是映射请求,location 是本地-->
-    <mvc:resources location="/css/" mapping="/css/**" />
-    <mvc:resources location="/images/" mapping="/WEB-INF/images/**" />
-    <mvc:resources location="/js/" mapping="/js/**" />
+<!--    <mvc:resources location="/css/" mapping="/css/**" />-->
+<!--    <mvc:resources location="/images/" mapping="/images/**" />-->
+<!--    <mvc:resources location="/js/" mapping="/js/**" />-->
+
 
     <!--   <mvc:resources mapping="/static/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css" location="/css/**"/>-->
+    <!--   WEB-INF目录下的文件和webapp目录下的文件访问时会冲突好像不可以识别-->
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
     <mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+    <mvc:resources location="/WEB-INF/pages/" mapping="/pages/**" />
 
     <mvc:cors>
-        <mvc:mapping path="/**"/>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT,PATCH"
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                     allow-credentials="true"/>
     </mvc:cors>
 
     <!-- 响应静态文件 -->

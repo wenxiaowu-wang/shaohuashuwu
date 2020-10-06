@@ -44,6 +44,13 @@
 <a href="elementTest.jsp">go to element ui test</a>
 <br>
 <a href="eletest.jsp">element ui test</a>
+<br>
+<%--在前头加上"/"tomcat就不自动添加application context路径了--%>
+<a href="transactionInfoController/topUpsInterface">保存打赏记录测试</a>
+<br>
+<a href="adminInfoController/adminLoginInterface">管理员登录页面（未分离）</a>
+<br>
+<a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>
 
 </body>
 </html>

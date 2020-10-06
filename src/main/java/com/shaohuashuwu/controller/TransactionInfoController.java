@@ -1,6 +1,8 @@
 package com.shaohuashuwu.controller;
 
 import com.shaohuashuwu.domain.TransactionInfo;
+import com.shaohuashuwu.service.TransactionInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,14 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path = "/transactionInfoController")
 public class TransactionInfoController {
 
+    @Autowired
+    private TransactionInfoService transactionInfoService;
 
     //添加交易信息（充值）
     @RequestMapping(path = "/addTopUpsInfo")
-    public boolean addTopUpsInfo(TransactionInfo transactionInfo){
-        boolean addResult = false;
-
-
+    public String addTopUpsInfo(TransactionInfo transactionInfo){
+        String addResult = "loginFaile";
+        if (transactionInfoService.addTopUpsInfo(transactionInfo)){
+            addResult = "loginSuccess";
+        }
         return addResult;
+    }
+    //跳转到打赏页面（跳转）
+    @RequestMapping(path = "/topUpsInterface")
+    public String topUpsInterface(){
+        System.out.println("将跳转到打赏页面");
+        return "topUpsInterface.html";
+//        return "loginSuccess.jsp";
     }
 
 }

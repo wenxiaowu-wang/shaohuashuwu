@@ -77,4 +77,19 @@ public class AdminInfoController {
         System.out.println(getResult.toString());
         return getResult;
     }
+
+    /**
+     * 跳转登录页面
+     */
+    @RequestMapping(path = "/adminLoginInterface")
+    public String toLoginInterface(){
+        return "hello.html";
+    }
+    /**
+     * 跳转登录页面
+     */
+    @RequestMapping(path = "/adminLoginInterface2")
+    public String toLoginInterface2(){
+        return "login.html";
+    }
 }

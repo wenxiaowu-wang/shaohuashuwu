@@ -32,6 +32,7 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+
   <!--解决中文乱码的过滤器-->
   <filter>
     <filter-name>characterEncodingFilter</filter-name>
