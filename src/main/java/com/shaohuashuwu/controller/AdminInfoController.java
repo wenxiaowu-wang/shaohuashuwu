@@ -22,21 +22,24 @@ public class AdminInfoController {
     private AdminInfoService adminInfoService;
 
     @RequestMapping(path = "/adminLogin")
-    public String adminLogin(@RequestBody AdminInfo adminInfo){
+    public @ResponseBody String adminLogin(@RequestBody AdminInfo adminInfo){
             //POJO对象
            // @RequestParam(value = "admin_id",required = true)String admin_id,
            // @RequestParam(value = "admin_password",required = true)String admin_password){
 
         System.out.println("进入登录函数。。。");
         System.out.println(adminInfo.toString());
-        String adminLoginResult = "loginFaile";
+        String adminLoginResult = "loginFaile.jsp";
         if (adminInfoService.isAdmainRight(adminInfo)){
-            adminLoginResult = "loginSuccess";
-            System.out.println("登录成功了...");
-            System.out.println("进入panduan函数。。。");
-            System.out.println(adminInfo.toString());
+            adminLoginResult = "loginSuccess.html";
         }
         return adminLoginResult;
+    }
+
+    @RequestMapping(path = "/forwardToLoginResult")
+    public String forwardToLoginResult(){
+        String result = "loginSuccess.html";
+        return result;
     }
 
     /**
@@ -56,12 +59,20 @@ public class AdminInfoController {
         return modelAndView;
     }
 
-    @RequestMapping(path = "/testChuanZhi")
-    public @ResponseBody String testChuanZhi(@RequestBody AdminInfo adminInfo){
+    /**
+     * 传值测试，测试成功
+     * @param id
+     * @param password
+     * @return
+     */
+    @RequestMapping(path = "/testChuanZhi/{admin_id}/{admin_password}")
+    public @ResponseBody String testChuanZhi(@PathVariable(value = "admin_id") String id,@PathVariable(value = "admin_password")String password){
             //POJO对象
            // @RequestParam(value = "admin_id",required = true)String admin_id,
            // @RequestParam(value = "admin_password",required = true)String admin_password){
-
+        AdminInfo adminInfo = new AdminInfo();
+        adminInfo.setAdmin_id(id);
+        adminInfo.setAdmin_password(password);
         System.out.println(adminInfo.toString());
         return adminInfo.toString();
     }
