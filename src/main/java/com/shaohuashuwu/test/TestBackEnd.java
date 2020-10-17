@@ -1,5 +1,8 @@
 package com.shaohuashuwu.test;
 
+import com.shaohuashuwu.dao.AdminInfoDao;
+import com.shaohuashuwu.dao.UserInfoDao;
+import com.shaohuashuwu.domain.AdminInfo;
 import com.shaohuashuwu.service.AccountService;
 import com.shaohuashuwu.service.AdminInfoService;
 import org.junit.Test;
@@ -41,6 +44,27 @@ public class TestBackEnd {
         if (adminInfoService.deleteAdminInfo("334455")){
             System.out.println("test over");
         }
+    }
+
+    @Autowired
+    private UserInfoDao userInfoDao;
+
+    @Autowired
+    private AdminInfoDao adminInfoDao;
+
+
+
+    @Test
+    public void updateBeanNumByIdAndNumTest(){
+        if (userInfoDao.updateGoldBeanNumByUserId(11,1000)!=0){
+            System.out.println("充值金豆测试成功");
+        }
+    }
+
+    @Test
+    public void selectAdminInfoByAdminIdTest(){
+        AdminInfo adminInfo = adminInfoDao.selectAdminInfoByAdminId("abin");
+        System.out.println(adminInfo.toString());
     }
     
 }

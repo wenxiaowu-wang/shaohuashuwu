@@ -28,7 +28,7 @@ public class AttentionInfoServiceImpl implements AttentionInfoService {
     @Override
     public boolean isAlreadyAttention(AttentionInfo attentionInfo) {
         boolean isAlreadyAttention = false;
-        if (attentionInfoDao.selectAttentionInfo(attentionInfo).getAuthor_id() == attentionInfo.getAuthor_id()){
+        if(attentionInfoDao.selectAttentionInfo(attentionInfo)!=null){
             isAlreadyAttention = true;
         }
         return isAlreadyAttention;

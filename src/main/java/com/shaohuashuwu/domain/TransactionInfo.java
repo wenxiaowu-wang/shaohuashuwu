@@ -14,6 +14,7 @@ public class TransactionInfo implements Serializable {
     private Integer transaction_quantity;   //交易数量
     private String transaction_unit;    //交易单位
 
+    //注意：根据交易类型的不同，交易的接受者可能为用户ID，也可能为作品ID
 
     public TransactionInfo() {
     }
@@ -94,4 +95,35 @@ public class TransactionInfo implements Serializable {
                 ", transaction_unit='" + transaction_unit + '\'' +
                 '}';
     }
+
+    //解析交易类型
+    public String analysisType(){
+        String type = "";
+        switch(this.getTransaction_type()){
+            case 0:type += "充值";break;
+            case 1:type += "打赏";break;
+            case 2:type += "订阅";break;
+            case 3:type += "投票";break;
+            case 4:type += "提现";break;
+            default:type += "未知";break;
+        }
+        return type;
+    }
+
+    //解析交易方式
+    public String analysisMode(){
+        String mode = "";
+        switch(this.getTransaction_mode()){
+            case 0:mode += "支付宝";break;
+            case 1:mode += "微信";break;
+            default:mode += "未知";break;
+        }
+        return mode;
+    }
+
+    //解析交易时间（Timestamp --> String ）
+    public String analysisTime(){
+        return this.getTransaction_time().toString();
+    }
+
 }

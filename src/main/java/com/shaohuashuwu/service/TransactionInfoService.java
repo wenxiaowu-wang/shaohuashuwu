@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface TransactionInfoService {
 
-    //添加一条充值记录
-    public boolean addTopUpsInfo(TransactionInfo topUpsInfo);
+    //充值金豆（记录充值信息并添加对应用户金豆数量）
+    public boolean topUpsGoldBean(TransactionInfo topUpsInfo);
 
     //打赏作品
     public boolean tipWork(TransactionInfo tipInfo);

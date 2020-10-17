@@ -4,6 +4,7 @@ import com.shaohuashuwu.domain.WorksInfo;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -37,4 +38,11 @@ public interface WorksInfoDao {
 
     //根据作者ID获取所有对应的作品ID和作品名字 待定
 
+
+    //根据作品ID获取对应作者ID
+    @Select("select user_id from works_info where work_id = #{work_id}")
+    public int selectAuthorIdByWorkId(int work_id);
+
+    @Update("update works_info set work_vote_num = work_vote_num + (#{param2}) where work_id = #{param1}")
+    public int updateWorkVoteNumByWorkId(int work_id,int voteNum);
 }

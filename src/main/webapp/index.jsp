@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/elementui.css">
 </head>
 <body>
 
@@ -48,9 +49,52 @@
 <%--在前头加上"/"tomcat就不自动添加application context路径了--%>
 <a href="transactionInfoController/topUpsInterface">购买金豆</a>
 <br>
+<a href="transactionInfoController/rewardInterface">打赏作品（小说打赏）</a>
+<br>
+<a href="transactionInfoController/voteInterface">投票作品（投推荐票）</a>
+<br>
+<a href="attentionInfoController/toPayAttemtion">关注作者（理论页面）</a>
+<br>
 <a href="adminInfoController/adminLoginInterface">管理员登录页面（未分离）</a>
 <br>
 <a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>
 
+
+
+<script src="js/axios.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/elementui.js"></script>
+<script>
+    new Vue({
+        methods:{
+            hello(){
+                axios.post("userSessionsaveUser/" +
+                    11+"/"+encodeURI(encodeURI("我吃西红柿"))).then(response =>{
+                    alert(JSON.stringify(response.data));
+                }).catch(error =>{
+                    alert(JSON.stringify(error));
+                })
+            }
+        },
+        created(){
+            alert("发送post请求")
+            axios.post("userSession/saveUser/" +
+                11+"/"+encodeURI("我吃唐家土豆")).then(response =>{
+                alert(JSON.stringify(response.data));
+                console.log("用户ID和name装载完毕");
+                console.log("结论：可以发送int（Integer）类型的数据，编码发送到后端的中文会自动解码")
+            }).catch(error =>{
+                alert(JSON.stringify(error));
+            });
+            axios.post("worksSession/saveWork/" +
+                28+"/"+encodeURI("斗罗大陆")).then(response =>{
+                alert(JSON.stringify(response.data));
+                console.log("作品ID和name装载完毕");
+            }).catch(error =>{
+                alert(JSON.stringify(error));
+            });
+        }
+    })
+</script>
 </body>
 </html>

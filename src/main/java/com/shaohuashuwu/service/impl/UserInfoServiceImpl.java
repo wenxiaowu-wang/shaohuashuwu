@@ -19,6 +19,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfoDao userInfoDao;
 
 
+    /**
+     * 在其它地方直接调用UserInfoDao了
+     * @param user_id
+     * @param updateNum
+     * @return
+     */
     //更新用户金豆数（加减都有可能）
     @Override
     public boolean updateUserGoldBean(int user_id, int updateNum) {

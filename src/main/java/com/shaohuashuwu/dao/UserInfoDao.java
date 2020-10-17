@@ -14,9 +14,17 @@ import java.util.List;
  */
 public interface UserInfoDao {
 
-    //更新该用户金豆数
-    @Update("update user_info set gold_bean_num = (gold_bean_num)+(#{updateNum}) where user_id = #{user_id}")
+    //根据用户ID更新该用户金豆数
+    @Update("update user_info set gold_bean_num = (gold_bean_num)+(#{param2}) where user_id = #{param1}")
     public int updateGoldBeanNumByUserId(int user_id,int updateNum);
+
+    //根据用户id更新该用户金币数量
+    @Update("update user_info set gold_coin_num = (gold_coin_num)+(#{param2}) where user_id = #{param1}")
+    public int updateGoldCoinNumByUserId(int user_id,int updateNum);//根据用户id更新该用户金币数量
+
+    //根据用户id更新该用户推荐票数量
+    @Update("update user_info set ticket_num = (ticket_num)+(#{param2}) where user_id = #{param1}")
+    public int updateTicketNumByUserId(int user_id,int updateNum);
 
     //查询该用户当前所有信息
     @Select("select * from user_info where user_id = #{user_id}")
@@ -37,7 +45,7 @@ public interface UserInfoDao {
     public UserInfo selectUserInfoByUserId(int user_id);
 
     //更新该用户二级密码
-    @Update("update user_info set double_password = #{double_password} where user_id = #{user_id}")
+    @Update("update user_info set double_password = #{param2} where user_id = #{param1}")
     public int updateDoublePasswordByUserId(int user_id,String double_password);
 
     //根据作品ID获取阅读历史信息表以及书架信息表中对应的读者ID，根据读者ID获取所有该用户对应的用户信息
