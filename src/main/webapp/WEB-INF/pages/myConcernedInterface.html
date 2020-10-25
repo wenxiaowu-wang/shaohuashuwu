@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的关注</title>
+    <link rel="stylesheet" href="../css/userModel.css">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/myConcerned.css">
+
+</head>
+<body>
+<div id="myConcerned">
+    <div class="top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips">{{topTips}}</div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1"><i class="el-icon-location"></i>我的首页</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">我的书架</template>
+                        <el-menu-item index="2-1">书架1</el-menu-item>
+                        <el-menu-item index="2-2">书架2</el-menu-item>
+                        <el-menu-item index="2-3">书架3</el-menu-item>
+                        <el-submenu index="2-4">
+                            <template slot="title">书架4</template>
+                            <el-menu-item index="2-4-1">书架4-1</el-menu-item>
+                            <el-menu-item index="2-4-2">书架4-2</el-menu-item>
+                            <el-menu-item index="2-4-3">书架4-3</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                    <el-menu-item index="3" disabled>消息中心</el-menu-item>
+                    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">个人账户</a></el-menu-item>
+                </el-menu>
+            </div>
+            <div class="top_data">
+                <br/>
+                {{user_name}}<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+    <div class="body_left">
+
+    </div>
+    <div class="body">
+        <div class="body_header">
+            <div class="body_img">
+            <div class="body_img_content">
+                <el-avatar id="avatar" :size="50" :src="circleUrl" shape="circle"></el-avatar>
+                <label>{{user_name}}&nbsp;&nbsp;&nbsp;<span>互相关注： </span>{{eachAttention}}&nbsp;&nbsp;
+                    <span>关注： </span>{{attentionNum}}&nbsp;&nbsp;<span>粉丝： </span>{{fans}}&nbsp;&nbsp;</label>
+            </div>
+        </div>
+        </div>
+        <div class="body_center">
+            <el-tabs type="border-card">
+                <el-tab-pane label="互相关注">
+                    <div class="users" v-for="user in userData">
+                        <div class="users_avatar">
+                            <el-avatar> {{user.avatar}} </el-avatar>
+                        </div>
+                        <div class="users_content">
+                            {{user.name}}
+                        </div>
+                        <div class="users_operate">
+                            <el-button type="danger" plain @click="cancelAttention(user.id)">取关</el-button>
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="我的关注">
+                    <el-table
+                            :data="tableData"
+                            style="width: 100%">
+                        <el-table-column
+                                prop="avatar"
+                                label="头像">
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="用户名"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="date"
+                                label="操作"
+                                width="180">
+                        </el-table-column>
+
+                    </el-table>
+                </el-tab-pane>
+                <el-tab-pane label="我的粉丝">
+                    <el-table
+                            :data="tableData"
+                            border
+                            style="width: 100%">
+                        <el-table-column
+                                prop="avatar"
+                                label="头像">
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="用户名"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                fixed="right"
+                                label="操作"
+                                width="100">
+                            <template slot-scope="scope">
+                                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                                <el-button type="text" size="small">编辑</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+        <div class="body_content">
+
+        </div>
+
+    </div>
+    <div class="footing">
+
+
+    </div>
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/myConcerned.js"></script>
+
+</body>
+</html>
