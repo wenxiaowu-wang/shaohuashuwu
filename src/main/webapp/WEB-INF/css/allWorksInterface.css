@@ -1,0 +1,196 @@
+.allWorksInterface-class{
+    margin: auto;
+    display:table;
+    width: 1170px;
+    height: 800px;
+    background: #ffffff;
+
+}
+
+.allWorksvole-class{
+    width: 220px;
+    /*height: 100px;*/
+
+    margin-left: 50px;
+    background: #ffffff;
+    margin-top: 20px;
+    float: left;
+}
+
+
+
+/*左侧选项*/
+.voletips-p-class{
+    font-weight: bold;
+    font-size: 13px;
+    color: #494949;
+    margin-left: 10px;
+}
+
+
+
+.voletips-div-class{
+    width: 100%;
+    height: 1px;
+    background: #b8b6b6;
+}
+
+.selected-button-class{
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.mainvole-button-class{
+
+    margin-left: 10px;
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+    width: 40px;
+}
+
+.vicevole-button-class{
+    margin-left: 10px;
+    background:  #f7f6f2;
+    border-color:  #f7f6f2;
+    color: #000000;
+    width: 90px;
+}
+
+.vicevole-class{
+    background: #f7f6f2;
+}
+
+/*主题内容*/
+.allWorksinclude-class{
+    margin-left: 20px;
+    width: 865px;
+    height: 1000px;
+    background: #ffffff;
+    margin-top: 10px;
+    float: left;
+}
+
+.worksNum-class{
+    height: 30px;
+    width: 865px;
+    background: #f7f6f2;
+    margin-top: 0px;
+}
+
+.worksNum-p-class{
+    font-size: 13px;
+    color: #555555;
+
+    margin-left: 10px;
+    position: relative;
+    top:8px;
+}
+
+.worksInfoList-class{
+    /*background: #b2d1d4;*/
+    position: relative;
+    left: -30px;
+    /*background: #13ce66;*/
+    width: 895px;
+    float: left;
+}
+
+
+/*每一个作品*/
+.workInfo-class{
+    width: 417px;
+    height: 140px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 40px;
+    /*background: #b7d5f8;*/
+}
+
+.work_cover-class{
+    height: 136px;
+    width: 102px;
+    float: left;
+}
+#work_name-id{
+/*一行显示一条*/
+    display: block;
+    margin-left: 15px;
+    margin-top: 5px;
+    width: 300px;
+    /*去掉链接下划线*/
+    text-decoration:none;
+    float: left;
+    font-size: 18px;
+    color: black;
+}
+
+.worksInfomation-two-class{
+
+    /*去掉链接下划线*/
+    text-decoration:none;
+    font-size: 15px;
+    color: #888888;
+    margin-left: 5px;
+    position: relative;
+    top: 5px;
+    /*float: left;*/
+
+}
+
+#work_main_label-id{
+    margin-left: 15px;
+    width:50px ;
+}
+
+#work_vice_label-id{
+    width:80px ;
+}
+
+#work_serial_state-id{
+    width:100px ;
+
+}
+
+#work_introduct-id{
+    display: block;
+    /*float: left;*/
+    margin-left: 117px;
+    margin-top: 13px;
+    width: 290px;
+    height: 35px;
+    font-size: 14px;
+    color: #454545;
+
+    /*其中overflow: hidden来将多出来的字体隐藏；*/
+    /*text-overflow: ellipsis;是用来代替的格式；*/
+    /*white-space: nowrap;规定段落中的文本不进行换行*/
+    /*display: block; 必须有*/
+
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+#work_word_num-id{
+    margin-left: 15px;
+    position: relative;
+    top: 15px;
+    color: #888888;
+    font-size: 15px;
+}
+
+.fengediv{
+    background: #666666;
+    height: 1px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.fenyediv{
+    display: block;
+    margin-left: 200px;
+    margin-top: 50px;
+    width: 400px;
+    float: left;
+}

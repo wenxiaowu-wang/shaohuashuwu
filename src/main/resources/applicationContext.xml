@@ -70,4 +70,17 @@
     <!--开启spring对注解事务的支持-->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 
+
+<!--    阿里云oss-->
+    <bean id="ossClient" class="com.aliyun.oss.OSSClient">
+        <constructor-arg index="0" value="oss-cn-beijing.aliyuncs.com"></constructor-arg>
+        <constructor-arg index="1" value="LTAI4GHgm8Qv5PCwSGBMNMYT"></constructor-arg>
+        <constructor-arg index="2" value="pMKax279ohKSOJEJoJTcNGDZCr6eA6"></constructor-arg>
+
+    </bean>
+
+
+
+
+
 </beans>

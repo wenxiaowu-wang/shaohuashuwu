@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchInterface.css">
+    <link rel="stylesheet" href="../css/mangagementWorksInterface.css">
+
+</head>
+<body>
+<div >
+
+<!--顶部标题栏-->
+<div class="authorMainTopdiv">
+    <ul class="authorMainTopdul">
+        <li id="shaohualog" class="woketopall">
+            <img src="../images/SHAOHUALOGO.png" >
+        </li>
+
+        <li id="authortips" class="woketopall">
+            <p id="authortips-a">欢迎进入作者平台！</p>
+        </li>
+        <li  id="worketbeach"   class="authorMainTopdli" >
+            <img  src="../images/authorworks-32.png" class="woketopall">
+        </li>
+        <li id="workhelp" class="authorMainTopdli">
+            <img  src="../images/authorhelp-32.png" class="woketopall">
+        </li>
+        <li id="workeinfo" class="authorMainTopdli" >
+            <img  src="../images/authorInf-32.png" class="woketopall">
+        </li>
+        <li id="workeme"  class="authorMainTopdli" >
+            <!--            <img id="workeme-img" src="../images/img1.png" class="woketopall">-->
+            <div class="dropdown">
+                <img   class="woketopall" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="dropdown-content" id="workeMe-dropdown">
+                    <a href="//www.runoob.com">点我</a>
+                    <a href="//www.runoob.com">点我</a>
+                    <div style="width:170px;border:1px solid #cccccc;"></div>
+                    <a href="//www.runoob.com">点我</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<!--左部标题栏和主题内容-->
+<div class="authorMain" >
+
+
+    <div class="authorMainLeftdiv">
+        <ul class="authorMainLeftdul">
+            <!--        <li class="nulllist">-->
+            <!--            作家专区-->
+            <!--        </li>-->
+            <li  id="worksBean"  class="authorMainLeftdli"  onclick="workeBeanOnclick(this)" >
+                <img src="../images/authorworks-36.png" class="authorMainLeftimg" id="worksBeanimg-id">
+                <h href="#home" class="authorMainLefta" id="worksBeanp-id">工作台</h></li>
+            </li>
+
+            <li id="worksMangagement" class="authorMainLeftdli" onclick="worksMangagementOnclick(this)">
+                <img src="../images/authormangagmentNew-32.png" class="authorMainLeftimg"  id="worksMangagementimg-id">
+                <h href="#home" class="authorMainLefta" id="worksMangagementp-id">作品管理</h></li>
+            </li>
+            <li id="workDataStatistics" class="authorMainLeftdli" onclick="workDataStatisticsOnclick(this)">
+                <img src="../images/authordata-32.png" class="authorMainLeftimg"  id="workeDataimg-id" >
+                <h href="#home" class="authorMainLefta" id="workeDatap-id">数据中心</h></li>
+
+            </li>
+            <li id="remuneration"  class="authorMainLeftdli" onclick="remunerationOnclick(this)">
+                <img src="../images/authorremunration-32.png" class="authorMainLeftimg" id="renmunerationimg-id">
+                <h href="#home" class="authorMainLefta" id="renmunerationp-id">稿酬收入</h></li>
+
+            </li>
+            <li id="interactionManagement"  class="authorMainLeftdli" onclick="interactionManagementOnclick(this)">
+                <img src="../images/authorinteraction-32.png" class="authorMainLeftimg"  id="interactionManagementimg-id">
+                <h href="#home" class="authorMainLefta" id="interactionManagementp-id">互动管理</h></li>
+            </li>
+            </li>
+        </ul>
+
+
+    </div>
+
+<!--    主要内容-->
+    <div id="app">
+
+        <div id="mangagenmentWorksInfo">
+            <p id = "mangemnetWork">管理作品</p>
+            <hr id="mangemnetWorkhr">
+
+
+
+<!--            <ul class="worksInfoul">-->
+<!--                <li v-for="worksInfo in worksInfoList">-->
+<!--&lt;!&ndash;                    <img src="../images/authorremunration-32.png" class="work_cover_class">&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;                 <div id="work_name_div_id">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="//www.runoob.com" class="work_name_class">{{worksInfo.work_name}}</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;                 </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="fengge">&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <el-button size="small" style="width: 120px" style="height: 40px"  @click="gorouter(worksInfo.work_id)"            class="worksMangagenment_button" id="gotowork1">管理作品</el-button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <el-button  size="small" style="width: 120px" style="height: 40px" class="worksMangagenment_button" id="gotowork2">作品设置</el-button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                    <el-button   type="primary" plain size="small" style="width: 120px" style="height: 40px" class="worksMangagenment_button" id="gotowork3">去写作</el-button>&ndash;&gt;&ndash;&gt;-->
+
+<!--                    <el-button type="danger">危险按钮</el-button>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+            <el-form  label-width="100px"                              class="demo-ruleForm">
+
+
+                <img :src="worksInfo.work_cover" class="work_cover_class">
+<!--                <img src="https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/authormangagment-32-on.png" class="work_cover_class">-->
+
+
+                <ul class="showworkInfo-ul">
+                    <li class="showworkInfo-li">
+                        <p class="showworkInfoTips" id="work_name_tipid">作品名称:</p>
+                        <p class="showworkInfo" id="work_name_id">{{worksInfo.work_name}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips" id="work_serial_state_tipid">作品状态:</p>
+                        <p class="showworkInfo" id="work_serial_state_id">{{work_serial_state_show}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips" id="work_word_num_tipid">作品字数:</p>
+                        <p class="showworkInfo" id="work_word_num_id">{{worksInfo.work_word_num}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips" id="work_tip_num_tipid">打赏数量:</p>
+                        <p class="showworkInfo" id="work_tip_num_id">{{worksInfo.work_tip_num}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips" id="work_subscribe_num_tipid">订阅数量:</p>
+                        <p class="showworkInfo" id="work_subscribe_num_id">{{worksInfo.work_subscribe_num}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips" id="work_vote_num_tipid">推荐票数:</p>
+                        <p class="showworkInfo" id="work_vote_num_id">{{worksInfo.work_vote_num}}</p>
+
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips" id="work_create_time_tipid">创建时间:</p>
+                        <p  value-format="yyyy-MM-dd HH:mm:ss" class="showworkInfo" id="work_create_time_id">{{worksInfo.work_create_time}}</p>
+
+                    </li>
+<!--                    <li class="showworkInfo-li">-->
+<!--                        <p class="showworkInfoTips" id="work_name_tipid">作品名称</p>-->
+<!--                        <p class="showworkInfo" id="work_name_id">1{{worksInfo.work_name}}</p>-->
+<!--                    </li>-->
+<!--                    <li class="showworkInfo-li">-->
+<!--                        <p class="showworkInfoTips" id="work_name_tipid">作品名称</p>-->
+<!--                        <p class="showworkInfo" id="work_name_id">1{{worksInfo.work_name}}</p>-->
+<!--                    </li>-->
+<!--                    <li class="showworkInfo-li">-->
+<!--                        <p class="showworkInfoTips" id="work_name_tipid">作品名称</p>-->
+<!--                        <p class="showworkInfo" id="work_name_id">1{{worksInfo.work_name}}</p>-->
+<!--                    </li>-->
+<!--                    <li class="showworkInfo-li">-->
+<!--                        <p class="showworkInfoTips" id="work_name_tipid">作品名称</p>-->
+<!--                        <p class="showworkInfo" id="work_name_id">1{{worksInfo.work_name}}</p>-->
+<!--                    </li>-->
+<!--                    <li class="showworkInfo-li">-->
+<!--                        <p class="showworkInfoTips" id="work_name_tipid">作品名称</p>-->
+<!--                        <p class="showworkInfo" id="work_name_id">1{{worksInfo.work_name}}</p>-->
+<!--                    </li>-->
+
+                </ul>
+
+
+
+<!--                <el-form-item label="书籍名称"                                                                            class="creatwork_include_p" id="creatwork_include_namep">-->
+<!--                    <el-input v-model="worksInfo.work_name"                                   class="creatwork_include_input" id="creatwork_include_nameinput"        style="width: 510px"></el-input>-->
+<!--                </el-form-item>-->
+
+
+                <el-form-item>
+                    <el-button type="success" type="text" @click="onwork()" :disabled="workstate == 1  || workstate == 2 ?true:false" class="onbutton">上架作品</el-button>
+                    <el-button type="danger" @click="offwork()"  :disabled="workstate == 3 || workstate == 4 ?true:false" class="offbutton">下架作品</el-button>
+
+
+
+
+
+<!--                    <el-button type="primary"  @click="submitForm('worksInfo')"   :disabled="iswork_name==0&&iswork_otherword==0&&iswork_introduct==0&&worksInfo.work_vice_label!=null?false:true" class="addwork_to_button" id="addwork_to_buttonid" >立即创建</el-button>-->
+<!--                    <el-button @click="resetForm('worksInfo')"                                                          class="notaddwork_to_button">重置</el-button>-->
+                </el-form-item>
+
+
+
+
+            </el-form>
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+
+<script src="../js/mangagementWorkInter.js"></script>
+
+
+</html>

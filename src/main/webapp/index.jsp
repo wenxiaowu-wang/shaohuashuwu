@@ -20,26 +20,53 @@
     <input type="submit" value="保存">
 </form>
 
-<form action="account/workbenchInterfacce" method="post">
-    <input type="submit" value="跳转">
+<hr>
+<p>
+    测试
+</p>
+<hr>
+
+<form  action="account/findworksAll" method="post">
+
+    <input type="submit" value="查找全部作品">
+
 </form>
 
 
+<a href="WEB-INF/pages/worksMangagementInterface.html">全部作品</a>
+<input type ="button" value="跳转" onclick="window.location.href='WEB-INF/pages/worksMangagementInterface.jsp'">
 
-<form action="account/test" method="post">
-    <input type="submit" value="跳转">
+
+<br>
+<br>
+<br>
+<br>
+<form  action="account/findallworks" method="post">
+
+    <input type="submit" value="测试跳转界面">
+
+</form>
+<br>
+<br>
+<br>
+<br>
+<form  action="account/addfindallworks" method="post">
+
+    <input type="submit" value="测试添加界面">
+
 </form>
 
-<a href="account/testtwo">two</a>
+<form  action="account/addfindallworks" method="post">
 
-<p>/*********************************************/</p>
+    <input type="submit" value="测试添加界面">
 
-<form action="adminInfoController/adminLogin" method="post">
-    账号：<input type="text" name="admin_id"/><br/>
-    密码：<input type="text" name="admin_password"/><br/>
-    <input type="submit" value="提交">
 </form>
 
+<form  action="account/usermain" method="post">
+
+    <input type="submit" value="用户主界面">
+
+</form>
 
 </body>
 </html>

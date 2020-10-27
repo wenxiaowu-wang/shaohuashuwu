@@ -1,0 +1,102 @@
+.userMainTop_class{
+    height: 32px;
+    /*width: 50px;*/
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+
+    /*y阴影*/
+    /*box-shadow: 0px 5px 10px #b2d1d4;*/
+    background: #524d4d;
+    float: left;
+}
+
+.user_navigation_bar{
+    margin:auto;
+    display:table;
+    list-style-type: none;
+    width: 1105px;
+}
+
+.workclassification_class{
+    float: left;
+/*    设置下拉框样式*/
+    width: 184px;
+    height: auto;
+    background: #13ce66;
+}
+
+
+.el-button-my{
+    background: #524d4d;
+    border-color: #524d4d;
+    color: #ffffff;
+}
+
+
+/*第二行*/
+.dierhang{
+    margin: auto;
+    display:table;
+    width: 1070px;
+    /*position: fixed;*/
+    /*top:32px;*/
+}
+/*用户信息*/
+.userInfo-class{
+    margin: auto;
+    display:table;
+    width: 1070px;
+    position: fixed;
+    top:32px;
+}
+
+.userInfo-p-class{
+    font-size: 12px;
+    color: #999999;
+    /*去掉链接下划线*/
+    text-decoration:none;
+}
+
+#userout-p-id{
+    margin-left: 130px;
+}
+
+#haveuser-p-id{
+    margin-left: 150px;
+}
+
+
+/*其他*/
+.imglogo{
+
+    width: 90px;
+    height: 40px;
+    margin-top: 50px;
+}
+
+.el-select-my{
+    margin-left: 290px;
+    border-color: black;
+    position: relative;
+    top: -10px;
+}
+
+.el-selectbutton-my{
+    position: relative;
+    top: -10px;
+    left: -5px;
+}
+
+.el-shujia-my{
+    position: relative;
+    left: 272px;
+    top:-10px;
+    height: 60px;
+}
+
+
+

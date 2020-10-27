@@ -1,0 +1,159 @@
+/*主题内容*/
+#app{
+    /*height: calc(100vh);*/
+
+}
+
+#mangagenmentWorksInfo{
+
+    background: #ffffff;
+    width: 875px;
+
+    /*height: calc(100vh);*/
+    min-height: calc(100vh);
+
+    margin-left: 20px;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    float: left;
+
+    /*!*j渐变色阴影*!*/
+    box-shadow: 5px 5px 10px #b2d1d4;
+
+    /*设置为圆角*/
+    border-radius:5px 5px 5px 5px;
+}
+
+#mangemnetWork{
+    margin-left: 10px;
+    margin-top: 10px;
+    /*font-size: 10px;*/
+    font-weight: bold;
+    font-size: 15px;
+    color: #494949;
+}
+
+#mangemnetWorkhr{
+    width: 700px;
+    margin-left: 10px;
+    color: #f3f3f3;
+
+}
+
+
+/*定义每个作品*/
+/*************************************
+展示作品
+**************************************/
+.showworkInfo-ul{
+    /*li去掉前面的点*/
+    list-style-type: none;
+    white-space: nowrap;
+}
+
+.showworkInfo-li{
+    white-space: nowrap;
+
+}
+
+.showworkInfoTips{
+
+    /*显示在同一行*/
+    display: inline;
+    margin-left: 300px;
+    /*padding-top: 1000px;*/
+    font-size: 20px;
+    color: #868686;
+
+}
+.showworkInfo{
+    /*float: left;*/
+    display: inline;
+    font-size: 20px;
+    margin-left: 20px;
+}
+.work_cover_class{
+    width: 100px;
+    height: 130px;
+    padding-left: 382px;
+
+}
+/*具体值*/
+#work_name_tipid{
+    position: relative;
+    top: 20px;
+}
+
+#work_serial_state_tipid{
+    position: relative;
+    top: 40px;
+}
+
+#work_word_num_tipid{
+    position: relative;
+    top: 60px;
+}
+
+#work_tip_num_tipid{
+    position: relative;
+    top: 80px;
+}
+
+#work_subscribe_num_tipid{
+    position: relative;
+    top: 100px;
+}
+
+#work_vote_num_tipid{
+    position: relative;
+    top: 120px;
+}
+
+#work_create_time_tipid{
+    position: relative;
+    top: 140px;
+}
+
+/*具体内容*/
+#work_name_id{
+    position: relative;
+    top: 20px;
+}
+
+#work_serial_state_id{
+    position: relative;
+    top: 40px;
+}
+
+#work_word_num_id{
+    position: relative;
+    top: 60px;
+}
+#work_tip_num_id{
+    position: relative;
+    top: 80px;
+}
+#work_subscribe_num_id{
+    position: relative;
+    top: 100px;
+}
+#work_vote_num_id{
+    position: relative;
+    top: 120px;
+}
+#work_create_time_id{
+    position: relative;
+    top: 140px;
+}
+
+/*按钮*/
+.onbutton{
+    position: relative;
+    left: 200px;
+    top: 180px;
+}
+.offbutton{
+    position: relative;
+    left: 250px;
+    top: 180px;
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户主界面</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/userMainInterfaceFragment.css">
+    <link rel="stylesheet" href="../css/userhomepage.css">
+</head>
+<body>
+<div >
+
+
+    <div id="app">
+        <div class="userMainTop_class">
+
+            <ul class="user_navigation_bar">
+                <li class="workclassification_class" id="user_main_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >首      页</el-button>
+                </li>
+                <li class="workclassification_class" id="allwork_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >全 部 作 品</el-button>
+                </li>
+                <li class="workclassification_class" id="paihang_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >排      行</el-button>
+                </li>
+                <li class="workclassification_class" id="tuijian_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >推      荐</el-button>
+                </li>
+                <li class="workclassification_class" id="chengweizuozhe_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >成 为 作 者</el-button>
+                </li>
+                <li class="workclassification_class" id="gerenzhongxin_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >个 人 中 心</el-button>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="dierhang">
+            <div class="userInfo-class">
+                <a class="userInfo-p-class" id="username-p-id" href="http://www.w3school.com.cn">您好，昵称 </a>
+                <a class="userInfo-p-class" id="userout-p-id" href="http://www.w3school.com.cn">退出</a>
+                <a class="userInfo-p-class" id="haveuser-p-id" href="http://www.w3school.com.cn">网站注册人数5人</a>
+            </div>
+            <img src="../images/SHAOHUALOGO.png" class="imglogo">
+
+            <el-input class="el-select-my" v-model="select_input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
+            <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectbyinfo()">搜索</el-button>
+
+
+            <el-button class="el-shujia-my"  type="info" plain size="small" @click="selectbyinfo()">
+                <img src="../images/shujia-16.png">
+                <p>
+                    书架
+                </p>
+            </el-button>
+        </div>
+    </div>
+
+
+
+
+    <div class="disanhang" id="disanhang-id" >
+        <div class="zuopinfenlei">
+            <ul>
+                <ul class="vole-diyi-ul-class">
+                    <li>
+                        <el-button class="el-vole-button" id="el-xuanhuan-button-id" type="info"  plain size="small" >
+                            <img src="../images/xuanhuan-32.png" class="xuanhuan-img-class" id="xuanhuan-img-id">
+                            <p class="vole-p-class" id="xuanhuan-p-id">玄幻</p>
+                            <p class="vole-p-class" id="xuanhuan-num-id" >{{difvolenumInfo.xuanhuannum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-qihuan-button-id" type="info"  plain size="small" >
+                            <img src="../images/qihuan-32.png" class="qihuan-img-class" id="qihuan-img-id">
+                            <p class="vole-p-class" id="qihuan-p-id">奇幻</p>
+                            <p class="vole-p-class" id="qihuan-num-id" >{{difvolenumInfo.qihuannum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-wuxia-button-id" type="info"  plain size="small" >
+                            <img src="../images/wuxia-32.png" class="wuxia-img-class" id="wuxia-img-id">
+                            <p class="vole-p-class" id="wuxia-p-id">武侠</p>
+                            <p class="vole-p-class" id="wuxia-num-id" >{{difvolenumInfo.wuxianum}}</p>
+                        </el-button>
+                    </li>
+                </ul>
+                <ul  class="vole-dier-ul-class">
+                    <li>
+                        <el-button class="el-vole-button" id="el-xianxia-button-id" type="info"  plain size="small" >
+                            <img src="../images/xianxia-32.png" class="xuanhuan-img-class" id="xianxia-img-id">
+                            <p class="vole-p-class" id="xianxia-p-id">仙侠</p>
+                            <p class="vole-p-class" id="xianxia-num-id" >{{difvolenumInfo.xianxianum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-dushi-button-id" type="info"  plain size="small" >
+                            <img src="../images/dushi-32.png" class="qihuan-img-class" id="dushi-img-id">
+                            <p class="vole-p-class" id="dushi-p-id">都市</p>
+                            <p class="vole-p-class" id="dushi-num-id" >{{difvolenumInfo.dushinum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-xianshi-button-id" type="info"  plain size="small" >
+                            <img src="../images/xianshi-32.png" class="wuxia-img-class" id="xianshi-img-id">
+                            <p class="vole-p-class" id="xianshi-p-id">现实</p>
+                            <p class="vole-p-class" id="xianshi1-num-id" >{{difvolenumInfo.xianshinum}}</p>
+                        </el-button>
+                    </li>
+                </ul>
+
+                <ul class="vole-disan-ul-class">
+                    <li>
+                        <el-button class="el-vole-button" id="el-lishi-button-id" type="info"  plain size="small" >
+                            <img src="../images/lishi-32.png" class="xuanhuan-img-class" id="lishi-img-id">
+                            <p class="vole-p-class" id="lishi-p-id">历史</p>
+                            <p class="vole-p-class" id="lishi-num-id" >{{difvolenumInfo.lishinum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-junshi-button-id" type="info"  plain size="small" >
+                            <img src="../images/junshi-32.png" class="qihuan-img-class" id="junshi-img-id">
+                            <p class="vole-p-class" id="junshi-p-id">军事</p>
+                            <p class="vole-p-class" id="junshi-num-id" >{{difvolenumInfo.junshinum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-youxi-button-id" type="info"  plain size="small" >
+                            <img src="../images/youxi-32.png" class="wuxia-img-class" id="youxi-img-id">
+                            <p class="vole-p-class" id="youxi-p-id">游戏</p>
+                            <p class="vole-p-class" id="youxi-num-id" >{{difvolenumInfo.youxinum}}</p>
+                        </el-button>
+                    </li>
+                </ul>
+                <ul class="vole-disi-ul-class">
+                    <li>
+                        <el-button class="el-vole-button" id="el-xuanyi-button-id" type="info"  plain size="small" >
+                            <img src="../images/xuanyi-32.png" class="xuanhuan-img-class" id="xuanyi-img-id">
+                            <p class="vole-p-class" id="xuanyi-p-id">悬疑</p>
+                            <p class="vole-p-class" id="xuanyi-num-id" >{{difvolenumInfo.xuanyinum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-kehuan-button-id" type="info"  plain size="small" >
+                            <img src="../images/kehuan-32.png" class="qihuan-img-class" id="kehuan-img-id">
+                            <p class="vole-p-class" id="kehuan-p-id">科幻</p>
+                            <p class="vole-p-class" id="kehuan-num-id" >{{difvolenumInfo.kehuannum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-tiyu-button-id" type="info"  plain size="small" >
+                            <img src="../images/tiyu-32.png" class="wuxia-img-class" id="tiyu-img-id">
+                            <p class="vole-p-class" id="tiyu-p-id">体育</p>
+                            <p class="vole-p-class" id="tiyu-num-id" >{{difvolenumInfo.tiyunum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el-vole-button" id="el-qingxiaoshuo-button-id" type="info"  plain size="small" >
+                            <img src="../images/qingxiaoshuo-32.png" class="xuanhuan-img-class" id="qingxiaoshuo-img-id">
+                            <p class="vole-p-class" id="qingxiaoshuo-p-id">轻小说</p>
+                            <p class="vole-p-class" id="qingxiaoshuo-num-id" >{{difvolenumInfo.qingxiaoshuonum}}</p>
+                        </el-button>
+                    </li>
+                </ul>
+            </ul>
+
+
+
+        </div>
+
+        <div class="guangao-zoumadeg">
+            <el-carousel :interval="5000" arrow="always">
+                <el-carousel-item v-for="item in 4" :key="item">
+                    <h3>{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
+
+        <div class="frind-link">
+            <p class="frind-link-class" id="frind-link-id-1" >网站介绍</p>
+            <a class="frind-link-class" id="frind-link-id-2" href="http://www.w3school.com.cn">【基本】建站技术</a>
+            <a class="frind-link-class" id="frind-link-id-3" href="http://www.w3school.com.cn">【基本】人员分工</a>
+            <a class="frind-link-class" id="frind-link-id-4" href="http://www.w3school.com.cn">【基本】站点基本功能</a>
+            <a class="frind-link-class" id="frind-link-id-5" href="http://www.w3school.com.cn">【链接】elementUI</a>
+            <a class="frind-link-class" id="frind-link-id-6" href="http://www.w3school.com.cn">【链接】学习站点w3c</a>
+            <a class="frind-link-class" id="frind-link-id-7" href="http://www.w3school.com.cn">【广告】一刀999，装备秒回收</a>
+            <a class="frind-link-class" id="frind-link-id-8" href="http://www.w3school.com.cn">【广告】lol手游</a>
+        </div>
+        <div class="guanggaomokuai" >
+            <a href="http://www.w3school.com.cn">
+                <img class="guanggao-class" id="guanggao-1-id"  src="../images/guanggao-1.png">
+            </a>
+            <a href="http://www.w3school.com.cn">
+                <img class="guanggao-class" id="guanggao-2-id" href="http://www.w3school.com.cn" src="../images/guanggao-2%20.png">
+            </a>
+            <a href="http://www.w3school.com.cn">
+                <img class="guanggao-class" id="guanggao-3-id" href="http://www.w3school.com.cn" src="../images/guanggao-3.png">
+            </a>
+            <a href="http://www.w3school.com.cn">
+                <img class="guanggao-class" id="guanggao-4-id" href="http://www.w3school.com.cn" src="../images/guanggao-4.jpg">
+            </a>
+
+
+        </div>
+
+        <button href="www.baidu.com"> 跳转</button>
+    </div>
+
+
+
+
+</div>
+</body>
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/userMainInterface.js"></script>
+<script src="../js/userhomepage.js"></script>
+
+
+
+
+</html>

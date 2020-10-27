@@ -1,16 +1,21 @@
 package com.shaohuashuwu.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shaohuashuwu.domain.Account;
+import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.service.AccountService;
+import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 账户web
@@ -21,6 +26,10 @@ public class AccountControler {
 
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private WorksInfoService worksInfoService;
+
+
     @RequestMapping("/findAll")
     public String finAll(Model model){
 
@@ -32,50 +41,90 @@ public class AccountControler {
         }
 
         model.addAttribute("list",list);
-        accountService.findAll();
-
-
-
-
-
-        return "list";
+        return "list.jsp";
     }
 
     @RequestMapping("/save")
     public void finAll(Account account, HttpServletRequest request,HttpServletResponse response) throws IOException {
-
         System.out.println("查询-----------------========");
-
         accountService.saveAccount(account);
         response.sendRedirect(request.getContextPath()+"/account/findAll");
         return ;
     }
 
-    @RequestMapping("/test")
-    public String test(Model model){
 
-        System.out.println("跳转-----------------========");
-        return "authorMainFragment";
+    @RequestMapping("/findworksAll")
+    public String findworksAll(Model model){
+
+        System.out.println("测试1");
+        List list1 = worksInfoService.selectAllworks();
+        System.out.println(list1);
+        List<WorksInfo> list = worksInfoService.selectAllworks();
+        System.out.println("测试2");
+        System.out.println(list);
+        model.addAttribute("list",list);
+
+        return "testworks.jsp";
     }
 
-    @RequestMapping("/testtwo")
-    public String testtwo(Model model){
+    @ResponseBody
+    @RequestMapping("/findallworksdate")
+    public List<WorksInfo> findalldate(){
 
-        System.out.println("跳转222222");
-        return "authorMainFragment";
+        System.out.println("测试输出数据");
+        List<WorksInfo> list = worksInfoService.selectAllworks();
+        System.out.println(list);
+        return list;
     }
-    /**
-     * test push
-     */
+
+    @RequestMapping("/findallworks")
+    public String findallworks(){
 
 
-//    @RequestMapping("/testtwo")
-//    public String testtwo(Model model){
-//
-//        System.out.println("跳转222222");
-//        return "authorMian";
-//    }
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "worksMangagementInterface.html";
+    }
+
+    @RequestMapping("/addfindallworks")
+    public String addfindallworks(){
 
 
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "newlyCreatedWorksInterface.html";
+    }
+
+    @RequestMapping("/usermain")
+    public String usermain(){
+
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "userMainInterface.html";
+    }
+
+    @RequestMapping("/addworkInfo")
+    public String addworksdate(@RequestBody WorksInfo worksInfodata) {
+
+        System.out.println("添加书籍-------------");
+        System.out.println(worksInfodata);
+        worksInfoService.insertworks_info(worksInfodata);
+        return  "forward:/account/findallworks";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/isworkname")
+    public int isworkname(@RequestBody WorksInfo worksInfodata) {
+
+
+        System.out.println("查找书籍-------------");
+        String works_name = worksInfodata.getWork_name();
+        System.out.println("---"+works_name+"------");
+        System.out.println(worksInfodata);
+
+        int num = worksInfoService.selectWorkbywork_name(works_name);
+        System.out.println("controller层显示结果:"+num);
+
+
+        return  num;
+    }
 
 }

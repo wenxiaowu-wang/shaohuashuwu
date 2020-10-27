@@ -1,0 +1,107 @@
+/*主题内容*/
+#app{
+    /*height: calc(100vh);*/
+
+}
+
+#worksMangagenmentInfo{
+
+    background: #ffffff;
+    width: 875px;
+
+    /*height: calc(100vh);*/
+    min-height: calc(100vh);
+
+    margin-left: 20px;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    float: left;
+
+    /*!*j渐变色阴影*!*/
+    box-shadow: 5px 5px 10px #b2d1d4;
+
+    /*设置为圆角*/
+    border-radius:5px 5px 5px 5px;
+}
+
+#workMangemnet{
+    margin-left: 10px;
+    margin-top: 10px;
+    /*font-size: 10px;*/
+    font-weight: bold;
+    font-size: 15px;
+    color: #494949;
+}
+
+#workMngemnethr{
+    width: 700px;
+    margin-left: 10px;
+    color: #f3f3f3;
+
+}
+
+
+/*定义每个作品*/
+
+.worksInfoul{
+    list-style-type: none;
+}
+
+.work_cover_class{
+
+    width: 100px;
+    height: 130px;
+    background: #5e5e5e;
+}
+
+/*#work_name_div_id{*/
+/*    height: 10px;*/
+/*    background: #5daf34;*/
+/*}*/
+
+.work_name_class{
+
+
+    /*background: #5e5e5e;*/
+    padding-left: 20px;
+    position: relative;
+    top:-100px;
+    font-size: 25px;
+    /*color: #5e5e5e;*/
+    color: black;
+}
+
+/*.fengge{*/
+/*    width: 20px;*/
+/*    height: 100px;*/
+/*    background: #346dff;*/
+/*}*/
+
+/*.worksMangagenment_button{*/
+
+/*    position: relative;*/
+
+/*    left: 500px;*/
+/*    font-size: 10px;*/
+
+/*    !*margin-right: 10px;*!*/
+
+/*}*/
+
+#gotowork1{
+    position: relative;
+    left: 550px;
+    top:-40px;
+}
+
+#gotowork2{
+    position: relative;
+    left: 415px;
+    top:-90px;
+}
+
+#gotowork3{
+    position: relative;
+    left: 280px;
+    top:-140px;
+}
