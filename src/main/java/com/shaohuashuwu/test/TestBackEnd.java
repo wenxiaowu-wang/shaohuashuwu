@@ -1,10 +1,15 @@
 package com.shaohuashuwu.test;
 
+import com.shaohuashuwu.controller.AttentionInfoController;
 import com.shaohuashuwu.dao.AdminInfoDao;
+import com.shaohuashuwu.dao.AttentionInfoDao;
 import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.domain.AdminInfo;
+import com.shaohuashuwu.domain.UserInfo;
+import com.shaohuashuwu.domain.vo.AttentionInfoVo;
 import com.shaohuashuwu.service.AccountService;
 import com.shaohuashuwu.service.AdminInfoService;
+import com.shaohuashuwu.service.AttentionInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,14 @@ public class TestBackEnd {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private UserInfoDao userInfoDao;
+
+    @Autowired
+    private AdminInfoDao adminInfoDao;
+
+    @Autowired
+    private AttentionInfoDao attentionInfoDao;
     /**
      * 测试推送 3
      * 在王洪斌的分支里，为所欲为，改名字
@@ -46,14 +59,6 @@ public class TestBackEnd {
         }
     }
 
-    @Autowired
-    private UserInfoDao userInfoDao;
-
-    @Autowired
-    private AdminInfoDao adminInfoDao;
-
-
-
     @Test
     public void updateBeanNumByIdAndNumTest(){
         if (userInfoDao.updateGoldBeanNumByUserId(11,1000)!=0){
@@ -65,6 +70,43 @@ public class TestBackEnd {
     public void selectAdminInfoByAdminIdTest(){
         AdminInfo adminInfo = adminInfoDao.selectAdminInfoByAdminId("abin");
         System.out.println(adminInfo.toString());
+    }
+
+    /**
+     * 测试根据读者ID获取关注者信息
+     * 测试接口：AttentionInfoDao.selectAttentionUserInfoByUserId
+     */
+    @Test
+    public void selectAttentionInfoByReaderId(){
+        System.out.println("测试根据读者ID获取关注者信息");
+        List<UserInfo> selectResult = attentionInfoDao.selectAttentionUserInfoByUserId(11);
+        for (int i=0;i<selectResult.size();i++){
+            System.out.println(selectResult.get(i).getUser_name());
+        }
+    }
+    /*
+    @Autowired
+    public AttentionInfoController attentionInfoController;
+
+    @Test
+    public void testAttentionInfoControllerGetAttentionInfo(){
+        List<AttentionInfoVo> attentionInfoVos = attentionInfoController.getAttentionAuthorInfo(11);
+        System.out.println("attentionInfoVos = ");
+        for (int i=0;i<attentionInfoVos.size();i++) {
+            System.out.println(attentionInfoVos.get(i).getUser_name());
+        }
+    }
+    */
+    @Autowired
+    public AttentionInfoService attentionInfoService;
+
+    @Test
+    public void testAttentionInfoServiceGetAttentionInfo(){
+        List<AttentionInfoVo> attentionInfoVos = attentionInfoService.getAttentionAuthorInfo(11);
+        System.out.println("attentionInfoVos = ");
+        for (int i=0;i<attentionInfoVos.size();i++) {
+            System.out.println(attentionInfoVos.get(i).getUser_name());
+        }
     }
     
 }

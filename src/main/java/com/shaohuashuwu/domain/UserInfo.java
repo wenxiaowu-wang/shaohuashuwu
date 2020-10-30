@@ -2,7 +2,6 @@ package com.shaohuashuwu.domain;
 
 import com.shaohuashuwu.domain.vo.AttentionInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.sql.Timestamp;
 
@@ -12,7 +11,7 @@ public class UserInfo {
     //属性
     private Integer user_id;                //用户ID
     private String user_name;           //用户昵称
-    private byte[] head_portrait;         //用户头像
+    private String head_portrait;         //用户头像
     private String gender;              //用户性别
     private Timestamp birthday;         //用户生日
     private String area;                //用户所在地
@@ -23,13 +22,13 @@ public class UserInfo {
     private Integer gold_coin_num;          //金豆数量
     private Integer ticket_num;             //推荐票数量
 
-    //成员变量
-    @Autowired
-    private AttentionInfoVo attentionInfoVo;    //关注信息值对象(成员变量)
+//    //成员变量 (方法暂未成功)
+//    @Autowired
+//    public AttentionInfoVo attentionInfoVo;    //关注信息值对象(成员变量)
 
     public UserInfo() {
         //无参构造方法
-        System.out.println("userinfo无参构造方法");
+        System.out.println("userinfo无参构造方法,自动注入参数");
     }
 
     public UserInfo(String user_name, String gender, String area, String phone_number, String password, Integer gold_bean_num, Integer gold_coin_num, Integer ticket_num) {
@@ -59,11 +58,11 @@ public class UserInfo {
         this.user_name = user_name;
     }
 
-    public byte[] getHead_portrait() {
+    public String getHead_portrait() {
         return head_portrait;
     }
 
-    public void setHead_portrait(byte[] head_portrait) {
+    public void setHead_portrait(String head_portrait) {
         this.head_portrait = head_portrait;
     }
 
@@ -163,10 +162,10 @@ public class UserInfo {
      */
 
     public AttentionInfoVo toAttentionInfoVo(){
-
-        attentionInfoVo.setUser_id(this.user_id);
-        attentionInfoVo.setUser_name(this.user_name);
-        attentionInfoVo.setHead_portrait(this.head_portrait);
+        AttentionInfoVo attentionInfoVo = new AttentionInfoVo();
+        attentionInfoVo.setUser_id(this.getUser_id());
+        attentionInfoVo.setUser_name(this.getUser_name());
+        attentionInfoVo.setHead_portrait(this.getHead_portrait());
         return attentionInfoVo;
     }
 }

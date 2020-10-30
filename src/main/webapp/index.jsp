@@ -55,6 +55,8 @@
 <br>
 <a href="attentionInfoController/toPayAttemtion">关注作者（理论页面）</a>
 <br>
+<a href="attentionInfoController/toMyConcerned">我的关注</a>
+<br>
 <a href="adminInfoController/adminLoginInterface">管理员登录页面（未分离）</a>
 <br>
 <a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>
@@ -68,7 +70,7 @@
     new Vue({
         methods:{
             hello(){
-                axios.post("userSessionsaveUser/" +
+                axios.post("userSession/saveUser/" +
                     11+"/"+encodeURI(encodeURI("我吃西红柿"))).then(response =>{
                     alert(JSON.stringify(response.data));
                 }).catch(error =>{
@@ -79,8 +81,8 @@
         created(){
             alert("发送post请求")
             axios.post("userSession/saveUser/" +
-                11+"/"+encodeURI("我吃唐家土豆")).then(response =>{
-                alert(JSON.stringify(response.data));
+                11+"/"+encodeURI("我吃唐家土豆")+"/004").then(response =>{
+                console.log(JSON.stringify(response.data));
                 console.log("用户ID和name装载完毕");
                 console.log("结论：可以发送int（Integer）类型的数据，编码发送到后端的中文会自动解码")
             }).catch(error =>{
@@ -88,7 +90,7 @@
             });
             axios.post("worksSession/saveWork/" +
                 28+"/"+encodeURI("斗罗大陆")).then(response =>{
-                alert(JSON.stringify(response.data));
+                console.log(JSON.stringify(response.data));
                 console.log("作品ID和name装载完毕");
             }).catch(error =>{
                 alert(JSON.stringify(error));

@@ -1,18 +1,19 @@
-let attentionInterface_vm = new Vue({
-    el:"#myConcerned",
+let messageCenterInterface_vm = new Vue({
+    el:"#messageCenter",
     data:{
         topTips:"个人中心",
         user_id:0,
         user_name:"我系成龙",
-        activeIndex: "1",
+        activeIndex: "3",
         user_avatar:"avatar",
+        tip_img_url:"",
         displayDivs:{
             displayDiv1:"block", //以块状元素展示
             displayDiv2:"block", //以块状元素展示
             displayDiv3:"block", //以块状元素展示
 
         },
-        buttonContext:"取关",
+        buttonContext:"删除",
         pageSize: 2, //每页显示4条数据
         currentPage: 1, //初始定位页数
         dynamicCurrentPage1:1, //动态变化的互相关注当前页数
@@ -20,37 +21,35 @@ let attentionInterface_vm = new Vue({
         dynamicCurrentPage3:1, //动态变化的粉丝当前页数
         totals:{
             //总条目数（总共数据条数）
-            total1:0,//互相关注的数量
-            total2:0,//关注的数量
-            total3:0 //粉丝的数量
+            total1:0,   //系统消息的数量
+            total2:0,   //更新消息的数量
+            total3:0    //私信消息的数量
         },
-        imageURL_header:"../images/avatar/",
-        imageURL_suffix:".jpg",
-        eachAttentionData:[
+        tipTotals:{
+            //总提示数目（提示未读信息）
+            tipTotal1:0,    //系统消息提示的数量
+            tipTotal2:0,    //更新消息提示的数量
+            tipTotal3:0,    //私信消息提示的数量
+        },
+        button_disabled:false,      //清空、全部已读按钮禁用状态
+        imageURL_header:"../images/avatar/",    //图片文件头
+        imageURL_suffix:".jpg",             //图片文件尾
+        systemMessageData:[
             {
-                head_portrait:"001",
-                user_name:"name0",
-                user_id:0
+                notice_id:0,        //通知ID
+                send_by:0,          //发送者ID
+                notice_content:"",  //通知内容
+                notice_title:"",    //通知标题
+                send_time:"",       //通知时间
+                notice_tip:1        //通知提示
             }
         ],
-        attentionData:[
-            {
-                head_portrait:"003",
-                user_name:"name0",
-                user_id:0
-            }
-        ],
-        fansData:[
-            {
-                avatar:"006",
-                name:"name0",
-                id:0
-            }
-        ],
+        updateMessageData:[],
+        chatMessageData:[],
         displayData:{
-            eachAttentionData:[],
-            attentionData:[],
-            fansData:[]
+            systemMessageData:[],
+            updateMessageData:[],
+            chatMessageData:[]
         },
 
 

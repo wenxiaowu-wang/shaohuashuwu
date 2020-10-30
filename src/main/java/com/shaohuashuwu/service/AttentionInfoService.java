@@ -23,6 +23,12 @@ public interface AttentionInfoService {
     //获取所有关注作者的信息
     public List<AttentionInfoVo> getAttentionAuthorInfo(int user_id);
 
+    //获取该用户所有粉丝的值对象信息
+    public List<AttentionInfoVo> getFansInfo(int user_id);
+
+    //获取与该用户互相关注的用户值对象信息
+    public List<AttentionInfoVo> getEachAttentionUserInfo(int user_id);
+
     //删除一条关注信息
     public boolean deleteAttentionInfo(AttentionInfo attentionInfo);
 }

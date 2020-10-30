@@ -13,7 +13,7 @@ public class AttentionInfoVo {
 
     private int user_id;            //用户ID
     private String user_name;       //用户名
-    private byte[] head_portrait;   //用户头像
+    private String head_portrait;   //用户头像
 
     public AttentionInfoVo() {
 
@@ -35,11 +35,11 @@ public class AttentionInfoVo {
         this.user_name = user_name;
     }
 
-    public byte[] getHead_portrait() {
+    public String getHead_portrait() {
         return head_portrait;
     }
 
-    public void setHead_portrait(byte[] head_portrait) {
+    public void setHead_portrait(String head_portrait) {
         this.head_portrait = head_portrait;
     }
 
@@ -48,7 +48,7 @@ public class AttentionInfoVo {
         return "AttentionInfoVo{" +
                 "user_id=" + user_id +
                 ", user_name='" + user_name + '\'' +
-                ", head_portrait=" + Arrays.toString(head_portrait) +
+                ", head_portrait=" + head_portrait +
                 '}';
     }
 }

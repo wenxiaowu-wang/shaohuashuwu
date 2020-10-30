@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 public class NoticeInfo {
 
     private Integer notice_id;              //通知信息ID
-    private Integer send_by;                //发送者ID
-    private Integer send_to;                //接收者ID
-    private Integer notice_type;            //通知类型
+    private Integer send_by;                //发送者ID（如果类型为更新提醒，此为作品ID；若类型为系统消息，此为0）
+    private Integer send_to;                //接收者ID（0表示全体用户）
+    private Integer notice_type;            //通知类型(1系统消息，2更新提醒，3私信)
     private String notice_content;      //通知内容
     private String notice_title;        //通知标题
     private Timestamp send_time;        //通知时间

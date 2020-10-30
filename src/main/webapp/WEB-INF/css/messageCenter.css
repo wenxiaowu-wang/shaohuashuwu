@@ -1,0 +1,227 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: #f7f6f2;
+    min-width: 1210px;          /*  防止过度缩放导致页面变形*/
+}
+.top{
+    width: 100%;
+    height: 72px;
+    background-color: #545c64;
+}
+.top_img{
+    width: 14%;
+    height: 65px;
+    /*border: 2px solid red;*/
+    background-image: url("../images/icon/shaohua-ps-cut.png");
+    margin-left: 15px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center center;
+    float: left;
+}
+.top_content{
+    width: 73%;
+    height: 70px;
+    margin: 0px 5px;/*  上下为0px，左右自适应，自适应有默认居中的效果  */
+    border: 2px solid #3a8ee6;
+    text-align: left;
+    /*background-color: #545c64;*/
+    float: left;
+
+}
+.top_tips{
+    width: 15%;
+    height: 100%;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    float: left;
+}
+.top_menu{
+    width: 60%;/*  所占其父级元素的70% 即占top_contend宽度的70%*/
+    height: 100%;
+    padding-left: 10px;
+    border: 2px solid red;
+    float: left;
+
+}
+.top_data{
+    width: 15%;
+    height: 100%;
+    text-align: right;
+    padding-right: 15px;
+    font-size: 15px;
+    font-weight: normal;
+    border: 2px solid red;
+    float: right;
+}
+/*.top_content el-menu label{*/
+/*    font-size: 20px;*/
+/*    font-weight: bolder;*/
+/*}*/
+.body_left{
+    width: 18%;
+    height: 800px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
+    border: 1px solid red;
+    margin-left: 12.5%;
+    margin-right: 20px;
+    margin-top: 20px;
+    float: left;
+}
+.body{
+    margin: 20px auto;
+    width: 55%;/*  若为100%会充满全屏  */
+    height: 800px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
+    /*background-color: #e6e6e6;*/
+    border: 1px solid blue;
+    float: left;
+}
+.footing{
+    margin: 0px 12.5%;
+    width: 75%;
+    height: 150px;
+    background-color: #e6a23c;
+    float: left;
+}
+.body_header{
+    background-color: #ffffff;
+    width: auto;
+    height: auto;
+}
+.body_img{
+    width: 100%;
+    height: 170px;
+    margin: 0px auto;/*  设置上下外边距为0px，左右自动，默认居中*/
+
+    background-image: url("../images/bg_card.png");
+    background-position: left top;
+    background-repeat: repeat-x;
+    border: 2px solid red;
+    box-shadow: 2px 2px 1px #685224;
+}
+.body_img_img{
+    width: auto;
+    min-width: 10%;
+    height: auto;
+    min-height: 40%;
+    text-align: center;
+    border:  2px solid red;
+    margin-top: 50px;
+    margin-left: 15px;
+    float: left;
+}
+#avatar{
+    /*  <img>标签的样式  */
+    border-radius: 50%;
+}
+.body_img_content{
+    /*background-color: #e6e6e6;*/
+    width: 60%;
+    height: 30%;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 115px;
+    margin-left: 35px;
+    float: left;
+
+}
+.body_img_content label{
+    margin-left: 20px;
+    color: #a31919;
+    border:1px solid blue;
+    font-weight: normal;
+    margin-bottom: 5px;
+    float: bottom;
+}
+.body_img_content label span{
+    font-size: 10px;
+    color: #121212;
+    font-weight: bold;
+}
+.body_center{
+    margin: 10px auto;
+    width: 100%;
+    height: auto;
+    max-height: 90%;
+    /* 待更新
+    background-image: url("../images/bg_center.jpg");
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-position-x: right;
+    */
+}
+.operate_header{
+    width: 100%;
+    min-width: 500px;
+    height: auto;
+    text-align: right;
+    padding: 5px;
+
+}
+#op_span2{
+    margin-right: 15px;
+    float: right;
+}
+#op_span1{
+    margin-right: 15px;
+    float: right;
+}
+.message{
+    /*  如果没有理解错的话应该是每一个user的div  */
+    width: 100%;
+    height: 100px;
+    border: 2px solid red;
+    margin: 2px auto;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.message_avatar{
+    width: 17%;
+    height: 80%;
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+    float: left;
+}
+.message_avatar img{
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    margin: 3px 3px;
+    text-align: center;
+}
+.message_content{
+    width: 55%;
+    height: 80%;
+    padding: 10px;
+    border: 2px solid blue;
+    float: left;
+}
+.message_operate{
+    width: 15%;
+    height: 80%;
+    padding: 5px;
+    text-align: center;
+    border: 2px solid black;
+    float: left;
+}
+.noDataTips{
+    width: 80%;
+    height: 200px;
+    /*border: 2px solid red;*/
+    background-image: url("../images/noDataTips.jpg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    text-align: center;
+    margin: 5px auto;
+}
+.message_pagination{
+    width: 90%;
+    height: 20px;
+    margin: 2px auto;
+    float: bottom;
+}

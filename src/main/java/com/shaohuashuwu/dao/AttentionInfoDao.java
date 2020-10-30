@@ -29,7 +29,7 @@ public interface AttentionInfoDao {
     public AttentionInfo selectAttentionInfo(AttentionInfo attentionInfo);
 
     //获取该用户关注的所有作者信息
-    @Select("select * from user_info where user_id = (select author_id from attention_info where reader_id = #{user_id}) ")
+    @Select("SELECT user_info.* FROM user_info,attention_info WHERE user_info.user_id = attention_info.author_id AND attention_info.reader_id = #{user_id} ")
     @Results(id = "userInfo",value = {
             @Result(id = true,column = "user_id",property = "user_id"),
             @Result(column = "user_name",property = "user_name"),
@@ -46,6 +46,15 @@ public interface AttentionInfoDao {
     })
     public List<UserInfo> selectAttentionUserInfoByUserId(int user_id);
 
+    //获取该用户粉丝信息
+    @Select("SELECT user_info.* FROM user_info,attention_info WHERE user_info.user_id = attention_info.reader_id AND attention_info.author_id = #{user_id} ")
+    @ResultMap("userInfo")
+    public List<UserInfo> selectWereAttentionUserInfoByAuthorId(int user_id);
+
+    //获取与该用户互相关注的所有用户信息
+    @Select("SELECT DISTINCT user_info.* FROM user_info,attention_info attention_one,attention_info attention_two WHERE user_info.user_id = attention_one.reader_id AND user_info.user_id = attention_two.author_id AND attention_one.author_id = #{user_id} ")
+    @ResultMap("userInfo")
+    public List<UserInfo> selectEachAttentionUserInfoByUserId(int user_id);
 
     //删除一条关注信息
     @Delete("delete from attention_info where reader_id = #{reader_id} and author_id = #{author_id}")
