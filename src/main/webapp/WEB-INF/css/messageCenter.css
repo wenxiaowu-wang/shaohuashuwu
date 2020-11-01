@@ -158,16 +158,18 @@ body{
 .operate_header{
     width: 100%;
     min-width: 500px;
-    height: auto;
+    height: 25px;
     text-align: right;
     padding: 5px;
+    float: top;
+    border: 1px solid red;
 
 }
-#op_span2{
+.op_span2{
     margin-right: 15px;
     float: right;
 }
-#op_span1{
+.op_span1{
     margin-right: 15px;
     float: right;
 }
@@ -178,10 +180,18 @@ body{
     border: 2px solid red;
     margin: 2px auto;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    float: top;
+}
+.tip_img{
+    width: 3%;
+    height: auto;
+    margin: 2px;
+    text-align: center;
+    float: left;
 }
 .message_avatar{
-    width: 17%;
-    height: 80%;
+    width: 8%;
+    height: 60%;
     border: 2px solid black;
     padding: 10px;
     text-align: center;
@@ -195,19 +205,61 @@ body{
     text-align: center;
 }
 .message_content{
-    width: 55%;
+    width: 65%;
     height: 80%;
     padding: 10px;
     border: 2px solid blue;
     float: left;
 }
+.message_content_title{
+    border: 1px solid red;
+    font-weight: bolder;
+    font-size: larger;
+    overflow: hidden;   /*  文本溢出隐藏  */
+    white-space: nowrap; /*  文本强制显示为一行  */
+    text-overflow: ellipsis; /*  文本溢出显示为三点  */
+    float: top;
+}
+.message_content_content{
+    border: 1px solid black;
+    font-weight: normal;
+    font-size: medium;
+    /*font-style: italic;*/
+    overflow: hidden;   /*  文本溢出隐藏  */
+    white-space: nowrap; /*  文本强制显示为一行  */
+    text-overflow: ellipsis; /*  文本溢出显示为三点  */
+    margin-top: 3px;
+    margin-bottom: 5px;
+    float: top;
+}
+.message_content_bottom{
+
+    float: bottom;
+}
+.message_content_time{
+    width: auto;
+    border: 1px solid blue;
+    font-weight: lighter;
+    font-size: small;
+    float: left;
+}
+.message_content_sendBy{
+    width: auto;
+    border: 1px solid green;
+    font-weight: lighter;
+    font-size: smaller;
+    float: right;
+}
 .message_operate{
-    width: 15%;
-    height: 80%;
+    width: 10%;
+    height: auto;
     padding: 5px;
     text-align: center;
     border: 2px solid black;
-    float: left;
+    font-size: small;
+    margin-right: 15px;
+    margin-top: 30px;
+    float: right;
 }
 .noDataTips{
     width: 80%;
@@ -221,7 +273,10 @@ body{
 }
 .message_pagination{
     width: 90%;
-    height: 20px;
-    margin: 2px auto;
-    float: bottom;
+    height: 34px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    border: 1px solid red;
+    float: top;
 }

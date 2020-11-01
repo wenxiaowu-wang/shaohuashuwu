@@ -1,6 +1,6 @@
 package com.shaohuashuwu.service;
 
-import com.shaohuashuwu.domain.NoticeInfo;
+import com.shaohuashuwu.domain.vo.NoticeInfoVo;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public interface NoticeInfoService {
 
     //获取该用户所有的通知信息
-    public List<NoticeInfo> getAllNoticeInfo(int user_id);
+    public List<NoticeInfoVo> getAllNoticeInfo(int user_id);
 
     //该用户全部消息置为已读
     public boolean updateAllNotice(int user_id);

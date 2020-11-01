@@ -54,4 +54,7 @@ public interface UserInfoDao {
     @ResultMap("userInfo")
     public List<UserInfo> selectReaderInfo(int work_id);
 
+    @Select("select user_name from user_info where user_id = #{id}")
+    public String selectUserNameById(int id);
+
 }

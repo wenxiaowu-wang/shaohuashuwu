@@ -57,6 +57,8 @@
 <br>
 <a href="attentionInfoController/toMyConcerned">我的关注</a>
 <br>
+<a href="noticeInfoController/toMessageCenterInterface">消息中心</a>
+<br>
 <a href="adminInfoController/adminLoginInterface">管理员登录页面（未分离）</a>
 <br>
 <a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>

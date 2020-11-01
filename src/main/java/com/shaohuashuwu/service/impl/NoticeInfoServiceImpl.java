@@ -1,11 +1,16 @@
 package com.shaohuashuwu.service.impl;
 
 import com.shaohuashuwu.dao.NoticeInfoDao;
+import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.domain.NoticeInfo;
+import com.shaohuashuwu.domain.UserInfo;
+import com.shaohuashuwu.domain.vo.AttentionInfoVo;
+import com.shaohuashuwu.domain.vo.NoticeInfoVo;
 import com.shaohuashuwu.service.NoticeInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,10 +26,33 @@ public class NoticeInfoServiceImpl implements NoticeInfoService {
     @Autowired
     public NoticeInfoDao noticeInfoDao;
 
+    @Autowired
+    public UserInfoDao userInfoDao;
+
     //获取该用户所有的通知信息
     @Override
-    public List<NoticeInfo> getAllNoticeInfo(int user_id) {
-        return noticeInfoDao.selectAllNoticeInfoByUserId(user_id);
+    public List<NoticeInfoVo> getAllNoticeInfo(int user_id) {
+        List<NoticeInfoVo> getResult = new ArrayList<NoticeInfoVo>();
+        List<NoticeInfo> noticeInfoList = noticeInfoDao.selectAllNoticeInfoByUserId(user_id);
+        //编制信息值对象
+        String user_name = "";
+        if (noticeInfoList.size()!=0){
+            for (int i=0;i<noticeInfoList.size();i++){
+                user_name = userInfoDao.selectUserNameById(noticeInfoList.get(i).getSend_by());
+                NoticeInfoVo noticeInfoVo = new NoticeInfoVo();
+                noticeInfoVo.setNotice_id(noticeInfoList.get(i).getNotice_id());
+                noticeInfoVo.setSend_by(noticeInfoList.get(i).getSend_by());
+                noticeInfoVo.setNotice_type(noticeInfoList.get(i).getNotice_type());
+                noticeInfoVo.setNotice_content(noticeInfoList.get(i).getNotice_content());
+                noticeInfoVo.setNotice_title(noticeInfoList.get(i).getNotice_title());
+                //TimeStamp转化为String类型
+                noticeInfoVo.setSend_time(noticeInfoList.get(i).getSend_time().toString());
+                noticeInfoVo.setNotice_tip(noticeInfoList.get(i).getNotice_tip());
+                noticeInfoVo.setSend_by_name(user_name);
+                getResult.add(noticeInfoVo);    //装配关注信息值对象
+            }
+        }
+        return getResult;
     }
 
     //该用户全部消息置为已读

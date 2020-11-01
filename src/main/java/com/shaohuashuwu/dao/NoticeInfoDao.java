@@ -28,6 +28,8 @@ public interface NoticeInfoDao {
     })
     public List<NoticeInfo> selectAllNoticeInfoByUserId(int user_id);
 
+    //获取该用户所有的通知信息值对象(猜测获取不成功，因为数据库不对应)
+
     //更新所有该用户的通知提示(取消该用户所有通知的提示)
     @Update("update from notice_info set notice_tip = 0 where send_to = #{user_id}")
     public int updateAllNoticeTipByUserId(int user_id);

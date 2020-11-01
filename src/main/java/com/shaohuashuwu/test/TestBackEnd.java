@@ -7,9 +7,11 @@ import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.domain.AdminInfo;
 import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.domain.vo.AttentionInfoVo;
+import com.shaohuashuwu.domain.vo.NoticeInfoVo;
 import com.shaohuashuwu.service.AccountService;
 import com.shaohuashuwu.service.AdminInfoService;
 import com.shaohuashuwu.service.AttentionInfoService;
+import com.shaohuashuwu.service.NoticeInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +108,18 @@ public class TestBackEnd {
         System.out.println("attentionInfoVos = ");
         for (int i=0;i<attentionInfoVos.size();i++) {
             System.out.println(attentionInfoVos.get(i).getUser_name());
+        }
+    }
+
+    @Autowired
+    public NoticeInfoService noticeInfoService;
+
+    @Test
+    public void testGetAllNoticeInfo(){
+        System.out.println("测试获取所有通知信息");
+        List<NoticeInfoVo> noticeInfoVoList = noticeInfoService.getAllNoticeInfo(11);
+        for (int i=0;i<noticeInfoVoList.size();i++){
+            System.out.println(noticeInfoVoList.get(i).toString());
         }
     }
     

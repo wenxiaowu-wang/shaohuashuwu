@@ -6,12 +6,12 @@ let messageCenterInterface_vm = new Vue({
         user_name:"我系成龙",
         activeIndex: "3",
         user_avatar:"avatar",
-        tip_img_url:"",
+        tip_img_url:"tan",
+        bell_img_url:"bell",
         displayDivs:{
             displayDiv1:"block", //以块状元素展示
             displayDiv2:"block", //以块状元素展示
             displayDiv3:"block", //以块状元素展示
-
         },
         buttonContext:"删除",
         pageSize: 2, //每页显示4条数据
@@ -27,27 +27,47 @@ let messageCenterInterface_vm = new Vue({
         },
         tipTotals:{
             //总提示数目（提示未读信息）
-            tipTotal1:0,    //系统消息提示的数量
-            tipTotal2:0,    //更新消息提示的数量
-            tipTotal3:0,    //私信消息提示的数量
+            tipTotal1:0,    //系统消息的未读数量
+            tipTotal2:0,    //更新消息的未读数量
+            tipTotal3:0,    //私信消息的未读数量
         },
         button_disabled:false,      //清空、全部已读按钮禁用状态
-        imageURL_header:"../images/avatar/",    //图片文件头
+        imageURL_header:"../images/message/",    //图片文件头
         imageURL_suffix:".jpg",             //图片文件尾
         systemMessageData:[
             {
                 notice_id:0,        //通知ID
                 send_by:0,          //发送者ID
-                notice_content:"",  //通知内容
-                notice_title:"",    //通知标题
-                send_time:"",       //通知时间
-                notice_tip:1        //通知提示
+                send_by_name:"信息门",    //发送者名字
+                notice_content:"王将亲口承认，苏寒为其结拜兄弟。目前两人一起在八臂佛陀门暴揍门主。",  //通知内容
+                notice_title:"震惊！！青州行走结拜兄弟为八阶蛮妖！！",    //通知标题
+                send_time:"2020-10-31 10:45:38",       //通知时间
+                notice_tip:1,        //通知提示
+                notice_type:1
             }
         ],
         updateMessageData:[],
         chatMessageData:[],
         displayData:{
-            systemMessageData:[],
+            systemMessageData:[{
+                notice_id:0,        //通知ID
+                send_by:0,          //发送者ID
+                send_by_name:"信息门",    //发送者名字
+                notice_content:"王将亲口承认，苏寒为其结拜兄弟。目前两人一起在八臂佛陀门暴揍门主。",  //通知内容
+                notice_title:"震惊！！青州行走结拜兄弟为八阶蛮妖！！",    //通知标题
+                send_time:"2020-10-31 10:45:38",       //通知时间
+                notice_tip:1,        //通知提示
+                notice_type:1
+            },{
+                notice_id:0,        //通知ID
+                send_by:0,          //发送者ID
+                send_by_name:"信息门",    //发送者名字
+                notice_content:"苏寒重归苏国，一人占群敌，竟带来一位与法相金身相当的八阶蛮妖。",  //通知内容
+                notice_title:"震惊！！法相金身莅临苏国！！",    //通知标题
+                send_time:"2020-10-31 10:45:38",       //通知时间
+                notice_tip:0,        //通知提示
+                notice_type:1
+            }],
             updateMessageData:[],
             chatMessageData:[]
         },
@@ -83,7 +103,7 @@ let messageCenterInterface_vm = new Vue({
             if (endNums > this.totals.total1){
                 endNums = this.totals.total1;
             }
-            this.displayData.eachAttentionData = this.eachAttentionData.slice(beginNums,endNums);
+            this.displayData.systemMessageData = this.systemMessageData.slice(beginNums,endNums);
         },
         handleCurrentChange_attention(page) {
             //当前页((x-1)*y,x*y)	page:x
@@ -95,7 +115,7 @@ let messageCenterInterface_vm = new Vue({
             if (endNums > this.totals.total2){
                 endNums = this.totals.total2;
             }
-            this.displayData.attentionData = this.attentionData.slice(beginNums,endNums);
+            this.displayData.updateMessageData = this.updateMessageData.slice(beginNums,endNums);
         },
         handleCurrentChange_fans(page) {
             //当前页((x-1)*y,x*y)	page:x
@@ -107,66 +127,81 @@ let messageCenterInterface_vm = new Vue({
             if (endNums > this.totals.total3){
                 endNums = this.totals.total3;
             }
-            this.displayData.fansData = this.fansData.slice(beginNums,endNums);
+            this.displayData.chatMessageData = this.chatMessageData.slice(beginNums,endNums);
         },
-        addAttention(id){
-            //先判断是否已经关注该作者用户
-            axios.post("/shaohuashuwu_war_exploded/attentionInfoController/isAlreadyAttention/" +
-                this.user_id+"/"+id).then(response =>{
-                    alert("hello "+response.data);
-                    //当判断结果为false时，进行添加关注信息操作
-                    if (!response.data){
-                        axios.post("/shaohuashuwu_war_exploded/attentionInfoController/addAttentionInfo",{
-                            "reader_id":this.user_id,
-                            "author_id":this.selected_user_id
-                        }).then(response =>{
-                            alert("关注成功");
-                        }).catch(error =>{
-                            alert("因为其它原因，关注失败");
-                        });
-                    }else{
-                        alert("您已经关注了该用户，请勿重复关注");
-                    }
-            }).catch(error =>{
-                alert("未判断出是否已经关注该用户");
-            });
-        },
-        cancelAttention(id,name,index){
+
+        deleteMessage(id,type,index){
           //取消关注选中ID的用户
-          //   let this_ = this;
-            this.$confirm('此操作将取消关注[ '+name+' ], 是否继续?', '提示', {
+            this.$confirm('此操作将删除该消息, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                // let this__ = this;
                 //删除关注信息
                 axios.post("/shaohuashuwu_war_exploded/attentionInfoController/deleteAttentionInfo/" +
                     this.user_id+"/"+id).then(response =>{
                     this.$message({
                         type: 'success',
-                        message: '取消关注成功，将不会给您发送该作者动态。'
+                        message: '删除成功。'
                     });
                     //更新页面的数据(很重要)
-                    let opIndex = ((this.dynamicCurrentPage2-1)*this.pageSize)+index;
-                    let page = this.dynamicCurrentPage2; //显示页，更新视图的作用
-                    if (opIndex == this.attentionData.length -1 && page -1>0 && index == 0){
-                        page -= 1;  //若操作的数组元素为末尾元素，并且为>1的页面而且该元素是显示数组的下标为0的元素，将会显示当前页面的前一个页面
-                    }
-                    //this.displayData.attentionData.splice(index,index); //清除对应显示数据
-                    this.attentionData.splice(opIndex,1);  //清除缓存的对应数据(从第几个元素开始，开始的几个，要插入的元素)
-                    this.totals.total2 -= 1;    //更新整体数据计数
-                    this.handleCurrentChange_attention(page);  //跳转页面，相当于更新视图
-                    this.displayDivsSetting(); //判断是否要显示空内容提示
-                    this.updateEachAttentionData(id); //更新被影响的相互关注的数据
+                    this.updateViewData(type,index);
                 }).catch(error =>{
                     this.$message({
                         type: 'info',
-                        message: '取消关注失败'
+                        message: '删除消息失败！'
                     });
                 });
-
             });
+        },
+        updateViewData(type,index){
+            //更新驶入数据（主要是tabs面板里面的数据）【parma:type】:消息类型，也表示是在哪一个面板
+            switch(type){
+                case 1:{
+                    let opIndex = ((this.dynamicCurrentPage1-1)*this.pageSize)+index; //将要操作数据下标
+                    let page = this.dynamicCurrentPage1; //显示的对应页，更新视图的作用
+                    if (opIndex == this.systemMessageData.length -1 && page -1>0 && index == 0){
+                        page -= 1;  //若操作的数组元素为末尾元素，并且为>1的页面而且该元素是显示数组的下标为0的元素，将会显示当前页面的前一个页面
+                    }
+                    //this.displayData.attentionData.splice(index,index); //清除对应显示数据
+                    this.systemMessageData.splice(opIndex,1);  //清除缓存的对应数据(从第几个元素开始，开始的几个，要插入的元素)
+                    this.totals.total1 -= 1;    //更新整体数据计数
+                    this.handleCurrentChange_each(page);  //跳转页面，相当于更新视图
+                    this.displayDivsSetting(); //判断是否要显示空内容提示
+                    // this.updateEachAttentionData(id); //更新被影响的相互关注的数据
+                    break;
+                }
+                case 2:{
+                    let opIndex = ((this.dynamicCurrentPage2-1)*this.pageSize)+index; //将要操作数据下标
+                    let page = this.dynamicCurrentPage2; //显示的对应页，更新视图的作用
+                    if (opIndex == this.updateMessageData.length -1 && page -1>0 && index == 0){
+                        page -= 1;  //若操作的数组元素为末尾元素，并且为>1的页面而且该元素是显示数组的下标为0的元素，将会显示当前页面的前一个页面
+                    }
+                    //this.displayData.attentionData.splice(index,index); //清除对应显示数据
+                    this.updateMessageData.splice(opIndex,1);  //清除缓存的对应数据(从第几个元素开始，开始的几个，要插入的元素)
+                    this.totals.total2 -= 1;    //更新整体数据计数
+                    this.handleCurrentChange_attention(page);  //跳转页面，相当于更新视图
+                    this.displayDivsSetting(); //判断是否要显示空内容提示
+                    // this.updateEachAttentionData(id); //更新被影响的相互关注的数据
+                    break;
+                }
+                case 3:{
+                    let opIndex = ((this.dynamicCurrentPage3-1)*this.pageSize)+index; //将要操作数据下标
+                    let page = this.dynamicCurrentPage3; //显示的对应页，更新视图的作用
+                    if (opIndex == this.chatMessageData.length -1 && page -1>0 && index == 0){
+                        page -= 1;  //若操作的数组元素为末尾元素，并且为>1的页面而且该元素是显示数组的下标为0的元素，将会显示当前页面的前一个页面
+                    }
+                    //this.displayData.attentionData.splice(index,index); //清除对应显示数据
+                    this.chatMessageData.splice(opIndex,1);  //清除缓存的对应数据(从第几个元素开始，开始的几个，要插入的元素)
+                    this.totals.total3 -= 1;    //更新整体数据计数
+                    this.handleCurrentChange_each(page);  //跳转页面，相当于更新视图
+                    this.displayDivsSetting(); //判断是否要显示空内容提示
+                    // this.updateEachAttentionData(id); //更新被影响的相互关注的数据
+                    break;
+                }
+                default:break;
+            }
+
         },
         displayDivsSetting(){
             //判断是否要显示空内容提示
@@ -197,10 +232,6 @@ let messageCenterInterface_vm = new Vue({
                 this.handleCurrentChange_each(page);  //跳转页面，相当于更新视图
             }
         },
-        updateFansButton(id){
-            //更新粉丝页面的按钮显示
-            //等待更新
-        },
     },
     mounted(){
         //钩子函数，在加载页面后，渲染数据前执行
@@ -214,66 +245,74 @@ let messageCenterInterface_vm = new Vue({
             this.user_id = userId;
             this.user_name = userName;
             this.user_avatar = userAvatar;
-            //获取与该用户相互关注的用户信息
-            axios.get("/shaohuashuwu_war_exploded/attentionInfoController/" +
-                 "getEachAttentionUserInfo/"+userId).then(resp =>{
-                 let objectData = eval(JSON.stringify(resp.data));//将字符串转化为数组对象
-                 console.log("获取的相互关注信息为："+typeof(objectData));
-                 this.eachAttentionData = objectData;
-                 console.log("与该用户互相关注信息总条数为："+objectData.length);
-                 this.totals.total1 = objectData.length;
-                 //配置显示数据
-                 let endNums = this.pageSize;
-                 if (endNums > objectData.length){
-                     endNums = objectData.length;
-                 }
-                 this.displayData.eachAttentionData = objectData.slice(0,endNums);
-                 //更新无数据提示的显示情况
-                 if(objectData.length > 0){
-                     this.displayDivs.displayDiv1 = "none";
-                 }
-            }).catch(error =>{
-                 console.log("获取与该用户互相关注信息失败:"+error);
-            });
-            //获取该用户关注的用户信息
-            axios.get("/shaohuashuwu_war_exploded/attentionInfoController/" +
-                "getAttentionAuthorInfo/"+userId).then(resp2 =>{
-                let objectData = eval(JSON.stringify(resp2.data));//将字符串转化为数组对象
-                console.log("获取的信息为："+typeof(objectData));
-                this.attentionData = objectData;
-                console.log("关注信息总条数为："+objectData.length);
-                this.totals.total2 = objectData.length;
-                //配置当前显示数据
-                let endNums = this.pageSize;
-                if (endNums > objectData.length){
-                    endNums = objectData.length;
-                }
-                this.displayData.attentionData = objectData.slice(0,endNums);
-                //更新无数据提示的显示情况
-                if (objectData.length > 0){  this.displayDivs.displayDiv2 = "none";  }
-            }).catch(error =>{
-                console.log("获取关注信息失败:"+error);
-            });
-            //获取关注该用户的用户信息，即粉丝信息
-            axios.get("/shaohuashuwu_war_exploded/attentionInfoController/" +
-                "getFansInfo/"+userId).then(resp3 =>{
-                let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
-                console.log("获取粉丝的信息为："+typeof(objectData));
-                this.fansData = objectData;
-                console.log("粉丝的关注信息总条数为："+objectData.length);
-                this.totals.total3 = objectData.length;
-                //配置当前显示数据
-                let endNums = this.pageSize;
-                if (endNums > objectData.length){
-                    endNums = objectData.length;
-                }
-                this.displayData.fansData = objectData.slice(0,endNums);
-                //更新无数据提示的显示情况
-                if (objectData.length > 0){  this.displayDivs.displayDiv3 = "none";  }
-            }).catch(error =>{
-                console.log("获取粉丝关注信息失败:"+error);
-            });
+            //获取所有该用户的通知消息
+            axios.get("/shaohuashuwu_war_exploded/noticeInfoController/getAllNoticeInfo/"+userId).then(resp =>{
+                console.log("获取成功");
+                let objectData = eval(JSON.stringify(resp.data));//将字符串转化为数组对象
+                // value是当前元素，index当前元素索引，array为当前数组
+                //将所有通知信息按照类别分类放置
+                let length1 = 0;
+                let length2 = 0;
+                let length3 = 0;
+                this.systemMessageData = [];
+                this.updateMessageData = [];
+                this.chatMessageData = [];
+                let _this = this;
+                console.log("数据装配中······");
+                objectData.forEach(function (value,index,array) {
+                    switch (value.notice_type) {
+                        case 1:{
+                            console.log("系统提醒数据装配中······【"+index+"】");
+                            // length1 = this.systemMessageData.push(value); //注意在这里使用this，指的是function
+                            length1 = _this.systemMessageData.push(value); //注意在这里使用this，指的是function
+                            if (value.notice_tip == 1){
+                                _this.tipTotals.tipTotal1 += 1;
+                            }
+                            break;
+                        }
+                        case 2:{
+                            console.log("更新提醒数据装配中······【"+index+"】");
+                            length2 = _this.updateMessageData.push(value);
+                            if (value.notice_tip == 1){
+                                _this.tipTotals.tipTotal2 += 1;
+                            }
+                            break;
+                        }
+                        case 3:{
+                            console.log("私信数据装配中······【"+index+"】");
+                            length3 = _this.chatMessageData.push(value);
+                            if (value.notice_tip == 1){
+                                _this.tipTotals.tipTotal3 += 1;
+                            }
+                            break;
+                        }
+                        default:break;
+                    }
+                });
+                this.totals.total1 = this.systemMessageData.length;
+                this.totals.total2 = this.updateMessageData.length;
+                this.totals.total3 = this.chatMessageData.length;
+                //配置初始显示数据
+                let endNums1 = this.pageSize > this.systemMessageData.length ? this.systemMessageData.length : this.pageSize;
+                let endNums2 = this.pageSize > this.updateMessageData.length ? this.updateMessageData.length : this.pageSize;
+                let endNums3 = this.pageSize > this.chatMessageData.length ? this.chatMessageData.length : this.pageSize;
 
+                this.displayData.systemMessageData = this.systemMessageData.slice(0,endNums1);
+                this.displayData.updateMessageData = this.updateMessageData.slice(0,endNums2);
+                this.displayData.chatMessageData = this.chatMessageData.slice(0,endNums3);
+                //更新无数据提示的显示情况
+                let display1 = this.totals.total1 > 0 ? "none":"block";
+                let display2 = this.totals.total2 > 0 ? "none":"block";
+                let display3 = this.totals.total3 > 0 ? "none":"block";
+                this.displayDivs.displayDiv1 = display1;
+                this.displayDivs.displayDiv2 = display2;
+                this.displayDivs.displayDiv3 = display3;
+
+                console.log("数据装配成功");
+
+            }).catch(error =>{
+                console.log("获取失败："+error);
+            })
         }).catch(error =>{
             alert("获取本用户ID和name错误。");
         });

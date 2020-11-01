@@ -41,7 +41,7 @@
             <div class="body_header">
                 <div class="body_img">
                     <div class="body_img_img">
-                        <img id="avatar" :src="imageURL_header+user_avatar+imageURL_suffix">
+                        <img id="avatar" :src="'../images/avatar/'+user_avatar+imageURL_suffix">
                     </div>
                     <div class="body_img_content">
 
@@ -55,30 +55,55 @@
                     <el-tab-pane label="系统消息">
                         <div class="operate_header">
 
-                            <span id="op_span2">
-                                <el-badge :value="totals.total1" class="item">
+                            <span class="op_span2">
+                                <el-badge :value="tipTotals.tipTotal1" class="item">
                                     <el-button size="mini" :disabled="button_disabled">全部已读</el-button>
                                 </el-badge>
                             </span>
-                            <span id="op_span1">
+                            <span class="op_span1">
                                 <el-badge :value="totals.total1" class="item" type="primary">
                                     <el-button size="mini" :disabled="button_disabled">清空</el-button>
                                 </el-badge>
                             </span>
                         </div>
                         <div class="message" v-for="(message,index) in displayData.systemMessageData">
-                            <div class="tip_img_url">
-                                <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                            <div class="tip_img" >
+                                <!--  提示图片  -->
+                                <img :src="imageURL_header+tip_img_url+imageURL_suffix" v-if="message.notice_tip==1">
                             </div>
                             <div class="message_avatar">
-                                <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                                <img :src="imageURL_header+bell_img_url+imageURL_suffix">
                             </div>
                             <div class="message_content">
-                                {{user.user_name}}
+                                <!--  铃铛图片后面、删除按钮之前的元素-->
+                                <div class="message_content_title">
+                                    <label>{{message.notice_title}}</label>
+                                </div>
+                                <div class="message_content_content">
+                                    <label>{{message.notice_content}}</label>
+                                </div>
+                                <div class="message_content_bottom">
+                                    <div class="message_content_time">
+                                        <label>{{message.send_time}}</label>
+                                    </div>
+                                    <div class="message_content_sendBy">
+                                        <label>发送人:{{message.send_by_name}}</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="message_operate">
-                                <el-button type="danger" plain @click="chat(message.user_id)">私信</el-button>
+                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,1,index)">删除</el-button>
+                                <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
+                                <el-popover
+                                        placement="left-start"
+                                        :title="'【'+message.notice_title+'】'"
+                                        width="400"
+                                        trigger="click"
+                                        :content="'[内容]:'+message.notice_content">
+                                    <el-button size="mini" type="text" slot="reference">全部内容</el-button>
+                                </el-popover>
                             </div>
+
                         </div>
                         <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
                             <!--                        <p>hello world</p>-->
@@ -95,59 +120,136 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="更新提醒">
-                        <div class="message" v-for="(message,index) in displayData.systemMessageData">
+                        <div class="operate_header">
+
+                            <span class="op_span2">
+                                <el-badge :value="tipTotals.tipTotal2" class="item">
+                                    <el-button size="mini" :disabled="button_disabled">全部已读</el-button>
+                                </el-badge>
+                            </span>
+                            <span class="op_span1">
+                                <el-badge :value="totals.total2" class="item" type="primary">
+                                    <el-button size="mini" :disabled="button_disabled">清空</el-button>
+                                </el-badge>
+                            </span>
+                        </div>
+                        <div class="message" v-for="(message,index) in displayData.updateMessageData">
+                            <div class="tip_img" >
+                                <!--  提示图片  -->
+                                <img :src="imageURL_header+tip_img_url+imageURL_suffix" v-if="message.notice_tip==1">
+                            </div>
                             <div class="message_avatar">
-                                <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                                <img :src="imageURL_header+bell_img_url+imageURL_suffix">
                             </div>
                             <div class="message_content">
-                                {{user.user_name}}
+                                <!--  铃铛图片后面、删除按钮之前的元素-->
+                                <div class="message_content_title">
+                                    <label>{{message.notice_title}}</label>
+                                </div>
+                                <div class="message_content_content">
+                                    <label>{{message.notice_content}}</label>
+                                </div>
+                                <div class="message_content_bottom">
+                                    <div class="message_content_time">
+                                        <label>{{message.send_time}}</label>
+                                    </div>
+                                    <div class="message_content_sendBy">
+                                        <label>发送人:{{message.send_by_name}}</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="message_operate">
-                                <el-button type="danger" plain @click="cancelAttention(user.user_id,user.user_name,index)">取关</el-button>
+                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,2,index)">删除</el-button>
+                                <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
+                                <el-popover
+                                        placement="left-start"
+                                        :title="'【'+message.notice_title+'】'"
+                                        width="400"
+                                        trigger="click"
+                                        :content="'[内容]:'+message.notice_content">
+                                    <el-button size="mini" type="text" slot="reference">全部内容</el-button>
+                                </el-popover>
                             </div>
+
                         </div>
-                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv2+';'"></div>
+                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
+                            <!--                        <p>hello world</p>-->
+                        </div>
                         <div class="message_pagination">
-                            <!--
-                                size-change:pageSize 改变时会触发,参数：每页条数
-                                current-change:currentPage 改变时会触发
-                                current-page.sync:当前页数，支持 .sync 修饰符
-                                page-size:每页显示条目个数，支持 .sync 修饰符
-                                layout:组件布局，子组件名用逗号分隔 String：'prev, pager, next, jumper, ->, total'
-                                total:总条目数
-                            -->
                             <el-pagination
                                     @size-change="handleSizeChange"
-                                    @current-change="handleCurrentChange_attention"
+                                    @current-change="handleCurrentChange_each"
                                     :current-page.sync="currentPage"
                                     :page-size="pageSize"
                                     layout="prev, pager, next, jumper"
-                                    :total="totals.total2">
+                                    :total="totals.total1">
                             </el-pagination>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="私信">
-                        <div class="message" v-for="(message,index) in displayData.systemMessageData">
+                        <div class="operate_header">
+
+                            <span class="op_span2">
+                                <el-badge :value="tipTotals.tipTotal3" class="item">
+                                    <el-button size="mini" :disabled="button_disabled">全部已读</el-button>
+                                </el-badge>
+                            </span>
+                            <span class="op_span1">
+                                <el-badge :value="totals.total3" class="item" type="primary">
+                                    <el-button size="mini" :disabled="button_disabled">清空</el-button>
+                                </el-badge>
+                            </span>
+                        </div>
+                        <div class="message" v-for="(message,index) in displayData.chatMessageData">
+                            <div class="tip_img" >
+                                <!--  提示图片  -->
+                                <img :src="imageURL_header+tip_img_url+imageURL_suffix" v-if="message.notice_tip==1">
+                            </div>
                             <div class="message_avatar">
-                                <!-- <img :src="'../images/avatar/'+user.head_portrait+'.jpg'">-->
-                                <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                                <img :src="imageURL_header+bell_img_url+imageURL_suffix">
                             </div>
                             <div class="message_content">
-                                {{user.user_name}}
+                                <!--  铃铛图片后面、删除按钮之前的元素-->
+                                <div class="message_content_title">
+                                    <label>{{message.notice_title}}</label>
+                                </div>
+                                <div class="message_content_content">
+                                    <label>{{message.notice_content}}</label>
+                                </div>
+                                <div class="message_content_bottom">
+                                    <div class="message_content_time">
+                                        <label>{{message.send_time}}</label>
+                                    </div>
+                                    <div class="message_content_sendBy">
+                                        <label>发送人:{{message.send_by_name}}</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="message_operate" style="display: none">
-                                <el-button type="danger" plain @click="addAttention(user.user_id)">查看</el-button>
+                            <div class="message_operate">
+                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,3,index)">删除</el-button>
+                                <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
+                                <el-popover
+                                        placement="left-start"
+                                        :title="'【'+message.notice_title+'】'"
+                                        width="400"
+                                        trigger="click"
+                                        :content="'[内容]:'+message.notice_content">
+                                    <el-button size="mini" type="text" slot="reference">全部内容</el-button>
+                                </el-popover>
                             </div>
+
                         </div>
-                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv3+';'"></div>
+                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
+                            <!--                        <p>hello world</p>-->
+                        </div>
                         <div class="message_pagination">
                             <el-pagination
                                     @size-change="handleSizeChange"
-                                    @current-change="handleCurrentChange_fans"
+                                    @current-change="handleCurrentChange_each"
                                     :current-page.sync="currentPage"
                                     :page-size="pageSize"
                                     layout="prev, pager, next, jumper"
-                                    :total="totals.total3">
+                                    :total="totals.total1">
                             </el-pagination>
                         </div>
                     </el-tab-pane>
