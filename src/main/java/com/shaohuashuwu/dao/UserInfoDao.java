@@ -54,6 +54,7 @@ public interface UserInfoDao {
     @ResultMap("userInfo")
     public List<UserInfo> selectReaderInfo(int work_id);
 
+    //根据用户ID获取用户名
     @Select("select user_name from user_info where user_id = #{id}")
     public String selectUserNameById(int id);
 

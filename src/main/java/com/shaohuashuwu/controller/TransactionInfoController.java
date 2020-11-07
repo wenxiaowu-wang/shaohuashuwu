@@ -1,6 +1,7 @@
 package com.shaohuashuwu.controller;
 
 import com.shaohuashuwu.domain.TransactionInfo;
+import com.shaohuashuwu.domain.vo.TransactionInfoVo;
 import com.shaohuashuwu.service.TransactionInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.controller
@@ -125,14 +128,14 @@ public class TransactionInfoController {
     /**
      * 打赏作品
      * @param userId    用户ID
-     * @param workId    作品ID
+     * @param chapterId    章节ID
      * @param beanNum   打赏金豆数量
      * @return  打赏结果 Boolean
      */
     //打赏作品
     @ResponseBody
-    @RequestMapping(path = "/tipsWork/{userId}/{workId}/{beanNum}")
-    public boolean tipsWork(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "workId") Integer workId,@PathVariable(value = "beanNum") Integer beanNum){
+    @RequestMapping(path = "/tipsWork/{userId}/{chapterId}/{work_id}/{beanNum}")
+    public boolean tipsWork(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "chapterId") Integer chapterId,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "beanNum") Integer beanNum){
         boolean tipsResult = false;
 
         TransactionInfo transactionInfo = new TransactionInfo();
@@ -142,7 +145,7 @@ public class TransactionInfoController {
         System.out.println("timestamp is "+timestamp.toString());
         //交易记录流水ID不用设置，在数据库中自增补齐
         transactionInfo.setConsumer_id(userId);//消费者ID
-        transactionInfo.setRecipent_id(workId);//接受者ID（作品ID）
+        transactionInfo.setRecipent_id(chapterId);//接受者ID（作品ID）(更改为章节ID)
         transactionInfo.setTransaction_type(1);//1表示交易类型是打赏
         transactionInfo.setTransaction_mode(11);//交易方式(除了0和1外，其它的不进行解析)
         transactionInfo.setTransaction_time(timestamp);//交易时间
@@ -150,27 +153,27 @@ public class TransactionInfoController {
         transactionInfo.setTransaction_unit("个金豆");
         System.out.println("打赏信息为："+transactionInfo.toString());
         //打赏作品操作service
-        tipsResult = transactionInfoService.tipWork(transactionInfo);
+        tipsResult = transactionInfoService.tipWork(transactionInfo,work_id);
         return tipsResult;
     }
 
     /**
      * 投推荐票
      * @param userId    用户ID
-     * @param workId    作品ID
+     * @param chapterId 章节ID
      * @param voteNum   投票数量
      * @return  投票结果 Boolean
      */
     @ResponseBody
-    @RequestMapping(path = "/voteWork/{userId}/{workId}/{voteNum}")
-    public boolean voteWork(@PathVariable(value = "userId")Integer userId,@PathVariable(value = "workId")Integer workId,@PathVariable(value = "voteNum")Integer voteNum){
+    @RequestMapping(path = "/voteWork/{userId}/{chapterId}/{work_id}/{voteNum}")
+    public boolean voteWork(@PathVariable(value = "userId")Integer userId,@PathVariable(value = "chapterId")Integer chapterId,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "voteNum")Integer voteNum){
         boolean voteResult = false;
         TransactionInfo transactionInfo = new TransactionInfo();
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         //交易记录流水ID不用设置，在数据库中自增补齐
         transactionInfo.setConsumer_id(userId);//消费者ID
-        transactionInfo.setRecipent_id(workId);//接受者ID（作品ID）
+        transactionInfo.setRecipent_id(chapterId);//接受者ID（作品ID）(更改为章节ID)
         transactionInfo.setTransaction_type(3);//3表示交易类型是投推荐票
         transactionInfo.setTransaction_mode(11);//交易方式(除了0和1外，其它的不进行解析)
         transactionInfo.setTransaction_time(timestamp);//交易时间
@@ -178,8 +181,38 @@ public class TransactionInfoController {
         transactionInfo.setTransaction_unit("张推荐票");
         System.out.println("投票信息为："+transactionInfo.toString());
 
-        voteResult = transactionInfoService.voteWork(transactionInfo);
+        voteResult = transactionInfoService.voteWork(transactionInfo,work_id);
         return voteResult;
+    }
+
+    /**
+     * 获取该用户所有的消费记录（除去提现记录的记录）
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(path = "/getAllConsumptionTransactionInfo/{user_id}")
+    @ResponseBody
+    public List<TransactionInfoVo> getAllConsumerRecords(@PathVariable(value = "user_id")Integer user_id){
+        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
+        List<TransactionInfoVo> getService = transactionInfoService.getAllConsumptionTransactionInfo(user_id);
+        for(int i=0;i<getService.size();i++){
+            switch(getService.get(i).getTransaction_type()){
+                case "充值":
+                case "打赏":
+                case "订阅":
+                case "投票":{
+                    getResult.add(getService.get(i));
+                    break;
+                }
+                default:break;
+            }
+        }
+        return getResult;
+    }
+
+    @RequestMapping(path = "/toPersonalAccount")
+    public String toPersonalAccount(){
+        return "personalAccountInterface.html";
     }
 
 }

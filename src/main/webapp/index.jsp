@@ -59,6 +59,10 @@
 <br>
 <a href="noticeInfoController/toMessageCenterInterface">消息中心</a>
 <br>
+<a href="transactionInfoController/toPersonalAccount">个人账户</a>
+<br>
+<a href="reportInfoController/toReportingWorks">举报作品</a>
+<br>
 <a href="adminInfoController/adminLoginInterface">管理员登录页面（未分离）</a>
 <br>
 <a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>
@@ -94,6 +98,13 @@
                 28+"/"+encodeURI("斗罗大陆")).then(response =>{
                 console.log(JSON.stringify(response.data));
                 console.log("作品ID和name装载完毕");
+            }).catch(error =>{
+                alert(JSON.stringify(error));
+            });
+            axios.post("chapterSession/saveChapter/" +
+                2+"/"+encodeURI("第一章：陨落的天才")).then(response =>{
+                console.log(JSON.stringify(response.data));
+                console.log("章节ID和title装载完毕");
             }).catch(error =>{
                 alert(JSON.stringify(error));
             });

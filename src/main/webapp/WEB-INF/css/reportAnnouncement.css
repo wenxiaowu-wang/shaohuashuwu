@@ -1,0 +1,30 @@
+body{
+    min-width: 900px;
+    min-height: 800px;
+    background-color: #f7f6f2;
+}
+.notice-box{
+    width: 75%;
+    margin: 10px auto;
+    padding-bottom: 30px;
+}
+.notice-name{
+    width: 73%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}
+.create-time{
+    text-align: center;
+    width: 73%;
+    font-weight: lighter;
+    font-size: smaller;
+    margin: 5px auto;
+}
+.more-detail{
+    margin: 10px auto;
+    width: 74%;
+    text-align: left;
+    padding-left: 8px;
+    padding-top: 8px;
+}

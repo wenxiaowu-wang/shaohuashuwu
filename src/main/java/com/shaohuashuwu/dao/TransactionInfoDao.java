@@ -66,4 +66,5 @@ public interface TransactionInfoDao {
             "transaction_unit = #{transaction_unit} where transaction_id = #{transaction_id}")
     public int updateTransactionInfo(TransactionInfo transactionInfo);
 
+
 }

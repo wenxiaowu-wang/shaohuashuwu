@@ -3,7 +3,7 @@ package com.shaohuashuwu.domain;
 //用于章节定位
 public class ChapterPostInfo {
 
-    private Integer user_id;        //用户ID
+    private Integer user_id;        //用户ID(作者ID)
     private Integer work_id;        //作品ID
     private Integer chapter_id;     //章节ID
 

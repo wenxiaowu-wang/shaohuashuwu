@@ -1,13 +1,13 @@
 package com.shaohuashuwu.service.impl;
 
-import com.shaohuashuwu.dao.TransactionInfoDao;
-import com.shaohuashuwu.dao.UserInfoDao;
-import com.shaohuashuwu.dao.WorksInfoDao;
+import com.shaohuashuwu.dao.*;
 import com.shaohuashuwu.domain.TransactionInfo;
+import com.shaohuashuwu.domain.vo.TransactionInfoVo;
 import com.shaohuashuwu.service.TransactionInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +29,12 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
 
     @Autowired
     public WorksInfoDao worksInfoDao;
+
+    @Autowired
+    public ChapterPostInfoDao chapterPostInfoDao;
+
+    @Autowired
+    public ChapterInfoDao chapterInfoDao;
 
     //充值金豆（记录充值信息并添加对应用户金豆数量）
     @Override
@@ -58,10 +64,10 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
      */
     //打赏作品
     @Override
-    public boolean tipWork(TransactionInfo tipInfo) {
+    public boolean tipWork(TransactionInfo tipInfo,int work_id) {
         boolean tipResult = false;
         //根据被打赏作品ID获取对应作品作者ID
-        int author_id = worksInfoDao.selectAuthorIdByWorkId(tipInfo.getRecipent_id());
+        int author_id = worksInfoDao.selectAuthorIdByWorkId(work_id);
         if (/*扣除消费用户金豆数，增加目标用户的金币数*/
                 userInfoDao.updateGoldBeanNumByUserId(tipInfo.getConsumer_id(),tipInfo.getTransaction_quantity() * (-1)) != 0
                 && userInfoDao.updateGoldCoinNumByUserId(author_id,tipInfo.getTransaction_quantity()/10) != 0
@@ -79,22 +85,61 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
      */
     //投票作品
     @Override
-    public boolean voteWork(TransactionInfo voteInfo) {
+    public boolean voteWork(TransactionInfo voteInfo,int work_id) {
         boolean voteResult = false;
         if (/*根据消费者ID扣除对应用户推荐票数，根据作品ID增加目标图书的推荐票数*/
-                userInfoDao.updateTicketNumByUserId(voteInfo.getConsumer_id(),voteInfo.getTransaction_quantity() * (-1)) != 0
-                && worksInfoDao.updateWorkVoteNumByWorkId(voteInfo.getRecipent_id(),voteInfo.getTransaction_quantity()) != 0
+                userInfoDao.updateTicketNumByUserId(work_id,voteInfo.getTransaction_quantity() * (-1)) != 0
+                && worksInfoDao.updateWorkVoteNumByWorkId(work_id,voteInfo.getTransaction_quantity()) != 0
                 && transactionInfoDao.insertTransactionInfo(voteInfo)!=(0)){
             voteResult = true;
         }
         return voteResult;
     }
 
+    /**
+     * 获取该用户所有的消费记录（所有的记录）
+     * @param user_id 消费者ID
+     * @return 交易记录值对象纪集合
+     */
     //获取该用户所有消费记录
     @Override
-    public List<TransactionInfo> getAllConsumptionTransactionInfo(int user_id) {
-        List<TransactionInfo> getResult = null;
-        getResult = transactionInfoDao.selectConsumptionInfoByUserId(user_id);
+    public List<TransactionInfoVo> getAllConsumptionTransactionInfo(int user_id) {
+        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
+        List<TransactionInfo> getDao = new ArrayList<TransactionInfo>();
+        getDao = transactionInfoDao.selectConsumptionInfoByUserId(user_id);
+        if (getDao.size() != 0){
+            for (int i=0;i<getDao.size();i++){
+                String name = "";
+                switch (getDao.get(i).getTransaction_type()){
+                    case 0:
+                    case 4:{
+                        //接收人名字获取：充值接收人为韶华书屋平台，打赏、订阅、投票的接收人为作者以及作品名字，提现的接收人为用户
+                        name = userInfoDao.selectUserNameById(getDao.get(i).getRecipent_id());
+                        break;
+                    }
+                    case 1:
+                    case 2:
+                    case 3:{
+                        //获取接受者ID对应的作品名和章节标题，将其进行字符串拼接
+                        name = chapterPostInfoDao.selectWorkNameByChapterId(getDao.get(i).getRecipent_id());
+                        name += chapterInfoDao.selectChapterTitleByChapterId(getDao.get(i).getRecipent_id());
+                        break;
+                    }
+                    default:name = "未知";break;
+                }
+                TransactionInfoVo transactionInfoVo = new TransactionInfoVo();
+                transactionInfoVo.setTransaction_id(getDao.get(i).getTransaction_id());
+                transactionInfoVo.setConsumer_id(getDao.get(i).getConsumer_id());
+                transactionInfoVo.setRecipient_id(getDao.get(i).getRecipent_id());
+                transactionInfoVo.setRecipient_name(name);
+                transactionInfoVo.setTransaction_type(getDao.get(i).analysisType());
+                transactionInfoVo.setTransaction_mode(getDao.get(i).analysisMode());
+                transactionInfoVo.setTransaction_time(getDao.get(i).analysisTime());
+                transactionInfoVo.setTransaction_quantity(getDao.get(i).getTransaction_quantity());
+                transactionInfoVo.setTransaction_unit(getDao.get(i).getTransaction_unit());
+                getResult.add(transactionInfoVo);
+            }
+        }
         return getResult;
     }
 

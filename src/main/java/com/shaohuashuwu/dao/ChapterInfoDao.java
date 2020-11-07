@@ -21,4 +21,8 @@ public interface ChapterInfoDao {
     @Update("update chapter_info set chapter_state = 0 where chapter_id = #{chapter_id}")
     public int updateChapterStateByChapterId(int chapter_id);
 
+    //根据章节ID获取章节标题名字
+    @Select("select chapter_title from chapter_info where chapter_id = #{param1}")
+    public String selectChapterTitleByChapterId(int chapter_id);
+
 }

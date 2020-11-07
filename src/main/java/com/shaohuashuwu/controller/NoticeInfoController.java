@@ -31,9 +31,32 @@ public class NoticeInfoController {
         return noticeInfoService.getAllNoticeInfo(user_id);
     }
 
+    //删除所有对应类型的通知消息
+    @RequestMapping(path = "/deleteAllNoticeInfoByIdAndType/{user_id}/{notice_type}")
+    @ResponseBody
+    public boolean deleteAllNoticeInfoByIdAndType(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "notice_type")Integer notice_id){
+        return noticeInfoService.deleteAllNoticeByIdAndType(user_id,notice_id);
+    }
+
+    //删除对应的一条通知消息
+    @RequestMapping(path = "/deleteOneNoticeInfo/{notice_id}")
+    @ResponseBody
+    public boolean deleteOneNoticeInfo(@PathVariable(value = "notice_id")Integer notice_id){
+        return noticeInfoService.deleteOneNotice(notice_id);
+    }
+
+    //将对应类型的消息置为已读
+    @RequestMapping(path = "/updateAllNoticeInfoByIdAndType/{user_id}/{notice_type}")
+    @ResponseBody
+    public boolean updateAllNoticeInfoByIdAndType(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "notice_type")Integer notice_id){
+        return noticeInfoService.updateAllNoticeByIdAndType(user_id,notice_id);
+    }
+
     //跳转到消息中心页面
     @RequestMapping(path = "/toMessageCenterInterface")
     public String toMessageCenterInterface(){
         return "messageCenterInterface.html";
     }
+
+
 }

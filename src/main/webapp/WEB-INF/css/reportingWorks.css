@@ -1,0 +1,66 @@
+.dialog_content{
+    margin: 2px auto;
+    height: 400px;
+    min-height: 390px;
+    width: 600px;
+    min-width: 590px;
+    /*border: 1px solid red;*/
+}
+.dialog_content_header{
+    /*border: 1px solid blue;*/
+    width: 75%;
+    text-align: left;
+}
+.dialog_content_header_title{
+    font-weight: bolder;
+    font-size: 15px;
+
+}
+.dialog_content_header_content{
+    font-weight: normal;
+    padding-left: 15px;
+}
+.dialog_content_header_content label{
+    font-weight: normal;
+}
+.dialog_content_hr{
+    width: 50%;
+    margin: 10px auto;
+}
+.dialog_content_center{
+    /*border: 1px solid green;*/
+    width: 80%;
+}
+.center_title{
+    margin-top: 2px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+.center_checkbox_group{
+    border: 1px solid #403e3e;
+    width: 80%;
+    height: 80%;
+    margin: 10px auto;
+    padding: 5px 5px;
+    border-radius: 5%;
+    box-shadow: 10px 10px 5px #363535;
+    /*透明*/
+    background-color: rgba(255, 255, 255,0.6);
+}
+.three_checkbox_1{
+    margin-left: 3px;
+    /*border: 1px solid red;*/
+}
+.three_checkbox_2{
+    margin-left: 3px;
+}
+.three_checkbox_3{
+    margin-left: 3px;
+}
+.dialog_content_footer{
+    width: 75%;
+    height: 30px;
+    margin:6px auto;
+    font-weight: lighter;
+    font-size: smaller;
+}

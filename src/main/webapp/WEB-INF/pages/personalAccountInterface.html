@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人账户</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/personalAccount.css">
+</head>
+<body>
+
+<div id="personalAccount">
+    <div class="top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips">{{topTips}}</div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+            <div class="top_data">
+                <br/>
+                {{user_name}}<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+    <div class="body_left">
+
+    </div>
+    <div class="body">
+        <div class="body_header">
+            <div class="body_img">
+                <div class="body_img_img">
+                    <img id="avatar" :src="'../images/avatar/'+user_avatar+imageURL_suffix">
+                </div>
+                <div class="body_img_content">
+
+                    <div class="body_img_content_userName">
+                        {{user_name}}
+                    </div>
+                    <div class="body_img_content_goldBean">
+                        <label>金豆数量:{{goldBeanNum}}</label>
+                        <el-button type="text" >充值</el-button>
+                    </div>
+                    <div class="body_img_content_ticket">
+                        <label>推荐票数:{{ticketNum}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="body_text">-->
+<!--            <label>交易记录</label>-->
+<!--            <span>交易记录可能存在延时，请以实际货币数量统计为准</span>-->
+<!--        </div>-->
+        <div class="body_center">
+            <el-tabs type="border-card">
+                <el-tab-pane label="充值记录">
+                    <div class="body_center_table">
+                        <el-table
+                                :data="topUpData"
+                                stripe
+                                style="width: 100%"
+                                height="470"
+                                :default-sort = "{prop: 'transaction_time', order: 'descending'}"
+                        >
+                            <el-table-column
+                                    fixed
+                                    prop="recipient_name"
+                                    label="接收者"
+                                    align="center"
+                                    width="140">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_time"
+                                    label="交易时间"
+                                    align="center"
+                                    sortable
+                                    width="170">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_mode"
+                                    label="交易方式"
+                                    align="center"
+                                    sortable
+                                    width="100">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_quantity"
+                                    label="交易数量"
+                                    align="center"
+                                    sortable
+                                    width="120">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_unit"
+                                    label="交易单位"
+                                    align="center"
+                                    width="120">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_type"
+                                    label="交易类型"
+                                    align="center"
+                                    width="100">
+                            </el-table-column>
+                        </el-table>
+                        <div class="noDataTips" v-if="topUpData.length == 0">
+                            <!--                        <p>数据为空提示</p>-->
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="打赏记录">
+                    <div class="body_center_search">
+                        <el-input
+                                v-model="search_reward"
+                                size="mini"
+                                placeholder="输入接受者关键字搜索" />
+                    </div>
+                    <div class="body_center_tip">
+
+                    </div>
+                    <el-table
+                            :data="rewardData.filter(data => !search_reward || data.recipient_name.toLowerCase().includes(search_reward.toLowerCase()))"
+                        stripe
+                        style="width: 100%"
+                        height="470"
+                        :default-sort = "{prop: 'transaction_time', order: 'descending'}">
+                        <el-table-column
+                                fixed
+                                prop="transaction_time"
+                                label="交易时间"
+                                align="center"
+                                sortable
+                                width="170">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                label="交易数量"
+                                align="center"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_unit"
+                                label="交易单位"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_type"
+                                label="交易类型"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="recipient_name"
+                                label="  接收者"
+                                align="left"
+                                header-align="center"
+                                width="300">
+                        </el-table-column>
+                        <div class="noDataTips" v-if="rewardData.length == 0">
+                            <!--                        <p>数据为空提示</p>-->
+                        </div>
+                    </el-table>
+                </el-tab-pane>
+                <el-tab-pane label="订阅记录">
+                    <div class="body_center_search">
+                        <el-input
+                                v-model="search_subscription"
+                                size="mini"
+                                placeholder="输入接受者关键字搜索" />
+                    </div>
+                    <div class="body_center_tip">
+
+                    </div>
+                    <el-table
+                            :data="subscriptionData.filter(data => !search_subscription || data.recipient_name.toLowerCase().includes(search_subscription.toLowerCase()))"
+                            stripe
+                            style="width: 100%"
+                            height="470"
+                            :default-sort = "{prop: 'transaction_time', order: 'descending'}">
+                        <el-table-column
+                                fixed
+                                prop="transaction_time"
+                                label="交易时间"
+                                align="center"
+                                sortable
+                                width="170">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                label="交易数量"
+                                align="center"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_unit"
+                                label="交易单位"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_type"
+                                label="交易类型"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="recipient_name"
+                                label="  接收者"
+                                align="left"
+                                header-align="center"
+                                width="300">
+                        </el-table-column>
+                        <div class="noDataTips" v-if="subscriptionData.length == 0">
+                            <!--                        <p>数据为空提示</p>-->
+                        </div>
+                    </el-table>
+                </el-tab-pane>
+                <el-tab-pane label="投票记录">
+                    <div class="body_center_search">
+                        <el-input
+                                v-model="search_voteTicket"
+                                size="mini"
+                                placeholder="输入接受者关键字搜索" />
+                    </div>
+                    <div class="body_center_tip">
+
+                    </div>
+                    <el-table
+                            :data="voteTicketData.filter(data => !search_voteTicket || data.recipient_name.toLowerCase().includes(search_voteTicket.toLowerCase()))"
+                            stripe
+                            style="width: 100%"
+                            height="470"
+                            :default-sort = "{prop: 'transaction_time', order: 'descending'}">
+                        <el-table-column
+                                fixed
+                                prop="transaction_time"
+                                label="交易时间"
+                                align="center"
+                                sortable
+                                width="170">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                label="交易数量"
+                                align="center"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_unit"
+                                label="交易单位"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_type"
+                                label="交易类型"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="recipient_name"
+                                label="  接收者"
+                                align="left"
+                                header-align="center"
+                                width="300">
+                        </el-table-column>
+                        <div class="noDataTips" v-if="voteTicketData.length == 0">
+                            <!--                        <p>数据为空提示</p>-->
+                        </div>
+                    </el-table>
+                </el-tab-pane>
+            </el-tabs>
+            <div class="body_bottom">
+                <label>交易记录</label>
+                <span>交易记录可能存在延时，请以实际货币数量统计为准（适度消费）</span>
+            </div>
+        </div>
+        <div class="body_content">
+
+        </div>
+
+    </div>
+    <div class="footing">
+
+
+    </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/personalAccount.js"></script>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.shaohuashuwu.service;
 
 import com.shaohuashuwu.domain.TransactionInfo;
+import com.shaohuashuwu.domain.vo.TransactionInfoVo;
 
 import java.util.List;
 
@@ -17,13 +18,13 @@ public interface TransactionInfoService {
     public boolean topUpsGoldBean(TransactionInfo topUpsInfo);
 
     //打赏作品
-    public boolean tipWork(TransactionInfo tipInfo);
+    public boolean tipWork(TransactionInfo tipInfo,int work_id);
 
     //投票作品
-    public boolean voteWork(TransactionInfo voteInfo);
+    public boolean voteWork(TransactionInfo voteInfo,int work_id);
 
     //获取该用户所有消费记录
-    public List<TransactionInfo> getAllConsumptionTransactionInfo(int user_id);
+    public List<TransactionInfoVo> getAllConsumptionTransactionInfo(int user_id);
 
     //获取该用户所有金币收入数量
     public int getAllIncomeGoldMount(int user_id);

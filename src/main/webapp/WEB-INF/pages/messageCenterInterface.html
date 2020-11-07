@@ -44,7 +44,6 @@
                         <img id="avatar" :src="'../images/avatar/'+user_avatar+imageURL_suffix">
                     </div>
                     <div class="body_img_content">
-
                         <label>{{user_name}}<br/>&nbsp;&nbsp;&nbsp;<span>系统消息： </span>{{totals.total1}}&nbsp;&nbsp;
                             <span>更新提醒： </span>{{totals.total2}}&nbsp;&nbsp;<span>其它私信： </span>{{totals.total3}}&nbsp;&nbsp;</label>
                     </div>
@@ -57,12 +56,12 @@
 
                             <span class="op_span2">
                                 <el-badge :value="tipTotals.tipTotal1" class="item">
-                                    <el-button size="mini" :disabled="button_disabled">全部已读</el-button>
+                                    <el-button size="mini" :disabled="button_disabled" @click="readAllMessage(1)">全部已读</el-button>
                                 </el-badge>
                             </span>
                             <span class="op_span1">
                                 <el-badge :value="totals.total1" class="item" type="primary">
-                                    <el-button size="mini" :disabled="button_disabled">清空</el-button>
+                                    <el-button size="mini" :disabled="button_disabled" @click="deleteAllMessage(1)">清空</el-button>
                                 </el-badge>
                             </span>
                         </div>
@@ -92,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="message_operate">
-                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,1,index)">删除</el-button>
+                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,1,message.notice_tip,index)">删除</el-button>
                                 <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
                                 <el-popover
                                         placement="left-start"
@@ -124,12 +123,12 @@
 
                             <span class="op_span2">
                                 <el-badge :value="tipTotals.tipTotal2" class="item">
-                                    <el-button size="mini" :disabled="button_disabled">全部已读</el-button>
+                                    <el-button size="mini" :disabled="button_disabled" @click="readAllMessage(2)">全部已读</el-button>
                                 </el-badge>
                             </span>
                             <span class="op_span1">
                                 <el-badge :value="totals.total2" class="item" type="primary">
-                                    <el-button size="mini" :disabled="button_disabled">清空</el-button>
+                                    <el-button size="mini" :disabled="button_disabled" @click="deleteAllMessage(2)">清空</el-button>
                                 </el-badge>
                             </span>
                         </div>
@@ -158,8 +157,9 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="message_operate">
-                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,2,index)">删除</el-button>
+                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,2,message.notice_tip,index)">删除</el-button>
                                 <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
                                 <el-popover
                                         placement="left-start"
@@ -191,12 +191,12 @@
 
                             <span class="op_span2">
                                 <el-badge :value="tipTotals.tipTotal3" class="item">
-                                    <el-button size="mini" :disabled="button_disabled">全部已读</el-button>
+                                    <el-button size="mini" :disabled="button_disabled" @click="readAllMessage(3)">全部已读</el-button>
                                 </el-badge>
                             </span>
                             <span class="op_span1">
                                 <el-badge :value="totals.total3" class="item" type="primary">
-                                    <el-button size="mini" :disabled="button_disabled">清空</el-button>
+                                    <el-button size="mini" :disabled="button_disabled" @click="deleteAllMessage(3)">清空</el-button>
                                 </el-badge>
                             </span>
                         </div>
@@ -226,7 +226,7 @@
                                 </div>
                             </div>
                             <div class="message_operate">
-                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,3,index)">删除</el-button>
+                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,3,message.notice_tip,index)">删除</el-button>
                                 <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
                                 <el-popover
                                         placement="left-start"

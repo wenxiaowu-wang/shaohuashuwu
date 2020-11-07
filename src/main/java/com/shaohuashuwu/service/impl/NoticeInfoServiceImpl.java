@@ -55,11 +55,21 @@ public class NoticeInfoServiceImpl implements NoticeInfoService {
         return getResult;
     }
 
-    //该用户全部消息置为已读
+    //该用户全部消息置为已读(未使用)
     @Override
     public boolean updateAllNotice(int user_id) {
         boolean updateResult = false;
         if (noticeInfoDao.updateAllNoticeTipByUserId(user_id)!=(0)){
+            updateResult = true;
+        }
+        return updateResult;
+    }
+
+    //该用户对应类型消息提醒全部置为已读
+    @Override
+    public boolean updateAllNoticeByIdAndType(int user_id, int notice_type) {
+        boolean updateResult = false;
+        if (noticeInfoDao.updateAllNoticeTipByIdAndType(user_id,notice_type)!=(0)){
             updateResult = true;
         }
         return updateResult;
@@ -75,7 +85,17 @@ public class NoticeInfoServiceImpl implements NoticeInfoService {
         return deleteResult;
     }
 
-    //删除该用户收到的所有对应消息
+    //删除该用户对应类型的所有消息提醒
+    @Override
+    public boolean deleteAllNoticeByIdAndType(int user_id, int notice_type) {
+        boolean deleteResult = false;
+        if (noticeInfoDao.deleteAllNoticeInfoByIdAndType(user_id,notice_type)!=(0)){
+            deleteResult = true;
+        }
+        return deleteResult;
+    }
+
+    //删除该用户收到的所有对应消息(未使用)
     @Override
     public boolean deleteAllNotice(int user_id) {
         boolean deleteResult = false;

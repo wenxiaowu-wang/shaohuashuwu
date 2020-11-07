@@ -129,23 +129,61 @@ let messageCenterInterface_vm = new Vue({
             }
             this.displayData.chatMessageData = this.chatMessageData.slice(beginNums,endNums);
         },
-
-        deleteMessage(id,type,index){
-          //取消关注选中ID的用户
-            this.$confirm('此操作将删除该消息, 是否继续?', '提示', {
+        deleteAllMessage(type){
+            //删除对应类型的所有的通知
+            let tip = "";
+            switch (type) {
+                case 1: tip = "系统消息"; break;
+                case 2: tip = "更新提醒"; break;
+                case 3: tip = "私信"; break;
+                default:break;
+            }
+            this.$confirm('此操作将删除所有【'+tip+'】通知消息, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
                 //删除关注信息
-                axios.post("/shaohuashuwu_war_exploded/attentionInfoController/deleteAttentionInfo/" +
-                    this.user_id+"/"+id).then(response =>{
+                axios.post("/shaohuashuwu_war_exploded/noticeInfoController/deleteAllNoticeInfoByIdAndType/" +
+                    this.user_id+"/"+type).then(response =>{
                     this.$message({
                         type: 'success',
                         message: '删除成功。'
                     });
-                    //更新页面的数据(很重要)
-                    this.updateViewData(type,index);
+                    //更新页面的数据(很重要)，删除所有对应类型信息后，进行视图数据更新。
+                    switch (type) {
+                        case 1:{
+                            this.displayData.systemMessageData = [];
+                            this.systemMessageData = [];
+                            this.totals.total1 = 0;
+                            this.tipTotals.tipTotal1 = 0;
+                            this.dynamicCurrentPage1 = 1;
+                            this.handleCurrentChange_each(1);
+                            this.displayDivs.displayDiv1 = "block";
+                            break;
+                        }
+                        case 2:{
+                            this.displayData.updateMessageData = [];
+                            this.updateMessageData = [];
+                            this.totals.total2 = 0;
+                            this.tipTotals.tipTotal2 = 0;
+                            this.dynamicCurrentPage2 = 1;
+                            this.handleCurrentChange_attention(1);
+                            this.displayDivs.displayDiv2 = "block";
+                            break;
+                        }
+                        case 3:{
+                            this.displayData.chatMessageData = [];
+                            this.chatMessageData = [];
+                            this.totals.total3 = 0;
+                            this.tipTotals.tipTotal3 = 0;
+                            this.dynamicCurrentPage3 = 1;
+                            this.handleCurrentChange_fans(1);
+                            this.displayDivs.displayDiv3 = "block";
+                            break;
+                        }
+                        default:break;
+                    }
                 }).catch(error =>{
                     this.$message({
                         type: 'info',
@@ -154,10 +192,122 @@ let messageCenterInterface_vm = new Vue({
                 });
             });
         },
-        updateViewData(type,index){
+        readAllMessage(type){
+            //将对应类型通知消息置为已读
+            switch (type) {
+                case 1:{
+                    if (this.tipTotals.tipTotal1 == 0){
+                        this.$message({
+                            type: 'info',
+                            message: '系统消息全部已读，请勿重复操作。'
+                        });
+                    }else{
+                        this.readAllMessageAxios(type);
+                        this.handleCurrentChange_each(this.dynamicCurrentPage1);
+                        this.systemMessageData.forEach(function (value, index, array) {
+                            value.notice_tip = 0;
+                        });
+                        this.displayData.systemMessageData.forEach(function (value, index, array) {
+                            value.notice_tip = 0;
+                        });
+                    }
+                    break;
+                }case 2:{
+                    if (this.tipTotals.tipTotal2 == 0){
+                        this.$message({
+                            type: 'info',
+                            message: '更新提醒全部已读，请勿重复操作。'
+                        });
+                    }else{
+                        this.readAllMessageAxios(type);
+                        this.handleCurrentChange_attention(this.dynamicCurrentPage2);
+                        this.updateMessageData.forEach(function (value, index, array) {
+                            value.notice_tip = 0;
+                        });
+                        this.displayData.updateMessageData.forEach(function (value, index, array) {
+                            value.notice_tip = 0;
+                        });
+                    }
+                    break;
+                }case 3:{
+                    if (this.tipTotals.tipTotal3 == 0){
+                        this.$message({
+                            type: 'info',
+                            message: '私信全部已读，请勿重复操作。'
+                        });
+                    }else{
+                        this.readAllMessageAxios(type);
+                        this.handleCurrentChange_fans(this.dynamicCurrentPage3);
+                        this.chatMessageData.forEach(function (value, index, array) {
+                            value.notice_tip = 0;
+                        });
+                        this.displayData.chatMessageData.forEach(function (value, index, array) {
+                            value.notice_tip = 0;
+                        });
+                    }
+                    break;
+                }default:break;
+            }
+        },
+        readAllMessageAxios(type){
+            //readAllMessage()的axios模块
+            axios.post("/shaohuashuwu_war_exploded/noticeInfoController/updateAllNoticeInfoByIdAndType/" +
+                this.user_id+"/"+type).then(response =>{
+                this.$message({
+                    type: 'success',
+                    message: '该类型全部已读。'
+                });
+                //更新页面的数据(很重要)
+                switch (type) {
+                    case 1:{
+                        this.tipTotals.tipTotal1 = 0;
+                        break;
+                    }case 2:{
+                        this.tipTotals.tipTotal2 = 0;
+                        break;
+                    }case 3:{
+                        this.tipTotals.tipTotal3 = 0;
+                        break;
+                    }default:break;
+                }
+            }).catch(error =>{
+                this.$message({
+                    type: 'info',
+                    message: '标记已读失败！'
+                });
+            });
+        },
+        deleteMessage(id,type,tip,index){
+          //取消关注选中ID的用户
+            this.$confirm('此操作将删除该消息, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //删除关注信息
+                axios.post("/shaohuashuwu_war_exploded/noticeInfoController/deleteOneNoticeInfo/" +
+                    id).then(response =>{
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功。'
+                    });
+                    //更新页面的数据(很重要)
+                    this.updateViewData(type,tip,index);
+                }).catch(error =>{
+                    this.$message({
+                        type: 'info',
+                        message: '删除消息失败！'
+                    });
+                });
+            });
+        },
+        updateViewData(type,tip,index){
             //更新驶入数据（主要是tabs面板里面的数据）【parma:type】:消息类型，也表示是在哪一个面板
             switch(type){
                 case 1:{
+                    if (tip == 1){
+                        this.tipTotals.tipTotal1 -= 1;
+                    }
                     let opIndex = ((this.dynamicCurrentPage1-1)*this.pageSize)+index; //将要操作数据下标
                     let page = this.dynamicCurrentPage1; //显示的对应页，更新视图的作用
                     if (opIndex == this.systemMessageData.length -1 && page -1>0 && index == 0){
@@ -172,6 +322,9 @@ let messageCenterInterface_vm = new Vue({
                     break;
                 }
                 case 2:{
+                    if (tip == 1){
+                        this.tipTotals.tipTotal2 -= 1;
+                    }
                     let opIndex = ((this.dynamicCurrentPage2-1)*this.pageSize)+index; //将要操作数据下标
                     let page = this.dynamicCurrentPage2; //显示的对应页，更新视图的作用
                     if (opIndex == this.updateMessageData.length -1 && page -1>0 && index == 0){
@@ -186,6 +339,9 @@ let messageCenterInterface_vm = new Vue({
                     break;
                 }
                 case 3:{
+                    if (tip == 1){
+                        this.tipTotals.tipTotal3 -= 1;
+                    }
                     let opIndex = ((this.dynamicCurrentPage3-1)*this.pageSize)+index; //将要操作数据下标
                     let page = this.dynamicCurrentPage3; //显示的对应页，更新视图的作用
                     if (opIndex == this.chatMessageData.length -1 && page -1>0 && index == 0){
@@ -201,7 +357,6 @@ let messageCenterInterface_vm = new Vue({
                 }
                 default:break;
             }
-
         },
         displayDivsSetting(){
             //判断是否要显示空内容提示

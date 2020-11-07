@@ -43,6 +43,11 @@ public interface WorksInfoDao {
     @Select("select user_id from works_info where work_id = #{work_id}")
     public int selectAuthorIdByWorkId(int work_id);
 
+    //根据作品ID获取作品名字
+    @Select("select work_name from works_info where work_id = #{work_id}")
+    public String selectWorkNameByWorkId(int work_id);
+
+    //根据作品ID更新投票数量
     @Update("update works_info set work_vote_num = work_vote_num + (#{param2}) where work_id = #{param1}")
     public int updateWorkVoteNumByWorkId(int work_id,int voteNum);
 }

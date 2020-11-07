@@ -28,4 +28,5 @@ public class ReportInfoServiceImpl implements ReportInfoService {
         }
         return addResult;
     }
+
 }
