@@ -24,6 +24,8 @@ public interface UserInfoService {
     //更新该用户(作者)的二级密码
     public boolean updateAuthorDoublePassword(int user_id,String double_password);
 
+    public boolean isDoublePassword(int user_id,String pass);
+
 
 
 

@@ -18,10 +18,10 @@ public interface AdminInfoService {
     public boolean deleteAdminInfo(String admin_id);
 
     //判断是否是该管理员
-    public boolean isAdmainRight(AdminInfo adminInfo);
+    public boolean isAdmainRight(String admin_id,String admin_password);
 
     //更新管理员密码,该adminInfo为修改后的AdminInfo
-    public boolean updateAdminPassword(AdminInfo adminInfo);
+    public boolean updateAdminPassword(String admin_id,String admin_password);
 
     AdminInfo getOneByName(String name);
 }

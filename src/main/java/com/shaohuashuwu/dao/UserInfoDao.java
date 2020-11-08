@@ -58,4 +58,8 @@ public interface UserInfoDao {
     @Select("select user_name from user_info where user_id = #{id}")
     public String selectUserNameById(int id);
 
+    //根据用户ID获取二级密码
+    @Select("select double_password from user_info where user_id = #{user_id}")
+    public String selectDoublePasswordById(int user_id);
+
 }

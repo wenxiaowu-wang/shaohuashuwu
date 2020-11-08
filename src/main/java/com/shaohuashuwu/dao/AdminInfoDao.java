@@ -33,8 +33,8 @@ public interface AdminInfoDao {
     public AdminInfo selectAdminInfoByAdminId(String admin_id);
 
     //更新一条管理员信息
-    @Update("update admin_info set admin_password = #{admin_password} where admin_id = #{adimn_id}")
-    public int updateAdminInfo(AdminInfo adminInfo);
+    @Update("update admin_info set admin_password = #{param2} where admin_id = #{param1}")
+    public int updateAdminInfo(String admin_id,String admin_password);
 
 
 }

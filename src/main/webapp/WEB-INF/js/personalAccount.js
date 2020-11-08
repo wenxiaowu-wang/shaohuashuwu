@@ -205,14 +205,14 @@ let personalAccountInterface_vm = new Vue({
                 console.log("获取交易记录失败："+error);
             });
             //获取用户金豆数量
-            axios.get("/shaohuashuwu_war_exploded/userController/getGoldBeanNum/"+userId).then(response_getGoldBeanNum =>{
+            axios.get("/shaohuashuwu_war_exploded/userInfoController/getGoldBeanNum/"+userId).then(response_getGoldBeanNum =>{
                 let str_goldBean = JSON.stringify(response_getGoldBeanNum.data);
                 this.goldBeanNum = parseInt(str_goldBean);
             }).catch(error =>{
                 console.log("获取金豆数量："+error);
             });
             //获取用户推荐票数量
-            axios.get("/shaohuashuwu_war_exploded/userController/getTicketNum/"+userId).then(response_getTicketNum =>{
+            axios.get("/shaohuashuwu_war_exploded/userInfoController/getTicketNum/"+userId).then(response_getTicketNum =>{
                 let str_ticketNum = JSON.stringify(response_getTicketNum.data);
                 this.ticketNum = parseInt(str_ticketNum);
             }).catch(error =>{

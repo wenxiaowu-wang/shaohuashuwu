@@ -42,10 +42,10 @@ public class AdminInfoServiceImpl implements AdminInfoService {
 
     //判断是否存在该管理员
     @Override
-    public boolean isAdmainRight(AdminInfo adminInfo) {
+    public boolean isAdmainRight(String admin_id,String admin_password) {
         Boolean isAdmin = false;
-        AdminInfo trueAdmin = adminInfoDao.selectAdminInfoByAdminId(adminInfo.getAdmin_id());
-        if (trueAdmin.getAdmin_password().equals(adminInfo.getAdmin_password())){
+        AdminInfo trueAdmin = adminInfoDao.selectAdminInfoByAdminId(admin_id);
+        if (trueAdmin.getAdmin_password().equals(admin_password)){
             isAdmin = true;
         }
         return isAdmin;
@@ -53,10 +53,10 @@ public class AdminInfoServiceImpl implements AdminInfoService {
 
     //修改管理员密码
     @Override
-    public boolean updateAdminPassword(AdminInfo adminInfo) {
+    public boolean updateAdminPassword(String admin_id,String admin_password) {
         Boolean updateResult = false;
         int num = 0;
-        num = adminInfoDao.updateAdminInfo(adminInfo);
+        num = adminInfoDao.updateAdminInfo(admin_id,admin_password);
         if (num!=0){
             updateResult = true;
         }

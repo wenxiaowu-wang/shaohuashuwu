@@ -66,4 +66,15 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         return updateResult;
     }
+
+    //判断二级密码是否正确
+    @Override
+    public boolean isDoublePassword(int user_id, String pass) {
+        boolean theResult = false;
+        String getPass = userInfoDao.selectDoublePasswordById(user_id);
+        if (getPass.equals(pass)){
+            theResult = true;
+        }
+        return theResult;
+    }
 }

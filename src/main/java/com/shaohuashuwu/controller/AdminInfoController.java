@@ -21,19 +21,25 @@ public class AdminInfoController {
     @Autowired
     private AdminInfoService adminInfoService;
 
-    @RequestMapping(path = "/adminLogin")
-    public @ResponseBody String adminLogin(@RequestBody AdminInfo adminInfo){
+    @RequestMapping(path = "/adminLogin/{admin_id}/{admin_password}")
+    @ResponseBody
+    public Boolean adminLogin(@PathVariable(value = "admin_id")String admin_id,@PathVariable(value = "admin_password")String admin_password){
             //POJO对象
            // @RequestParam(value = "admin_id",required = true)String admin_id,
            // @RequestParam(value = "admin_password",required = true)String admin_password){
 
-        System.out.println("进入登录函数。。。");
-        System.out.println(adminInfo.toString());
-        String adminLoginResult = "loginFaile.jsp";
-        if (adminInfoService.isAdmainRight(adminInfo)){
-            adminLoginResult = "loginSuccess.html";
-        }
+        System.out.println("admin_id = "+admin_id+",admin_password = "+admin_password);
+        Boolean adminLoginResult = false;
+        adminLoginResult = adminInfoService.isAdmainRight(admin_id,admin_password);
         return adminLoginResult;
+    }
+
+    @RequestMapping(path = "/updateAdminPassword/{admin_id}/{admin_password}")
+    @ResponseBody
+    public Boolean updateAdminPassword(@PathVariable(value = "admin_id")String admin_id,@PathVariable(value = "admin_password")String admin_password){
+        Boolean updateResult = false;
+        updateResult = adminInfoService.updateAdminPassword(admin_id,admin_password);
+        return updateResult;
     }
 
     @RequestMapping(path = "/forwardToLoginResult")
@@ -90,17 +96,22 @@ public class AdminInfoController {
     }
 
     /**
-     * 跳转登录页面
+     * 跳转登录页面(假)
      */
     @RequestMapping(path = "/adminLoginInterface")
     public String toLoginInterface(){
         return "hello.html";
     }
     /**
-     * 跳转登录页面
+     * 跳转登录页面(假)
      */
     @RequestMapping(path = "/adminLoginInterface2")
     public String toLoginInterface2(){
-        return "login.html";
+        return "adminLoginInterface.html";
+    }
+
+    @RequestMapping(path = "/toAdminLoginInterface")
+    public String toAdminLoginInterface(){
+        return "adminLoginInterface.html";
     }
 }
