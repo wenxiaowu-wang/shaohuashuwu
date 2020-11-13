@@ -30,7 +30,7 @@ public interface TransactionInfoService {
     public int getAllIncomeGoldMount(int user_id);
 
     //获取该用户所有收入记录
-    public List<TransactionInfo> getAllIncomeTransactionInfo(int user_id);
+    public List<TransactionInfoVo> getAllIncomeTransactionInfo(int user_id);
 
     //获取该用户所有提现记录
     public List<TransactionInfo> getTransactionOfWithdraw(int user_id);

@@ -153,8 +153,53 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
 
     //获取该用户所有收入记录
     @Override
-    public List<TransactionInfo> getAllIncomeTransactionInfo(int user_id) {
-        return transactionInfoDao.selectIncomeInfoByUserId(user_id);
+    public List<TransactionInfoVo> getAllIncomeTransactionInfo(int user_id) {
+        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
+        List<TransactionInfo> getDao = transactionInfoDao.selectIncomeInfoByUserId(user_id);
+        //遍历从dao层获取到的数据，处理后封装到transactionInfoVo对象中
+        if (getDao.size() != 0){
+            for (int i=0;i<getDao.size();i++){
+                String work_name = "待赋值";
+                String chapter_name = "待赋值";
+                String consumer_name = "待赋值";
+                int type = getDao.get(i).getTransaction_type();
+                //如果是0(充值)，暂不考虑，先行跳过
+                if ( type == 0){
+                    continue;
+                }
+                switch (getDao.get(i).getTransaction_type()){
+                    case 0:
+                    case 4:{
+                        consumer_name = "韶华书屋平台";
+                        break;
+                    }
+                    case 1:
+                    case 2:
+                    case 3:{
+                        //获取接受者ID对应的作品名和章节标题，将其进行字符串拼接(打赏、订阅、投票接受者都是对应章节ID)
+                        work_name = chapterPostInfoDao.selectWorkNameByChapterId(getDao.get(i).getRecipent_id());
+                        chapter_name = chapterInfoDao.selectChapterTitleByChapterId(getDao.get(i).getRecipent_id());
+                        consumer_name = userInfoDao.selectUserNameById(getDao.get(i).getConsumer_id());
+                        break;
+                    }
+                    default:work_name = "未知"; chapter_name = "未知";break;
+                }
+                TransactionInfoVo transactionInfoVo = new TransactionInfoVo();
+                transactionInfoVo.setTransaction_id(getDao.get(i).getTransaction_id());
+                transactionInfoVo.setConsumer_id(getDao.get(i).getConsumer_id());
+                transactionInfoVo.setConsumer_name(consumer_name);
+                transactionInfoVo.setRecipient_id(getDao.get(i).getRecipent_id());//还是对应的章节ID（打赏、订阅、投票）
+                transactionInfoVo.setRecipient_name(work_name);
+                transactionInfoVo.setRecipient_name_other(chapter_name);
+                transactionInfoVo.setTransaction_type(getDao.get(i).analysisType());
+                transactionInfoVo.setTransaction_mode(getDao.get(i).analysisMode());
+                transactionInfoVo.setTransaction_time(getDao.get(i).analysisTime());
+                transactionInfoVo.setTransaction_quantity(getDao.get(i).getTransaction_quantity());
+                transactionInfoVo.setTransaction_unit(getDao.get(i).getTransaction_unit());
+                getResult.add(transactionInfoVo);
+            }
+        }
+        return getResult;
     }
 
     //获取该用户所有提现记录

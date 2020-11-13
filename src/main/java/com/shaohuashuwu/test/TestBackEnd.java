@@ -8,16 +8,15 @@ import com.shaohuashuwu.domain.AdminInfo;
 import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.domain.vo.AttentionInfoVo;
 import com.shaohuashuwu.domain.vo.NoticeInfoVo;
-import com.shaohuashuwu.service.AccountService;
-import com.shaohuashuwu.service.AdminInfoService;
-import com.shaohuashuwu.service.AttentionInfoService;
-import com.shaohuashuwu.service.NoticeInfoService;
+import com.shaohuashuwu.domain.vo.TransactionInfoVo;
+import com.shaohuashuwu.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -121,6 +120,19 @@ public class TestBackEnd {
         for (int i=0;i<noticeInfoVoList.size();i++){
             System.out.println(noticeInfoVoList.get(i).toString());
         }
+    }
+
+    @Autowired
+    public TransactionInfoService transactionInfoService;
+
+    @Test
+    public void testGetAllIncomeTransaction(){
+        List<TransactionInfoVo> transactionInfoVos = new ArrayList<>();
+        transactionInfoVos = transactionInfoService.getAllIncomeTransactionInfo(11);
+        for (int i=0;i<transactionInfoVos.size();i++){
+            System.out.println(transactionInfoVos.get(i).toString());
+        }
+        System.out.println("test``````success");
     }
     
 }

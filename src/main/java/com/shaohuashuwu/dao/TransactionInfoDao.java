@@ -40,8 +40,8 @@ public interface TransactionInfoDao {
     })
     public List<TransactionInfo> selectConsumptionInfoByUserId(int user_id);//查询对应消费记录信息
 
-    //查询对应收入记录信息
-    @Select("select * from transaction_info where recipient_id = #{user_id}")
+    //查询对应收入记录信息，应更改，接受者的ID为章节ID
+    @Select("SELECT DISTINCT transaction_info.* FROM transaction_info,chapter_post_info,chapter_info WHERE transaction_info.recipient_id = chapter_info.chapter_id AND chapter_info.chapter_id = chapter_post_info.chapter_id AND chapter_post_info.user_id = #{user_id}")
     @ResultMap("transactionInfo")
     public List<TransactionInfo> selectIncomeInfoByUserId(int user_id);
 

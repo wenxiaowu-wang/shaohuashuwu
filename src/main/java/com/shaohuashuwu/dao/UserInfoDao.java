@@ -55,7 +55,7 @@ public interface UserInfoDao {
     public List<UserInfo> selectReaderInfo(int work_id);
 
     //根据用户ID获取用户名
-    @Select("select user_name from user_info where user_id = #{id}")
+    @Select("select distinct user_name from user_info where user_id = #{id}")
     public String selectUserNameById(int id);
 
     //根据用户ID获取二级密码

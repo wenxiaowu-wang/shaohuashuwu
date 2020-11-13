@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
+    <link rel="stylesheet" href="../css/remunerationExamine.css">
+
+
+
+</head>
+<body>
+<div >
+
+<!--顶部标题栏-->
+<div class="authorMainTopdiv">
+    <ul class="authorMainTopdul">
+        <li id="shaohualog" class="woketopall">
+            <img src="../images/icon/shaohua-ps-cut-all.png" >
+        </li>
+
+        <li id="authortips" class="woketopall">
+            <p id="authortips-a">欢迎进入作者平台！</p>
+        </li>
+        <li  id="worketbeach"   class="authorMainTopdli" >
+            <img  src="../images/authorworks-32.png" class="woketopall">
+        </li>
+        <li id="workhelp" class="authorMainTopdli">
+            <img  src="../images/authorhelp-32.png" class="woketopall">
+        </li>
+        <li id="workeinfo" class="authorMainTopdli" >
+            <img  src="../images/authorInf-32.png" class="woketopall">
+        </li>
+        <li id="workeme"  class="authorMainTopdli" >
+            <!--            <img id="workeme-img" src="../images/img1.png" class="woketopall">-->
+            <div class="dropdown">
+                <img   class="woketopall" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="dropdown-content" id="workeMe-dropdown">
+                    <a href="//www.runoob.com">点我</a>
+                    <a href="//www.runoob.com">点我</a>
+                    <div style="width:170px;border:1px solid #cccccc;"></div>
+                    <a href="//www.runoob.com">点我</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<!--左部标题栏和主题内容-->
+<div class="authorMain" >
+
+
+    <div class="authorMainLeftdiv">
+        <ul class="authorMainLeftdul">
+            <!--        <li class="nulllist">-->
+            <!--            作家专区-->
+            <!--        </li>-->
+            <li  id="worksBean"  class="authorMainLeftdli"  onclick="workeBeanOnclick(this)" >
+                <img src="../images/authorworks-36.png" class="authorMainLeftimg" id="worksBeanimg-id">
+                <h href="#home" class="authorMainLefta" id="worksBeanp-id">工作台</h></li>
+            </li>
+
+            <li id="worksMangagement" class="authorMainLeftdli" onclick="worksMangagementOnclick(this)">
+                <img src="../images/authormangagmentNew-32.png" class="authorMainLeftimg"  id="worksMangagementimg-id">
+                <h href="#home" class="authorMainLefta" id="worksMangagementp-id">作品管理</h></li>
+            </li>
+            <li id="workDataStatistics" class="authorMainLeftdli" onclick="workDataStatisticsOnclick(this)">
+                <img src="../images/authordata-32.png" class="authorMainLeftimg"  id="workeDataimg-id" >
+                <h href="#home" class="authorMainLefta" id="workeDatap-id">数据中心</h></li>
+
+            </li>
+            <li id="remuneration"  class="authorMainLeftdli" onclick="remunerationOnclick(this)">
+                <img src="../images/authorremunration-32.png" class="authorMainLeftimg" id="renmunerationimg-id">
+                <h href="#home" class="authorMainLefta" id="renmunerationp-id">稿酬收入</h></li>
+
+            </li>
+            <li id="interactionManagement"  class="authorMainLeftdli" onclick="interactionManagementOnclick(this)">
+                <img src="../images/authorinteraction-32.png" class="authorMainLeftimg"  id="interactionManagementimg-id">
+                <h href="#home" class="authorMainLefta" id="interactionManagementp-id">互动管理</h></li>
+            </li>
+            </li>
+        </ul>
+
+
+    </div>
+
+<!--    主要内容-->
+    <div id="remuneration_div">
+        <div class="content_title">
+            <p id = "remuneration-p-id">收入管理</p>
+            <hr id="remuneration-hr-id">
+        </div>
+        <div class="content_body">
+            <div class="body_header">
+                <div class="header_prefix">
+                    <label>{{tip1}}</label>
+                </div>
+                <div class="header_display">
+                    <label>{{header.goldCoin_total_income}}</label>
+                </div>
+                <div class="header_suffix">
+                    <label>{{tip2}}</label>
+                </div>
+                <div class="header_prefix">
+                    <label>{{tip3}}</label>
+                </div>
+                <div class="header_display">
+                    <label>{{header.goldCoin_already_withdraw}}</label>
+                </div>
+                <div class="header_suffix">
+                    <label>{{tip2}}</label>
+                </div>
+                <div class="header_prefix">
+                    <label>{{tip4}}</label>
+                </div>
+                <div class="header_display">
+                    <label>{{header.goldCoin_able_withdraw}}</label>
+                </div>
+                <div class="header_suffix">
+                    <label>{{tip2}}</label>
+                </div>
+                <div class="header_operate">
+                    <el-button type="primary" size="mini" @click="toWithdraw">提现</el-button>
+                </div>
+            </div>
+            <div class="body_selector">
+                <div class="selector_tip">
+                    <label>作品：</label>
+                </div>
+                <div class="selector_select">
+                    <el-select v-model="select_value1" multiple placeholder="请选择作品">
+                        <el-option
+                                v-for="item in work_options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="selector_tip">
+                    <label>交易方式：</label>
+                </div>
+                <div class="selector_select">
+                    <el-select v-model="select_value2" placeholder="请选择交易方式">
+                        <el-option
+                                v-for="item in operate_options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="selector_button">
+                    <el-button type="primary" size="mini" @click="examine">查看</el-button>
+                </div>
+            </div>
+            <div class="body_center">
+                <div class="center_top">
+                    <div class="center_tip">
+                        <label>收入分布</label>
+                    </div>
+                    <div class="center_statistics">
+                        <span>
+                            总计：
+                            <label>{{statistics}}</label>
+                            {{unit_display}}
+                        </span>
+                    </div>
+                </div>
+                <div class="center_table">
+                    <el-table
+                            :data="tableData_display"
+                            style="width: 98%"
+                            height="450"
+                            border
+                            stripe
+                            :default-sort = "{prop: 'transaction_time', order: 'descending'}"
+                    >
+                        <el-table-column
+                                prop="work_name"
+                                label="作品名"
+                                align="center"
+                                sortable
+                                width="auto"
+                                min-width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="chapter_title"
+                                label="章节名"
+                                align="center"
+                                sortable
+                                width="auto"
+                                min-width="200">
+                        </el-table-column>
+                        <el-table-column
+                                prop="consumer_name"
+                                :label="consumer_tip"
+                                align="center"
+                                sortable
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                :label="unit_display"
+                                align="left"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_time"
+                                label="时间"
+                                align="center"
+                                sortable
+                                width="180">
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+
+<script src="../js/remunerationExamine.js"></script>
+
+
+</html>

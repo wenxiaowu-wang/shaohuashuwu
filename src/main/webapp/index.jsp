@@ -67,6 +67,8 @@
 <br>
 <a href="adminInfoController/toAdminLoginInterface">管理员登录（真实测试版）</a>
 <br>
+<a href="transactionInfoController/toRemunerationInterface">稿酬收入</a>
+<br>
 <a href="adminInfoController/adminLoginInterface">管理员登录页面（未分离）</a>
 <br>
 <a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>

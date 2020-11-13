@@ -12,8 +12,11 @@ import java.sql.Timestamp;
 public class TransactionInfoVo {
     private Integer transaction_id;         //交易ID
     private Integer consumer_id;            //消费者
+    private String consumer_name;            //消费者名字
     private Integer recipient_id;            //接受者(当交易类型为2订阅时，接受者为作品ID)
     private String recipient_name;          //接受者名字
+    private Integer recipient_id_other;            //其它接受者(当交易类型为2订阅时，其它接受者为作品章节ID)
+    private String recipient_name_other;          //其它接受者名字，用于记录章节名，方便展示
     private String transaction_type;       //交易类型(0充值、1打赏、2订阅、3投票)
     private String transaction_mode;       //交易方式
     private String transaction_time; //交易时间
@@ -21,7 +24,10 @@ public class TransactionInfoVo {
     private String transaction_unit;    //交易单位
 
     public TransactionInfoVo() {
-
+        //先将特定情况才会使用的章节ID这两项初始化
+        this.recipient_id_other = 0;
+        this.recipient_name_other = "待赋值";
+        this.consumer_name = "待赋值";
     }
 
     public Integer getTransaction_id() {
@@ -40,6 +46,14 @@ public class TransactionInfoVo {
         this.consumer_id = consumer_id;
     }
 
+    public String getConsumer_name() {
+        return consumer_name;
+    }
+
+    public void setConsumer_name(String consumer_name) {
+        this.consumer_name = consumer_name;
+    }
+
     public Integer getRecipient_id() {
         return recipient_id;
     }
@@ -54,6 +68,22 @@ public class TransactionInfoVo {
 
     public void setRecipient_name(String recipient_name) {
         this.recipient_name = recipient_name;
+    }
+
+    public Integer getRecipient_id_other() {
+        return recipient_id_other;
+    }
+
+    public void setRecipient_id_other(Integer recipient_id_other) {
+        this.recipient_id_other = recipient_id_other;
+    }
+
+    public String getRecipient_name_other() {
+        return recipient_name_other;
+    }
+
+    public void setRecipient_name_other(String recipient_name_other) {
+        this.recipient_name_other = recipient_name_other;
     }
 
     public String getTransaction_type() {

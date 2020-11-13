@@ -210,6 +210,24 @@ public class TransactionInfoController {
         return getResult;
     }
 
+    /**
+     * 根据用户（作者ID）获取对应收入的交易记录信息（值对象集合）
+     * @param author_id 用户（作者）ID
+     * @return
+     */
+    @RequestMapping(path = "/getAllIncomeTransactionInfo/{author_id}")
+    @ResponseBody
+    public List<TransactionInfoVo> getAllIncomeTransactionInfo(@PathVariable(value = "author_id")Integer author_id){
+        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
+        getResult = transactionInfoService.getAllIncomeTransactionInfo(author_id);
+        return getResult;
+    }
+
+    @RequestMapping(path = "/toRemunerationInterface")
+    public String toRemunerationInterface(){
+        return "remunerationInterface.html";
+    }
+
     @RequestMapping(path = "/toPersonalAccount")
     public String toPersonalAccount(){
         return "personalAccountInterface.html";

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
+    <link rel="stylesheet" href="../css/workbeanchInterface.css">
+
+
+
+</head>
+<body>
+<div >
+
+<!--顶部标题栏-->
+<div class="authorMainTopdiv">
+    <ul class="authorMainTopdul">
+        <li id="shaohualog" class="woketopall">
+            <img src="../images/icon/shaohua-ps-cut-all.png" >
+        </li>
+
+        <li id="authortips" class="woketopall">
+            <p id="authortips-a">欢迎进入作者平台！</p>
+        </li>
+        <li  id="worketbeach"   class="authorMainTopdli" >
+            <img  src="../images/authorworks-32.png" class="woketopall">
+        </li>
+        <li id="workhelp" class="authorMainTopdli">
+            <img  src="../images/authorhelp-32.png" class="woketopall">
+        </li>
+        <li id="workeinfo" class="authorMainTopdli" >
+            <img  src="../images/authorInf-32.png" class="woketopall">
+        </li>
+        <li id="workeme"  class="authorMainTopdli" >
+            <!--            <img id="workeme-img" src="../images/img1.png" class="woketopall">-->
+            <div class="dropdown">
+                <img   class="woketopall" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="dropdown-content" id="workeMe-dropdown">
+                    <a href="//www.runoob.com">点我</a>
+                    <a href="//www.runoob.com">点我</a>
+                    <div style="width:170px;border:1px solid #cccccc;"></div>
+                    <a href="//www.runoob.com">点我</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<!--左部标题栏和主题内容-->
+<div class="authorMain" >
+
+
+    <div class="authorMainLeftdiv">
+        <ul class="authorMainLeftdul">
+            <!--        <li class="nulllist">-->
+            <!--            作家专区-->
+            <!--        </li>-->
+            <li  id="worksBean"  class="authorMainLeftdli"  onclick="workeBeanOnclick(this)" >
+                <img src="../images/authorworks-36.png" class="authorMainLeftimg" id="worksBeanimg-id">
+                <h href="#home" class="authorMainLefta" id="worksBeanp-id">工作台</h></li>
+            </li>
+
+            <li id="worksMangagement" class="authorMainLeftdli" onclick="worksMangagementOnclick(this)">
+                <img src="../images/authormangagmentNew-32.png" class="authorMainLeftimg"  id="worksMangagementimg-id">
+                <h href="#home" class="authorMainLefta" id="worksMangagementp-id">作品管理</h></li>
+            </li>
+            <li id="workDataStatistics" class="authorMainLeftdli" onclick="workDataStatisticsOnclick(this)">
+                <img src="../images/authordata-32.png" class="authorMainLeftimg"  id="workeDataimg-id" >
+                <h href="#home" class="authorMainLefta" id="workeDatap-id">数据中心</h></li>
+
+            </li>
+            <li id="remuneration"  class="authorMainLeftdli" onclick="remunerationOnclick(this)">
+                <img src="../images/authorremunration-32.png" class="authorMainLeftimg" id="renmunerationimg-id">
+                <h href="#home" class="authorMainLefta" id="renmunerationp-id">稿酬收入</h></li>
+
+            </li>
+            <li id="interactionManagement"  class="authorMainLeftdli" onclick="interactionManagementOnclick(this)">
+                <img src="../images/authorinteraction-32.png" class="authorMainLeftimg"  id="interactionManagementimg-id">
+                <h href="#home" class="authorMainLefta" id="interactionManagementp-id">互动管理</h></li>
+            </li>
+            </li>
+        </ul>
+
+
+    </div>
+
+<!--    主要内容-->
+    <div id="remuneration_div">
+        <div id="remuneration_content">
+            <p id = "remuneration-p-id">收入管理</p>
+            <hr id="remuneration-hr-id">
+
+
+            <div class="two-div-class">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+
+<script src="../js/workbeanchInterface.js"></script>
+
+
+</html>

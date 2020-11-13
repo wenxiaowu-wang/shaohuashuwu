@@ -22,7 +22,7 @@ public interface ChapterInfoDao {
     public int updateChapterStateByChapterId(int chapter_id);
 
     //根据章节ID获取章节标题名字
-    @Select("select chapter_title from chapter_info where chapter_id = #{param1}")
+    @Select("select distinct chapter_title from chapter_info where chapter_id = #{param1}")
     public String selectChapterTitleByChapterId(int chapter_id);
 
 }
