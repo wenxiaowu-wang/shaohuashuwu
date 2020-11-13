@@ -5,7 +5,7 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="../css/elementui.css">
-    <link rel="stylesheet" href="../css/workbeanchInterface.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
     <link rel="stylesheet" href="../css/worksMangagementInterface.css">
 
 </head>
@@ -102,8 +102,8 @@
                  <div class="fengge">
                  </div>
                  <el-button size="small" style="width: 120px" style="height: 40px"  @click="gorouter(worksInfo.work_id)"            class="worksMangagenment_button" id="gotowork1">管理作品</el-button>
-                 <el-button  size="small" style="width: 120px" style="height: 40px"  @click="text()" class="worksMangagenment_button" id="gotowork2">作品设置</el-button>
-                 <el-button   type="primary" plain size="small" style="width: 120px" style="height: 40px" class="worksMangagenment_button" id="gotowork3">去写作</el-button>
+                 <el-button size="small" style="width: 120px" style="height: 40px"  @click="text()" class="worksMangagenment_button" id="gotowork2">作品设置</el-button>
+                 <el-button type="primary" plain size="small" style="width: 120px" style="height: 40px" @click="gotowrite(worksInfo.work_id)" class="worksMangagenment_button" id="gotowork3">去写作</el-button>
              </li>
          </ul>
 

@@ -1,0 +1,333 @@
+
+#app{
+    width: 110%;
+    /*height: calc(100vh - 10px);*/
+    height: auto;
+    /*background: #69c5ef;*/
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+
+.novelDetails_top_div_class{
+    height: 60px;
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+
+    /*position: fixed;*/
+    /*top:0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*z-index: 1;*/
+}
+
+.novelDetails_top_div2_class{
+    margin:auto;
+    display:table;
+    width: 900px;
+    height: 100%;
+    /*background: #8cc5ff;*/
+}
+
+.novelDetails_top_el_menu_class{
+    background: rgba(255,255,255,0);
+}
+
+.userInfo_class{
+    margin-left: 200px;
+}
+
+.shujia_class{
+    margin-right:0px;
+}
+
+
+.shaohualogo{
+    width: 18px;
+    height: 18px;
+    float: left;
+    position: relative;
+    top:20px;
+}
+
+.shaohualogo_p_class{
+    float: left;
+    margin-left: 10px;
+    position: relative;
+    top:-15px;
+}
+
+.chapter_info_div_class{
+    width: 900px;
+    margin:auto;
+    display:table;
+    height: auto;
+    /*background: #bfcce3;*/
+    margin-top: 20px;
+
+}
+.chapter_list_div_class{
+    height: 355px;
+    width:70px;
+    /*background: #13ce66;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: #888888;
+    float: left;
+}
+.list_div_class{
+    width: 100%;
+    height: 70px;
+    /*background: red;*/
+    background: rgba(255,255,255,0.3);
+    cursor:pointer;
+
+}
+
+/*.el_button_my{*/
+
+/*    width: 70px;*/
+/*    background: rgba(255,255,255,0);*/
+/*    border-color: black;*/
+/*}*/
+.el_button_list{
+   background: rgba(255,255,255,0);
+    border: 1px solid rgba(255,255,255,0);
+}
+
+.el_button_img_my{
+    display: block;
+    /*width: 100%;*/
+    /*float: left;*/
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 0px;
+    left: 5px;
+    /*margin-left: 40%;*/
+
+}
+
+.el_button_p_my{
+    display: block;
+    width: 100%;
+    position: relative;
+    top: -5px;
+    color: black;
+    /*margin-left: 30%;*/
+    /*float: left;*/
+}
+
+.hrdiv_class{
+    height: 1px;
+    width: 100%;
+    background: #888888;
+}
+
+.chapter_info_rightdiv_class{
+    margin-left: 20px;
+    width: 800px;
+
+
+
+    /*??????????/???????????*/
+    height: auto;
+    background: rgba(255,255,255,0.3);
+    float: left;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: #888888;
+}
+
+.chapter_info1_class{
+    background: rgba(255,255,255,0);
+    width: 82%;
+    margin-left: 9%;
+    height: auto;
+    margin-top: 20px;
+}
+
+/*.work_name_div_class{*/
+/*    width: 100%;*/
+/*    height: 50px;*/
+/*    background: #f1f1f1;*/
+/*}*/
+
+.work_name_p_class{
+    font-size: 25px;
+    display: block;
+    width: 100%;
+    background: rgba(255,255,255,0);
+    /*font-weight:bold;*/
+}
+
+.work_info_class{
+    width: 100%;
+    height: 30px;
+    background: rgba(255,255,255,0);
+    margin-top: -5px;
+}
+
+.work_info_img1_class{
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.work_info_p1_class{
+    font-size: 15px;
+
+    /*display: block;*/
+    /*width: auto;*/
+    margin-left: 10px;
+    margin-top: 5px;
+    /*background: #3a8ee6;*/
+    float: left;
+}
+
+.chapter_content_p_class{
+    display: block;
+    width: 100%;
+
+
+    /*///////////////？？？？？？？？？*/
+    height: auto;
+    background: rgba(255,255,255,0);
+    /*background: orange;*/
+    line-height: 2em;
+}
+
+/*提示文字*/
+.tip_div_class{
+    width: 100%;
+    height: 40px;
+    /*background: #af4646;*/
+}
+
+/*y阅读设置*/
+.setting_theme_div_class{
+    width: 100%;
+    height: 70px;
+    /*margin-top: 20px;*/
+    /*background: #f3ecd2;*/
+}
+
+.setting_p_class{
+    display: block;
+    width: 10%;
+    height: 30px;
+    float: left;
+}
+
+.setting_theme_button_class{
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+
+    /*设置为圆角*/
+    border-radius: 50% 50% 50% 50%;
+    border:1px solid #8e8e8e;
+
+}
+
+#setting_theme_button_1{
+    background: #f6f1e7;
+}
+
+#setting_theme_button_2{
+    background: #f8f1da;
+}
+#setting_theme_button_3{
+    background: #e1ede1;
+}
+#setting_theme_button_4{
+    background: #e1eef2;
+}
+#setting_theme_button_5{
+    background: #f5e4e4;
+}
+#setting_theme_button_6{
+    background: #e9e9e9;
+}
+#setting_theme_button_7{
+    background: #181a1b;
+}
+
+.setting_font_type_div_class{
+    width: 100%;
+    height: 70px;
+    /*background: green;*/
+}
+
+.setting_font_type_button_class{
+    /*width: 100px;*/
+    /*height: 50px;*/
+    margin-left: 20px;
+
+    /*设置为圆角*/
+    /*border-radius: 50% 50% 50% 50%;*/
+    border:1px solid #8e8e8e;
+    /*width: 100px;*/
+    /*height: 50px;*/
+    background: #e5e5e5;
+    /*border:1px solid #8e8e8e;*/
+
+}
+
+.setting_font_size_div_class{
+    width: 100%;
+    height: 70px;
+    /*background: #13ce66;*/
+}
+
+.setting_font_size_div2_class{
+    width: 350px;
+    height: 50px;
+    background: #e5e5e5;
+
+    margin-left:80px;
+
+}
+
+.setting_font_size_button_class{
+    width: 100px;
+    height: 50px;
+    background:  rgba(255,255,255,0);
+    /*background: gainsboro;*/
+    float: left;
+    border:none;
+    font-size: 24px;
+}
+
+.setting_fenge_class{
+    display: block;
+    width: 12px;
+    height: 50px;
+    background: rgba(255,255,255,0);
+    margin-left: 12px;
+    float: left;
+
+}
+
+
+/*底部按钮*/
+.bottom_div_class{
+    margin-top: 20px;
+    width: 100%;
+    height: 60px;
+    /*background: #13ce66;*/
+}
+
+.bottom_button_class{
+    margin-left: 30%;
+}
+
+.hrdiv_class2{
+    width: 100%;
+    height: 1px;
+    margin-top: 20px;
+    background: black;
+}

@@ -100,4 +100,24 @@ public class TestWorks {
         System.out.println("最终结果"+list);
     }
 
+    @Test
+    public  void selectUserandWork(){
+
+
+        worksInfo = new WorksInfo(14);
+
+        List list = worksInfoService.selectUserandWork(worksInfo);
+//        List list = worksInfoService.selectworksneed(pageInfo);
+
+        System.out.println("数组中长度为：---"+list.size());
+        System.out.println("最终结果"+list);
+    }
+
+
+
+    @Test
+    public void testSelectworkInfoByChapter_id(){
+        worksInfoService.selectworkInfoByChapter_id(10);
+    }
+
 }

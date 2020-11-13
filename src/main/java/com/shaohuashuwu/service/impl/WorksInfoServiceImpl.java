@@ -1,11 +1,15 @@
 package com.shaohuashuwu.service.impl;
 
+import com.shaohuashuwu.dao.ChapterPostInfoDao;
 import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.dao.WorksInfoDao;
+import com.shaohuashuwu.domain.ChapterPostInfo;
 import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.Difvolenum;
 import com.shaohuashuwu.domain.vo.PageInfo;
+import com.shaohuashuwu.domain.vo.UserandWorksInfoVo;
+import com.shaohuashuwu.service.AttentionInfoService;
 import com.shaohuashuwu.service.WorksInfoService;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +33,14 @@ public class WorksInfoServiceImpl implements WorksInfoService {
 
     @Autowired
     public WorksInfoDao worksInfoDao;
+    @Autowired
+    public ChapterPostInfoDao chapterPostInfoDao;
 
     @Autowired
     public UserInfoDao userInfoDao;
+
+    @Autowired
+    public AttentionInfoService attentionInfoService;
     //    @Autowired
     private WorksInfo worksInfo;
     private Difvolenum difvolenum;
@@ -178,7 +187,7 @@ public class WorksInfoServiceImpl implements WorksInfoService {
      * @return
      */
     @Override
-    public List<WorksInfo> selectworkbyinfoResult(WorksInfo needworksInfo) {
+    public List<WorksInfo> selectworkbyinfoResult(WorksInfo needworksInfo) throws NullPointerException{
 
 //        向返回集合中添加数据
         List<WorksInfo> worksInfoLists = new ArrayList<WorksInfo>();
@@ -197,8 +206,14 @@ public class WorksInfoServiceImpl implements WorksInfoService {
 
 //        2.再获取作者名称和提供类型相同的数据
         String user_name = needworksInfo.getWork_name();
-        userInfo = userInfoDao.selectuserInfoByusername(user_name);
-        needworksInfo.setUser_id(userInfo.getUser_id());
+
+        try {
+            userInfo = userInfoDao.selectuserInfoByusername(user_name);
+            needworksInfo.setUser_id(userInfo.getUser_id());
+        }catch (Exception e){
+            System.out.println("异常"+e);
+        }
+
         if (userInfo == null) {
             System.out.println("空了");
         }
@@ -236,6 +251,24 @@ public class WorksInfoServiceImpl implements WorksInfoService {
 
     }
 
+    @Override
+    public List<UserandWorksInfoVo> selectUserandWork(WorksInfo worksInfo) {
+
+
+        List<UserandWorksInfoVo> list = worksInfoDao.selectUserandWork(worksInfo);
+
+        System.out.println("输出list----"+list);
+        return list;
+    }
+
+    //依据章节id查询作品信息
+    @Override
+    public WorksInfo selectworkInfoByChapter_id(int chapter_id) {
+
+        worksInfo = chapterPostInfoDao.selectworkInfoByChapter_id(chapter_id);
+        System.out.println(worksInfo);
+        return worksInfo;
+    }
 
 
 }

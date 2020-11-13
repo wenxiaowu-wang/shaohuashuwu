@@ -1,0 +1,258 @@
+
+/*顶部栏*/
+.addChapterLeftdiv{
+    height: 100%;
+    width: 255px;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    /*y阴影*/
+    /*box-shadow: 0px 5px 10px #b2d1d4;*/
+    background: #ffffff;
+
+    border:1px solid #dddddd;
+    border-top: none;
+    /*float: left;*/
+}
+
+
+
+/*作品信息*/
+.work_info{
+    width: 100%;
+    height: 50px;
+    background: #ffffff;
+    /*padding-top: 1px;*/
+}
+
+.shaohualogo{
+    height: 18px;
+    width: 18px;
+    float: left;
+    /*margin-top: 2px;*/
+    position: relative;
+    top:20px;
+}
+.work_name_p_class{
+    float: left;
+    margin-left: 20px;
+    /*!*margin-top: 30px;*!*/
+    font-size: 16px;
+    width: 200px;
+    height: 25px;
+    /*background: #13ce66;*/
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*性质*/
+.chapter_charge_div_class{
+    width: 100%;
+    height: 50px;
+    background: #ffffff;
+    /*padding-top: 1px;*/
+    /*float: left;*/
+}
+
+.chapter_charge_class{
+    margin-top: 5px;
+    float: left;
+}
+
+#chapter_charge_p_id{
+    position: relative;
+    top:5px;
+    margin-left: 20px;
+    font-size: 15px;
+    color: #8d8d8d;
+}
+#chapter_charge_el_id{
+    margin-left: 10px;
+}
+
+/*章节字数*/
+.wordnNumber_class{
+    width: 80%;
+    height: 40px;
+    background: #ffffff;
+}
+
+.wordnNumber_class{
+    /*position: relative;*/
+    /*top:5px;*/
+    margin-left: 20px;
+    font-size: 15px;
+    color: #8d8d8d;
+}
+
+/*按钮*/
+.allbutton_class{
+    width: 80%;
+    height: 40px;
+    background: #ffffff;
+
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+
+.div-hr-class{
+    height: 1px;
+    width: 100%;
+    background: #dddddd;
+}
+
+
+
+/*主要内容*/
+.addChapterInfodiv{
+    /*height: ;*/
+    min-height: calc(100vh);
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /*float: left;*/
+    background: #f5f5f5;
+}
+
+
+.addChapterInfoTopdiv_class{
+    height: 40px;
+    width: 100%;
+    background: #ffffff;
+    padding-top: 10px;
+}
+
+.topButtondiv1_class{
+    margin-left: 90%;
+
+}
+
+.img-class{
+    margin-left: 20px;
+    height: 24px;
+    width: 24px;
+}
+
+
+.topButtondiv2_class{
+    height: 25px;
+    width: 100%;
+    background: #fff0f0;
+    padding-top: 10px;
+}
+
+.warning_p_class{
+    color: red;
+    position: relative;
+    top:-15px;
+    left: 40%;
+    font-size: 13px;
+
+}
+
+.warning_img_class{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    /*margin-top: px;*/
+}
+
+
+/*章节正文内容*/
+.addChapterInfo_fu_class{
+
+    width: 1200px;
+    min-height: calc(100vh - 100px);
+    /*background: #3a8ee6;*/
+
+    margin:auto;
+    display:table;
+    /*margin-top: 50px;*/
+    /*margin-left: 500px;*/
+
+    /*position: fixed;*/
+    /*left: 100px;*/
+    /*right: 0;*/
+}
+
+.addChapterInfo_zi_class{
+    margin-top: 20px;
+    margin-left: 340px;
+    background: #ffffff;
+    width: 790px;
+    /*设置输入框div高度*/
+    min-height: calc(100vh - 120px);
+    /*height: 98%;*/
+    /*position: fixed;*/
+    /*top: -100px;*/
+    box-shadow:  0px 0px 5px 5px #d0d0d0;
+}
+
+.chapter_title_class{
+    margin-top: 10px;
+    margin-left: 2%;
+    width: 96%;
+    /*outline: none;*/
+    /*输出框去掉边框*/
+    border:0;
+    font-size: 25px;
+    /*cursor: pointer;*/
+    /*color: red;*/
+}
+
+.addChapterInfo_hr1_class{
+    height: 1px;
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 10px;
+    background: #eeeeee;
+}
+
+.chapter_content_class{
+    margin-left: 2%;
+    margin-top: 10px;
+    width: 96%;
+    height: 200px;
+    /*设置输入框div高度*/
+    min-height: calc(100vh - 340px);
+    /*边框不能调整大小*/
+    resize:none;
+    /*!*输出框去掉边框*!*/
+    border:0;
+    font-size: 16px;
+
+}
+
+.addChapterInfo_hr2_class{
+    height: 1px;
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 10px;
+    background: #eeeeee;
+}
+
+.chapter_other_word_class{
+    margin-left: 2%;
+    margin-top: 10px;
+    width: 96%;
+
+    /*设置输入框div高度*/
+    height: 50px;
+    /*边框不能调整大小*/
+    resize:none;
+    /*!*!*输出框去掉边框*!*!*/
+    border:0;
+    font-size: 15px;
+}
+
+
+.chapter_content_num_class{
+    margin-left: 87%;
+    font-size: 12px;
+}

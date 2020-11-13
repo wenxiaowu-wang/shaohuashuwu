@@ -3,6 +3,7 @@ package com.shaohuashuwu.service;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.Difvolenum;
 import com.shaohuashuwu.domain.vo.PageInfo;
+import com.shaohuashuwu.domain.vo.UserandWorksInfoVo;
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -44,6 +45,14 @@ public interface WorksInfoService {
     public  int selectworkstotal(PageInfo pageInfo);
 
     public List<WorksInfo> selectworkbyinfoResult(WorksInfo worksInfo);
+
+
+    //    查询出作品信息和作者
+    public List<UserandWorksInfoVo> selectUserandWork(WorksInfo worksInfo);
+
+
+    //依据章节id查询作品信息
+    public WorksInfo selectworkInfoByChapter_id(int chapter_id);
 
 
 }

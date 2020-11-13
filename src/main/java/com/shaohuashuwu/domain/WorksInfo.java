@@ -24,6 +24,28 @@ public class WorksInfo implements Serializable {
     private Integer work_vote_num;          //推荐票数
     private String work_create_time;        //创建时间
 
+    public WorksInfo(Integer work_id) {
+        this.work_id = work_id;
+    }
+
+    public WorksInfo(Integer work_id, String work_cover, String work_name, Integer user_id, String work_main_label, String work_vice_label, Integer work_serial_state, String work_introduct, String work_other_word, Integer work_word_num, Integer work_tip_num, Integer work_subscribe_num, Integer work_vote_num, String work_create_time) {
+        this.work_id = work_id;
+        this.work_cover = work_cover;
+        this.work_name = work_name;
+        this.user_id = user_id;
+        this.work_main_label = work_main_label;
+        this.work_vice_label = work_vice_label;
+        this.work_serial_state = work_serial_state;
+        this.work_introduct = work_introduct;
+        this.work_other_word = work_other_word;
+        this.work_word_num = work_word_num;
+        this.work_tip_num = work_tip_num;
+        this.work_subscribe_num = work_subscribe_num;
+        this.work_vote_num = work_vote_num;
+        this.work_create_time = work_create_time;
+    }
+
+
     public WorksInfo(String work_main_label, String work_vice_label, Integer work_serial_state) {
         this.work_main_label = work_main_label;
         this.work_vice_label = work_vice_label;

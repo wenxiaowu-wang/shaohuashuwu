@@ -1,0 +1,174 @@
+body{
+    background: #f7f6f5;
+    margin-top: 0px;
+}
+
+/****************************
+*顶部导航栏
+****************************/
+
+/*顶部导航栏-div*/
+.authorMainTopdiv {
+    height: 75px;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    /*y阴影*/
+    box-shadow: 0px 5px 10px #b2d1d4;
+    background: #FFFFFF;
+
+    float: left;
+}
+
+
+.authorMainTopdul{
+    margin:auto;
+    display:table;
+    list-style-type: none;
+    width: 1100px;
+
+}
+
+.woketopall{
+    float: left;
+    /*设置图片大小*/
+    width: 27px;
+    height: auto;
+
+}
+.woketopall p{
+    width: 150px;
+
+}
+.woketopall img{
+    padding-top: 15px;
+    /*设置图片大小*/
+    width: 140px;
+    height: auto;
+}
+
+#authortips{
+    padding-left: 600px;
+    padding-top:14px ;
+}
+
+
+#worketbeach{
+    /*绝对布局布置每个li*/
+    padding-left: 860px;
+    padding-top:25px ;
+}
+
+#workhelp{
+    padding-left: 915px;
+
+}
+
+#workeinfo{
+    padding-left: 970px;
+
+}
+/*******
+*设置下拉表单-网址：https://www.runoob.com/try/try.php?filename=trycss_dropdown_button
+*******/
+#workeme{
+    padding-left: 1025px;
+}
+
+
+.dropdown:hover #workeMe-dropdown{
+    display: block;
+}
+
+#workeMe-dropdown a:hover{
+    background-color: #f1f1f1
+}
+
+#workeMe-dropdown a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+
+}
+
+#workeMe-dropdown{
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+    /*设置为圆角*/
+    border-radius:5px 5px 5px 5px;
+
+}
+
+
+/************
+左侧导航栏和主体
+*************/
+
+.authorMain{
+
+    width: 1300px;
+    height: calc(100vh);
+    margin:auto;
+    display:table;
+    background: #f7f6f5;
+
+}
+
+
+.authorMainLeftdiv{
+    float: left;
+    margin-left: 130px;
+    margin-top: 100px;
+    height: 350px;
+    width: 150px;
+
+    background: #ffffff;
+
+    /*!*j渐变色阴影*!*/
+    box-shadow: 5px 5px 10px #b2d1d4;
+
+    /*设置为圆角*/
+    border-radius:5px 5px 5px 5px;
+
+}
+
+.authorMainLeftdul{
+    list-style-type: none;
+    width: 180px;
+    margin-left: -15px;
+}
+
+.authorMainLeftdli{
+    padding-top: 30px;
+    padding-left: -15px;
+}
+
+.authorMainLeftimg{
+    /*设置图片大小*/
+    width: 25px;
+    height: auto;
+}
+.authorMainLefta{
+    padding-left:10px;
+    /*相对位置*/
+    position: relative;
+    top:-6px;
+    font-size: 15px;
+    color: #5e5e5e;
+}
+
+#worksBean{
+    padding-top: 10px;
+    padding-left: -20px;
+}
+
+

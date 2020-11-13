@@ -4,20 +4,238 @@
     height: 1000px;
     margin: auto;
     display:table;
-    background: #d2d2d2;
+    background: #ffffff;
 }
 
+/*标签选择内容*/
 .vole-tips-class{
-    background: #ffb0b0;
+    background: #f7f6f2;
     width: 805px;
-    height: 400px;
+    height: 250px;
     margin-left: 67px;
     margin-top: 10px;
 }
 
-.selectworkInfo-class{
-    background: #b0daff;
-    width: 805px;
-    height: 400px;
-    margin-left: 67px;
+.voletips-p-class{
+    font-weight: bold;
+    font-size: 13px;
+    color: #494949;
+    margin-left: 10px;
 }
+
+/*横线*/
+.voletips-div-class{
+    width: 100%;
+    height: 1px;
+    background: #b8b6b6;
+    margin-top: 5px;
+}
+
+.selected-button-class{
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.mainvole-button-class{
+
+    margin-left: 10px;
+    margin-top: 2px;
+    background: #f7f6f2;
+    border-color: #f7f6f2;
+    color: #000000;
+    width: 40px;
+}
+
+
+
+/*返回内容数量*/
+.selectworknum-class{
+    background: #f7f6f2;
+    width: 805px;
+    height: 30px;
+    margin-left: 67px;
+    margin-top: 20px;
+}
+
+
+
+/*返回内容*/
+
+.fengediv{
+    background: #999999;
+    height: 1px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.selectworkInfo-class{
+    background: #ffffff;
+    width: 805px;
+    /*height: 1000px;*/
+    margin-left: 67px;
+    margin-top: 10px;
+    float: left;
+}
+
+.workInfo-class{
+    margin-top: 30px;
+}
+
+/*设置图片样式*/
+.work_cover-class{
+    height: 136px;
+    width: 102px;
+    float: left;
+}
+
+
+/*第一行*/
+#work_name-id{
+
+    margin-left: 15px;
+    /*margin-top: 5px;*/
+
+    /*去掉链接下划线*/
+    text-decoration:none;
+
+    float: left;
+    font-size: 18px;
+    color: black;
+
+    display:inline-block;
+    width: 545px;
+    min-width: 100px;
+    /*background: #3a8ee6;*/
+    height: 20px;
+
+}
+
+
+#work_word_num-id{
+
+
+    color: #888888;
+    font-size: 13px;
+    height: 20px;
+
+    display:inline-block;
+    min-width: 140px;
+
+    /*display:block;*/
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*!*第二行*!*/
+
+.worksInfomation-two-class{
+
+    /*去掉链接下划线*/
+    text-decoration:none;
+
+    font-size: 15px;
+
+    color: #888888;
+    /*margin-left: 15px;*/
+    margin-top: 5px;
+
+}
+
+
+
+
+
+
+#work_main_label-id{
+    margin-left: 15px;
+    display:inline-block;
+    width:60px ;
+}
+
+#work_vice_label-id{
+    display:inline-block;
+    width:80px ;
+}
+
+#work_serial_state-id{
+    display:inline-block;
+    width:393px ;
+
+}
+
+
+#work_vote_num-id{
+
+    color: #888888;
+    font-size: 13px;
+
+}
+
+
+
+
+
+
+/*#addtoshujia-id{*/
+/*    margin-left: 30px;*/
+/*    position: relative;*/
+/*    top: 150px;*/
+
+/*}*/
+
+
+#work_introduct-id{
+    display: block;
+    /*float: left;*/
+    margin-left: 117px;
+    margin-top: 13px;
+    width: 500px;
+    height: 35px;
+    font-size: 13px;
+    color: #454545;
+
+    /*其中overflow: hidden来将多出来的字体隐藏；*/
+    /*text-overflow: ellipsis;是用来代替的格式；*/
+    /*white-space: nowrap;规定段落中的文本不进行换行*/
+    /*display: block; 必须有*/
+
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+#workDef-id{
+    margin-left: 15px;
+    margin-top:15px;
+    /*    position: relative;*/
+    /*    top: 150px;*/
+}
+
+
+
+
+
+/*推荐*/
+.tuijian-class{
+    float: left;
+    width: 268px;
+    height: 300px;
+    margin-left: 30px;
+    background: #cccccc;
+    position: relative;
+    top: -300px;
+}
+
+
+

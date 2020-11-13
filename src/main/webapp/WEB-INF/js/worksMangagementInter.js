@@ -40,6 +40,20 @@ new Vue({
         text(){
             console.log("要舔砖用户主界面")
             window.location.assign("../pages/userMainInterface.html");
+        },
+
+    //    跳转写作界面
+        gotowrite(work_id){
+            console.log("作品id"+work_id);
+            var _this = this;
+            axios.get('http://localhost:8080/worksInfoController/selectworksByworkid?work_id='+work_id)
+                .then(function (response){
+                    window.location.assign("../pages/addChapterInterface.html");
+                }.bind(this))
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
         }
     },
     created:function (){ //页面加载时查询所有

@@ -10,6 +10,12 @@ public class ChapterPostInfo {
     public ChapterPostInfo() {
     }
 
+    public ChapterPostInfo(Integer user_id, Integer work_id, Integer chapter_id) {
+        this.user_id = user_id;
+        this.work_id = work_id;
+        this.chapter_id = chapter_id;
+    }
+
     public Integer getUser_id() {
         return user_id;
     }

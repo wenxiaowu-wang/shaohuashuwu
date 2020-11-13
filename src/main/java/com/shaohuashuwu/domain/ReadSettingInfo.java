@@ -11,6 +11,13 @@ public class ReadSettingInfo {
     public ReadSettingInfo() {
     }
 
+    public ReadSettingInfo(Integer setting_id, Integer user_id, Integer setting_theme, Integer setting_font_type, Integer setting_font_size) {
+        this.setting_id = setting_id;
+        this.user_id = user_id;
+        this.setting_theme = setting_theme;
+        this.setting_font_type = setting_font_type;
+        this.setting_font_size = setting_font_size;
+    }
 
     public Integer getSetting_id() {
         return setting_id;

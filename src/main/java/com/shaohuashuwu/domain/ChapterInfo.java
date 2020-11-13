@@ -8,7 +8,7 @@ public class ChapterInfo implements Serializable {
     private Integer chapter_id;                 //章节id
     private Integer chapter_pid;                //章节父标签
     private String chapter_title;               //章节名称
-    private Timestamp chapter_time;             //创建时间
+    private String chapter_time;                //创建时间
     private Integer chapter_word_num;           //章节字数
     private String chapter_content;             //章节内容
     private String chapter_other_word;          //给读者的话
@@ -16,6 +16,18 @@ public class ChapterInfo implements Serializable {
     private Integer chapter_charge;             //是否收费
 
     public ChapterInfo() {
+    }
+
+    public ChapterInfo(Integer chapter_id, Integer chapter_pid, String chapter_title, String chapter_time, Integer chapter_word_num, String chapter_content, String chapter_other_word, Integer chapter_state, Integer chapter_charge) {
+        this.chapter_id = chapter_id;
+        this.chapter_pid = chapter_pid;
+        this.chapter_title = chapter_title;
+        this.chapter_time = chapter_time;
+        this.chapter_word_num = chapter_word_num;
+        this.chapter_content = chapter_content;
+        this.chapter_other_word = chapter_other_word;
+        this.chapter_state = chapter_state;
+        this.chapter_charge = chapter_charge;
     }
 
     public Integer getChapter_id() {
@@ -42,11 +54,11 @@ public class ChapterInfo implements Serializable {
         this.chapter_title = chapter_title;
     }
 
-    public Timestamp getChapter_time() {
+    public String getChapter_time() {
         return chapter_time;
     }
 
-    public void setChapter_time(Timestamp chapter_time) {
+    public void setChapter_time(String chapter_time) {
         this.chapter_time = chapter_time;
     }
 

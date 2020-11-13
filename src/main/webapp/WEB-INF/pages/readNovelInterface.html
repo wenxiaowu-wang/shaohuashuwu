@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阅读小说</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/readNovelInterface.css">
+</head>
+<body id="htmlbody_id">
+
+    <div id="app">
+        <div class="novelDetails_top_div_class" id="novelDetails_top_div_id">
+
+            <div class="novelDetails_top_div2_class" >
+
+                <el-menu class="novelDetails_top_el_menu_class" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="1">首页</el-menu-item>
+
+                    <el-menu-item index="2">阅读历史</el-menu-item>
+                    <el-submenu index="3">
+                        <template slot="title">快速导航</template>
+                        <el-menu-item index="2-1">选项1</el-menu-item>
+                        <el-menu-item index="2-2">选项2</el-menu-item>
+                        <el-menu-item index="2-3">选项3</el-menu-item>
+
+                    </el-submenu>
+
+                    <el-menu-item class="userInfo_class" index="3" >书友20172111814</el-menu-item>
+                    <el-menu-item index="4">
+                        <div class="shujia_class">
+                            <img class="shaohualogo" src="../images/xiaoshuo-32.png" >
+                            <p class="shaohualogo_p_class">书架</p>
+                        </div>
+
+                    </el-menu-item>
+                </el-menu>
+            </div>
+
+            <div class="chapter_info_div_class">
+                <div class="chapter_list_div_class">
+                    <div class="list_div_class" >
+
+                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
+
+                            <img class="el_button_img_my" src="../images/shujia-16.png">
+                            <p class="el_button_p_my" > 目录</p>
+
+                        </el-button>
+                    </div>
+
+                    <div class="hrdiv_class"></div>
+
+                    <div class="list_div_class" id="htmlsetting" @click="readSettingbutton()" tabindex = "0" @focus="readSettingbutton_focus()">
+
+
+                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
+
+                            <img class="el_button_img_my" src="../images/shujia-16.png">
+                            <p class="el_button_p_my" > 设置</p>
+
+                        </el-button>
+
+                    </div>
+                    <div class="hrdiv_class"></div>
+                    <div class="list_div_class" @click="testjiaodian()">
+
+
+                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <p class="el_button_p_my" > 书架</p>
+                        </el-button>
+                    </div>
+
+                    <div class="hrdiv_class"></div>
+                    <div class="list_div_class" @click="testjiaodian()">
+
+                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <p class="el_button_p_my" > 打赏</p>
+                        </el-button>
+                    </div>
+
+                    <div class="hrdiv_class"></div>
+                    <div class="list_div_class" @click="testjiaodian()">
+
+                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <p class="el_button_p_my" > 投票</p>
+                        </el-button>
+                    </div>
+                    <div class="hrdiv_class"></div>
+                </div>
+
+                <div class="chapter_info_rightdiv_class">
+                    <div class="chapter_info1_class">
+<!--                        <p class="work_name_p_class">第五章 仙剑奇侠传</p>-->
+                        <div class="work_name_div_class">
+                            <p class="work_name_p_class">{{chapterInfo.chapter_title}}</p>
+                        </div>
+<!--                        -->
+                        <div class="work_info_class">
+                            <div>
+                                <img class="work_info_img1_class" src="../images/shujia-16.png">
+                                <p class="work_info_p1_class">{{worksInfo.work_name}}</p>
+                            </div>
+                            <div>
+                                <img class="work_info_img1_class" src="../images/shujia-16.png">
+                                <p class="work_info_p1_class">{{userInfo.user_name}}</p>
+                            </div>
+                            <div>
+                                <img class="work_info_img1_class" src="../images/shujia-16.png">
+                                <p class="work_info_p1_class">{{chapterInfo.chapter_word_num}}字</p>
+                            </div>
+                            <div>
+                                <img class="work_info_img1_class" src="../images/shujia-16.png">
+                                <p class="work_info_p1_class">{{chapterInfo.chapter_time}}</p>
+                            </div>
+
+                        </div>
+                        <div class="hrdiv_class2"></div>
+                        <div class="chapter_content_div_class">
+                            <p class="chapter_content_p_class" id="chapter_content_p_id">
+                                {{chapterInfo.chapter_content}}
+                            </p>
+
+
+
+<!--                            <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>-->
+
+                            <el-dialog
+                                    title="设置"
+                                    :visible.sync="dialogVisible"
+                                    width="650px"
+                                    :before-close="handleClose">
+                                <div class="tip_div_class">如果保存，下次阅读将自动设置！不保存，下次阅读，将使用之前的保存数据!</div>
+                                <div class="setting_theme_div_class">
+                                    <p class="setting_p_class">阅读主题</p>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_1" @click="settingThemeclick(1)">
+                                        <p id="setting_theme_p_1">√</p>
+                                    </button>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_2" @click="settingThemeclick(2)" >
+                                        <p id="setting_theme_p_2">√</p>
+                                    </button>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_3" @click="settingThemeclick(3)">
+                                        <p id="setting_theme_p_3">√</p>
+                                    </button>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_4" @click="settingThemeclick(4)">
+                                        <p id="setting_theme_p_4">√</p>
+                                    </button>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_5" @click="settingThemeclick(5)">
+                                        <p id="setting_theme_p_5">√</p>
+                                    </button>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_6" @click="settingThemeclick(6)">
+                                        <p id="setting_theme_p_6">√</p>
+                                    </button>
+                                    <button class="setting_theme_button_class" id="setting_theme_button_7" @click="settingThemeclick(7)">
+                                        <p id="setting_theme_p_7">√</p>
+                                    </button>
+                                </div>
+
+                                <div class="setting_font_type_div_class">
+                                    <p class="setting_p_class">正文字体</p>
+                                    <button style="height: 50px;width: 100px" class="setting_font_type_button_class" id="setting_font_type_button_1" @click="settingFont(1)">
+                                        雅黑
+                                    </button>
+
+                                    <button style="height: 50px;width: 100px" class="setting_font_type_button_class" id="setting_font_type_button_2" @click="settingFont(2)">
+                                        宋体
+                                    </button>
+
+                                    <button style="height: 50px;width: 100px" class="setting_font_type_button_class" id="setting_font_type_button_3" @click="settingFont(3)">
+                                        楷书
+                                    </button>
+
+
+                                </div>
+
+                                <div class="setting_font_size_div_class">
+                                    <p class="setting_p_class">字体大小</p>
+                                    <div class="setting_font_size_div2_class">
+
+                                        <button class="setting_font_size_button_class" id="setting_font_size+_button" @click="settingFontSize(1)">
+                                            A-
+                                        </button>
+                                        <p class="setting_fenge_class">|</p>
+                                        <button class="setting_font_size_button_class" id="setting_font_size_button">
+                                            {{settingInfo.setting_font_size}}
+                                        </button>
+                                        <p class="setting_fenge_class">|</p>
+                                        <button class="setting_font_size_button_class" id="setting_font_size-_button" @click="settingFontSize(2)">
+                                            A+
+                                        </button>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+                                <el-button @click="notsaveSettingInfo()">取 消</el-button>
+                                <el-button type="primary" @click="saveSettingInfo()">保 存</el-button>
+                              </span>
+                            </el-dialog>
+
+
+
+                        </div>
+
+                        <div class="hrdiv_class2"></div>
+                        <div class="bottom_div_class">
+
+                            <el-button class="bottom_button_class" round>评论章节</el-button>
+                            <el-button class="bottom_button_class" type="danger" round>下一章</el-button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tset-div-class">
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/readNovelInterface.js"></script>
+
+
+
+</html>

@@ -4,15 +4,16 @@ import com.shaohuashuwu.domain.vo.AttentionInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
-public class UserInfo {
+public class UserInfo implements Serializable {
 
     //属性
     private Integer user_id;                //用户ID
     private String user_name;           //用户昵称
-    private byte[] head_portrait;         //用户头像
+    private String head_portrait;         //用户头像
     private String gender;              //用户性别
     private Timestamp birthday;         //用户生日
     private String area;                //用户所在地
@@ -31,6 +32,13 @@ public class UserInfo {
         //无参构造方法
         System.out.println("userinfo无参构造方法");
     }
+
+    public UserInfo(Integer user_id, String user_name, String head_portrait) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.head_portrait = head_portrait;
+    }
+
 
     public UserInfo(String user_name, String gender, String area, String phone_number, String password, Integer gold_bean_num, Integer gold_coin_num, Integer ticket_num) {
         this.user_name = user_name;
@@ -59,11 +67,11 @@ public class UserInfo {
         this.user_name = user_name;
     }
 
-    public byte[] getHead_portrait() {
+    public String getHead_portrait() {
         return head_portrait;
     }
 
-    public void setHead_portrait(byte[] head_portrait) {
+    public void setHead_portrait(String head_portrait) {
         this.head_portrait = head_portrait;
     }
 

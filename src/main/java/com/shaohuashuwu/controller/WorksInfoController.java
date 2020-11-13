@@ -39,7 +39,7 @@ public class WorksInfoController {
         System.out.println(work_id);
         HttpSession session = request.getSession();
         session.setAttribute("work_id",work_id);
-//        return "mangagementWorksInterface.html";
+
     }
 
 
@@ -56,9 +56,9 @@ public class WorksInfoController {
         Object msg = session.getAttribute("work_id");
         int a=Integer.parseInt(String.valueOf(msg));
         System.out.println("session获取----"+a);
-        session.removeAttribute("work_id");
-        int b=Integer.parseInt(String.valueOf(msg));
-        System.out.println("销毁后的session----"+b);
+//        session.removeAttribute("work_id");
+//        int b=Integer.parseInt(String.valueOf(msg));
+//        System.out.println("销毁后的session----"+b);
 
         WorksInfo worksInfoList = worksInfoService.selectworkByid(a);
 
@@ -136,17 +136,66 @@ public class WorksInfoController {
         System.out.println("session获取1----"+String.valueOf(msg));
         String a =String.valueOf(msg);
         System.out.println("session获取----"+a);
-        session.removeAttribute("selectinput");
-        String b=String.valueOf(msg);
-        System.out.println("销毁后的session----"+b);
+//        session.setMaxInactiveInterval(60);
+//        session.removeAttribute("selectinput");
+//        String b=String.valueOf(msg);
+//        System.out.println("销毁后的session----"+b);
 
         worksInfo = new WorksInfo();
         worksInfo.setWork_name(a);
         System.out.println("worksInfo---"+worksInfo);
-        List worksInfoList =worksInfoService.selectworkbyinfoResult(worksInfo);;
-        System.out.println(worksInfoList);
-        return null;
+        List<WorksInfo> list =worksInfoService.selectworkbyinfoResult(worksInfo);;
+        System.out.println("listssss====输出:"+list);
+        return list;
     }
+
+
+    @ResponseBody
+    @RequestMapping("/selectworkbyinfoResult2")
+    public List<WorksInfo> selectworkbyinfoResult2(@RequestBody WorksInfo worksInfomation, HttpServletRequest request, HttpServletResponse response){
+
+
+        System.out.println("controller层查看session--");
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("selectinput");
+//        int a=Integer.parseInt(String.valueOf(msg));
+        System.out.println("session获取1----"+String.valueOf(msg));
+        String a =String.valueOf(msg);
+        System.out.println("session获取----"+a);
+//        session.removeAttribute("selectinput");
+//        String b=String.valueOf(msg);
+//        System.out.println("销毁后的session----"+b);
+
+
+        worksInfomation.setWork_name(a);
+        System.out.println("worksInfomation---"+worksInfomation);
+        List<WorksInfo> list =worksInfoService.selectworkbyinfoResult(worksInfomation);;
+        System.out.println("listssss====输出:"+list);
+        return list;
+    }
+
+    //依据章节id查询作品信息
+    @ResponseBody
+    @RequestMapping("/selectworkInfoByChapter_id")
+    public WorksInfo selectworkInfoByChapter_id(HttpServletRequest request, HttpServletResponse response){
+
+        System.out.println("selectworkByid测试输出数据");
+
+
+        HttpSession session = request.getSession();
+        session.setAttribute("chapter_id",10);
+        Object msg = session.getAttribute("chapter_id");
+        int a=Integer.parseInt(String.valueOf(msg));
+        System.out.println("session获取----"+a);
+
+         worksInfo = worksInfoService.selectworkInfoByChapter_id(a);
+
+
+
+        return worksInfo;
+    }
+
+
 
 
 }

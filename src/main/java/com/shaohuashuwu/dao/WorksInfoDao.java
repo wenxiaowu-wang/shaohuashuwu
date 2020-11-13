@@ -4,6 +4,7 @@ import com.shaohuashuwu.domain.Account;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.Difvolenum;
 import com.shaohuashuwu.domain.vo.PageInfo;
+import com.shaohuashuwu.domain.vo.UserandWorksInfoVo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -157,5 +158,17 @@ public interface WorksInfoDao {
             "</script>"
     })
     public List<WorksInfo> selectWorkInfobyuser_id(WorksInfo worksInfo);
+
+
+//    查询出作品信息和作者
+    @Select("SELECT works_info.* , user_info.`user_name` ,user_info.`head_portrait` FROM works_info ,user_info WHERE works_info.`user_id` = user_info.`user_id` AND works_info.`work_id` = 14 ")
+    public List<UserandWorksInfoVo> selectUserandWork(WorksInfo worksInfo);
+
+
+//    查询作者创作总字数
+    @Select("SELECT sum(work_word_num) from works_info where user_id = #{user_id}")
+    public int selectallWorknum(int user_id);
+
+
 
 }
