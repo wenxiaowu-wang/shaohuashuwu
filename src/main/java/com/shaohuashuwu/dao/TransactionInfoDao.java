@@ -22,6 +22,10 @@ public interface TransactionInfoDao {
             "#{transaction_unit})")
     public int insertTransactionInfo(TransactionInfo transactionInfo);
 
+    //根据获取最新的 insert or update 的某个表中的ID（在此作为transaction_id）获取该交易记录
+    @Select("SELECT * FROM transaction_info WHERE transaction_id = (SELECT LAST_INSERT_ID())")
+    public TransactionInfo selectWithdrawRecordByInsertNewId();
+
     //删除一条交易信息
     @Delete("delete from admin_info where transaction_id = #{transaction_id}")
     public int deleteTransactionInfo(int transaction_id);

@@ -33,10 +33,10 @@ public interface TransactionInfoService {
     public List<TransactionInfoVo> getAllIncomeTransactionInfo(int user_id);
 
     //获取该用户所有提现记录
-    public List<TransactionInfo> getTransactionOfWithdraw(int user_id);
+    public List<TransactionInfoVo> getTransactionOfWithdraw(int user_id);
 
     //提现金币（等待第三方转账成功，保存提现记录）
-    public boolean withdrawMoney(TransactionInfo withdrawInfo);
+    public TransactionInfo withdrawMoney(TransactionInfo withdrawInfo,String third_party_number);
 
     //获取该作品的被订阅的所有记录
     public List<TransactionInfo> getSubscribeInfo(int work_id);

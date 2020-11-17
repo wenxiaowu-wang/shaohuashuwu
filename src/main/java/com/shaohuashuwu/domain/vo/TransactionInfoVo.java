@@ -125,4 +125,22 @@ public class TransactionInfoVo {
     public void setTransaction_unit(String transaction_unit) {
         this.transaction_unit = transaction_unit;
     }
+
+    @Override
+    public String toString() {
+        return "TransactionInfoVo{" +
+                "transaction_id=" + transaction_id +
+                ", consumer_id=" + consumer_id +
+                ", consumer_name='" + consumer_name + '\'' +
+                ", recipient_id=" + recipient_id +
+                ", recipient_name='" + recipient_name + '\'' +
+                ", recipient_id_other=" + recipient_id_other +
+                ", recipient_name_other='" + recipient_name_other + '\'' +
+                ", transaction_type='" + transaction_type + '\'' +
+                ", transaction_mode='" + transaction_mode + '\'' +
+                ", transaction_time='" + transaction_time + '\'' +
+                ", transaction_quantity=" + transaction_quantity +
+                ", transaction_unit='" + transaction_unit + '\'' +
+                '}';
+    }
 }

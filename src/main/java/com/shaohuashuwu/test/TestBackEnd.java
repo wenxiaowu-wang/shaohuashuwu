@@ -134,5 +134,17 @@ public class TestBackEnd {
         }
         System.out.println("test``````success");
     }
+
+    @Test
+    public void testGetAllWithdarw(){
+        List<TransactionInfoVo> transactionInfoVos = transactionInfoService.getTransactionOfWithdraw(11);
+        for (int i=0;i<transactionInfoVos.size();i++){
+            System.out.println(transactionInfoVos.get(i).toString());
+        }
+    }
+
+
+
+
     
 }

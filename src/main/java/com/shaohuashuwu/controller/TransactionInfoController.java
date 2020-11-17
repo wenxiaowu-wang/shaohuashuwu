@@ -185,6 +185,30 @@ public class TransactionInfoController {
         return voteResult;
     }
 
+    //提现金币
+    @RequestMapping(path = "/withdrawGoldCoin/{author_id}/{quantity}/{mode}/{third_party_number}")
+    @ResponseBody
+    public TransactionInfo withdrawGoldCoin(@PathVariable(value = "author_id")Integer author_id,@PathVariable(value = "quantity")Integer quantity,
+                                            @PathVariable(value = "mode")Integer mode,@PathVariable(value = "third_party_number")String third_party_number){
+        TransactionInfo transactionInfo = new TransactionInfo();
+        //调用transactionService的添加一条记录（其中包含对该用户的金币数减少）
+        //封装数据，调用transactionInfoService
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        //交易记录流水ID不用设置，在数据库中自增补齐
+        transactionInfo.setConsumer_id(0);//代表韶华书屋平台
+        transactionInfo.setRecipent_id(author_id);//接受者ID（作者ID）
+        transactionInfo.setTransaction_type(4);//4表示交易类型是提现
+        transactionInfo.setTransaction_mode(mode);//交易方式(除了0和1外，其它的不进行解析)
+        transactionInfo.setTransaction_time(timestamp);//交易时间
+        transactionInfo.setTransaction_quantity(quantity);//交易数量
+        transactionInfo.setTransaction_unit("元人民币");
+        //返回插入的交易记录
+        TransactionInfo transactionInfo1 = new TransactionInfo();
+        transactionInfo1 = transactionInfoService.withdrawMoney(transactionInfo,third_party_number);
+        return transactionInfo1;
+    }
+
     /**
      * 获取该用户所有的消费记录（除去提现记录的记录）
      * @param user_id
@@ -213,13 +237,30 @@ public class TransactionInfoController {
     /**
      * 根据用户（作者ID）获取对应收入的交易记录信息（值对象集合）
      * @param author_id 用户（作者）ID
-     * @return
+     * @return 对应收入记录值对象
      */
     @RequestMapping(path = "/getAllIncomeTransactionInfo/{author_id}")
     @ResponseBody
     public List<TransactionInfoVo> getAllIncomeTransactionInfo(@PathVariable(value = "author_id")Integer author_id){
         List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
         getResult = transactionInfoService.getAllIncomeTransactionInfo(author_id);
+        return getResult;
+    }
+
+    //获取该用户所有提现记录
+    @RequestMapping(path = "/getAllWithdrawInfo/{author_id}")
+    @ResponseBody
+    public List<TransactionInfoVo> getAllWithdrawInfo(@PathVariable(value = "author_id")Integer author_id){
+        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
+        List<TransactionInfoVo> getService = transactionInfoService.getTransactionOfWithdraw(author_id);
+        //筛选出来提现信息
+        if (getService.size() != 0){
+            for (int i=0;i<getService.size();i++){
+                if (getService.get(i).getTransaction_type().equals("提现")){
+                    getResult.add(getService.get(i));
+                }
+            }
+        }
         return getResult;
     }
 

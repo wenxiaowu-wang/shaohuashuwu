@@ -68,7 +68,17 @@ let remunerationInterface_vm = new Vue({
     },
     methods:{
         toWithdraw(){
-            console.log("将进入提现稿酬页面。");
+
+            //将所有金币收入以及所有已经提现的金币数发送到transactionSession中
+            axios.post("/shaohuashuwu_war_exploded/transactionSession/saveTransactionGoldCoin/" +
+                this.header.goldCoin_total_income+"/"+this.header.goldCoin_already_withdraw).then(resp =>{
+                console.log("数据存放成功。");
+                console.log("将进入提现稿酬页面。");
+                //进入提现稿酬界面
+                window.location.assign("../pages/withdrawGoldCoinInterface.html");
+            }).catch(error =>{
+               console.log("数据存放失败！");
+            });
         },
         handleChange(value) {
             console.log(value);
@@ -239,6 +249,21 @@ let remunerationInterface_vm = new Vue({
                 //调用该js封装好的切换数据的方法（初始展示数据）
                this.tableData_display = this.changeTableDataDisplay([0],"打赏");
                this.statistics = this.toStatistics(this.tableData_display);
+
+               //获取该用户的所有提现记录，用来统计已提现金币数
+                axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllWithdrawInfo/" +
+                    this.user_id).then(resp =>{
+                    let objectData = eval(JSON.stringify(resp.data));
+                    let total_already = 0;
+                    objectData.forEach(function (value,index,array) {
+                        total_already += value.transaction_quantity;
+                    });
+                    this.header.goldCoin_already_withdraw = total_already;
+                    this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
+                    console.log("统计已提现金币成功。");
+                }).catch(error =>{
+                    console.log("统计已提现金币失败。");
+                })
                console.log("装配交易信息成功。");
                 /*
                 *根据用户的ID统计该作者的总收入（金币数）以及总提现数（金币数）【封装到map集合中】

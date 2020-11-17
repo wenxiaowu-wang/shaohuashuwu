@@ -36,6 +36,9 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
     @Autowired
     public ChapterInfoDao chapterInfoDao;
 
+    @Autowired
+    public ThirdPartyInfoDao thirdPartyInfoDao;
+
     //充值金豆（记录充值信息并添加对应用户金豆数量）
     @Override
     public boolean topUpsGoldBean(TransactionInfo topUpsInfo) {
@@ -168,9 +171,15 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
                     continue;
                 }
                 switch (getDao.get(i).getTransaction_type()){
-                    case 0:
+                    case 0:{
+                        consumer_name = "韶华书屋平台";
+                        break;
+                    }
                     case 4:{
                         consumer_name = "韶华书屋平台";
+                        System.out.println("Service层有提现记录");
+                        //此处的chapter_name代表的是第三方的账号
+                        chapter_name = thirdPartyInfoDao.selectThirdNumberById(getDao.get(i).getTransaction_id());
                         break;
                     }
                     case 1:
@@ -204,17 +213,44 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
 
     //获取该用户所有提现记录
     @Override
-    public List<TransactionInfo> getTransactionOfWithdraw(int user_id) {
-        return transactionInfoDao.selectWithdrawInfoByUserId(user_id);
+    public List<TransactionInfoVo> getTransactionOfWithdraw(int user_id) {
+        List<TransactionInfo> getDao = transactionInfoDao.selectWithdrawInfoByUserId(user_id);
+        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
+        String third_party_number = "";
+        if (getDao.size()!=0){
+            for (int i=0;i<getDao.size();i++){
+                //根据获取到的transaction_info的ID获取提现的第三方的账号
+                third_party_number = "";
+                third_party_number += thirdPartyInfoDao.selectThirdNumberById(getDao.get(i).getTransaction_id());
+                TransactionInfoVo transactionInfoVo = new TransactionInfoVo();
+                transactionInfoVo.setTransaction_id(getDao.get(i).getTransaction_id());
+                transactionInfoVo.setConsumer_id(getDao.get(i).getConsumer_id());
+                transactionInfoVo.setConsumer_name("韶华书屋平台");
+                transactionInfoVo.setRecipient_id(getDao.get(i).getRecipent_id());//还是对应的章节ID（打赏、订阅、投票）
+                transactionInfoVo.setRecipient_name(third_party_number);
+                transactionInfoVo.setRecipient_name_other("该用户");
+                transactionInfoVo.setTransaction_type(getDao.get(i).analysisType());
+                transactionInfoVo.setTransaction_mode(getDao.get(i).analysisMode());
+                transactionInfoVo.setTransaction_time(getDao.get(i).analysisTime());
+                transactionInfoVo.setTransaction_quantity(getDao.get(i).getTransaction_quantity());
+                transactionInfoVo.setTransaction_unit(getDao.get(i).getTransaction_unit());
+                getResult.add(transactionInfoVo);
+            }
+        }
+        return getResult;
     }
 
     //提现金币（等待第三方转账成功，保存提现记录）
     @Override
-    public boolean withdrawMoney(TransactionInfo withdrawInfo) {
-        boolean withdrawResult = false;
-        if (/*等待第三方转账成功*/
-        transactionInfoDao.insertTransactionInfo(withdrawInfo)!=(0)){
-            withdrawResult = true;
+    public TransactionInfo withdrawMoney(TransactionInfo withdrawInfo,String third_party_number) {
+        TransactionInfo withdrawResult = new TransactionInfo();
+        if (/*等待第三方转账成功,扣除对应用户金币数量,保存第三方账号*/
+        userInfoDao.updateGoldCoinNumByUserId(withdrawInfo.getRecipent_id(),withdrawInfo.getTransaction_quantity()*(-10)) != (0)
+                &&transactionInfoDao.insertTransactionInfo(withdrawInfo)!=(0)){
+            withdrawResult = transactionInfoDao.selectWithdrawRecordByInsertNewId();
+            if (thirdPartyInfoDao.insertOneRecord(withdrawResult.getTransaction_id(),third_party_number) != 0){
+                System.out.println("第三方账号保存成功");
+            }
         }
         return withdrawResult;
     }
