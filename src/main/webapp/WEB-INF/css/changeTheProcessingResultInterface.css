@@ -1,0 +1,138 @@
+
+.administrators_mainInfoRight_div_class{
+
+    width: 81%;
+    height: 500px;
+    margin-left: 2%;
+    background: #ffffff;
+    float: left;
+}
+
+.administrators_mainInfoRight_Listdiv_class{
+    width: 100%;
+    height: 50px;
+    background: #ffffff;
+}
+
+.administrators_mainInfoRight_Listp_class{
+    display: block;
+    font-size: 17px;
+
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight:bold;
+
+    width: 240px;
+    float: left;
+    background: #ffffff;
+}
+.needwork_name_class{
+    display: block;
+    font-size: 15px;
+
+    margin-top: 21px;
+    margin-left: 100px;
+    /*font-weight:bold;*/
+
+    width: 80px;
+    float: left;
+    background: #ffffff;
+}
+
+.needwork_nameinput_class{
+    display: block;
+    margin-top: 17px;
+    /*margin-left: 100px;*/
+    float: left;
+}
+
+.needwork_time_class{
+    display: block;
+    font-size: 15px;
+
+    margin-top: 21px;
+    margin-left: 50px;
+    width: 80px;
+    float: left;
+    background: #ffffff;
+}
+
+.needwork_timeinput_class{
+    /*display: block;*/
+    margin-top: 17px;
+}
+
+
+
+
+.administrators_mainInfoRight_divhr_class{
+
+    margin-top: 10px;
+    width: 96%;
+    margin-left: 20px;
+    height: 1px;
+    background: #999999;
+}
+
+.administrators_mainInfoRight_needdiv_class{
+    width: 96%;
+    margin-left: 20px;
+    height: 180px;
+    background: #eeeeee;
+    margin-top: 20px;
+
+    /*设置为圆角*/
+    border-radius:15px 15px 15px 15px;
+}
+
+.reportleft_div_class{
+    width: 78%;
+    margin-left: 2%;
+    height: 180px;
+    /*background: #888888;*/
+    float: left;
+
+}
+
+.reportright_div_class{
+    width: 18%;
+    margin-right: 2%;
+    height: 180px;
+    /*background: #de9393;*/
+    float: left;
+}
+
+.reportInfo_everydiv_class{
+    width: 100%;
+    height: 35px;
+    /*background: #cf9236;*/
+
+}
+
+.reportInfo_pname_class{
+    display: block;
+    width: 12%;
+    font-size: 15px;
+
+    margin-top: 6px;
+    margin-left: 15px;
+    font-weight:bold;
+    /*background: red;*/
+    float: left;
+}
+.reportInfo_pinfo_class{
+    display: block;
+    width: 84%;
+    font-size: 15px;
+
+    margin-top: 6px;
+    /*margin-left: 20px;*/
+    /*font-weight:bold;*/
+    /*background: #37ff00;*/
+    float: left;
+}
+
+.reportright_button_class {
+    margin-top: 135px;
+    margin-left: 20px;
+}

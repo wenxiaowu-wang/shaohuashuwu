@@ -44,7 +44,7 @@ new Vue( {
 
 
         //    接收数据
-            total:0,
+
             worksInfoList:[],
 
         }

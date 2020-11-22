@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小说排行</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/userMainInterfaceFragment.css">
+    <link rel="stylesheet" href="../css/novelRankingInterface.css">
+</head>
+<body>
+
+<div id="app">
+    <div class="userMainTop_class">
+
+        <ul class="user_navigation_bar">
+            <li class="workclassification_class" id="user_main_li">
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >首      页</el-button>
+            </li>
+            <li class="workclassification_class" id="allwork_li">
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >全 部 作 品</el-button>
+            </li>
+            <li class="workclassification_class" id="paihang_li">
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >排      行</el-button>
+            </li>
+            <li class="workclassification_class" id="tuijian_li">
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >推      荐</el-button>
+            </li>
+            <li class="workclassification_class" id="chengweizuozhe_li">
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >成 为 作 者</el-button>
+            </li>
+            <li class="workclassification_class" id="gerenzhongxin_li">
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >个 人 中 心</el-button>
+            </li>
+        </ul>
+    </div>
+    <div class="dierhang">
+        <div class="userInfo-class">
+            <a class="userInfo-p-class" id="username-p-id" href="http://www.w3school.com.cn">您好，昵称 </a>
+            <a class="userInfo-p-class" id="userout-p-id" href="http://www.w3school.com.cn">退出</a>
+            <a class="userInfo-p-class" id="haveuser-p-id" href="http://www.w3school.com.cn">网站注册人数5人</a>
+        </div>
+        <img src="../images/SHAOHUALOGO.png" class="imglogo">
+
+        <el-input class="el-select-my" v-model="input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
+        <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search">搜索</el-button>
+
+
+        <el-button class="el-shujia-my"  type="info" plain size="small" >
+            <img src="../images/shujia-16.png">
+            <p>
+                书架
+            </p>
+        </el-button>
+    </div>
+</div>
+
+<div class="rankinginclue-class" id="rankinginclue-id">
+    <div class="rankinginclue_left_class" id="rankinginclue_left_id">
+        <a class="ranking_name_a_class" href="#"  @click="clickalllistbutton()">人气榜单▶</a>
+        <div class="hr_div_class"></div>
+        <a class="ranking_name_a_class" href="#" @click="clicklistbutton(3)">推荐榜</a>
+        <a class="ranking_name_a_class" href="#" @click="clicklistbutton(4)">收藏榜</a>
+        <a class="ranking_name_a_class" href="#" @click="clicklistbutton(2)">订阅榜</a>
+        <a class="ranking_name_a_class" href="#" @click="clicklistbutton(1)">打赏榜</a>
+    </div>
+    <div class="rankinginclue_right_class" id="rankinginclue_right_id">
+        <div class="rankinginclue_leftneed_class">
+            <p class="ranking_need_p_class">人气榜单</p>
+            <p class="time_need_p_class">2020-11-16 09:33:22  更新</p>
+        </div>
+        <div class="rankinginclue_right_top_class" id="rankinginclue_right_top_id">
+            <a class="rankinginclue_right_top_a_class" id="allwork_id" href="#">全部作品</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">玄幻</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">奇幻</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">武侠</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">仙侠</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">都市</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">现实</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">军事</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">历史</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">游戏</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">体育</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">科幻</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">悬疑</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#">轻小说</a>
+
+        </div>
+<!--推荐内容-->
+        <div class="rankinginclue_right_bottom_class">
+            <div class="rankinginclue_onehang_div_class" id="rankinginclue_onehang_div_id">
+                <div class="rankinginclue_right_recommend_class" id="rankinginclue_right_recommend_id">
+<!--                    第一行-->
+                    <div class="rankinginclue_right_Listname_frist_class">
+                        <p class="rankinginclue_right_Listname_p_class">收藏榜</p>
+                        <a class="more_Listname_a_class" href="#">更多></a>
+                    </div>
+                    <div class="rankinghr_div_class"></div>
+<!--                    排行第一-->
+                    <div class="rankinginclue_right_List_frist_class">
+
+                         <div class="workinfo_left_div_class">
+                             <div class="no1_div_class">
+                                 <p class="no1_p_class">NO 1</p>
+                             </div>
+                             <a class="no1_work_name_class" href="#">神盾局</a>
+                             <a class="no1_work_num_class" href="#">1212.1万 推荐票</a>
+                             <a class="no1_work_state_class" href="#">玄幻 连载</a>
+                         </div>
+                        <div class="workinfo_right_div_class">
+                            <img class="workinfo_right_img_class" src="../images/tset-1-work.jpg">
+                        </div>
+                    </div>
+<!--                    第一之下-->
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+                    <div class="otherno_work_div_class">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">1</p>
+                            <p class="other_work_name_p_class">斗破苍穹</p>
+                            <p class="resultnum_class">10000</p>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="rankinginclue_right_recommend_class" id="rankinginclue_right_recommend2_id">
+                    <!--                    第一行-->
+                    <div class="rankinginclue_right_Listname_frist_class">
+                        <p class="rankinginclue_right_Listname_p_class">推荐榜</p>
+                        <a class="more_Listname_a_class" href="#">更多></a>
+                    </div>
+                    <div class="rankinghr_div_class"></div>
+                    <!--                    排行第一-->
+                    <div class="rankinginclue_right_List_frist_class">
+
+                        <div class="workinfo_left_div_class">
+                            <div class="no1_div_class">
+                                <p class="no1_p_class">NO 1</p>
+                            </div>
+                            <a class="no1_work_name_class" href="#">{{recommendInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_num_class" href="#">{{recommendInfoVoList[0].sumnum}} 推荐票</a>
+                            <a class="no1_work_state_class" href="#">{{recommendInfoVoList[0].work_main_label}} {{recommendInfoVoList[0].work_serial_state}}</a>
+                        </div>
+                        <div class="workinfo_right_div_class">
+                            <img class="workinfo_right_img_class" :src="recommendInfoVoList[0].work_cover">
+                        </div>
+                    </div>
+                    <!--                    第一之下-->
+
+
+                    <div class="otherno_work_div_class" v-for="(recommendInfoVo,index) in recommendInfoVoList.slice(1)">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">{{index+2}}</p>
+                            <p class="other_work_name_p_class">{{recommendInfoVo.work_name}}</p>
+                            <p class="resultnum_class">{{recommendInfoVo.sumnum}}</p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="rankinginclue_twohang_div_class" id="rankinginclue_twohang_div_id">
+                <div class="rankinginclue_right_recommend_class" id="rankinginclue_right_recommend3_id">
+                    <!--                    第一行-->
+                    <div class="rankinginclue_right_Listname_frist_class">
+                        <p class="rankinginclue_right_Listname_p_class">订阅榜</p>
+                        <a class="more_Listname_a_class" href="#">更多></a>
+                        <div class="whattimes_div_class">
+                            <a class="whattimes_a1_class" href="#">年</a>
+                            <a>·</a>
+                            <a class="whattimes_a1_class" href="#">月</a>
+                            <a>·</a>
+                            <a class="whattimes_a1_class" href="#">日</a>
+
+                        </div>
+
+                    </div>
+                    <div class="rankinghr_div_class"></div>
+                    <!--                    排行第一-->
+                    <div class="rankinginclue_right_List_frist_class">
+
+                        <div class="workinfo_left_div_class">
+                            <div class="no1_div_class">
+                                <p class="no1_p_class">NO 1</p>
+                            </div>
+                            <a class="no1_work_name_class" href="#">{{subscribeInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_num_class" href="#">{{subscribeInfoVoList[0].sumnum}} 推荐票</a>
+                            <a class="no1_work_state_class" href="#">{{subscribeInfoVoList[0].work_main_label}} {{subscribeInfoVoList[0].work_serial_state}}</a>
+                        </div>
+                        <div class="workinfo_right_div_class">
+                            <img class="workinfo_right_img_class" src="../images/tset-1-work.jpg">
+                        </div>
+                    </div>
+                    <!--                    第一之下-->
+                    <div class="otherno_work_div_class" v-for="(subscribeInfoVo,index) in subscribeInfoVoList.slice(1)">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class">
+                            <p class="other_work_pnum_class">{{index+2}}</p>
+                            <p class="other_work_name_p_class">{{subscribeInfoVo.work_name}}</p>
+                            <p class="resultnum_class">{{subscribeInfoVo.sumnum}}</p>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="rankinginclue_right_recommend_class" id="rankinginclue_right_recommend4_id">
+                    <!--                    第一行-->
+                    <div class="rankinginclue_right_Listname_frist_class">
+                        <p class="rankinginclue_right_Listname_p_class">打赏榜</p>
+                        <a class="more_Listname_a_class" href="#">更多></a>
+                    </div>
+                    <div class="rankinghr_div_class"></div>
+                    <!--                    排行第一-->
+                    <div class="rankinginclue_right_List_frist_class">
+
+                        <div class="workinfo_left_div_class">
+                            <div class="no1_div_class">
+                                <p class="no1_p_class">NO 1</p>
+                            </div>{{rewardInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_num_class" href="#">{{rewardInfoVoList[0].sumnum}} 推荐票</a>
+                            <a class="no1_work_state_class" href="#">{{rewardInfoVoList[0].work_main_label}} {{rewardInfoVoList[0].work_serial_state}}</a>
+                        </div>
+                        <div class="workinfo_right_div_class">
+                            <img class="workinfo_right_img_class" src="../images/tset-1-work.jpg">
+                        </div>
+                    </div>
+                    <!--                    第一之下-->
+                    <div class="otherno_work_div_class" v-for="(rewardInfoVo,index) in rewardInfoVoList.slice(1)">
+                        <div class="rankinghr_div2_class"></div>
+
+                        <div class="otherranking_work_div_class" >
+                            <p class="other_work_pnum_class">{{index+2}}</p>
+                            <p class="other_work_name_p_class">{{rewardInfoVo.work_name}}</p>
+                            <p class="resultnum_class">{{rewardInfoVo.sumnum}}</p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/userMainInterface.js"></script>
+<script src="../js/novelRankingInterface.js"></script>
+
+
+</html>

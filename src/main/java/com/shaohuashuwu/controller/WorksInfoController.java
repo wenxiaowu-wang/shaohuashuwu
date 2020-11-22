@@ -183,10 +183,10 @@ public class WorksInfoController {
 
 
         HttpSession session = request.getSession();
-        session.setAttribute("chapter_id",10);
+//        session.setAttribute("chapter_id",10);
         Object msg = session.getAttribute("chapter_id");
         int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session获取----"+a);
+        System.out.println("依据章节获取作者信息的章节id："+a);
 
          worksInfo = worksInfoService.selectworkInfoByChapter_id(a);
 

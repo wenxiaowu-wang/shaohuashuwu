@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     data() {
         return {
+            drawer: false,
             dialogVisible: false,
 
             /*
@@ -20,6 +21,8 @@ new Vue({
             worksInfo:[],
             userInfo:[],
             chapterInfo:[],
+            catalogInfoVoList:[],
+
 
 
 
@@ -33,8 +36,25 @@ new Vue({
          * 初始化界面，依据章节id获取章节信息、作品信息、作者信息。
          */
         startChapterInfo(){
+            var _this = this;
+            //获取章节信息
+            axios.post('http://localhost:8080/chapterInfoController/selectUserInfoByChapter_id')
+                .then(function (response) {
+                    _this.chapterInfo = response.data;
+                    console.log("相应章节："+JSON.stringify(_this.chapterInfo));
+
+
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+
+        startreadNovelhtml(){
             //获取作品信息
             var _this = this;
+            _this.startChapterInfo();
             axios.post('http://localhost:8080/worksInfoController/selectworkInfoByChapter_id')
                 .then(function (response) {
                     _this.worksInfo = response.data;
@@ -58,12 +78,14 @@ new Vue({
                     console.log(error);
                     alert("相应失败");
                 })
-            //获取章节信息
-            axios.post('http://localhost:8080/chapterInfoController/selectUserInfoByChapter_id')
-                .then(function (response) {
-                    _this.chapterInfo = response.data;
-                    console.log("相应章节："+JSON.stringify(_this.chapterInfo));
 
+
+
+            //获取目录信息
+            axios.post('http://localhost:8080/chapterInfoController/selectchaptercatalog')
+                .then(function (response) {
+                    _this.catalogInfoVoList = response.data;
+                    console.log("目录信息："+JSON.stringify(_this.catalogInfoVoList));
 
                 })
                 .catch(function (error){
@@ -71,6 +93,8 @@ new Vue({
                     alert("相应失败");
                 })
         },
+
+
 
 
         /**
@@ -176,6 +200,52 @@ new Vue({
 
 
         },
+
+
+        /**
+         * 目录按钮的操作
+         */
+        /*
+            目录操作
+         */
+        chapterCatalogbutton(){
+            this.drawer=true;
+            // var _this = this;
+
+        },
+
+        //点击某一章节
+        gotochatpter(chapter_id){
+            console.log("点击了--："+chapter_id);
+            var _this = this;
+            axios.post('http://localhost:8080/chapterInfoController/saveChapter_idSession?chapter_id='+ chapter_id)
+                .then(function (response) {
+
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+
+            _this.startChapterInfo();
+
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //设置按钮
         readSettingbutton(){
 
@@ -309,9 +379,51 @@ new Vue({
         },
 
 
+
+        //下一章按钮
+        nextchapter(){
+
+            //获取下一章章节
+             var chapter_id_before=this.chapterInfo.chapter_id;
+             var chaptertatol=Object.keys(this.catalogInfoVoList).length;
+             var chapter_id_num;
+             var chapter_id;
+
+            console.log("数组长度"+Object.keys(this.catalogInfoVoList).length);
+
+
+            for(var i = 0;i< chaptertatol ;i++){
+                if(this.catalogInfoVoList[i].chapter_id == chapter_id_before){
+                    chapter_id_num = 1+i;
+                    break;
+                }else {
+                    continue;
+                }
+            }
+             console.log("下一章："+ this.catalogInfoVoList[chapter_id_num].chapter_id);
+            chapter_id = this.catalogInfoVoList[chapter_id_num].chapter_id;
+
+
+            var _this = this;
+            axios.post('http://localhost:8080/chapterInfoController/saveChapter_idSession?chapter_id='+ chapter_id)
+                .then(function (response) {
+
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+
+            _this.startChapterInfo();
+        },
+
+
+
+
     },
     created:function (){ //页面加载时查询所有
         this.startSettingInfo();
+        this.startreadNovelhtml();
         this.startChapterInfo();
     }
 })

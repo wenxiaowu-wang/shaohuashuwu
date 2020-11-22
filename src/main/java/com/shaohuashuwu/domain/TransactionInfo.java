@@ -18,6 +18,11 @@ public class TransactionInfo implements Serializable {
     public TransactionInfo() {
     }
 
+    public TransactionInfo(Integer consumer_id, Integer recipient_id) {
+        this.consumer_id = consumer_id;
+        this.recipient_id = recipient_id;
+    }
+
     public Integer getTransaction_id() {
         return transaction_id;
     }

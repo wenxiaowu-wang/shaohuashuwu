@@ -1,0 +1,67 @@
+.administrators_topNavigation_div_class{
+    height:60px;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    /*y阴影*/
+    box-shadow: 0px 5px 10px #b2d1d4;
+    background: #FFFFFF;
+
+    /*float: left;*/
+}
+
+.topNavigation_content_div_class{
+    margin:auto;
+    display:table;
+    list-style-type: none;
+    width: 1100px;
+
+}
+
+
+.administrators_topNavigation_subdiv_class{
+    float: left;
+}
+
+.shaohualogo_img_class{
+    margin-top: 8px;
+    height: 45px;
+    /*width: 100px;*/
+
+}
+#topintroduce_div_id{
+    margin-left: 60px;
+}
+
+.topintroduce_p_class{
+    margin-top: 25px;
+    margin-left: 20px;
+    font-size: 20px;
+    color: #888888;
+}
+
+
+
+.changepassword_img_class{
+
+    margin-top: 27px;
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+    /*设置按钮为小手*/
+    cursor:pointer;
+    float: left;
+
+}
+#changepassword_div_id{
+    margin-left:645px;
+}
+#help_div_id{
+    margin-left: 25px;
+}
+#administratorsme_div_id{
+    margin-left: 25px;
+}

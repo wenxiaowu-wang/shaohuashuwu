@@ -38,7 +38,14 @@ public interface ChapterInfoDao {
     public int sleectMaxChapter_idByChapter_pid (int chapter_pid);
 
 //    依据chapter_id查询
-    @Select("SELECT * from chapter_info where chapter_id = #{chapter_id}")
+    @Select("SELECT * from chapter_info where chapter_id = #{chapter_id} ")
     public ChapterInfo selectchapterInfoByChapter_id(int chapter_id);
+
+    //依据pid查询章节信息
+    @Select("SELECT * from chapter_info where chapter_pid = #{chapter_pid} ")
+    public ChapterInfo selectchapterInfoByChapter_pid(int chapter_pid);
+
+
+
 
 }

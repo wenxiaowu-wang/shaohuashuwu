@@ -30,14 +30,14 @@ public class UserInfoController {
     @RequestMapping("/selectuserInfoByuserid")
     public UserInfo selectuserInfoByuserid(HttpServletRequest request, HttpServletResponse response){
 
-        System.out.println("selectworkByid测试输出数据");
+        System.out.println("查询作者信息selectworkByid测试输出数据：");
 
 
         HttpSession session = request.getSession();
-        session.setAttribute("chapter_id",10);
+//        session.setAttribute("chapter_id",);
         Object msg = session.getAttribute("chapter_id");
         int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session获取----"+a);
+        System.out.println("获取作者功能输出chapter——id："+a);
 
         userInfo = userInfoService.selectUserInfoByChapter_id(a);
 

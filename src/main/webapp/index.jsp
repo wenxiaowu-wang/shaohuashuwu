@@ -9,8 +9,9 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="../css/elementui.css">
 </head>
-<body>
+<body id="app">
 
 <a href="account/findAll">cceshi</a>
 
@@ -68,5 +69,16 @@
 
 </form>
 
+
+
+<button @click="testgotochatpter(34)" value="用户主界面">11111</button>
+
+
 </body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/readNovelInterface.js"></script>
+
+
 </html>

@@ -83,7 +83,7 @@
                         </div>
                         <div class="div_line_class">
 
-                            <el-button class="workinfo1_div_button_class" type="danger" plain>开始阅读</el-button>
+                            <el-button class="workinfo1_div_button_class" type="danger" plain @click="gotoreadNovelInterface()">开始阅读</el-button>
 
                             <el-button plain>添加书架</el-button>
                             <el-button plain>投推荐票</el-button>
@@ -133,7 +133,7 @@
                                     <div class="hr_class"></div>
                                     <div class="chapter_div_info">
                                         <a class="thischapter_info">本书目录</a>
-                                        <a class="allchapter_info_class"  v-for="chapter_name in chapter_name_test" href="shaohua">{{chapter_name}}</a>
+                                        <a class="allchapter_info_class"  v-for="catalogInfoVo in catalogInfoVoList" href="#">{{catalogInfoVo.chapter_title}}</a>
 
                                     </div>
                                 </div>

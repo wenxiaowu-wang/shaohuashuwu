@@ -21,7 +21,7 @@ public class TsestReadSettingInfo {
     @Test
     public void testSelectReadSettinginfo(){
 
-       readSettingInfo =  readSettingInfoService.selectReadSettinginfo(4);
+       readSettingInfo =  readSettingInfoService.selectReadSettinginfo(1);
         System.out.println(readSettingInfo);
     }
 

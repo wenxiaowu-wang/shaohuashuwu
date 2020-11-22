@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReadSettingInfoDao {
 
-    //依据用户id查询是否有数量
+    //依据用户id
     @Select("select count(*) from read_setting_info where user_id = #{user_id}" )
     public int selectIsuserid(int user_id);
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户主界面</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/userMainInterfaceFragment.css">
+    <link rel="stylesheet" href="../css/userhomepage.css">
+</head>
+<body>
+<div >
+
+
+<!--    顶部导航信息-->
+    <div id="usertop_all_div_id">
+        <!--顶部导航栏-->
+        <div class="userMainTop_class">
+            <ul class="user_navigation_bar">
+                <li class="workclassification_class" id="user_main_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >首      页</el-button>
+                </li>
+                <li class="workclassification_class" id="allwork_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >全 部 作 品</el-button>
+                </li>
+                <li class="workclassification_class" id="paihang_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >排      行</el-button>
+                </li>
+                <li class="workclassification_class" id="tuijian_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >推      荐</el-button>
+                </li>
+                <li class="workclassification_class" id="chengweizuozhe_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >成 为 作 者</el-button>
+                </li>
+                <li class="workclassification_class" id="gerenzhongxin_li">
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >个 人 中 心</el-button>
+                </li>
+            </ul>
+        </div>
+        <!--顶部导航栏，用户信息获取-->
+        <div class="dierhang">
+            <div class="userInfo-class">
+                <a class="userInfo-p-class" id="username-p-id" href="http://www.w3school.com.cn">您好，昵称 </a>
+                <a class="userInfo-p-class" id="userout-p-id" href="http://www.w3school.com.cn">退出</a>
+                <a class="userInfo-p-class" id="haveuser-p-id" href="http://www.w3school.com.cn">网站注册人数5人</a>
+            </div>
+            <!--logo，搜索，书架-->
+            <img class="imglogo" src="../images/SHAOHUALOGO.png">
+            <el-input class="el-select-my" v-model="select_input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
+            <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectbyinfo()">搜索</el-button>
+            <el-button class="el-shujia-my"  type="info" plain size="small" @click="selectbyinfo()">
+                <img src="../images/shujia-16.png">
+                <p>书架</p>
+            </el-button>
+        </div>
+    </div>
+
+    <div >排行榜</div>
+
+
+
+
+
+
+</div>
+</body>
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/userMainInterface.js"></script>
+<script src="../js/userhomepage.js"></script>
+
+
+
+
+</html>
