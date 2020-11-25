@@ -7,8 +7,13 @@ import com.shaohuashuwu.service.TransactionInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 包:com.shaohuashuwu.service.impl
@@ -260,4 +265,19 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
     public List<TransactionInfo> getSubscribeInfo(int work_id) {
         return transactionInfoDao.selectSubscribeInfoByWorkId(work_id);
     }
+
+    //统计近一个月的某作品的订阅量分布
+    @Override
+    public List<Map<String, Object>> getSubscriptionStatisticsData(int work_id) {
+        //将timestamp类型格式化为String
+        Date date = new Date();
+        System.out.println("date is "+date.toString());
+        Timestamp timestamp = new Timestamp(date.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("格式化日期后："+sdf.format(timestamp)); //2009-07-16
+        return null;
+    }
+
+
+
 }

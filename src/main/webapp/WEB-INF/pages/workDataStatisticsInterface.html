@@ -88,164 +88,162 @@
     </div>
 
 <!--    主要内容-->
-    <div id="withdrawGoldCoin_div">
+    <div id="workDataStatistics_div">
         <div class="content_title">
-            <p id = "remuneration-p-id">提现稿酬</p>
+            <p id = "remuneration-p-id">数据统计</p>
             <hr id="remuneration-hr-id">
         </div>
         <div class="content_body">
-            <div class="body_header">
-                <div class="header_prefix">
-                    <label>{{tip1}}</label>
-                </div>
-                <div class="header_display">
-                    <label>{{header.goldCoin_total_income}}</label>
-                </div>
-                <div class="header_suffix">
-                    <label>{{tip2}}</label>
-                </div>
-                <div class="header_prefix">
-                    <label>{{tip3}}</label>
-                </div>
-                <div class="header_display">
-                    <label>{{header.goldCoin_already_withdraw}}</label>
-                </div>
-                <div class="header_suffix">
-                    <label>{{tip2}}</label>
-                </div>
-                <div class="header_prefix">
-                    <label>{{tip4}}</label>
-                </div>
-                <div class="header_display">
-                    <label>{{header.goldCoin_able_withdraw}}</label>
-                </div>
-                <div class="header_suffix">
-                    <label>{{tip2}}</label>
-                </div>
-                <div class="header_operate">
-                    <el-button type="primary" size="mini" @click="toWithdraw">提现</el-button>
-                </div>
-            </div>
-            <div class="body_selector">
-                <div class="selector_tip">
-                    <label>提现金币数：</label>
-                </div>
-                <div class="selector_select">
-                    <el-select
-                            v-model="select_value"
-                            filterable
-                            allow-create
-                            default-first-option
-                            placeholder="请选择提现金币数">
-                        <el-option
-                                v-for="item in withdraw_options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-                <div class="selector_tip2">
-                    <span>
-                        = &nbsp;
-                        <label>{{select_value/10}}</label>
-                        &nbsp;元(￥)
-                    </span>
-                </div>
-                <div class="selector_button">
-                    <el-button type="primary" size="mini" @click="determineAmount">确认金额</el-button>
-                </div>
-                <div class="dialog_form_withdraw">
-                    <el-dialog title="提现选择" :visible.sync="dialogFormVisible" width="30%">
-                        <el-form :model="withdrawForm">
-                            <el-form-item label="提现目标账号" :label-width="formLabelWidth">
-                                <el-input v-model="withdrawForm.third_party_number" autocomplete="off"></el-input>
-                            </el-form-item>
-                            <el-form-item label="活动区域" :label-width="formLabelWidth">
-                                <el-select v-model="withdrawForm.third_party_name" placeholder="请选择提现平台">
-                                    <el-option label="支付宝" value=0></el-option>
-                                    <el-option label="微信" value=1"></el-option>
+            <el-tabs type="border-card">
+                <el-tab-pane label="订阅统计">
+                    <div class="tab_pane">
+                        <div class="tab_pane_header">
+                            <div class="pane_header_tips">
+                                <label>选择作品：</label>
+                            </div>
+                            <div class="pane_header_selector">
+                                <el-select v-model="select.value_1" placeholder="请选择作品">
+                                    <el-option
+                                            v-for="item in work_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
                                 </el-select>
-                            </el-form-item>
-                        </el-form>
-                        <div slot="footer" class="dialog-footer">
-                            <el-button @click="dialogFormVisible = false">取 消</el-button>
-                            <el-button type="primary" @click="commitWithdrawForm">确 定</el-button>
+                            </div>
+                            <div class="pane_header_button">
+                                <el-button type="primary" plain @click="selectWork">查看</el-button>
+                            </div>
                         </div>
-                    </el-dialog>
-                </div>
-            </div>
-            <div class="body_center">
-                <div class="center_top">
-                    <div class="center_tip">
-                        <label>提现记录</label>
+                        <div class="pane_header_hr">
+                            <hr>
+                        </div>
+                        <div class="figure_all">
+                            <div class="subscription_statistics">
+                                <div class="subscription_all">
+                                    <span>总订阅：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>{{this.subscription_data.all}}</label></span>
+                                </div>
+                                <div class="subscription_one">
+                                    <div class="subscription_one_tips">
+                                        昨日新增订阅量
+                                    </div>
+                                    <div class="subscription_one_value">
+                                        {{this.subscription_data.yesterday}}
+                                    </div>
+                                </div>
+                                <div class="subscription_one">
+                                    <div class="subscription_one_tips">
+                                        章节平均订阅量
+                                    </div>
+                                    <div class="subscription_one_value">
+                                        {{this.subscription_data.average}}
+                                    </div>
+                                </div>
+                                <div class="subscription_one">
+                                    <div class="subscription_one_tips">
+                                        章节最高订阅量
+                                    </div>
+                                    <div class="subscription_one_value">
+                                        {{this.subscription_data.most}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="figure_subscription" style="width: 750px;height: 380px">
+                                <!--图形空间-->
+                            </div>
+                        </div>
                     </div>
-                    <div class="center_statistics">
-                        <span>
-                            总计：
-                            <label>{{statistics}}</label>
-                            元（￥）
-                        </span>
+                </el-tab-pane>
+                <el-tab-pane label="读者群体画像">
+                    <div class="tab_pane">
+                        <div class="tab_pane_header">
+                            <div class="pane_header_tips">
+                                <label>选择作品：</label>
+                            </div>
+                            <div class="pane_header_selector">
+                                <el-select v-model="select.value_1" placeholder="请选择作品">
+                                    <el-option
+                                            v-for="item in work_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="pane_header_button">
+                                <el-button type="primary" plain @click="selectWork">查看</el-button>
+                            </div>
+                        </div>
+                        <div class="pane_header_hr">
+                            <hr>
+                        </div>
+                        <div class="figure_all">
+                            <div class="figure_header">
+                                <div class="figure_all_tips">
+                                    <label>读者性别年龄比例分布</label>
+                                </div>
+                            </div>
+                            <div class="figure_content">
+                                <!--图形空间-->
+                                <div id="figure_reader_male" style="width: 400px;height: 420px">
+
+                                </div>
+                                <div id="figure_reader_female" style="width: 400px;height: 420px">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="center_table">
-                    <el-table
-                            :data="tableData_display"
-                            style="width: 98%"
-                            height="450"
-                            border
-                            stripe
-                            :default-sort = "{prop: 'withdraw_time', order: 'descending'}"
-                    >
-                        <el-table-column
-                                prop="withdraw_id"
-                                label="交易单号"
-                                align="center"
-                                sortable
-                                width="auto"
-                                min-width="150">
-                        </el-table-column>
-                        <el-table-column
-                                prop="third_party_number"
-                                label="第三方账号"
-                                align="center"
-                                sortable
-                                width="auto"
-                                min-width="200">
-                        </el-table-column>
-                        <el-table-column
-                                prop="third_party_name"
-                                label="第三方"
-                                align="center"
-                                sortable
-                                width="150">
-                        </el-table-column>
-                        <el-table-column
-                                prop="withdraw_quantity"
-                                label="金额(元￥)"
-                                align="left"
-                                sortable
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                prop="withdraw_time"
-                                label="提现时间"
-                                align="center"
-                                sortable
-                                width="180">
-                        </el-table-column>
-                    </el-table>
-                </div>
-            </div>
+                </el-tab-pane>
+                <el-tab-pane label="读者行为偏好">
+                    <div class="tab_pane">
+                        <div class="tab_pane_header">
+                            <div class="pane_header_tips">
+                                <label>选择作品：</label>
+                            </div>
+                            <div class="pane_header_selector">
+                                <el-select v-model="select.value_1" placeholder="请选择作品">
+                                    <el-option
+                                            v-for="item in work_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="pane_header_button">
+                                <el-button type="primary" plain @click="selectWork">查看</el-button>
+                            </div>
+                        </div>
+                        <div class="pane_header_hr">
+                            <hr>
+                        </div>
+                        <div class="figure_all">
+                            <div class="figure_header">
+                                <div class="figure_all_tips">
+                                    <label>读者行为统计分析</label>
+                                </div>
+                            </div>
+                            <div class="figure_content">
+                                <!--图形空间-->
+                                <div id="figure_behavior_time" style="width: 400px;height: 420px">
+
+                                </div>
+                                <div id="figure_behavior_like" style="width: 400px;height: 420px">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
+            </el-tabs>
         </div>
-
+        <div class="content_bottom">
+            <label>
+                该数据由【韶华书屋】平台统计获得，同时感谢echarts的开源使用！
+            </label>
+        </div>
     </div>
-
-
-
-
-
-
 
 </div>
 
@@ -253,11 +251,13 @@
 
 
 </body>
+<script src="../js/echarts.min.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
 
 <script src="../js/workDataStatistics.js"></script>
+
 
 
 </html>

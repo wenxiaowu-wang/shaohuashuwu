@@ -4,6 +4,7 @@ import com.shaohuashuwu.domain.TransactionInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 包:com.shaohuashuwu.dao
@@ -70,5 +71,16 @@ public interface TransactionInfoDao {
             "transaction_unit = #{transaction_unit} where transaction_id = #{transaction_id}")
     public int updateTransactionInfo(TransactionInfo transactionInfo);
 
+    //测试选择某一时间段的信息是否成功
+    @Select("SELECT * FROM transaction_info WHERE transaction_time >=  #{param1} AND transaction_time <=  #{param2}")
+    @ResultMap("transactionInfo")
+    public List<TransactionInfo> selectSomeTimeOfTransactionInfo(String time_1,String time_2);
 
+    //1.统计某一时间段的订阅记录的条数（选择时间段【精确到日%Y-%m-%d】、选择性别、选择作品ID）
+    @Select("SELECT DATE_FORMAT(subscription_time,'%Y-%m-%d')date_day,SUM(transaction_quantity)subscription_quantity FROM subscription_view WHERE gender = #{param4} AND subscription_time >= #{param2} AND subscription_time <= #{param3} AND work_id = #{param1} GROUP BY DATE_FORMAT(subscription_time,'%Y-%m-%d')")
+    public List<Map<String,Object>> selectSubscriptionStatisticsData(int work_id,String start_time,String end_time,String gender);
+
+    //测试返回map集合数据
+    @Select("SELECT user_id,user_name FROM user_info WHERE user_name like #{param1}")
+    public List<Map<String,Object>> selectTestResultMapData(String work_name);
 }

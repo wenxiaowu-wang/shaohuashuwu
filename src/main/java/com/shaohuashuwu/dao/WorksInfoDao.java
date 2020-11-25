@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -47,7 +48,13 @@ public interface WorksInfoDao {
     @Select("select work_name from works_info where work_id = #{work_id}")
     public String selectWorkNameByWorkId(int work_id);
 
+    //根据作品ID获取作品发布时间
+    @Select("SELECT work_create_time FROM works_info WHERE work_id = #{param1}")
+    public Timestamp selectWorkCreateTimeByWorkId(int work_id);
+
     //根据作品ID更新投票数量
     @Update("update works_info set work_vote_num = work_vote_num + (#{param2}) where work_id = #{param1}")
     public int updateWorkVoteNumByWorkId(int work_id,int voteNum);
+
+
 }
