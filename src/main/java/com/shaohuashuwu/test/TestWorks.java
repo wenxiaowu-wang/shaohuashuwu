@@ -1,6 +1,7 @@
 package com.shaohuashuwu.test;
 
 
+import com.shaohuashuwu.dao.WorksInfoDao;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.PageInfo;
 import com.shaohuashuwu.service.WorksInfoService;
@@ -18,6 +19,8 @@ public class TestWorks {
 
     @Autowired
     private WorksInfoService worksInfoService;
+    @Autowired
+    WorksInfoDao worksInfoDao;
 //    @Autowired
     private WorksInfo worksInfo;
     private PageInfo pageInfo;
@@ -36,7 +39,7 @@ public class TestWorks {
                 "东方玄幻",null,
                 "这是一个作品介绍","这是作者给读者的话",null,null,null,null,null);
 
-        int list = worksInfoService.insertworks_info(worksInfo);
+        int list = worksInfoService.addworksdate(worksInfo,1);
 
 
         System.out.println(list);
@@ -44,16 +47,16 @@ public class TestWorks {
 
     @Test
     public void testEorksnum(){
-        int num = worksInfoService.selectWorkbywork_name("西游记");
-
-        System.out.println(" ---"+num);
+//        int num = worksInfoService.getWorkbywork_name("西游记");
+//
+//        System.out.println(" ---"+num);
     }
 
-    @Test
-    public void testSelectworkByid(){
-        worksInfo = worksInfoService.selectworkByid(14);
-        System.out.println(worksInfo);
-    }
+//    @Test
+//    public void testSelectworkByid(){
+//        worksInfo = worksInfoService.selectworkByid(14);
+//        System.out.println(worksInfo);
+//    }
 
     /*
     根据作品id修改作品状态
@@ -62,7 +65,7 @@ public class TestWorks {
     public void testUpdateWorkSerialStateByid(){
         worksInfo = new WorksInfo(33,1);
 
-        int num = worksInfoService.updateWorkSerialStateByid(worksInfo);
+        int num = worksInfoService.updateWorkInfoByworkid(worksInfo);
         System.out.println(num);
     }
 
@@ -71,7 +74,7 @@ public class TestWorks {
      */
     @Test
     public void testdifvolenum(){
-        worksInfoService.selectdifvolenum();
+        worksInfoService.getdifvolenum();
 //        worksInfoService.selectxuanhuannum();
     }
 
@@ -81,7 +84,7 @@ public class TestWorks {
 
         pageInfo = new PageInfo("玄幻",null,null,1,10);
 
-        List list = worksInfoService.selectworksneed(pageInfo);
+        List list = worksInfoService.getworksneed(pageInfo);
 
         System.out.println("数组中长度为：---"+list.size());
     }
@@ -117,7 +120,17 @@ public class TestWorks {
 
     @Test
     public void testSelectworkInfoByChapter_id(){
-        worksInfoService.selectworkInfoByChapter_id(10);
+        worksInfoService.getworkInfoByChapter_id(10);
+    }
+
+
+
+    @Test
+    public  void selectworkBuwork_name(){
+
+        worksInfo = new WorksInfo("不可思议",null,null,null);
+
+            System.out.println("输出"+worksInfoDao.selectVaguework_nameBywork_name(worksInfo));
     }
 
 }

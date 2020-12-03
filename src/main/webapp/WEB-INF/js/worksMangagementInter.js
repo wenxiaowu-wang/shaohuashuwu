@@ -1,6 +1,6 @@
 new Vue({
     // router,
-    el: '#app',
+    el: '#worksMangagement_id',
     data() {
         return {
             worksInfoList:[],
@@ -8,55 +8,75 @@ new Vue({
     },
     methods:{
 
+        /*
+        * 初始化信息
+        * */
 
-        findalldate () {
-            //当前方法中定义一个变量，表明是vue对象
-            var _this= this;
-            axios.get('http://localhost:8080/account/findallworksdate')
-                .then(function (response) {
-                    _this.worksInfoList = response.data;//相应数据给userlist
-                    // alert(JSON.stringify(response.data));
-                    console.log(response.data);
+        /*获取作品信息*/
+        getWorksInfoListInfo(){
+            var _this = this;
+            axios.post('http://localhost:8080/worksInfoController/getWorksInfoByUser_id')
+                .then(function (response){
+                    _this.worksInfoList = response.data;
+                    console.log("作品信息"+JSON.stringify(_this.worksInfoList));
                 })
                 .catch(function (error){
                     console.log(error);
-                    alert("相应失败");
-                })
 
+                })
         },
-        gorouter(work_id){
-            var _this= true;
-            console.log(work_id);
-            axios.get('http://localhost:8080/worksInfoController/selectworksByworkid?work_id='+work_id)
+
+
+        /*
+        * 点击事件
+        * */
+        //点击新建作品按钮
+        gotonewlyCreatedWorks(){
+            window.location.assign("../pages/newlyCreatedWorksInterface.html");
+        },
+
+        //点击管理作品按钮
+        gotomangagementWorks(work_id){
+            var _this= this;
+            console.log("作品id");
+            console.log("作品id"+work_id);
+            axios.get('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response){
                     window.location.assign("../pages/mangagementWorksInterface.html");
                 }.bind(this))
                 .catch(function (error){
                     console.log(error);
-                    alert("相应失败");
                 })
-
         },
-        text(){
-            console.log("要舔砖用户主界面")
-            window.location.assign("../pages/userMainInterface.html");
-        },
-
-    //    跳转写作界面
-        gotowrite(work_id){
+        //点击添加章节按钮
+        gotoaddChapterInter(work_id){
+            var _this= this;
+            console.log("作品id");
             console.log("作品id"+work_id);
-            var _this = this;
-            axios.get('http://localhost:8080/worksInfoController/selectworksByworkid?work_id='+work_id)
+            axios.get('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response){
                     window.location.assign("../pages/addChapterInterface.html");
                 }.bind(this))
                 .catch(function (error){
                     console.log(error);
-                    alert("相应失败");
                 })
-        }
+        },
+
+        //点击作品设置按钮
+        gotoWorkSet(work_id){
+            var _this= this;
+            console.log("作品id");
+            console.log("作品id"+work_id);
+            axios.get('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+                .then(function (response){
+                    window.location.assign("../pages/workSetInterface.html");
+                }.bind(this))
+                .catch(function (error){
+                    console.log(error);
+                })
+        },
     },
     created:function (){ //页面加载时查询所有
-        this.findalldate();
+        this.getWorksInfoListInfo();
     }
 })

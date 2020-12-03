@@ -17,7 +17,7 @@ public class TestAuthorInfoService {
 
     @Test
     public void testselectAuthorInfoVo(){
-        authorInfoVoService.selectAuthorInfoVo(11);
+        authorInfoVoService.getAuthorInfoVo(1);
     }
 
 

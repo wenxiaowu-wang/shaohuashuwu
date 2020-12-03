@@ -100,13 +100,20 @@ public class AccountControler {
         System.out.println("zzzzzzzzzzzzz--------");
         return "userMainInterface.html";
     }
+    @RequestMapping("/mangagement")
+    public String mangagement(){
+
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "worksMangagementInterface.html";
+    }
 
     @RequestMapping("/addworkInfo")
     public String addworksdate(@RequestBody WorksInfo worksInfodata) {
 
         System.out.println("添加书籍-------------");
         System.out.println(worksInfodata);
-        worksInfoService.insertworks_info(worksInfodata);
+        worksInfoService.addworksdate(worksInfodata,11);
         return  "forward:/account/findallworks";
     }
 
@@ -120,7 +127,7 @@ public class AccountControler {
         System.out.println("---"+works_name+"------");
         System.out.println(worksInfodata);
 
-        int num = worksInfoService.selectWorkbywork_name(works_name);
+        int num = worksInfoService.isworkname(works_name);
         System.out.println("controller层显示结果:"+num);
 
 

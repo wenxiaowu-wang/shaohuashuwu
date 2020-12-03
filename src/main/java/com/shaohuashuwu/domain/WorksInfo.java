@@ -28,6 +28,29 @@ public class WorksInfo implements Serializable {
         this.work_id = work_id;
     }
 
+    /**
+     * WorkWholeInfoVo用到信息
+     * */
+    public WorksInfo(Integer work_id, String work_cover, String work_name, Integer user_id, String work_main_label, Integer work_serial_state, String work_introduct, Integer work_vote_num) {
+        this.work_id = work_id;
+        this.work_cover = work_cover;
+        this.work_name = work_name;
+        this.user_id = user_id;
+        this.work_main_label = work_main_label;
+        this.work_serial_state = work_serial_state;
+        this.work_introduct = work_introduct;
+        this.work_vote_num = work_vote_num;
+    }
+
+    public WorksInfo(Integer work_id, String work_cover, String work_name, Integer user_id, String work_main_label, String work_introduct) {
+        this.work_id = work_id;
+        this.work_cover = work_cover;
+        this.work_name = work_name;
+        this.user_id = user_id;
+        this.work_main_label = work_main_label;
+        this.work_introduct = work_introduct;
+    }
+
     public WorksInfo(Integer work_id, String work_cover, String work_name, Integer user_id, String work_main_label, String work_vice_label, Integer work_serial_state, String work_introduct, String work_other_word, Integer work_word_num, Integer work_tip_num, Integer work_subscribe_num, Integer work_vote_num, String work_create_time) {
         this.work_id = work_id;
         this.work_cover = work_cover;
@@ -123,14 +146,15 @@ public class WorksInfo implements Serializable {
         this.work_main_label = work_main_label;
     }
 
-    public WorksInfo(String work_name, Integer user_id) {
+    public WorksInfo(Integer work_id, String work_name, Integer user_id) {
+        this.work_id = work_id;
         this.work_name = work_name;
         this.user_id = user_id;
     }
 
     /*
-    根据作品id修改作品状态
-     */
+        根据作品id修改作品状态
+         */
     public WorksInfo(Integer work_id, Integer work_serial_state) {
         this.work_id = work_id;
         this.work_serial_state = work_serial_state;

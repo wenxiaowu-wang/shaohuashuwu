@@ -24,50 +24,93 @@ public class ChapterInfoController {
     @Autowired
     public ChapterInfoService chapterInfoService;
 
-
     private  ChapterInfo chapterInfo;
 
-    @RequestMapping(value = "/insertchapter_info")
-    public void insertchapter_info(@RequestBody ChapterInfo chapterInfo, HttpServletRequest request, HttpServletResponse response) {
 
-
-
-//        获取session中存储的work_id值
+    /**
+     * 根据作品id查询最新章节信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getnewChapterInfoByword_id")
+    public ChapterInfo getnewChapterInfoByword_id(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("work_id");
         int work_id=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session获取----"+work_id);
-
-
-        System.out.println("根据id修改作品状态-------------"+chapterInfo);
-        int a = chapterInfoService.insertchapter_info(chapterInfo,work_id);
-        System.out.println("controller层显示结果:"+a);
-
+        return chapterInfoService.getnewChapterInfoByword_id(work_id);
     }
 
+    /**
+     * 将章节id保存进入session
+     * @param chapter_id
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/saveChapter_idSession")
+    public void saveChapter_idSession(Integer chapter_id, HttpServletRequest request, HttpServletResponse response)  {
+        HttpSession session = request.getSession();
+        session.setAttribute("chapter_id",chapter_id);
+        System.out.println("保存章节session-------------------------------"+chapter_id);
+    }
+
+    /**
+     * 根据章节id获取章节信息
+     * @param request
+     * @param response
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = "/selectUserInfoByChapter_id")
-    public ChapterInfo selectUserInfoByChapter_id(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/getChapterInfoByChapter_id")
+    public ChapterInfo getChapterInfoByChapter_id(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("chapter_id");
+        int chapter_id=Integer.parseInt(String.valueOf(msg));
+        System.out.println("获取章节session++++++++++++++++++++++++++++++++"+chapter_id);
+        return chapterInfoService.getchapterInfoByChapter_id(chapter_id);
+    }
 
-
-//        System.out.println("selectworkByid测试输出数据");
-
+    /**
+     * 新建章节
+     * @param chapterInfo
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/addchapter_info")
+    public int addchapter_info(@RequestBody ChapterInfo chapterInfo, HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
-//        session.setAttribute("chapter_id",34);
-        Object msg = session.getAttribute("chapter_id");
-        int a=Integer.parseInt(String.valueOf(msg));
-//        System.out.println("aaa"+a);
-        System.out.println("查询章节功能session获取chapter_id----"+a);
-
-         chapterInfo= chapterInfoService.selectchapterInfoByChapter_id(a);
-
-
-
-        return chapterInfo;
-//
-
+        Object msg = session.getAttribute("work_id");
+        int work_id=Integer.parseInt(String.valueOf(msg));
+        session.setAttribute("user_id",1);
+        Object user_id_o = session.getAttribute("user_id");
+        int user_id=Integer.parseInt(String.valueOf(user_id_o));
+        int num = chapterInfoService.addchapter_info(chapterInfo,work_id,user_id);
+        return num;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*****************以下未修改*********************/
+
+
+
+
 
     @ResponseBody
     @RequestMapping(value = "/selectchaptercatalog")
@@ -93,13 +136,7 @@ public class ChapterInfoController {
 
     }
 
-    @RequestMapping("/saveChapter_idSession")
-    public void saveChapter_idSession(Integer chapter_id, HttpServletRequest request, HttpServletResponse response)  {
-        System.out.println("将要存储的session信息chapter_id："+chapter_id);
-        HttpSession session = request.getSession();
-        session.setAttribute("chapter_id",chapter_id);
 
-    }
 
     @ResponseBody
     @RequestMapping(value = "/selectchaptercatalogBywork_id")

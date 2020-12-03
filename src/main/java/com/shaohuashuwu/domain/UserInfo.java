@@ -33,12 +33,23 @@ public class UserInfo implements Serializable {
         System.out.println("userinfo无参构造方法");
     }
 
+    public UserInfo(Integer user_id, String user_name) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+    }
+
     public UserInfo(Integer user_id, String user_name, String head_portrait) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.head_portrait = head_portrait;
     }
 
+    public UserInfo(Integer user_id, String user_name, String head_portrait, Integer gold_coin_num) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.head_portrait = head_portrait;
+        this.gold_coin_num = gold_coin_num;
+    }
 
     public UserInfo(String user_name, String gender, String area, String phone_number, String password, Integer gold_bean_num, Integer gold_coin_num, Integer ticket_num) {
         this.user_name = user_name;

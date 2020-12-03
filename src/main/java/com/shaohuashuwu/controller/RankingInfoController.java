@@ -23,11 +23,19 @@ public class RankingInfoController {
 
     private RankingInfoVo rankingInfoVo;
 
-    @ResponseBody
-    @RequestMapping(value = "/selectRankingListInfo")
-    public List<RankingInfoVo> selectRankingListInfo(@RequestBody RankingInputInfoVo rankingInputInfoVo) {
-        System.out.println("11111");
-        return rankingInfoVoService.selectRankingListInfo(rankingInputInfoVo);
 
+    /**
+     * 分页获取排行信息
+     * @param rankingInputInfoVo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getRankingListInfo")
+    public List<RankingInfoVo> getRankingListInfo(@RequestBody RankingInputInfoVo rankingInputInfoVo) {
+        System.out.println("进入/rankingInfoController/getRankingListInfo");
+        return rankingInfoVoService.getRankingListInfo(rankingInputInfoVo);
     }
+
+
+
 }

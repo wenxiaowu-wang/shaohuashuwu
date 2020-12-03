@@ -8,9 +8,9 @@ import java.util.List;
 public interface RankingInfoVoService {
 
     //排行榜
-    public List<RankingInfoVo> selectListInfo(RankingInputInfoVo rankingInputInfoVo);
+    public List<RankingInfoVo> getListInfo(RankingInputInfoVo rankingInputInfoVo);
 
-    //前十排行榜
-    public List<RankingInfoVo> selectRankingListInfo(RankingInputInfoVo rankingInputInfoVo);
+    //获取排行榜信息
+    public List<RankingInfoVo> getRankingListInfo(RankingInputInfoVo rankingInputInfoVo);
 
 }

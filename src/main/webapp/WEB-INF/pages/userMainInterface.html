@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/userMainInterfaceFragment.css">
     <link rel="stylesheet" href="../css/userhomepage.css">
+    <link rel="stylesheet" href="../css/userBottomFragment.css">
 </head>
 <body>
 <div >
@@ -17,37 +18,37 @@
         <div class="userMainTop_class">
             <ul class="user_navigation_bar">
                 <li class="workclassification_class" id="user_main_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >首      页</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoUserMainIterface()" >首      页</el-button>
                 </li>
                 <li class="workclassification_class" id="allwork_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >全 部 作 品</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoAllWorksInterface()">全 部 作 品</el-button>
                 </li>
                 <li class="workclassification_class" id="paihang_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >排      行</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoNovelRankingInterface()">排      行</el-button>
                 </li>
                 <li class="workclassification_class" id="tuijian_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >推      荐</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoPersonalityRecommendInterface()">推      荐</el-button>
                 </li>
                 <li class="workclassification_class" id="chengweizuozhe_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >成 为 作 者</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoAuthorPrefecture()">作 者 专 区</el-button>
                 </li>
                 <li class="workclassification_class" id="gerenzhongxin_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >个 人 中 心</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoMysqelfHtml()">个 人 中 心</el-button>
                 </li>
             </ul>
         </div>
         <!--顶部导航栏，用户信息获取-->
         <div class="dierhang">
             <div class="userInfo-class">
-                <a class="userInfo-p-class" id="username-p-id" href="http://www.w3school.com.cn">您好，昵称 </a>
-                <a class="userInfo-p-class" id="userout-p-id" href="http://www.w3school.com.cn">退出</a>
-                <a class="userInfo-p-class" id="haveuser-p-id" href="http://www.w3school.com.cn">网站注册人数5人</a>
+                <a class="userInfo-p-class" id="username-p-id" href="#" @click="gotoMysqelfHtml()">您好，{{userInfo.user_name}} </a>
+                <el-button type="text" class="userInfo-p-class" id="userout-p-id" href="#" @click="signOut()">退出</el-button>
+                <a class="userInfo-p-class" id="haveuser-p-id" >网站注册人数{{userNum}}人</a>
             </div>
             <!--logo，搜索，书架-->
             <img class="imglogo" src="../images/SHAOHUALOGO.png">
             <el-input class="el-select-my" v-model="select_input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
-            <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectbyinfo()">搜索</el-button>
-            <el-button class="el-shujia-my"  type="info" plain size="small" @click="selectbyinfo()">
+            <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectworkInfobyinfo()">搜索</el-button>
+            <el-button class="el-shujia-my"  type="info" plain size="small" @click="gotoBookshelf()">
                 <img src="../images/shujia-16.png">
                 <p>书架</p>
             </el-button>
@@ -56,153 +57,1078 @@
 
 
 
-
-    <div class="disanhang" id="disanhang-id" >
-        <div class="zuopinfenlei">
+<!--主要内容-->
+    <div class="disanhang_class" id="disanhang_id" >
+        <div class="workclassification_div_class">
             <ul>
-                <ul class="vole-diyi-ul-class">
+                <ul class="vole_frist_ul_class">
                     <li>
-                        <el-button class="el-vole-button" id="el-xuanhuan-button-id" type="info"  plain size="small" >
-                            <img src="../images/xuanhuan-32.png" class="xuanhuan-img-class" id="xuanhuan-img-id">
-                            <p class="vole-p-class" id="xuanhuan-p-id">玄幻</p>
-                            <p class="vole-p-class" id="xuanhuan-num-id" >{{difvolenumInfo.xuanhuannum}}</p>
+                        <el-button class="el_vole_button_class" id="el_xuanhuan_button_id" type="info"  plain size="small" >
+                            <img src="../images/xuanhuan-32.png" >
+                            <p class="vole-p-class" >玄幻</p>
+                            <p class="vole-p-class" >{{difvolenumInfo.xuanhuannum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-qihuan-button-id" type="info"  plain size="small" >
-                            <img src="../images/qihuan-32.png" class="qihuan-img-class" id="qihuan-img-id">
-                            <p class="vole-p-class" id="qihuan-p-id">奇幻</p>
-                            <p class="vole-p-class" id="qihuan-num-id" >{{difvolenumInfo.qihuannum}}</p>
+                        <el-button class="el_vole_button_class" id="el_qihuan_button_id" type="info"  plain size="small" >
+                            <img src="../images/qihuan-32.png" >
+                            <p class="vole-p-class" >奇幻</p>
+                            <p class="vole-p-class" >{{difvolenumInfo.qihuannum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-wuxia-button-id" type="info"  plain size="small" >
-                            <img src="../images/wuxia-32.png" class="wuxia-img-class" id="wuxia-img-id">
-                            <p class="vole-p-class" id="wuxia-p-id">武侠</p>
-                            <p class="vole-p-class" id="wuxia-num-id" >{{difvolenumInfo.wuxianum}}</p>
-                        </el-button>
-                    </li>
-                </ul>
-                <ul  class="vole-dier-ul-class">
-                    <li>
-                        <el-button class="el-vole-button" id="el-xianxia-button-id" type="info"  plain size="small" >
-                            <img src="../images/xianxia-32.png" class="xuanhuan-img-class" id="xianxia-img-id">
-                            <p class="vole-p-class" id="xianxia-p-id">仙侠</p>
-                            <p class="vole-p-class" id="xianxia-num-id" >{{difvolenumInfo.xianxianum}}</p>
-                        </el-button>
-                    </li>
-                    <li>
-                        <el-button class="el-vole-button" id="el-dushi-button-id" type="info"  plain size="small" >
-                            <img src="../images/dushi-32.png" class="qihuan-img-class" id="dushi-img-id">
-                            <p class="vole-p-class" id="dushi-p-id">都市</p>
-                            <p class="vole-p-class" id="dushi-num-id" >{{difvolenumInfo.dushinum}}</p>
-                        </el-button>
-                    </li>
-                    <li>
-                        <el-button class="el-vole-button" id="el-xianshi-button-id" type="info"  plain size="small" >
-                            <img src="../images/xianshi-32.png" class="wuxia-img-class" id="xianshi-img-id">
-                            <p class="vole-p-class" id="xianshi-p-id">现实</p>
-                            <p class="vole-p-class" id="xianshi1-num-id" >{{difvolenumInfo.xianshinum}}</p>
+                        <el-button class="el_vole_button_class" id="el_wuxia_button_id" type="info"  plain size="small" >
+                            <img src="../images/wuxia-32.png" >
+                            <p class="vole-p-class" >武侠</p>
+                            <p class="vole-p-class" >{{difvolenumInfo.wuxianum}}</p>
                         </el-button>
                     </li>
                 </ul>
-
-                <ul class="vole-disan-ul-class">
+                <ul  class="vole_second_ul_class">
                     <li>
-                        <el-button class="el-vole-button" id="el-lishi-button-id" type="info"  plain size="small" >
-                            <img src="../images/lishi-32.png" class="xuanhuan-img-class" id="lishi-img-id">
-                            <p class="vole-p-class" id="lishi-p-id">历史</p>
-                            <p class="vole-p-class" id="lishi-num-id" >{{difvolenumInfo.lishinum}}</p>
+                        <el-button class="el_vole_button_class" id="el_xianxia_button_id" type="info"  plain size="small" >
+                            <img src="../images/xianxia-32.png" >
+                            <p class="vole_p_class">仙侠</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.xianxianum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-junshi-button-id" type="info"  plain size="small" >
-                            <img src="../images/junshi-32.png" class="qihuan-img-class" id="junshi-img-id">
-                            <p class="vole-p-class" id="junshi-p-id">军事</p>
-                            <p class="vole-p-class" id="junshi-num-id" >{{difvolenumInfo.junshinum}}</p>
+                        <el-button class="el_vole_button_class" id="el_dushi_button_id" type="info"  plain size="small" >
+                            <img src="../images/dushi-32.png" >
+                            <p class="vole_p_class" >都市</p>
+                            <p class="vole_p_class"  >{{difvolenumInfo.dushinum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-youxi-button-id" type="info"  plain size="small" >
-                            <img src="../images/youxi-32.png" class="wuxia-img-class" id="youxi-img-id">
-                            <p class="vole-p-class" id="youxi-p-id">游戏</p>
-                            <p class="vole-p-class" id="youxi-num-id" >{{difvolenumInfo.youxinum}}</p>
+                        <el-button class="el_vole_button_class" id="el_xianshi_button_id" type="info"  plain size="small" >
+                            <img src="../images/xianshi-32.png" >
+                            <p class="vole_p_class" >现实</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.xianshinum}}</p>
                         </el-button>
                     </li>
                 </ul>
-                <ul class="vole-disi-ul-class">
+                <ul class="vole_third_ul_class">
                     <li>
-                        <el-button class="el-vole-button" id="el-xuanyi-button-id" type="info"  plain size="small" >
-                            <img src="../images/xuanyi-32.png" class="xuanhuan-img-class" id="xuanyi-img-id">
-                            <p class="vole-p-class" id="xuanyi-p-id">悬疑</p>
-                            <p class="vole-p-class" id="xuanyi-num-id" >{{difvolenumInfo.xuanyinum}}</p>
+                        <el-button class="el_vole_button_class" id="el_lishi_button_id" type="info"  plain size="small" >
+                            <img src="../images/lishi-32.png" >
+                            <p class="vole_p_class" >历史</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.lishinum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-kehuan-button-id" type="info"  plain size="small" >
-                            <img src="../images/kehuan-32.png" class="qihuan-img-class" id="kehuan-img-id">
-                            <p class="vole-p-class" id="kehuan-p-id">科幻</p>
-                            <p class="vole-p-class" id="kehuan-num-id" >{{difvolenumInfo.kehuannum}}</p>
+                        <el-button class="el_vole_button_class" id="el_junshi_button_id" type="info"  plain size="small" >
+                            <img src="../images/junshi-32.png">
+                            <p class="vole_p_class" >军事</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.junshinum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-tiyu-button-id" type="info"  plain size="small" >
-                            <img src="../images/tiyu-32.png" class="wuxia-img-class" id="tiyu-img-id">
-                            <p class="vole-p-class" id="tiyu-p-id">体育</p>
-                            <p class="vole-p-class" id="tiyu-num-id" >{{difvolenumInfo.tiyunum}}</p>
+                        <el-button class="el_vole_button_class" id="el_youxi_button_id" type="info"  plain size="small" >
+                            <img src="../images/youxi-32.png">
+                            <p class="vole_p_class">游戏</p>
+                            <p class="vole_p_class">{{difvolenumInfo.youxinum}}</p>
+                        </el-button>
+                    </li>
+                </ul>
+                <ul class="vole_fourth_ul_class">
+                    <li>
+                        <el-button class="el_vole_button_class" id="el_xuanyi_button_id" type="info"  plain size="small" >
+                            <img src="../images/xuanyi-32.png" >
+                            <p class="vole_p_class" >悬疑</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.xuanyinum}}</p>
                         </el-button>
                     </li>
                     <li>
-                        <el-button class="el-vole-button" id="el-qingxiaoshuo-button-id" type="info"  plain size="small" >
-                            <img src="../images/qingxiaoshuo-32.png" class="xuanhuan-img-class" id="qingxiaoshuo-img-id">
-                            <p class="vole-p-class" id="qingxiaoshuo-p-id">轻小说</p>
-                            <p class="vole-p-class" id="qingxiaoshuo-num-id" >{{difvolenumInfo.qingxiaoshuonum}}</p>
+                        <el-button class="el_vole_button_class" id="el_kehuan_button_id" type="info"  plain size="small" >
+                            <img src="../images/kehuan-32.png" >
+                            <p class="vole_p_class" >科幻</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.kehuannum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el_vole_button_class" id="el_tiyu_button_id" type="info"  plain size="small" >
+                            <img src="../images/tiyu-32.png" >
+                            <p class="vole_p_class" >体育</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.tiyunum}}</p>
+                        </el-button>
+                    </li>
+                    <li>
+                        <el-button class="el_vole_button_class" id="el_qingxiaoshuo_button_id" type="info"  plain size="small" >
+                            <img src="../images/qingxiaoshuo-32.png" >
+                            <p class="vole_p_class" >轻小说</p>
+                            <p class="vole_p_class" >{{difvolenumInfo.qingxiaoshuonum}}</p>
                         </el-button>
                     </li>
                 </ul>
             </ul>
 
-
-
         </div>
-
-        <div class="guangao-zoumadeg">
-            <el-carousel :interval="5000" arrow="always">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <h3>{{ item }}</h3>
+        <div class="rotation_advertisement_div_class">
+            <el-carousel class="rotation_advertisement_carousel_class" :interval="3000" arrow="always">
+                <el-carousel-item v-for="rotationimg in rotationimgList"   :key="rotationimg">
+                    <div>
+                        <a :href="rotationimg.ahref">
+                            <img class="rotation_advertisement_img_class" :src="rotationimg.imghref" >
+                        </a>
+                    </div>
                 </el-carousel-item>
             </el-carousel>
         </div>
 
-        <div class="frind-link">
-            <p class="frind-link-class" id="frind-link-id-1" >网站介绍</p>
-            <a class="frind-link-class" id="frind-link-id-2" href="http://www.w3school.com.cn">【基本】建站技术</a>
-            <a class="frind-link-class" id="frind-link-id-3" href="http://www.w3school.com.cn">【基本】人员分工</a>
-            <a class="frind-link-class" id="frind-link-id-4" href="http://www.w3school.com.cn">【基本】站点基本功能</a>
-            <a class="frind-link-class" id="frind-link-id-5" href="http://www.w3school.com.cn">【链接】elementUI</a>
-            <a class="frind-link-class" id="frind-link-id-6" href="http://www.w3school.com.cn">【链接】学习站点w3c</a>
-            <a class="frind-link-class" id="frind-link-id-7" href="http://www.w3school.com.cn">【广告】一刀999，装备秒回收</a>
-            <a class="frind-link-class" id="frind-link-id-8" href="http://www.w3school.com.cn">【广告】lol手游</a>
+        <div class="frind_link">
+            <p class="frind_link_class" id="frind_link_id_1" >网站介绍</p>
+            <a class="frind_link_class" id="frind_link_id_2" href="http://www.w3school.com.cn">【基本】建站技术</a>
+            <a class="frind_link_class" id="frind_link_id_3" href="http://www.w3school.com.cn">【基本】人员分工</a>
+            <a class="frind_link_class" id="frind_link_id_4" href="http://www.w3school.com.cn">【基本】站点基本功能</a>
+            <a class="frind_link_class" id="frind_link_id_5" href="http://www.w3school.com.cn">【链接】elementUI</a>
+            <a class="frind_link_class" id="frind_link_id_6" href="http://www.w3school.com.cn">【链接】学习站点w3c</a>
+            <a class="frind_link_class" id="frind_link_id_7" href="http://www.w3school.com.cn">【广告】一刀999，装备秒回收</a>
+            <a class="frind_link_class" id="frind_link_id_8" href="http://www.w3school.com.cn">【广告】lol手游正式上线试玩</a>
         </div>
-        <div class="guanggaomokuai" >
+        <div class="advertisementModular" >
             <a href="http://www.w3school.com.cn">
-                <img class="guanggao-class" id="guanggao-1-id"  src="../images/guanggao-1.png">
+                <img class="advertisement_class" id="advertisement_1_id"  src="../images/guanggao-1.png">
             </a>
             <a href="http://www.w3school.com.cn">
-                <img class="guanggao-class" id="guanggao-2-id" href="http://www.w3school.com.cn" src="../images/guanggao-2%20.png">
+                <img class="advertisement_class" id="advertisement_2_id" href="http://www.w3school.com.cn" src="../images/guanggao-2%20.png">
             </a>
             <a href="http://www.w3school.com.cn">
-                <img class="guanggao-class" id="guanggao-3-id" href="http://www.w3school.com.cn" src="../images/guanggao-3.png">
+                <img class="advertisement_class" id="advertisement_3_id" href="http://www.w3school.com.cn" src="../images/guanggao-3.png">
             </a>
             <a href="http://www.w3school.com.cn">
-                <img class="guanggao-class" id="guanggao-4-id" href="http://www.w3school.com.cn" src="../images/guanggao-4.jpg">
+                <img class="advertisement_class" id="advertisement_4_id" href="http://www.w3school.com.cn" src="../images/guanggao-4.jpg">
             </a>
-
-
         </div>
 
-        <button href="www.baidu.com"> 跳转</button>
+
+        <!--显示四个排行-->
+        <div class="rankingworkinfo_div">
+
+            <div class="recommendRankingworkinfo_div_class">
+                <p class="rankingworkinfo_p_class">今日推荐榜</p>
+
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="collectionRankingworkinfo_div_class">
+                <p class="rankingworkinfo_p_class">今日收藏榜</p>
+
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="subscribeRankingworkinfo_div_class">
+                <p class="rankingworkinfo_p_class">今日订阅榜</p>
+
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="rewardRankingworkinfo_div_class">
+                <p class="rankingworkinfo_p_class">今日打赏榜</p>
+
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+                <div class="rankingworkinfo_div_class">
+                    <div class="rankingworkinfo_divhr2_class">
+
+                    </div>
+                    <div class="rankingworkinfo_onediv_class">
+                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
+                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
+                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--不同状态的小说-->
+        <div class="differentStateWork_div_class">
+
+            <!--广告分割-->
+            <img class="differentStateWork_img1_class" src="../images/mainguanggaohengtiao.jpg">
+
+            <!--完结精品-->
+            <div class="differentStateWork_div1_class">
+                <p class="differentStateWork_p_class">完本精品</p>
+                <div class="differentStateWork_divhr_class"></div>
+                <div class="differentStateWork_leftdiv_class">
+
+                    <el-carousel class="differentStateWork_class" :interval="2000"  height="400px" indicator-position="none">
+                        <el-carousel-item v-for="endWorkWholeInfoVo in endWorkWholeInfoVoList" :key="endWorkWholeInfoVo">
+
+                            <div class="differentStateWork_cover_div_class">
+                                <a href="#" @click="clickWork_name(endWorkWholeInfoVo.work_id)">
+                                    <img class="differentStateWork_cover_class" :src="endWorkWholeInfoVo.work_cover">
+                                </a>
+
+                            </div>
+                            <div class="differentStateWork_name_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <a class="differentStateWork_name_p_class" href="#" @click="clickWork_name(endWorkWholeInfoVo.work_id)">{{endWorkWholeInfoVo.work_name}}</a>
+                            </div>
+                            <div class="differentStateWork_int_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <p class="differentStateWork_int_p_class">{{endWorkWholeInfoVo.work_introduct}}</p>
+                            </div>
+                            <div class="differentStateWork_Button_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <el-button class="differentStateWork_button_class" type="danger" round @click="clickWork_name(endWorkWholeInfoVo.work_id)">书籍详情</el-button>
+                            </div>
+<!--                                                                                   <h3 class="medium">{{ item }}</h3>-->
+                        </el-carousel-item>
+                    </el-carousel>
+                </div>
+                <div class="differentStateWork_rightdiv_class">
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(endWorkWholeInfoVoList[0].work_id)">
+                                <img class="workcover_leftimg_class" :src="endWorkWholeInfoVoList[0].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#"  @click="clickWork_name(endWorkWholeInfoVoList[0].work_id)">{{endWorkWholeInfoVoList[0].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{endWorkWholeInfoVoList[0].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(endWorkWholeInfoVoList[0].user_id)">{{endWorkWholeInfoVoList[0].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{endWorkWholeInfoVoList[0].work_main_label}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#"  @click="clickWork_name(endWorkWholeInfoVoList[1].work_id)">
+                                <img class="workcover_leftimg_class" :src="endWorkWholeInfoVoList[1].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#"  @click="clickWork_name(endWorkWholeInfoVoList[1].work_id)"> {{endWorkWholeInfoVoList[1].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{endWorkWholeInfoVoList[1].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(endWorkWholeInfoVoList[1].user_id)">{{endWorkWholeInfoVoList[1].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{endWorkWholeInfoVoList[1].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_divhr2_class"></div>
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#"  @click="clickWork_name(endWorkWholeInfoVoList[2].work_id)">
+                                <img class="workcover_leftimg_class" :src="endWorkWholeInfoVoList[2].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#"  @click="clickWork_name(endWorkWholeInfoVoList[2].work_id)"> {{endWorkWholeInfoVoList[2].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{endWorkWholeInfoVoList[2].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(endWorkWholeInfoVoList[2].user_id)">{{endWorkWholeInfoVoList[2].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{endWorkWholeInfoVoList[2].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#"  @click="clickWork_name(endWorkWholeInfoVoList[3].work_id)">
+                                <img class="workcover_leftimg_class" :src="endWorkWholeInfoVoList[3].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#"  @click="clickWork_name(endWorkWholeInfoVoList[3].work_id)"> {{endWorkWholeInfoVoList[3].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{endWorkWholeInfoVoList[3].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(endWorkWholeInfoVoList[3].user_id)"> {{endWorkWholeInfoVoList[3].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{endWorkWholeInfoVoList[3].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_divhr2_class"></div>
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#"  @click="clickWork_name(endWorkWholeInfoVoList[4].work_id)">
+                                <img class="workcover_leftimg_class" :src="endWorkWholeInfoVoList[4].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#"  @click="clickWork_name(endWorkWholeInfoVoList[4].work_id)"> {{endWorkWholeInfoVoList[4].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{endWorkWholeInfoVoList[4].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(endWorkWholeInfoVoList[4].user_id)">{{endWorkWholeInfoVoList[4].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{endWorkWholeInfoVoList[4].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#"  @click="clickWork_name(endWorkWholeInfoVoList[5].work_id)">
+                                <img class="workcover_leftimg_class" :src="endWorkWholeInfoVoList[5].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#"  @click="clickWork_name(endWorkWholeInfoVoList[5].work_id)"> {{endWorkWholeInfoVoList[5].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{endWorkWholeInfoVoList[5].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(endWorkWholeInfoVoList[5].user_id)">{{endWorkWholeInfoVoList[5].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{endWorkWholeInfoVoList[5].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--火热连载-->
+            <div class="differentStateWork_div1_class">
+                <p class="differentStateWork_p_class">火热连载</p>
+                <div class="differentStateWork_divhr_class"></div>
+                <div class="differentStateWork_leftdiv_class">
+
+                    <el-carousel class="differentStateWork_class" :interval="2000"  height="400px" indicator-position="none">
+                        <el-carousel-item v-for="serialWorkWholeInfoVo in serialWorkWholeInfoVoList" :key="serialWorkWholeInfoVo">
+
+                            <div class="differentStateWork_cover_div_class">
+                                <a href="#" @click="clickWork_name(serialWorkWholeInfoVo.work_id)">
+                                    <img class="differentStateWork_cover_class" :src="serialWorkWholeInfoVo.work_cover">
+                                </a>
+                            </div>
+                            <div class="differentStateWork_name_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <a class="differentStateWork_name_p_class" href="#" @click="clickWork_name(serialWorkWholeInfoVo.work_id)">{{serialWorkWholeInfoVo.work_name}}</a>
+                            </div>
+                            <div class="differentStateWork_int_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <p class="differentStateWork_int_p_class">{{serialWorkWholeInfoVo.work_introduct}}</p>
+                            </div>
+                            <div class="differentStateWork_Button_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <el-button class="differentStateWork_button_class" type="danger" round @click="clickWork_name(serialWorkWholeInfoVo.work_id)">书籍详情</el-button>
+                            </div>
+                            <!--                                                                                   <h3 class="medium">{{ item }}</h3>-->
+                        </el-carousel-item>
+                    </el-carousel>
+                </div>
+                <div class="differentStateWork_rightdiv_class">
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#"  @click="clickWork_name(serialWorkWholeInfoVoList[0].work_id)">
+                                <img class="workcover_leftimg_class" :src="serialWorkWholeInfoVoList[0].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(serialWorkWholeInfoVoList[0].work_id)">{{serialWorkWholeInfoVoList[0].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{serialWorkWholeInfoVoList[0].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(serialWorkWholeInfoVoList[0].user_id)">{{serialWorkWholeInfoVoList[0].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{serialWorkWholeInfoVoList[0].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(serialWorkWholeInfoVoList[1].work_id)">
+                                <img class="workcover_leftimg_class" :src="serialWorkWholeInfoVoList[1].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(serialWorkWholeInfoVoList[1].work_id)"> {{serialWorkWholeInfoVoList[1].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{serialWorkWholeInfoVoList[1].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(serialWorkWholeInfoVoList[1].user_id)">{{serialWorkWholeInfoVoList[1].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{serialWorkWholeInfoVoList[1].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_divhr2_class"></div>
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(serialWorkWholeInfoVoList[2].work_id)">
+                                <img class="workcover_leftimg_class" :src="serialWorkWholeInfoVoList[2].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(serialWorkWholeInfoVoList[2].work_id)"> {{serialWorkWholeInfoVoList[2].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{serialWorkWholeInfoVoList[2].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(serialWorkWholeInfoVoList[2].user_id)">{{serialWorkWholeInfoVoList[2].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{serialWorkWholeInfoVoList[2].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(serialWorkWholeInfoVoList[3].work_id)">
+                                <img class="workcover_leftimg_class" :src="serialWorkWholeInfoVoList[3].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(serialWorkWholeInfoVoList[3].work_id)"> {{serialWorkWholeInfoVoList[3].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{serialWorkWholeInfoVoList[3].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(serialWorkWholeInfoVoList[3].user_id)"> {{serialWorkWholeInfoVoList[3].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{serialWorkWholeInfoVoList[3].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_divhr2_class"></div>
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(serialWorkWholeInfoVoList[4].work_id)">
+                                <img class="workcover_leftimg_class" :src="serialWorkWholeInfoVoList[4].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(serialWorkWholeInfoVoList[4].work_id)"> {{serialWorkWholeInfoVoList[4].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{serialWorkWholeInfoVoList[4].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(serialWorkWholeInfoVoList[4].user_id)">{{serialWorkWholeInfoVoList[4].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{serialWorkWholeInfoVoList[4].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(serialWorkWholeInfoVoList[5].work_id)">
+                                <img class="workcover_leftimg_class" :src="serialWorkWholeInfoVoList[5].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(serialWorkWholeInfoVoList[5].work_id)"> {{serialWorkWholeInfoVoList[5].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{serialWorkWholeInfoVoList[5].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(serialWorkWholeInfoVoList[5].user_id)">{{serialWorkWholeInfoVoList[5].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{serialWorkWholeInfoVoList[5].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--最新小说-->
+            <div class="differentStateWork_div1_class">
+                <p class="differentStateWork_p_class">最新小说</p>
+                <div class="differentStateWork_divhr_class"></div>
+                <div class="differentStateWork_leftdiv_class">
+
+                    <el-carousel class="differentStateWork_class" :interval="2000"  height="400px" indicator-position="none">
+                        <el-carousel-item v-for="newWorkWholeInfoVo in newWorkWholeInfoVoList" :key="newWorkWholeInfoVo">
+
+                            <div class="differentStateWork_cover_div_class">
+                                <a href="#" @click="clickWork_name(newWorkWholeInfoVo.work_id)">
+                                    <img class="differentStateWork_cover_class" :src="newWorkWholeInfoVo.work_cover">
+                                </a>
+                            </div>
+                            <div class="differentStateWork_name_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <a class="differentStateWork_name_p_class" href="#" @click="clickWork_name(newWorkWholeInfoVo.work_id)">{{newWorkWholeInfoVo.work_name}}</a>
+                            </div>
+                            <div class="differentStateWork_int_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <p class="differentStateWork_int_p_class">{{newWorkWholeInfoVo.work_introduct}}</p>
+                            </div>
+                            <div class="differentStateWork_Button_div_class">
+                                <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
+                                <el-button class="differentStateWork_button_class" type="danger" round  @click="clickWork_name(newWorkWholeInfoVo.work_id)">书籍详情</el-button>
+                            </div>
+                            <!--                                                                                   <h3 class="medium">{{ item }}</h3>-->
+                        </el-carousel-item>
+                    </el-carousel>
+                </div>
+                <div class="differentStateWork_rightdiv_class">
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(newWorkWholeInfoVoList[0].work_id)">
+                                <img class="workcover_leftimg_class" :src="newWorkWholeInfoVoList[0].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(newWorkWholeInfoVoList[0].work_id)">{{newWorkWholeInfoVoList[0].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{newWorkWholeInfoVoList[0].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[0].user_id)">{{newWorkWholeInfoVoList[0].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[0].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(newWorkWholeInfoVoList[1].work_id)">
+                                <img class="workcover_leftimg_class" :src="newWorkWholeInfoVoList[1].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(newWorkWholeInfoVoList[1].work_id)"> {{newWorkWholeInfoVoList[1].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{newWorkWholeInfoVoList[1].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[1].user_id)">{{newWorkWholeInfoVoList[1].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[1].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_divhr2_class"></div>
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(newWorkWholeInfoVoList[2].work_id)">
+                                <img class="workcover_leftimg_class" :src="newWorkWholeInfoVoList[2].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(newWorkWholeInfoVoList[2].work_id)"> {{newWorkWholeInfoVoList[2].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{newWorkWholeInfoVoList[2].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[2].user_id)">{{newWorkWholeInfoVoList[2].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[2].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(newWorkWholeInfoVoList[3].work_id)">
+                                <img class="workcover_leftimg_class" :src="newWorkWholeInfoVoList[3].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(newWorkWholeInfoVoList[3].work_id)"> {{newWorkWholeInfoVoList[3].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{newWorkWholeInfoVoList[3].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[3].user_id)"> {{newWorkWholeInfoVoList[3].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[3].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_divhr2_class"></div>
+                    <div class="differentStateWork_rightdiv1_1_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(newWorkWholeInfoVoList[4].work_id)">
+                                <img class="workcover_leftimg_class" :src="newWorkWholeInfoVoList[4].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(newWorkWholeInfoVoList[4].work_id)"> {{newWorkWholeInfoVoList[4].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{newWorkWholeInfoVoList[4].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[4].user_id)">{{newWorkWholeInfoVoList[4].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[4].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="differentStateWork_rightdiv1_2_class">
+                        <div class="workcover_leftdiv_class">
+                            <a href="#" @click="clickWork_name(newWorkWholeInfoVoList[5].work_id)">
+                                <img class="workcover_leftimg_class" :src="newWorkWholeInfoVoList[5].work_cover" >
+                            </a>
+                        </div>
+                        <div class="workinfo_rightdiv_class">
+                            <a class="workname_rightp_class" href="#" @click="clickWork_name(newWorkWholeInfoVoList[5].work_id)"> {{newWorkWholeInfoVoList[5].work_name}}</a>
+                            <p class="workintroduct_rightp_class">
+                                {{newWorkWholeInfoVoList[5].work_introduct}}
+                            </p>
+                            <div class="workother_rightdiv_class">
+                                <img class="user_me_img_class" src="../images/authorme-36.png">
+                                <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[5].user_id)">{{newWorkWholeInfoVoList[5].user_name}}</a>
+
+                                <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[5].work_main_label}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
     </div>
+
+
+
+    <div class="userbottom_allhtml_class" id="userbottom_allhtml_id">
+        <div class="userbottom_allhtml1_class">
+            <p class="userbottom_p1_class">毕业设计名称：韶华书屋</p>
+            <p class="userbottom_p2_class">小组人员：</p>
+            <p class="userbottom_p2_class">王洪斌</p>
+            <p class="userbottom_p2_class">郝振威</p>
+            <p class="userbottom_p2_class">耿建强</p>
+        </div>
+
+
+    </div>
+
+
+
 
 
 
@@ -215,6 +1141,7 @@
 <script src="../js/axios.js"></script>
 <script src="../js/userMainInterface.js"></script>
 <script src="../js/userhomepage.js"></script>
+
 
 
 

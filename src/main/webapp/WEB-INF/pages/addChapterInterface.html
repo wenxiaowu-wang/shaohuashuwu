@@ -8,25 +8,22 @@
 </head>
 <body>
 
-<div id="app">
+<div id="addChapter_id">
 
-
-    <div class="addChapterLeftdiv">
-        <div class="work_info">
-
-            <img class="shaohualogo" src="../images/xiaoshuo-32.png">
+    <!--左侧控制栏-->
+    <div class="addChapterLeftdiv_class">
+        <div class="work_info_class">
+            <img class="shaohualogo_class" src="../images/xiaoshuo-32.png">
             <p class="work_name_p_class">{{worksInfo.work_name}}</p>
         </div>
 
         <div class="div-hr-class"></div>
 
         <div class="chapter_charge_div_class">
-
             <p class="chapter_charge_class" id="chapter_charge_p_id">
                 本章性质：
             </p>
-
-            <el-select class="chapter_charge_class" id="chapter_charge_el_id" v-model="chapterInfo.chapter_charge" placeholder="请选择" style="width: 130px" style="height: 10px" size="mini">
+            <el-select class="chapter_charge_class" id="chapter_charge_el_id" v-model="model_label" @change="chapter_chargeChange" placeholder="请选择" style="width: 100px" style="height: 10px" size="mini">
                 <el-option
                         v-for="label in labelList"
                         :key="label"
@@ -42,70 +39,74 @@
 
         <div class="wordnNumber_class">
             <p class="wordnNumber_p_class" id="wordnNumber_class_p_id">
-                本章字数：10000
+                本章字数：{{chapter_contentNum}}
             </p>
         </div>
 
         <div class="div-hr-class"></div>
 
         <div class="allbutton_class">
-            <el-button  size="small" style="width: 80px">清空</el-button>
-            <el-button type="primary" size="small" style="width: 80px" @click="savechapter()">保存</el-button>
+            <el-button  size="small" type="success" style="width: 80px" @click="showcatalogInfo()">作品目录</el-button>
+            <el-button type="primary" size="small" style="width: 80px" @click="savechapter()"
+                       :disabled="ischapter_title==1&&ischapter_content==1&&ischapter_other_word==1 && this.chapterInfo.chapter_charge != 3 ?false:true">
+                保存</el-button>
         </div>
 
-        <!--        <div class="backworkBeach">-->
-        <!--            <el-button class="backworkBeach_button" type="primary" >主要按钮</el-button>-->
-        <!--        </div>-->
+        <el-dialog
+                title="目录"
+                :visible.sync="drawer"
+                width="650px">
+
+            <div class="tip_div_class">您已经创建的章节</div>
+
+            <div class="chpterCatalog_dialog_div_class">
+                <div class="chpterCatalog_div1_class" v-for="catalogInfoVo in catalogInfoVoList">
+                    <div class="chapterCataloginfo_div_class">
+                        <a class="chapterCataloginfo_a_class" >{{catalogInfoVo.chapter_title}}</a>
+                    </div>
+                    <div class="chpterCatalog_charge_div_class" id="chapter_charge_needdiv_id">
+                        <img class="chpterCatalog_charge_img_class"  :style=" {'visibility':( (catalogInfoVo.chapter_charge==1&&catalogInfoVo.subscribe==1)? '':'hidden')}"     :src="(catalogInfoVo.subscribe==1)?'../images/money-32.png':'../images/jinggao-32.png'" >
+                    </div>
+                </div>
+
+            </div>
+
+        </el-dialog>
 
 
     </div>
 
-    <div class="addChapterInfodiv">
-
+    <!--章节内容-->
+    <div class="addChapterInfodiv_class">
+        <!--顶部返回按钮-->
         <div class="addChapterInfoTopdiv_class">
-
-
             <div class="topButtondiv1_class">
-
-
             <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
-
                 <img class="img-class" id="help-img-p2" src="../images/authorworks-32-on.png" @click="writerGradehelp()">
-
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
-
                 <img class="img-class" id="help-img-p" src="../images/authorhelp-32.png" @click="writerGradehelp()">
-
             </el-tooltip>
-
-
-
             </div>
 
+            <!--警告条-->
             <div class="topButtondiv2_class">
                 <p class="warning_p_class" > <img class="warning_img_class" src="../images/jinggao-32.png">请注意：严禁上传任何情色、低俗、涉政等违法违规内容。一旦查实，视情节严重程度全书屏蔽整改起步并取消福利，直至报警处理。</p>
             </div>
-
+            <!--章节和语句-->
             <div class="addChapterInfo_fu_class">
                 <div class="addChapterInfo_zi_class">
-                    <input class="chapter_title_class"  v-model="chapterInfo.chapter_title" placeholder="请输入章节号与章节名。示例”第十章 他叫王洪斌“" >
+                    <input class="chapter_title_class"  id="chapter_title_id" v-model="chapterInfo.chapter_title" @input="getchapter_titleNum()" @propertychange="getchapter_titleNum()" placeholder="请输入章节号与章节名。示例”第十章 他叫洪水茫茫“" >
+                    <p class="chapter_content_num_class" id="chapter_title_Numid">最少1个字：{{chapter_titleNum}}/20</p>
                     <div class="addChapterInfo_hr1_class"></div>
-                    <textarea  class="chapter_content_class"  v-model="chapterInfo.chapter_content"  placeholder="在此输入正文"></textarea>
-                    <p class="chapter_content_num_class">10000/10000</p>
+                    <textarea  class="chapter_content_class" id="chapter_content_id" v-model="chapterInfo.chapter_content" @input="getchapter_contentNum()" @propertychange="getchapter_contentNum()" placeholder="在此输入正文"></textarea>
+                    <p class="chapter_content_num_class" id="chapter_content_Numid">最少1000个字：{{chapter_contentNum}}/12000</p>
                     <div class="addChapterInfo_hr2_class"></div>
-                    <textarea  class="chapter_other_word_class" v-model="chapterInfo.chapter_other_word" placeholder="在此输入给读者的话"></textarea>
-                    <p class="chapter_content_num_class">100/10000</p>
+                    <textarea  class="chapter_other_word_class" id="chapter_other_word_id" v-model="chapterInfo.chapter_other_word" @input="getchapter_other_wordNum()" @propertychange="getchapter_other_wordNum()" placeholder="在此输入给读者的话"></textarea>
+                    <p class="chapter_content_num_class" id="chapter_other_word_Numid">最少0个字： &nbsp; {{chapter_other_wordNum}}/300</p>
                 </div>
             </div>
-
-
-
-
-
         </div>
-
-
     </div>
 </div>
 

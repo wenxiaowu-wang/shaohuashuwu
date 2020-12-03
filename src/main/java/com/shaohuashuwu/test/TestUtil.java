@@ -41,5 +41,11 @@ public class TestUtil {
 //        thisCurrentTime.currentTime();
     }
 
+    @Test
+    public void testCurrentTime2(){
+        System.out.println("获取当前时间"+thisCurrentTime.currentMonthTime());
+//        thisCurrentTime.currentTime();
+    }
+
 
 }

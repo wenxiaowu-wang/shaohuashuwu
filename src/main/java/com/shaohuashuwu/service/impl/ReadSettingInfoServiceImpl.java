@@ -21,35 +21,61 @@ public class ReadSettingInfoServiceImpl implements ReadSettingInfoService {
      * @return
      */
     @Override
-    public ReadSettingInfo selectReadSettinginfo(int user_id) {
+    public ReadSettingInfo getReadSettinginfo(int user_id) {
 
         //1.先判断是否存在
-        int isReadingSetting = readSettingInfoDao.selectIsuserid(user_id);
+        int isReadingSetting = readSettingInfoDao.selectReadSettinginfoNumByuser_id(user_id);
 
         //2.如果存在就获取信息，不存在就进行设置，并保存
         if (isReadingSetting == 0){
             readSettingInfo = new ReadSettingInfo(null,user_id,1,1,24);
-            int insertresult = readSettingInfoDao.insertchapter_info(readSettingInfo);
+            int insertresult = readSettingInfoDao.insertreadSettingInfo(readSettingInfo);
             return readSettingInfo;
         }
         else{
-            readSettingInfo = readSettingInfoDao.selectReadSettinginfo(user_id);
+            readSettingInfo = readSettingInfoDao.selectReadSettinginfoByuser_id(user_id);
             return readSettingInfo;
         }
     }
 
     /**
-     * 修改设置信息
+     * 通过用户id修改设置信息
      * @param readSettingInfo
      * @return
      */
     @Override
     public int updateReadSettingInfoByid(ReadSettingInfo readSettingInfo) {
-
         int updataResult = readSettingInfoDao.updateReadSettingInfoByid(readSettingInfo);
-
         return updataResult;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /***********************以下未修改***************/
+
+
+
+
+
 
 
 }

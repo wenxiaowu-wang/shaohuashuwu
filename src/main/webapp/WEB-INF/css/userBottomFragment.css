@@ -1,0 +1,45 @@
+/*底部信息*/
+.userbottom_allhtml_class{
+    /*margin-top: calc(100vh - 240px);*/
+    /*position:absolute;*/
+    /*top: calc(100vh + 240px);*/
+    margin-left: -10px;
+
+    width: 101%;
+    height: 240px;
+    background: #eeeeee;
+}
+
+.userbottom_allhtml1_class{
+    margin: auto;
+    display:table;
+
+    width: 1410px;
+    height: 240px;
+}
+
+
+.userbottom_p1_class{
+    margin-left: 500px;
+    text-align: center;
+
+
+    display: block;
+    width: 400px;
+    height: 30px;
+    font-size: 25px;
+    color: red;
+    font-weight: bold;
+}
+
+.userbottom_p2_class{
+    margin-left: 500px;
+    margin-top: -5px;
+
+    display: block;
+    width: 400px;
+    height: 30px;
+    font-size: 17px;
+
+    text-align: center;
+}

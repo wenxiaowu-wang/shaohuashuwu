@@ -23,14 +23,15 @@ public class AuthorInfoController {
     private AuthorInfoVo authorInfoVo;
 
     @ResponseBody
-    @RequestMapping("/selectAuthorInfoVo")
-    public AuthorInfoVo selectAuthorInfoVo( HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping("/getAuthorInfoVo")
+    public AuthorInfoVo getAuthorInfoVo( HttpServletRequest request, HttpServletResponse response){
 
-//        System.out.println();
 
-        authorInfoVo = authorInfoVoService.selectAuthorInfoVo(11);
+        HttpSession session = request.getSession();
+        session.setAttribute("user_id",1);
+        Object msg = session.getAttribute("user_id");
+        int user_id=Integer.parseInt(String.valueOf(msg));
 
-        System.out.println("selectAuthorInfoVo测试输出数据"+authorInfoVo);
-        return authorInfoVo;
+        return authorInfoVoService.getAuthorInfoVo(user_id);
     }
 }

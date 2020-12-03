@@ -3,7 +3,6 @@ package com.shaohuashuwu.service.impl;
 import com.shaohuashuwu.dao.ChapterPostInfoDao;
 import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.dao.WorksInfoDao;
-import com.shaohuashuwu.domain.ChapterPostInfo;
 import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.Difvolenum;
@@ -11,14 +10,12 @@ import com.shaohuashuwu.domain.vo.PageInfo;
 import com.shaohuashuwu.domain.vo.UserandWorksInfoVo;
 import com.shaohuashuwu.service.AttentionInfoService;
 import com.shaohuashuwu.service.WorksInfoService;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,50 +32,217 @@ public class WorksInfoServiceImpl implements WorksInfoService {
     public WorksInfoDao worksInfoDao;
     @Autowired
     public ChapterPostInfoDao chapterPostInfoDao;
-
     @Autowired
     public UserInfoDao userInfoDao;
 
+
+
     @Autowired
     public AttentionInfoService attentionInfoService;
-    //    @Autowired
+
+
     private WorksInfo worksInfo;
     private Difvolenum difvolenum;
     private UserInfo userInfo;
 
 
+    /**
+     * 获取分类统计的作品信息
+     * @return 分类作品数量
+     */
     @Override
-    public List<WorksInfo> selectAllworks() {
+    public Difvolenum getdifvolenum() {
 
-        System.out.println("输出全部作品---");
-        return worksInfoDao.selectAllworks();
+        int xuanhuannum = worksInfoDao.selectnumBywork_main_label("玄幻");
+        int qihuannum = worksInfoDao.selectnumBywork_main_label("奇幻");
+        int wuxianum = worksInfoDao.selectnumBywork_main_label("武侠");
+        int xianxianum = worksInfoDao.selectnumBywork_main_label("仙侠");
+        int dushinum = worksInfoDao.selectnumBywork_main_label("都市");
+        int xianshinum = worksInfoDao.selectnumBywork_main_label("现实");
+        int lishinum = worksInfoDao.selectnumBywork_main_label("历史");
+        int junshinum = worksInfoDao.selectnumBywork_main_label("军事");
+        int youxinum = worksInfoDao.selectnumBywork_main_label("游戏");
+        int xuanyinum = worksInfoDao.selectnumBywork_main_label("悬疑");
+        int kehuannum = worksInfoDao.selectnumBywork_main_label("科幻");
+        int tiyunum = worksInfoDao.selectnumBywork_main_label("体育");
+        int qingxiaoshuonum = worksInfoDao.selectnumBywork_main_label("轻小说");
+
+        difvolenum = new Difvolenum(xuanhuannum, qihuannum, wuxianum, xianxianum, dushinum,
+                xianshinum, lishinum, junshinum, youxinum, xuanyinum, kehuannum, tiyunum, qingxiaoshuonum);
+
+        return difvolenum;
+    }
+
+
+    /**
+     * 依据作者名称查询作品名称
+     * @param user_name
+     * @return
+     */
+    public List<WorksInfo> getwork_nameByuser_name(String user_name){
+
+        return worksInfoDao.selectwork_nameByuser_name(user_name);
     }
 
     /**
+     * 模糊查询，依据模糊作品名称查询作品名称
+     * @param worksInfo
+     * @return
+     */
+    @Override
+    public List<WorksInfo> getVaguework_nameBywork_name(WorksInfo worksInfo) {
+        return worksInfoDao.selectVaguework_nameBywork_name(worksInfo);
+    }
+
+
+
+    /**
+     * 根据不同条件查询书籍，sql拼接查询寻
+     * @param pageInfo
+     * @return
+     */
+    @Override
+    public List<WorksInfo> getworksneed(PageInfo pageInfo) {
+        //获取作品当前页，和每页数量
+        int works_page = pageInfo.getWorks_page();
+        int works_page_num = pageInfo.getWorks_page_num();
+        //页面开始作品，页面结束作品
+        int start = (works_page - 1) * works_page_num;
+        int end = start + works_page_num;
+        if (end > worksInfoDao.selectworksneed(pageInfo).size()) {
+            end = worksInfoDao.selectworksneed(pageInfo).size();
+        }
+
+        return worksInfoDao.selectworksneed(pageInfo).subList(start, end);
+    }
+
+    /**
+     * 获取全部作品页面，作品数量
+     * @param pageInfo
+     * @return
+     */
+    @Override
+    public int getworkstotal(PageInfo pageInfo) {
+        //返回作品数量
+        return worksInfoDao.selectworksneed(pageInfo).size();
+    }
+
+
+    /**
      * 依据作品id查询作品信息
-     *
      * @param work_id
      * @return
      */
     @Override
-    public WorksInfo selectworkByid(int work_id) {
-        System.out.println("依据作品id查询作品信息--");
-        System.out.println(worksInfoDao.selectworkByid(work_id));
+    public WorksInfo getworkInfoByWork_id(int work_id) {
+        return worksInfoDao.selectworkInfoByWork_id(work_id);
+    }
 
-        return worksInfoDao.selectworkByid(work_id);
+    /**
+     * 根据作品id获取作者的其他作品信息
+     * @param work_id
+     * @return
+     */
+    @Override
+    public List<WorksInfo> getOtherWorkInfoByWork_id(int work_id) {
+        return worksInfoDao.selectOtherWorkInfoByWork_id(work_id);
+    }
+
+
+    /**
+     * 依据章节id查询作品信息
+     * @param chapter_id
+     * @return
+     */
+    @Override
+    public WorksInfo getworkInfoByChapter_id(int chapter_id) {
+        return chapterPostInfoDao.selectworkInfoByChapter_id(chapter_id);
+    }
+
+
+    /**
+     * 依据用户id查询该用户作品数量
+     * @param user_id
+     * @return
+     */
+    @Override
+    public int getWorksNumByUser_id(int user_id) {
+        return worksInfoDao.selectWorksNumByUser_id(user_id);
+    }
+
+    /**
+     * 根据用户id获取作品信息
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<WorksInfo> getWorksInfoByUser_id(int user_id) {
+
+        return worksInfoDao.selectWorksInfoByUser_id(user_id);
+    }
+
+    /**
+     * 根据作品名称判断作品是否存在
+     * @param work_name
+     * @return
+     */
+    @Override
+    public int isworkname(String work_name) {
+        int num = worksInfoDao.selectWorkbywork_name(work_name);
+        return num;
     }
 
     /**
      * 新建作品
-     *
      * @param worksinfo
      * @return
      */
     @Override
-    public int insertworks_info(WorksInfo worksinfo) {
-        System.out.println("业务层，添加新作品");
+    public int addworksdate(WorksInfo worksinfo,int user_id) {
+
 //      设置作品其他信息
-        worksinfo.setUser_id(1);
+        String work_main_label = worksinfo.getWork_main_label();
+        if(work_main_label.equals("都市")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/dushicover.png");
+        }
+        else if(work_main_label.equals("军事")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/junshicover.png");
+        }
+        else if(work_main_label.equals("科幻")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/kehuancover.png");
+        }
+        else if(work_main_label.equals("历史")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/lishicover.png");
+        }
+        else if(work_main_label.equals("奇幻")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/qihaucover.png");
+        }
+        else if(work_main_label.equals("轻小说")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/qingxiaoshuocover.png");
+        }
+        else if(work_main_label.equals("体育")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/tiyucover.png");
+        }
+        else if(work_main_label.equals("武侠")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/wuxiacover.png");
+        }
+        else if(work_main_label.equals("现实")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xianshicover.png");
+        }
+        else if(work_main_label.equals("仙侠")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xianxiacover.png");
+        }
+        else if(work_main_label.equals("玄幻")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xuanhuancover.png");
+        }
+        else if(work_main_label.equals("悬疑")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xuanyicover.png");
+        }
+        else if(work_main_label.equals("游戏")){
+            worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/youxicover.png");
+        }
+
+        worksinfo.setUser_id(user_id);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
         worksinfo.setWork_create_time(date);
@@ -94,92 +258,78 @@ public class WorksInfoServiceImpl implements WorksInfoService {
         return sureorno;
     }
 
-    @Override
-    public int selectWorkbywork_name(String work_name) {
-
-        int num = worksInfoDao.selectWorkbywork_name(work_name);
-        System.out.println("查询到的行数" + num);
-        return num;
-    }
-
     /**
      * 根据作品id修改作品状态
-     *
      * @return
      */
     @Override
-    public int updateWorkSerialStateByid(WorksInfo worksInfo) {
-        System.out.println("server层查询");
-//
-//        worksInfo.setWork_id(10);
-//        worksInfo.setWork_serial_state(2);
-        int num = worksInfoDao.updateWorkSerialStateByid(worksInfo);
-        System.out.println("server层查询成功");
+    public int updateWorkInfoByworkid(WorksInfo worksInfo) {
+        int num = worksInfoDao.updateWorkInfoByworkid(worksInfo);
         return num;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************以下未完成***********/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
-    public Difvolenum selectdifvolenum() {
+    public List<WorksInfo> selectAllworks() {
 
-        int xuanhuannum = worksInfoDao.selectxuanhuannum();
-        int qihuannum = worksInfoDao.selectqihuannum();
-        int wuxianum = worksInfoDao.selectwuxianum();
-        int xianxianum = worksInfoDao.selectxianxianum();
-        int dushinum = worksInfoDao.selectdushinum();
-        int xianshinum = worksInfoDao.selectxianshinum();
-        int lishinum = worksInfoDao.selectlishinum();
-        int junshinum = worksInfoDao.selectjunshinum();
-        int youxinum = worksInfoDao.selectyouxinum();
-        int xuanyinum = worksInfoDao.selectxuanyinum();
-        int kehuannum = worksInfoDao.selectkehuannum();
-        int tiyunum = worksInfoDao.selecttiyunum();
-        int qingxiaoshuonum = worksInfoDao.selectqingxiaoshuonum();
-
-        difvolenum = new Difvolenum(xuanhuannum, qihuannum, wuxianum, xianxianum, dushinum,
-                xianshinum, lishinum, junshinum, youxinum, xuanyinum, kehuannum, tiyunum, qingxiaoshuonum);
-        System.out.println("不同标签数量---" + difvolenum);
-
-
-        return difvolenum;
+        System.out.println("输出全部作品---");
+        return worksInfoDao.selectAllworks();
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     public int selectxuanhuannum() {
 
-        int num = worksInfoDao.selectxuanhuannum();
+        int num = worksInfoDao.selectnumBywork_main_label("玄幻");
         System.out.println("num---" + num);
         return 0;
     }
 
-    /**
-     * 根据不同条件查询书籍，sql拼接查询寻
-     *
-     * @param pageInfo
-     * @return
-     */
-    @Override
-    public List<WorksInfo> selectworksneed(PageInfo pageInfo) {
-        System.out.println("service查询--");
-        System.out.println(worksInfoDao.selectworksneed(pageInfo));
 
-        int works_page = pageInfo.getWorks_page();
-        int works_page_num = pageInfo.getWorks_page_num();
-        System.out.println("页数" + works_page);
-        System.out.println("每页个数" + works_page_num);
-//        return worksInfoDao.selectworksneed(works_info).subList(1,3);
-        int start = (works_page - 1) * works_page_num;
-        int end = start + works_page_num;
-        if (end > worksInfoDao.selectworksneed(pageInfo).size()) {
-            end = worksInfoDao.selectworksneed(pageInfo).size();
-        }
-//        selectworkstotal(worksInfoDao.selectworksneed(pageInfo).size());
-        return worksInfoDao.selectworksneed(pageInfo).subList(start, end);
-    }
-
-    @Override
-    public int selectworkstotal(PageInfo pageInfo) {
-        return worksInfoDao.selectworksneed(pageInfo).size();
-    }
 
     /**
      * 按关键字搜索小说
@@ -205,28 +355,28 @@ public class WorksInfoServiceImpl implements WorksInfoService {
         }
 
 //        2.再获取作者名称和提供类型相同的数据
-        String user_name = needworksInfo.getWork_name();
-
-        try {
-            userInfo = userInfoDao.selectuserInfoByusername(user_name);
-            needworksInfo.setUser_id(userInfo.getUser_id());
-        }catch (Exception e){
-            System.out.println("异常"+e);
-        }
-
-        if (userInfo == null) {
-            System.out.println("空了");
-        }
-        else {
-            if (worksInfoDao.selectWorkInfobyuser_id(needworksInfo) == null) {
-                System.out.println("空了");
-            }
-            else {
-
-                worksInfoLists.addAll(worksInfoDao.selectWorkInfobyuser_id(needworksInfo));
-
-            }
-        }
+//        String user_name = needworksInfo.getWork_name();
+//
+//        try {
+//            userInfo = userInfoDao.selectuserInfoByusername(user_name);
+//            needworksInfo.setUser_id(userInfo.getUser_id());
+//        }catch (Exception e){
+//            System.out.println("异常"+e);
+//        }
+//
+//        if (userInfo == null) {
+//            System.out.println("空了");
+//        }
+//        else {
+//            if (worksInfoDao.selectWorkInfobyuser_id(needworksInfo) == null) {
+//                System.out.println("空了");
+//            }
+//            else {
+//
+//                worksInfoLists.addAll(worksInfoDao.selectWorkInfobyuser_id(needworksInfo));
+//
+//            }
+//        }
 
 //         3.最后模糊查询获取数据
 //        结果长度大于30就不在显示，少于30就获取
@@ -261,14 +411,7 @@ public class WorksInfoServiceImpl implements WorksInfoService {
         return list;
     }
 
-    //依据章节id查询作品信息
-    @Override
-    public WorksInfo selectworkInfoByChapter_id(int chapter_id) {
 
-        worksInfo = chapterPostInfoDao.selectworkInfoByChapter_id(chapter_id);
-        System.out.println(worksInfo);
-        return worksInfo;
-    }
 
 
 }

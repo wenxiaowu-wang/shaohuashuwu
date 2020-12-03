@@ -68,7 +68,11 @@
     <input type="submit" value="用户主界面">
 
 </form>
+<form  action="account/mangagement" method="post">
 
+    <input type="submit" value="作者作品设置">
+
+</form>
 
 
 <button @click="testgotochatpter(34)" value="用户主界面">11111</button>
@@ -78,7 +82,7 @@
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
-<script src="../js/readNovelInterface.js"></script>
+
 
 
 </html>

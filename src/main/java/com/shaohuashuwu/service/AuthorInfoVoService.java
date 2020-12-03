@@ -5,5 +5,5 @@ import com.shaohuashuwu.domain.vo.AuthorInfoVo;
 public interface AuthorInfoVoService {
 
     //查询作者信息
-    public AuthorInfoVo selectAuthorInfoVo(int user_id);
+    public AuthorInfoVo getAuthorInfoVo(int user_id);
 }

@@ -22,12 +22,214 @@ public class WorksInfoController {
     @Autowired
     private WorksInfoService worksInfoService;
 
-//    @Autowired
     private WorksInfo worksInfo;
+
+    /**
+     * 将关键字搜索信息存入session，跳转后获取搜索的session
+     * @param worksInfodta
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/addSelectInfotoSession")
+    public void addSelectInfotoSession(@RequestBody WorksInfo worksInfodta,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //1.获取前端数据
+        String select_input = worksInfodta.getWork_name();
+        //2.将获取数据存入session
+        HttpSession session = request.getSession();
+        session.setAttribute("selectinput",select_input);
+    }
 
 
     /**
-     * 根据work_id查询作品信息
+     * 获取分类统计的作品信息
+     * @return 分类数量
+     */
+    @ResponseBody
+    @RequestMapping("/getdifvolenum")
+    public Difvolenum getdifvolenum(){
+        Difvolenum difvolenum = worksInfoService.getdifvolenum();
+        return difvolenum;
+    }
+
+
+    /**
+     * 将work_id存入sesssion
+     * @param work_id
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/addWork_idSession")
+    public void addWork_idSession(Integer work_id, HttpServletRequest request, HttpServletResponse response)  {
+        HttpSession session = request.getSession();
+        session.setAttribute("work_id",work_id);
+    }
+
+
+    /**
+     * 获取全部作品页面，作品信息
+     * @param pageInfo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getworksneed")
+    public List<WorksInfo> getworksneed(@RequestBody PageInfo pageInfo) {
+        return  worksInfoService.getworksneed(pageInfo);
+    }
+
+    /**
+     * 获取全部作品页面，作品数量
+     * @param pageInfo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getworkstotal")
+    public int getworkstotal(@RequestBody PageInfo pageInfo) {
+        return  worksInfoService.getworkstotal(pageInfo);
+    }
+
+    /**
+     * 根据作品id获取作品信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getworkInfoByWork_id")
+    public WorksInfo getworkInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("work_id");
+        int work_id=Integer.parseInt(String.valueOf(msg));
+        return worksInfoService.getworkInfoByWork_id(work_id);
+    }
+
+
+    /**
+     * 根据作品id获取作者的其他作品信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getOtherWorkInfoByWork_id")
+    public List<WorksInfo> getOtherWorkInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("work_id");
+        int work_id=Integer.parseInt(String.valueOf(msg));
+        return worksInfoService.getOtherWorkInfoByWork_id(work_id);
+    }
+
+
+    /**
+     *依据章节id查询作品信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getworkInfoByChapter_id")
+    public WorksInfo getworkInfoByChapter_id(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("chapter_id");
+        int chapter_id=Integer.parseInt(String.valueOf(msg));
+
+        return worksInfoService.getworkInfoByChapter_id(chapter_id);
+    }
+
+    /**
+     *依据用户id查询该用户作品数量
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getWorksNumByUser_id")
+    public int getWorksNumByUser_id(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.setAttribute("user_id",1);
+        Object msg = session.getAttribute("user_id");
+        int user_id=Integer.parseInt(String.valueOf(msg));
+
+        return worksInfoService.getWorksNumByUser_id(user_id);
+    }
+
+    /**
+     *根据用户id获取作品信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getWorksInfoByUser_id")
+    public List<WorksInfo> getWorksInfoByUser_id(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.setAttribute("user_id",1);
+        Object msg = session.getAttribute("user_id");
+        int user_id=Integer.parseInt(String.valueOf(msg));
+
+        return worksInfoService.getWorksInfoByUser_id(user_id);
+    }
+
+
+    /**
+     *根据作品名称判断作品是否存在
+     * @param worksInfodata
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/isworkname")
+    public int isworkname(@RequestBody WorksInfo worksInfodata) {
+        String works_name = worksInfodata.getWork_name();
+        int num = worksInfoService.isworkname(works_name);
+        return  num;
+    }
+
+    @ResponseBody
+    @RequestMapping("/addworkInfo")
+    public int addworksdate(@RequestBody WorksInfo worksInfodata,HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        session.setAttribute("user_id",1);
+        Object msg = session.getAttribute("user_id");
+        int user_id=Integer.parseInt(String.valueOf(msg));
+
+
+        int isaddok = worksInfoService.addworksdate(worksInfodata,user_id);
+        return  isaddok;
+    }
+
+
+    /**
+     * 修改作品信息
+     * @param worksInfodata
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateWorkSerialStateByid")
+    public int updateWorkSerialStateByid(@RequestBody WorksInfo worksInfodata) {
+        int num = worksInfoService.updateWorkInfoByworkid(worksInfodata);
+        return  num;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /***********修改未完成功能******************/
+
+    /**
+     * 将work_id存入sesssion
      * @param work_id
      * @param request
      * @param response
@@ -44,85 +246,16 @@ public class WorksInfoController {
 
 
 
-    @ResponseBody
-    @RequestMapping("/selectworkByid")
-    public WorksInfo selectworkByid(HttpServletRequest request, HttpServletResponse response){
-
-        System.out.println("selectworkByid测试输出数据");
-
-
-        HttpSession session = request.getSession();
-
-        Object msg = session.getAttribute("work_id");
-        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session获取----"+a);
-//        session.removeAttribute("work_id");
-//        int b=Integer.parseInt(String.valueOf(msg));
-//        System.out.println("销毁后的session----"+b);
-
-        WorksInfo worksInfoList = worksInfoService.selectworkByid(a);
 
 
 
-//        List<WorksInfo> list = worksInfoService.selectworkByid(a);
-//        System.out.println(list);
-        return worksInfoList;
-    }
 
-    @ResponseBody
-    @RequestMapping(value = "/updateWorkSerialStateByid")
-    public int updateWorkSerialStateByid(@RequestBody WorksInfo worksInfodata) {
 
-        System.out.println("根据id修改作品状态-------------");
-        int num = worksInfoService.updateWorkSerialStateByid(worksInfodata);
-        System.out.println("controller层显示结果:"+num);
-        return  num;
-    }
 
-    @ResponseBody
-    @RequestMapping(value = "/difvolenum")
-    public Difvolenum selectdifvolenum(){
-        Difvolenum difvolenum = worksInfoService.selectdifvolenum();
-        System.out.println("con层---"+difvolenum);
-        return difvolenum;
-    }
 
-    @ResponseBody
-    @RequestMapping(value = "/selectworksneed")
-    public List<WorksInfo> selectworksneed(@RequestBody PageInfo pageInfo) {
 
-        System.out.println("根据id修改作品状态-------------");
-        List<WorksInfo> list = worksInfoService.selectworksneed(pageInfo);
-        System.out.println("controller层显示结果:"+list);
-        return  list;
-    }
 
-    @ResponseBody
-    @RequestMapping(value = "/selectworkstotal")
-    public int selectworkstotal(@RequestBody PageInfo pageInfo) {
 
-        System.out.println("根据id修改作品状态-------------");
-        int total = worksInfoService.selectworkstotal(pageInfo);
-        System.out.println("controller层显示结果:"+total);
-        return  total;
-    }
-
-    @RequestMapping("/selectworkbyinfo")
-    public String selectworkbyinfo(@RequestBody WorksInfo worksInfodta,HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("controller层搜索条件");
-        System.out.println(worksInfodta.getWork_name());
-        String select_input = worksInfodta.getWork_name();
-        System.out.println(select_input);
-        HttpSession session = request.getSession();
-        session.setAttribute("selectinput",select_input);
-
-        Object msg = session.getAttribute("selectinput");
-//        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session自己获取----"+String.valueOf(msg));
-
-        return "keywordSearchResultInterface.html";
-        //response.sendRedirect(request.getContextPath()+"/worksInfoController/selectworkbyinfoResult");
-    }
 
     @ResponseBody
     @RequestMapping("/selectworkbyinfoResult")
@@ -188,7 +321,7 @@ public class WorksInfoController {
         int a=Integer.parseInt(String.valueOf(msg));
         System.out.println("依据章节获取作者信息的章节id："+a);
 
-         worksInfo = worksInfoService.selectworkInfoByChapter_id(a);
+         worksInfo = worksInfoService.getworkInfoByChapter_id(a);
 
 
 

@@ -15,120 +15,147 @@
 <div >
 
 <!--顶部标题栏-->
-<div class="authorMainTopdiv">
-    <ul class="authorMainTopdul">
-        <li id="shaohualog" class="woketopall">
-            <img src="../images/SHAOHUALOGO.png" >
-        </li>
+<div class="authorMainTop_div_class" id="authorMainTop_div_id">
 
-        <li id="authortips" class="woketopall">
-            <p id="authortips-a">欢迎进入作者平台！</p>
-        </li>
-        <li  id="worketbeach"   class="authorMainTopdli" >
-            <img  src="../images/authorworks-32.png" class="woketopall">
-        </li>
-        <li id="workhelp" class="authorMainTopdli">
-            <img  src="../images/authorhelp-32.png" class="woketopall">
-        </li>
-        <li id="workeinfo" class="authorMainTopdli" >
-            <img  src="../images/authorInf-32.png" class="woketopall">
-        </li>
-        <li id="workeme"  class="authorMainTopdli" >
-            <!--            <img id="workeme-img" src="../images/img1.png" class="woketopall">-->
-            <div class="dropdown">
-                <img   class="woketopall" src="../images/authorme-36.png" type="button" id="workeme-img">
-                <div class="dropdown-content" id="workeMe-dropdown">
-                    <a href="//www.runoob.com">点我</a>
-                    <a href="//www.runoob.com">点我</a>
-                    <div style="width:170px;border:1px solid #cccccc;"></div>
-                    <a href="//www.runoob.com">点我</a>
-                </div>
+    <div class="authorMainTopCenter_div_class">
+        <div class="shaohualogo_div_class">
+            <img  class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
+        </div>
+        <div class="authorMainTopUserInfo_div_class">
+            <p class="authorMainTopUserInfo_p_class">欢迎进入作者平台！</p>
+        </div>
+        <div class="authorMainTopButton_div_class">
+            <el-tooltip class="item" effect="dark" content="返回读者平台" placement="top-start">
+
+                <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="writerGradehelp()">
+
+            </el-tooltip>
+        </div>
+        <div class="authorMainTopButton_div2_class">
+            <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
+
+                <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="writerGradehelp()">
+
+            </el-tooltip>
+        </div>
+        <div class="authorMainTopButton_div2_class">
+            <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
+
+                <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
+
+            </el-tooltip>
+        </div>
+        <div class="authorMainTopButton_div3_class">
+
+            <img   class="authorMainTop_button_class" src="../images/authorme-36.png" type="button" id="workeme-img">
+            <div class="authorMainTop_hidediv_class" id="authorMainTop_hidediv_id">
+                <a class="authorMainTop_adiv1_class">用户名：{{authorInfo.user_name}}</a>
+                <a class="authorMainTop_adiv1_class">作品数量：{{worksNum}}</a>
+                <a class="authorMainTop_adiv1_class">可提现金币：{{authorInfo.gold_coin_num}}</a>
+                <div style="width:170px;border:1px solid #cccccc;"></div>
+                <a class="authorMainTop_adiv2_class" id="signOut_id" href="//www.runoob.com">退出</a>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
+
 
 </div>
 
 <!--左部标题栏和主题内容-->
-<div class="authorMain" >
+<div class="authorMain_class" >
 
 
-    <div class="authorMainLeftdiv">
-        <ul class="authorMainLeftdul">
-            <!--        <li class="nulllist">-->
-            <!--            作家专区-->
-            <!--        </li>-->
-            <li  id="worksBean"  class="authorMainLeftdli"  onclick="workeBeanOnclick(this)" >
-                <img src="../images/authorworks-36.png" class="authorMainLeftimg" id="worksBeanimg-id">
-                <h href="#home" class="authorMainLefta" id="worksBeanp-id">工作台</h></li>
+    <div class="authorMainLeft_div_class">
+
+        <ul class="authorMainLeft_ul_class">
+            <li  id="worksBean"  class="authorMainLeft_li_class"   >
+                <img src="../images/authorworks-36.png" class="authorMainLeft_img_class" >
+                <a href="#" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id">工作台</a></li>
             </li>
 
-            <li id="worksMangagement" class="authorMainLeftdli" onclick="worksMangagementOnclick(this)">
-                <img src="../images/authormangagmentNew-32.png" class="authorMainLeftimg"  id="worksMangagementimg-id">
-                <h href="#home" class="authorMainLefta" id="worksMangagementp-id">作品管理</h></li>
+            <li id="worksMangagement" class="authorMainLeft_li_class" >
+                <img src="../images/authormangagmentNew-32.png" class="authorMainLeft_img_class"  >
+                <a href="#" class="authorMainLeft_a_class" id="worksMangagementp_id">作品管理</a></li>
             </li>
-            <li id="workDataStatistics" class="authorMainLeftdli" onclick="workDataStatisticsOnclick(this)">
-                <img src="../images/authordata-32.png" class="authorMainLeftimg"  id="workeDataimg-id" >
-                <h href="#home" class="authorMainLefta" id="workeDatap-id">数据中心</h></li>
+            <li id="workDataStatistics" class="authorMainLeft_li_class" >
+                <img src="../images/authordata-32.png" class="authorMainLeft_img_class"  >
+                <a href="#" class="authorMainLeft_a_class" id="workeDatap-id">数据中心</a></li>
 
             </li>
-            <li id="remuneration"  class="authorMainLeftdli" onclick="remunerationOnclick(this)">
-                <img src="../images/authorremunration-32.png" class="authorMainLeftimg" id="renmunerationimg-id">
-                <h href="#home" class="authorMainLefta" id="renmunerationp-id">稿酬收入</h></li>
+            <li id="remuneration"  class="authorMainLeft_li_class" >
+                <img src="../images/authorremunration-32.png" class="authorMainLeft_img_class" >
+                <a href="#" class="authorMainLeft_a_class" id="renmunerationp-id">稿酬收入</a></li>
 
             </li>
-            <li id="interactionManagement"  class="authorMainLeftdli" onclick="interactionManagementOnclick(this)">
-                <img src="../images/authorinteraction-32.png" class="authorMainLeftimg"  id="interactionManagementimg-id">
-                <h href="#home" class="authorMainLefta" id="interactionManagementp-id">互动管理</h></li>
+            <li id="interactionManagement"  class="authorMainLeft_li_class">
+                <img src="../images/authorinteraction-32.png" class="authorMainLeft_img_class" >
+                <a href="#" class="authorMainLeft_a_class" id="interactionManagementp-id">互动管理</a></li>
             </li>
-            </li>
+
         </ul>
 
 
     </div>
 
 <!--    主要内容-->
-    <div id="app">
-        <div id="myselfInfo">
-            <p id = "myselfInfo-p-id">个人中心</p>
-            <hr id="myselfInfo-hr-id">
+    <div id="worksBeanch_id">
+        <div id="myselfInfo_id">
+            <div class="top_div_class">
+                <p id = "myselfInfo_p_id">个人中心</p>
+                <img class="img_class" src="../images/authorme-36.png">
+                <a id = "addworkInfo_id" href="#">新建作品</a>
+            </div>
 
-            <div class="one-div-class">
-            <img  class="head_portrait-class" id="head_portrait-id" :src="authorInfo.head_portrait">
+            <div class="divhr_class"></div>
 
-            <p class="user_name-class" id="user_name-id">{{authorInfo.user_name}}</p>
-            <p class="writer-Grade-class" id="writer-Grade-id">普通作家</p>
+            <div class="one_div_class">
+            <img  class="head_portrait_class"  :src="authorInfo.head_portrait">
+
+            <p class="user_name_class" >{{authorInfo.user_name}}</p>
+            <p class="writer_Grade_class">普通作家</p>
 
 
             <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
 
-                <img class="writer-Grade-img-class" id="writer-Grade-img-p" src="../images/authorhelp-32.png" @click="writerGradehelp()">
+                <img class="writer_Grade_img_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
 
             </el-tooltip>
 
-                <div class="work_word_num-div-class">
-                    <p class="output_num-class"> {{authorInfo.allwork_word_num}}</p>
-                    <p class="workInfoStatistics-class">累积字数</p>
+                <div class="work_word_num_div_class">
+                    <p class="output_num_class"> {{authorInfo.allwork_word_num}}</p>
+                    <p class="workInfoStatistics_class">累积字数</p>
                 </div>
-                <div class="work_vote_num-class">
-                    <p class="output_num-class">{{authorInfo.attention_num}}</p>
-                    <p class="workInfoStatistics-class">累积粉丝</p>
+                <div class="work_vote_num_class">
+                    <p class="output_num_class">{{authorInfo.attention_num}}</p>
+                    <p class="workInfoStatistics_class">累积粉丝</p>
                 </div>
 
             </div>
 
-<!--            <hr id="myselfInfo-hr-id">-->
-            <div class="two-div-class">
-<!--                <div>-->
-<!--                    <p class="work_word_num-class">100</p>-->
-<!--                    <p class="workInfoStatistics-class">累积字数：</p>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <p class="work_vote_num-class">100</p>-->
-<!--                    <p class="workInfoStatistics-class">累积粉丝：</p>-->
-<!--                </div>-->
-<!--                <p class="workInfoStatistics-class">累积字数：</p>-->
-<!--                <p class="workInfoStatistics-class">累积粉丝：</p>-->
+            <div class="otherworkInfo_div_class">
+                <div class="workintro_div_class">
+                    <p class="workintro_p_class">作品信息</p>
+                    <div class="workInfotro_divhr_class">
+
+                    </div>
+                </div>
+                <div class="workInfo_div_class" v-for="workinfo in worksInfoList">
+                    <div class="workInfo_imgdiv_class">
+                        <img class="workInfo_img_class" :src="workinfo.work_cover">
+                    </div>
+                    <div class="workInfo_otherdiv_class">
+                        <p class="workInfo_p_class">{{workinfo.work_name}}</p>
+                        <p class="workInfo_p2_class">{{workinfo.work_main_label}} | {{workinfo.work_vice_label}} | {{workinfo.work_serial_state}}</p>
+                        <p class="workInfo_p2left_class">作品字数：{{workinfo.work_word_num}}</p>
+                        <p class="workInfo_p2left_class">打赏数：{{workinfo.work_tip_num}}</p>
+                        <p class="workInfo_p2left_class">订阅数：{{workinfo.work_subscribe_num}}</p>
+                        <p class="workInfo_p2left_class">推荐票数：{{workinfo.work_vote_num}}</p>
+                        <p class="workInfo_p2_class">创建时间: {{workinfo.work_create_time}}</p>
+                    </div>
+
+                </div>
+
+                <div class="warning_div_class"></div>
             </div>
 
         </div>
@@ -150,8 +177,8 @@
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
-
 <script src="../js/workbeanchInterface.js"></script>
+<script src="../js/workbeanchTopFragment.js"></script>
 
 
 </html>

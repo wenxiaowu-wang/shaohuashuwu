@@ -5,7 +5,7 @@
     top:0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 99;
     /*样式*/
     height: 32px;
     background: #524d4d;
@@ -24,7 +24,7 @@
 .workclassification_class{
     width: 184px;
     height: auto;
-    background: #13ce66;
+    /*background: #13ce66;*/
 
     float: left;
 }
@@ -42,7 +42,6 @@
 .dierhang{
     margin: auto;
     display:table;
-
     width: 1070px;
 }
 
@@ -54,6 +53,7 @@
     top:32px;
 
     width: 1070px;
+
 }
 
 .userInfo-p-class{
@@ -61,12 +61,19 @@
     color: #999999;
     /*去掉链接下划线*/
     text-decoration:none;
+    z-index: 99;
 }
-
+/*获得焦点时样式变红*/
+#username-p-id:hover {
+    color: #ff0000
+}
 #userout-p-id{
     margin-left: 130px;
 }
-
+/*获得焦点时样式变红*/
+#userout-p-id:hover{
+    color: #ff0000
+}
 #haveuser-p-id{
     margin-left: 150px;
 }

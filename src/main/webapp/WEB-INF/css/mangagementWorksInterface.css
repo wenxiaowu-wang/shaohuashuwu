@@ -1,43 +1,47 @@
-/*主题内容*/
-#app{
-    /*height: calc(100vh);*/
+
+#worksMangagementp_id{
+    color: #8cc5ff;
+}
+#worksMangagementp_id:hover{
+    color: red;
 
 }
 
-#mangagenmentWorksInfo{
+/*主题内容*/
+#app{
 
-    background: #ffffff;
-    width: 875px;
+}
 
-    /*height: calc(100vh);*/
-    min-height: calc(100vh);
-
+#mangagenmentWorksInfo_id{
     margin-left: 20px;
     margin-top: 100px;
     margin-bottom: 30px;
-    float: left;
 
+    background: #ffffff;
+    width: 875px;
+    min-height: calc(100vh);
     /*!*j渐变色阴影*!*/
     box-shadow: 5px 5px 10px #b2d1d4;
-
     /*设置为圆角*/
     border-radius:5px 5px 5px 5px;
+
+    float: left;
 }
 
-#mangemnetWork{
+#mangemnetWork_id{
     margin-left: 10px;
     margin-top: 10px;
-    /*font-size: 10px;*/
+
     font-weight: bold;
     font-size: 15px;
     color: #494949;
 }
 
-#mangemnetWorkhr{
-    width: 700px;
+#mangemnetWorkhr_id{
     margin-left: 10px;
-    color: #f3f3f3;
 
+    width: 700px;
+    color: #f3f3f3;
 }
 
 
@@ -45,29 +49,27 @@
 /*************************************
 展示作品
 **************************************/
-.showworkInfo-ul{
+.showworkInfo_ul_class{
     /*li去掉前面的点*/
     list-style-type: none;
     white-space: nowrap;
 }
 
-.showworkInfo-li{
+.showworkInfo_li_class{
     white-space: nowrap;
-
 }
 
-.showworkInfoTips{
+.showworkInfoTips_class{
+    margin-left: 300px;
 
     /*显示在同一行*/
     display: inline;
-    margin-left: 300px;
     /*padding-top: 1000px;*/
     font-size: 20px;
     color: #868686;
 
 }
-.showworkInfo{
-    /*float: left;*/
+.showworkInfo_class{
     display: inline;
     font-size: 20px;
     margin-left: 20px;

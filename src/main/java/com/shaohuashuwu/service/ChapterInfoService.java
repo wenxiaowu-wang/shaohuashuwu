@@ -17,11 +17,38 @@ import java.util.List;
  */
 public interface ChapterInfoService {
 
-    //保存章节信息
-    public int insertchapter_info(ChapterInfo chapterInfo, int work_id);
 
-    //    依据chapter_id查询
-    public ChapterInfo selectchapterInfoByChapter_id(int chapter_id);
+
+    //根据作品id查询最新章节信息
+    public ChapterInfo getnewChapterInfoByword_id(int work_id);
+
+    //依据chapter_id查询章节信息
+    public ChapterInfo getchapterInfoByChapter_id(int chapter_id);
+
+
+    //保存章节信息
+    public int addchapter_info(ChapterInfo chapterInfo, int work_id,int user_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*****************以下未修改*********************/
+
+
+
 
 
 
@@ -33,4 +60,6 @@ public interface ChapterInfoService {
     //依据pid查询章节信息
 
     public ChapterInfo selectchapterInfoByChapter_pid(int chapter_pid);
+
+
 }

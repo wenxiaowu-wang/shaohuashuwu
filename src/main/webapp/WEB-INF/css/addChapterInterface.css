@@ -1,50 +1,44 @@
-
 /*顶部栏*/
-.addChapterLeftdiv{
-    height: 100%;
-    width: 255px;
+.addChapterLeftdiv_class{
     position: fixed;
     top:0;
     left: 0;
     right: 0;
     z-index: 1;
 
+    height: 100%;
+    width: 255px;
     /*y阴影*/
     /*box-shadow: 0px 5px 10px #b2d1d4;*/
     background: #ffffff;
-
     border:1px solid #dddddd;
     border-top: none;
-    /*float: left;*/
 }
 
-
-
 /*作品信息*/
-.work_info{
+.work_info_class{
     width: 100%;
     height: 50px;
     background: #ffffff;
-    /*padding-top: 1px;*/
 }
 
-.shaohualogo{
-    height: 18px;
-    width: 18px;
-    float: left;
-    /*margin-top: 2px;*/
+.shaohualogo_class{
     position: relative;
     top:20px;
+
+    height: 18px;
+    width: 18px;
+
+    float: left;
 }
 .work_name_p_class{
     float: left;
     margin-left: 20px;
-    /*!*margin-top: 30px;*!*/
+
     font-size: 16px;
     width: 200px;
     height: 25px;
-    /*background: #13ce66;*/
-    /*white-space: nowrap;*/
+
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -53,12 +47,15 @@
     width: 100%;
     height: 50px;
     background: #ffffff;
-    /*padding-top: 1px;*/
-    /*float: left;*/
 }
 
 .chapter_charge_class{
     margin-top: 5px;
+
+    display: block;
+    width: 80px;
+    background: red;
+
     float: left;
 }
 
@@ -66,6 +63,7 @@
     position: relative;
     top:5px;
     margin-left: 20px;
+
     font-size: 15px;
     color: #8d8d8d;
 }
@@ -81,21 +79,20 @@
 }
 
 .wordnNumber_class{
-    /*position: relative;*/
-    /*top:5px;*/
     margin-left: 20px;
+
     font-size: 15px;
     color: #8d8d8d;
 }
 
 /*按钮*/
 .allbutton_class{
+    margin-left: 20px;
+    margin-top: 20px;
+
     width: 80%;
     height: 40px;
     background: #ffffff;
-
-    margin-left: 20px;
-    margin-top: 20px;
 }
 
 
@@ -107,116 +104,107 @@
 
 
 
+
 /*主要内容*/
-.addChapterInfodiv{
-    /*height: ;*/
-    min-height: calc(100vh);
+.addChapterInfodiv_class{
     position: fixed;
     top:0;
     left: 0;
     right: 0;
+
+    min-height: calc(100vh);
     width: 100%;
-    /*float: left;*/
     background: #f5f5f5;
 }
 
 
 .addChapterInfoTopdiv_class{
+    padding-top: 10px;
+
     height: 40px;
     width: 100%;
     background: #ffffff;
-    padding-top: 10px;
 }
 
 .topButtondiv1_class{
     margin-left: 90%;
-
 }
 
 .img-class{
     margin-left: 20px;
+
     height: 24px;
     width: 24px;
 }
 
-
+/*警告条*/
 .topButtondiv2_class{
+    padding-top: 10px;
+
     height: 25px;
     width: 100%;
     background: #fff0f0;
-    padding-top: 10px;
 }
 
 .warning_p_class{
-    color: red;
     position: relative;
     top:-15px;
     left: 40%;
-    font-size: 13px;
 
+    color: red;
+    font-size: 13px;
 }
 
 .warning_img_class{
+    margin-right: 10px;
+
     width: 15px;
     height: 15px;
-    margin-right: 10px;
-    /*margin-top: px;*/
 }
 
 
 /*章节正文内容*/
 .addChapterInfo_fu_class{
+    margin:auto;
+    display:table;
 
     width: 1200px;
     min-height: calc(100vh - 100px);
-    /*background: #3a8ee6;*/
-
-    margin:auto;
-    display:table;
-    /*margin-top: 50px;*/
-    /*margin-left: 500px;*/
-
-    /*position: fixed;*/
-    /*left: 100px;*/
-    /*right: 0;*/
 }
 
 .addChapterInfo_zi_class{
     margin-top: 20px;
     margin-left: 340px;
+
     background: #ffffff;
     width: 790px;
     /*设置输入框div高度*/
     min-height: calc(100vh - 120px);
-    /*height: 98%;*/
-    /*position: fixed;*/
-    /*top: -100px;*/
     box-shadow:  0px 0px 5px 5px #d0d0d0;
 }
 
 .chapter_title_class{
     margin-top: 10px;
     margin-left: 2%;
+
     width: 96%;
-    /*outline: none;*/
-    /*输出框去掉边框*/
     border:0;
     font-size: 25px;
-    /*cursor: pointer;*/
-    /*color: red;*/
 }
 
 .addChapterInfo_hr1_class{
-    height: 1px;
-    width: 96%;
     margin-left: 2%;
     margin-top: 10px;
+
+    height: 1px;
+    width: 96%;
     background: #eeeeee;
 }
 
 .chapter_content_class{
     margin-left: 2%;
     margin-top: 10px;
+
     width: 96%;
     height: 200px;
     /*设置输入框div高度*/
@@ -226,22 +214,22 @@
     /*!*输出框去掉边框*!*/
     border:0;
     font-size: 16px;
-
 }
 
 .addChapterInfo_hr2_class{
-    height: 1px;
-    width: 96%;
     margin-left: 2%;
     margin-top: 10px;
+
+    height: 1px;
+    width: 96%;
     background: #eeeeee;
 }
 
 .chapter_other_word_class{
     margin-left: 2%;
     margin-top: 10px;
-    width: 96%;
 
+    width: 96%;
     /*设置输入框div高度*/
     height: 50px;
     /*边框不能调整大小*/
@@ -253,6 +241,74 @@
 
 
 .chapter_content_num_class{
-    margin-left: 87%;
+    margin-left: 77%;
+
     font-size: 12px;
 }
+
+
+/*目录按钮弹框中设置*/
+
+/*提示文字*/
+.tip_div_class{
+    width: 100%;
+    height: 40px;
+}
+
+.chpterCatalog_dialog_div_class{
+    width: 100%;
+    max-height: 600px;
+    overflow-y:auto;
+}
+
+.chpterCatalog_div1_class{
+    width: 100%;
+    height: auto;
+}
+
+.chapterCataloginfo_div_class{
+    width: 90%;
+    height: 30px;
+
+    float: left;
+}
+
+.chapterCataloginfo_a_class{
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+}
+
+.chpterCatalog_charge_div_class{
+    width:10% ;
+    height: 30px;
+
+    float: left;
+}
+
+.chpterCatalog_charge_img_class{
+    width: 20px;
+    height: 20px;
+
+    float: left;
+}
+
+/*优化滚动条*/
+.chpterCatalog_dialog_div_class::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chpterCatalog_dialog_div_class::-webkit-scrollbar-track {
+    background-color: #f6f6f6;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+
+.chpterCatalog_dialog_div_class::-webkit-scrollbar-thumb {
+    background-color: #cbcbcb;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+

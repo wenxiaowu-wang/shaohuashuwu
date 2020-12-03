@@ -7,39 +7,39 @@
     <link rel="stylesheet" href="../css/novelDetailsInterface.css">
 </head>
 <body>
-    <div id="app">
-        <div class="detailstopNavigation-div-class">
-            <ul class="detailstopNavigation-ul-class">
+    <div id="novelDetailsInterface_id">
+        <div class="detailstopNavigation_div_class">
+            <ul class="detailstopNavigation_ul_class">
                 <li class="detailstopNavigation-li-class">
 
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >首页</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >首页</el-button>
 
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >玄幻</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >玄幻</el-button>
                 </li>
 
                 <li>
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >都市</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >都市</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >仙侠</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >仙侠</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >奇幻</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >奇幻</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >武侠</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >武侠</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation-button-class" type="danger"  size="mini"   >排行</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >排行</el-button>
                 </li>
                 
                 <li>
-                    <el-button class="detailstopNavigation-button-class" id="user_name_id" type="danger"  size="mini"  style="width: 200px"  >书友20202002020200123456789123456</el-button>
+                    <el-button class="detailstopNavigation_button_class" id="user_name_id" type="danger"  size="mini"  style="width: 200px"  >书友~{{userInfo.user_name}}，您好</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation-button-class" id="shujia_id" type="danger"  size="mini"  style="width: 100px"  >
+                    <el-button class="detailstopNavigation_button_class" id="shujia_id" type="danger"  size="mini"  style="width: 100px"  >
                         <img class="shaohualogo" src="../images/xiaoshuo-32.png" >
                         <p class="work_name_p_class">书架</p>
                     </el-button>
@@ -48,14 +48,15 @@
             </ul>
 
         </div>
-        
+        <!--显示横幅内容-->
         <div class="banner_div_class"> 
-        <img class="banner_img_class" src="../images/qihuan.png">
+        <img class="banner_img_class" :src="showbackgroundInfo">
         </div>
-
+        <!--主要内容-->
         <div class="mainInfo_div_class">
             <div class="mainInfo_div2_class">
 
+                <!--模块1，书籍信息不动模块-->
                 <div class="workinfo1_div_class">
                     <div class="work_cover_div_class">
                     <img class="work_cover_class" :src="worksInfo.work_cover">
@@ -63,7 +64,7 @@
                     <div class="workInfo_right_class">
                         <div class="one_line_class">
                         <h1 class="work_name_h_class">{{worksInfo.work_name}}</h1>
-                        <p class="user_name_p_class">{{worksInfo.user_id}}   &nbsp 著</p>
+                        <a class="user_name_p_class" href="#">{{authorInfo.user_name}}   &nbsp 著</a>
                         </div>
                         <div class="div_line_class">
                             <el-tag  class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_main_label}}</el-tag>
@@ -71,34 +72,25 @@
                             <el-tag  class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_serial_state}}</el-tag>
                         </div>
                         <div class="div_line_class">
-                            <h class="label_h_class">魔兽践踏，巨龙咆哮，巫师诅咒，魔法璀璨之光照耀知识灯塔！
-                            </h>
+                            <h class="label_h_class">{{typedescribeInfo}}</h>
 
                         </div>
                         <div class="div_line_class">
-                            <h class="num_label_p_class">{{worksInfo.work_word_num}}字</h>
+                            <h class="num_label_p_class">{{worksInfo.work_word_num}} 字</h>
                             <h class="num_label_p_class">|</h>
-                            <h class="num_label_p_class">{{worksInfo.work_vote_num}}推荐</h>
-<!--                            <h class="num_label_p_class">|</h>-->
+                            <h class="num_label_p_class">{{worksInfo.work_vote_num}} 推荐</h>
                         </div>
                         <div class="div_line_class">
-
                             <el-button class="workinfo1_div_button_class" type="danger" plain @click="gotoreadNovelInterface()">开始阅读</el-button>
-
                             <el-button plain>添加书架</el-button>
                             <el-button plain>投推荐票</el-button>
-
+                            <el-button plain>书籍评论</el-button>
                         </div>
                     </div>
-
                 </div>
 
-<!--                <div class="hr_class">-->
-
-<!--                </div>-->
-
+                <!--第二部分-->
                 <div class="workinfo2_div_class">
-
                     <div class="workinfo2_leftdiv_class">
 
                         <el-menu
@@ -112,10 +104,9 @@
                         </el-menu>
                             <div id="work_info_hid_class">
                                 <div class="workinfo2_leftdiv1_class">
-    <!--                            <textarea readonly class="work_introduct_class" v-model="jieshao"></textarea>-->
-    <!--                                <div class="work_introduct_div_class">-->
-                                            <a class="work_introduct_class" >{{worksInfo.work_introduct}}</a>
-        <!--                                </div>-->
+                                            <a class="work_introduct_class" >
+
+                                                {{worksInfo.work_introduct}}</a>
                                     <div class="hr_class"></div>
 
                                     <a class="label_custom_class" >作者自定义标签</a>
@@ -125,34 +116,35 @@
                                     <div class="hr_class"></div>
 
                                     <div class="newchapter_div_info">
-
-
                                         <a class="newchapter_info">最新章节</a>
-                                        <a class="newchapter1_info"> 第四章 呜呜呜</a>
+                                        <a class="newchapter1_info" href="#" @click="gotoneedchapter(newChapterInfoVo.chapter_id)" >{{newChapterInfoVo.chapter_title}}</a>
                                     </div>
                                     <div class="hr_class"></div>
                                     <div class="chapter_div_info">
                                         <a class="thischapter_info">本书目录</a>
-                                        <a class="allchapter_info_class"  v-for="catalogInfoVo in catalogInfoVoList" href="#">{{catalogInfoVo.chapter_title}}</a>
+                                        <div class="chpterCatalog_div1_class" v-for="catalogInfoVo in catalogInfoVoList">
+                                            <div class="chapterCataloginfo_div_class">
+                                                <a class="chapterCataloginfo_a_class" href="#" @click="gotoneedchapter(catalogInfoVo.chapter_id)">{{catalogInfoVo.chapter_title}}</a>
+                                            </div>
+                                            <div class="chapter_charge_div_class" id="chapter_charge_needdiv_id">
+                                                <img class="chapter_charge_img_class"  :style=" {'visibility':( catalogInfoVo.chapter_charge==1 ? '':'hidden')}"     :src="catalogInfoVo.subscribe ?'../images/kaisuo-32.png':'../images/suo-32.png'" >
+                                            </div>
+
+                                        </div>
 
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                     </div>
 
-
+                    <!--右侧作者信息-->
                     <div class="workinfo2_rightdiv_class">
-
                         <div class="head_portrait_div_class">
-                            <img class="head_portrait_class" src="../images/tset-1-work.jpg">
+                            <img class="head_portrait_class" :src="authorInfo.head_portrait">
                         </div>
 
                         <div class="user_name_div_class">
-                            <a class="user_name_class" >老鹰吃小鸡</a>
+                            <a class="user_name_class" >{{authorInfo.user_name}}</a>
                         </div>
 
                         <div class="workinfo2_hr_class"></div>
@@ -160,10 +152,16 @@
                         <div class="user_info_class">
                             <div class="user1_info_class">
                                 <div class="user1_info1_class">
-                                    <img class="user1_info1_img_class" src="../images/shujia-16.png">
+                                    <div class="user1_info2_class">
+
+                                        <img class="user1_info1_img_class" src="../images/shujinum-32.png">
+                                    </div>
                                 </div>
                                 <div class="user1_info1_class">
-                                    <img class="user1_info1_img_class" src="../images/shujia-16.png">
+                                    <div class="user1_info3_class">
+
+                                        <img class="user1_info1_img_class" src="../images/leijizishu-128.png">
+                                    </div>
                                 </div>
                             </div>
                             <div class="user2_info_class">
@@ -176,44 +174,39 @@
                             </div>
                             <div class="user2_info_class">
                                 <div class="user2_info2_class">
-                                    <p class="user2_info2_p_class">3</p>
+                                    <p class="user2_info2_p_class">{{otherWorkNum}}</p>
                                 </div>
                                 <div class="user2_info2_class">
-                                    <p class="user2_info2_p_class">13111.11万字</p>
+                                    <p class="user2_info2_p_class">{{otherWorkwork_word_num}}字</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="workinfo2_hr_class"></div>
-
+                        <!--其他作品-->
                         <div class="userwork_info_class">
                             <div class="morework_class">
                                 <p class="other_work_class">其他作品</p>
-                                <a class="more_work_class" href="shaohua">更多></a>
+                                <a class="more_work_class" href="#">更多></a>
                             </div>
+                            <!--更多作品-->
                             <div class="moreworklunbo_class">
-
-
-                                <el-carousel class="carousel_class" :interval="4000"  height="300px" indicator-position="none">
-                                    <el-carousel-item v-for="item in 5" :key="item">
+                                <el-carousel class="carousel_class" :interval="2000"  height="300px" indicator-position="none">
+                                    <el-carousel-item v-for="authorOtherWorksInfo in authorOtherWorksInfoList" :key="authorOtherWorksInfo">
                                         <div class="otherwork_cover_div_class">
-                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">
+                                            <img class="otherwork_cover_class" :src="authorOtherWorksInfo.work_cover">
                                         </div>
                                         <div class="othername_div_class">
-<!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
-                                            <p class="othername_p_class">张三丰异界行</p>
+                                            <p class="othername_p_class">{{authorOtherWorksInfo.work_name}}</p>
                                         </div>
                                         <div class="otherint_div_class">
-                                            <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
-                                            <p class="otherint_p_class">张三丰哈哈哈哈哈哈哈沙河异界行张三丰哈哈哈哈哈哈哈沙河异界行张三丰哈哈哈哈哈哈哈沙河异界行张三丰哈哈哈哈哈哈哈沙河异界行张三丰哈哈哈哈哈哈哈沙河异界行张三丰哈哈哈哈哈哈哈沙河异界行</p>
+                                            <p class="otherint_p_class">{{authorOtherWorksInfo.work_introduct}}</p>
                                         </div>
 
                                         <div class="otherButton_div_class">
-                                            <!--                                            <img class="otherwork_cover_class" src="../images/tset-1-work.jpg">-->
-                                            <el-button class="other_button_class" type="danger" round >加入书架</el-button>
+                                            <el-button class="other_button_class" type="danger" round >查看详情</el-button>
                                         </div>
 
-<!--                                        <h3 class="medium">{{ item }}</h3>-->
                                     </el-carousel-item>
                                 </el-carousel>
                             </div>

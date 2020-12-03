@@ -14,7 +14,6 @@ new Vue({
             recommendInfoVoList:[],
             collectionInfoVoList:[],
             subscribeInfoVoList:[],
-
             rewardInfoVoList:[],
 
 

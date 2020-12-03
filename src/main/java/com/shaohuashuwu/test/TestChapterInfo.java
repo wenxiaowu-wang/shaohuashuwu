@@ -26,7 +26,7 @@ public class TestChapterInfo {
     @Test
     public void TestChapterInfoService(){
         chapterInfo = new ChapterInfo(null,null,"东方龙",null,null,null,null,null,null);
-        chapterInfoService.insertchapter_info(chapterInfo,76);
+        chapterInfoService.addchapter_info(chapterInfo,75,1);
     }
 
     @Test
@@ -40,6 +40,11 @@ public class TestChapterInfo {
     @Test
     public  void Testselectchaptercatalog() throws Exception {
         System.out.println(chapterInfoService.selectchaptercatalog(1,34));
+    }
+
+    @Test
+    public void tset1(){
+        System.out.println("----"+chapterInfoService.getchapterInfoByChapter_id(34));
     }
 
 

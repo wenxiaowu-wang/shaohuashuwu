@@ -21,7 +21,7 @@ public class TestRankingInfoVo {
     @Test
     public void testSelectListInfo(){
 
-        rankingInputInfoVo = new RankingInputInfoVo(null,2,null);
-        rankingInfoVoService.selectListInfo(rankingInputInfoVo);
+        rankingInputInfoVo = new RankingInputInfoVo(null,3,"1");
+        System.out.println("显示结果"+rankingInfoVoService.getRankingListInfo(rankingInputInfoVo));
     }
 }

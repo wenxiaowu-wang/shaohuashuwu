@@ -1,141 +1,268 @@
-#myselfInfo{
 
-    background: #ffffff;
-    width: 875px;
+#authorMainLeft_worksBeanp_id{
+    color: #409EFF;
+}
 
-    height: calc(100vh);
+#authorMainLeft_worksBeanp_id:hover{
+     color: #ff0000;
+ }
+
+#myselfInfo_id{
     margin-left: 20px;
     margin-top: 100px;
     margin-bottom: 30px;
-    float: left;
 
+    background: #ffffff;
+    width: 875px;
+    height: auto;
+    min-height: calc(100vh);
     /*/*j渐变色阴影*/
     box-shadow: 5px 5px 10px #b2d1d4;
-
     /*设置为圆角*/
     border-radius:5px 5px 5px 5px;
+
+    float: left;
 }
 
+.top_div_class{
+    width: 100%;
+    height: 40px;
 
-#myselfInfo-p-id{
+}
+
+#myselfInfo_p_id{
     margin-left: 10px;
     margin-top: 10px;
-    /*font-size: 10px;*/
+
+    display: block;
+    width: 100px;
+    height: 10px;
     font-weight: bold;
     font-size: 15px;
     color: #494949;
+    float: left;
 }
 
-#myselfInfo-hr-id{
-    width: 700px;
+.img_class{
+    margin-left: 610px;
+    margin-top: 10px;
+
+    width: 25px;
+    height: 25px;
+    float: left;
+}
+
+#addworkInfo_id{
     margin-left: 10px;
-    color: #f3f3f3;
+    margin-top: 10px;
+
+    display: block;
+    width: 100px;
+    height: 30px;
+    color: #0084fd;
+    font-weight: bold;
+    font-size: 17px;
+    text-decoration:none;
+
+    float: left;
+}
+
+#addworkInfo_id:hover{
+    color: red;
+}
+
+.divhr_class{
+    margin-left: 10px;
+
+    height: 1px;
+    width: 830px;
+    background: #656565;
 }
 
 
 /*个人信息*/
 
-.one-div-class{
+.one_div_class{
     width: 100%;
     height: 100px;
 }
-.head_portrait-class{
+.head_portrait_class{
+    margin-top: 20px;
+    margin-left: 40px;
 
     width: 70px;
     height: 70px;
     /*设置为圆角*/
     border-radius: 50% 50% 50% 50%;
-    margin-top: 20px;
-    margin-left: 40px;
+
     float: left;
 }
 
-.user_name-class{
-
+.user_name_class{
     margin-top: 40px;
     margin-left: 30px;
+
     font-size: 20px;
     font-weight: bold;
+
     float: left;
 }
 
-.writer-Grade-class{
+.writer_Grade_class{
     margin-top: 43px;
     margin-left: 20px;
+
     font-size: 15px;
-    /*font-weight: bold;*/
-    float: left;
     color: #3a8ee6;
+
+    float: left;
 }
 
-.hid-button-class{
-    border-color:#ffffff;
-    width: 1px;
-    height: 1px;
-}
-
-
-.writer-Grade-img-class{
-
+.writer_Grade_img_class{
     margin-top: 43px;
     margin-left: 5px;
+
     width: 20px;
     height: 20px;
-
     /*设置按钮为小手*/
     cursor:pointer;
+
     float: left;
-
-
 }
 
-
-.work_word_num-div-class{
-    float: left;
+.work_word_num_div_class{
     margin-left: 200px;
     margin-top: 5px;
+
+    float: left;
 }
 
-.work_vote_num-class{
-    float: left;
+.work_vote_num_class{
     margin-left: 50px;
     margin-top: 5px;
+
+    float: left;
 }
 /*累积文字形式*/
-.workInfoStatistics-class{
-    font-size: 17px;
-    color: #555555;
-    /*font-family: "\5E7C\5706";*/
-    font-family: "\9ED1\4F53";
-    font-weight:500;
-
+.workInfoStatistics_class{
     position: relative;
     top:-10px;
 
-}
-
-.output_num-class{
-
-    font-size: 20px;
-    color: #000000;
-    /*font-family: "\5E7C\5706";*/
+    font-size: 17px;
+    color: #555555;
     font-family: "\9ED1\4F53";
     font-weight:500;
+}
 
+.output_num_class{
+    font-size: 20px;
+    color: #000000;
+    font-family: "\9ED1\4F53";
+    font-weight:500;
 }
 
 
-/*第二行*/
-/*.two-div-class{*/
-/*    width: 100%;*/
-/*    height: 100px;*/
-/*    background: #e5e5e5;*/
-/*}*/
+/*其他信息*/
+.otherworkInfo_div_class{
+    height: auto;
+    width: 100%;
 
-/*.workInfoStatistics-class{*/
+}
 
-/*    margin-left: 140px;*/
-/*    font-size: 15px;*/
-/*    color: #777777;*/
-/*    font-weight: bold;*/
-/*}*/
+.workintro_div_class{
+    margin-top: 20px;
+
+    height: 50px;
+    width: 100%;
+
+}
+
+.workintro_p_class{
+    margin-left: 10px;
+    margin-top: 10px;
+
+    font-weight: bold;
+    font-size: 15px;
+    color: #494949;
+}
+
+
+.workInfotro_divhr_class{
+    margin-left: 10px;
+
+    height: 1px;
+    background: #494949;
+    width: 830px;
+
+}
+
+.workInfo_div_class{
+    margin-top: 10px;
+    margin-left: 3%;
+
+    height: 180px;
+    width: 94%;
+    /*设置为圆角*/
+    border-radius:10px 10px 10px 10px;
+    background: #f7f6f2;
+}
+
+.workInfo_imgdiv_class{
+    margin-left: 10px;
+
+    height: 100%;
+    width: 130px;
+    
+    float: left;
+}
+.workInfo_img_class{
+    margin-top: 10px;
+
+    height: 160px;
+    width: 120px;
+}
+.workInfo_otherdiv_class{
+    margin-left: 10px;
+
+    height: 100%;
+    width: 660px;
+
+    float: left;
+}
+
+.workInfo_p_class{
+    margin-top: 10px;
+
+    display: block;
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.workInfo_p2_class{
+    margin-top: -8px;
+
+    display: block;
+    width: 100%;
+    height: 20px;
+    font-size: 15px;
+}
+
+.workInfo_p2left_class{
+    margin-top: -5px;
+
+    display: block;
+    width: 50%;
+    height: 20px;
+    font-size: 15px;
+
+    float: left;
+}
+
+
+.warning_div_class{
+    height: 40px;
+    width: 100%;
+}

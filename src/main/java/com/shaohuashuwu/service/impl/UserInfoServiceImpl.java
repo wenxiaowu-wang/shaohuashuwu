@@ -26,9 +26,99 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
 
+    /**
+     * 获取网站注册人数
+     * @return
+     */
     @Override
-    public UserInfo selectUserInfoByChapter_id(int chapter_id) {
-
-        return chapterPostInfoDao.selectUserInfoByChapter_id(chapter_id);
+    public int getUserNum() {
+        return userInfoDao.selectUserNum();
     }
+
+    /**
+     * 获取用户登录信息
+     * @param user_id
+     * @return
+     */
+    @Override
+    public UserInfo getUserLoginInfo(int user_id) {
+        return userInfoDao.selectUserLogiInfoByuser_id(user_id);
+    }
+
+    /**
+     * 根据作品id获取用户信息
+     * @param work_id
+     * @return
+     */
+    @Override
+    public UserInfo getUserInfoByWork_id(int work_id) {
+        return userInfoDao.selectUserInfoByWork_id(work_id);
+    }
+
+    /**
+     * 根据章节id获取作者信息
+     * @param chapter_id
+     * @return
+     */
+    @Override
+    public UserInfo getauthorInfoBychapterid(int chapter_id) {
+
+        return userInfoDao.selectauthorInfoByChapter_id(chapter_id);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /********以下未修改**********/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 依据用户名获取用户id
+     * @param user_name
+     * @return
+     */
+    @Override
+    public int getuser_idByusername(String user_name) {
+
+
+        return userInfoDao.selectuser_idByusername(user_name);
+    }
+
+
+
+
+
 }

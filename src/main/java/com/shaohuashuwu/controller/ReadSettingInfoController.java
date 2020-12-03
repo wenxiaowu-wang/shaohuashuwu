@@ -20,34 +20,53 @@ public class ReadSettingInfoController {
     @Autowired
     public ReadSettingInfoService readSettingInfoService;
 
-    @ResponseBody
-    @RequestMapping(value = "/selectReadSettinginfo")
-    public ReadSettingInfo selectReadSettinginfo(HttpServletRequest request, HttpServletResponse response) {
 
-//        System.out.println("根据id修改作品状态-------------");
-//        int num = worksInfoService.updateWorkSerialStateByid(worksInfodata);
-//        System.out.println("controller层显示结果:"+num);
+    /**
+     * 依据用户id获取设置信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getReadSettinginfo")
+    public ReadSettingInfo getReadSettinginfo(HttpServletRequest request, HttpServletResponse response) {
+
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
         Object msg = session.getAttribute("user_id");
-        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("设置功能session获取user——id："+a);
+        int user_id=Integer.parseInt(String.valueOf(msg));
 
-        return  readSettingInfoService.selectReadSettinginfo(a);
+        return  readSettingInfoService.getReadSettinginfo(user_id);
     }
 
 
-    //获取设置信息
+    /**
+     * 根据用户id修改设置信息
+     * @param readSettingInfo
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = "/updateReadSettingInfoByid")
-    public int updateReadSettingInfoByid(@RequestBody ReadSettingInfo readSettingInfo) {
-
-        System.out.println("根据id修改作品状态-------------");
+    @RequestMapping(value = "/updateReadSettingInfoByuser_id")
+    public int updateReadSettingInfoByuser_id(@RequestBody ReadSettingInfo readSettingInfo) {
         int num = readSettingInfoService.updateReadSettingInfoByid(readSettingInfo);
-        System.out.println("controller层显示结果:"+num);
         return num;
-
     }
+
+
+
+
+
+
+
+
+
+
+
+    /***********************以下未修改***************/
+
+
+
+
+
 
 
 

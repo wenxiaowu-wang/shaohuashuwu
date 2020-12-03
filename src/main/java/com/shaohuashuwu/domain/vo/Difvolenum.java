@@ -4,22 +4,19 @@ package com.shaohuashuwu.domain.vo;
  * 各个不同类型数量
  */
 public class Difvolenum {
+
     private Integer xuanhuannum;
     private Integer qihuannum;
     private Integer wuxianum;
-
     private Integer xianxianum;
     private Integer dushinum;
     private Integer xianshinum;
-
     private Integer lishinum;
     private Integer junshinum;
     private Integer youxinum;
-
     private Integer xuanyinum;
     private Integer kehuannum;
     private Integer tiyunum;
-
     private Integer qingxiaoshuonum;
 
 

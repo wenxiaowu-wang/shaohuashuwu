@@ -1,19 +1,22 @@
 new Vue({
-    // router,
-    el: '#app',
+    el: '#worksBeanch_id',
     data() {
         return {
             authorInfo:[],
+            worksInfoList:[],
         }
     },
     methods:{
+        /*
+        * 获取数据
+        * */
+        //作者信息
         getAuthorInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/authorInfoController/selectAuthorInfoVo')
+            axios.post('http://localhost:8080/authorInfoController/getAuthorInfoVo')
                 .then(function (response){
                     _this.authorInfo = response.data;
-                    console.log(response.data)
-                    console.log(_this.authorInfo);
+
                 })
                 .catch(function (error){
                         console.log(error);
@@ -21,10 +24,25 @@ new Vue({
                     })
         },
 
+        //作品信息
+        getWorksInfoListInfo(){
+            var _this = this;
+            axios.post('http://localhost:8080/worksInfoController/getWorksInfoByUser_id')
+                .then(function (response){
+                    _this.worksInfoList = response.data;
+                    console.log("作品信息"+JSON.stringify(_this.worksInfoList));
+                })
+                .catch(function (error){
+                    console.log(error);
+
+                })
+        },
+
 
 
     },
-    created:function (){ //页面加载时查询所有
+    created:function (){
         this.getAuthorInfo();
+        this.getWorksInfoListInfo();
     }
 })
