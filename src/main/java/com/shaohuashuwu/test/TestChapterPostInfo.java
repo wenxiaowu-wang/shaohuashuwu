@@ -26,12 +26,12 @@ public class TestChapterPostInfo {
     List<ChapterPostInfo> chapterPostInfoList;
     List<ChapterInfo> chapterInfoList;
 
-    @Test
-    public void testgetWorkWholeInfoBySelectinput(){
-
-
-        chapterInfoList = chapterPostInfoDao.getTest(9);
-        System.out.println("章节信息"+ chapterInfoList);
-    }
+//    @Test
+//    public void testgetWorkWholeInfoBySelectinput(){
+//
+//
+//        chapterInfoList = chapterPostInfoDao.getTest(9);
+//        System.out.println("章节信息"+ chapterInfoList);
+//    }
 
 }

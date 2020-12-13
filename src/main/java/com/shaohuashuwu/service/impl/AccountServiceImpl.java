@@ -5,7 +5,6 @@ import com.shaohuashuwu.domain.Account;
 import com.shaohuashuwu.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service("accountService")

@@ -3,12 +3,10 @@ package com.shaohuashuwu.controller;
 import com.shaohuashuwu.domain.ChapterInfo;
 import com.shaohuashuwu.domain.vo.CatalogInfoVo;
 import com.shaohuashuwu.service.CatalogInfoVoService;
-import com.shaohuashuwu.service.ChapterInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +23,7 @@ public class CatalogInfoVoController {
 
     /**
      * 依据作品id，作者id，获取章节目录信息
+     * 功能点：作品详情时获取目录新信息，
      * @param request
      * @param response
      * @return
@@ -50,6 +49,7 @@ public class CatalogInfoVoController {
 
     /**
      * 依据作品id，获取章节目录信息
+     * 功能点：添加作品获取章节信息
      * @param request
      * @param response
      * @return
@@ -74,6 +74,7 @@ public class CatalogInfoVoController {
 
     /**
      * 依据章节id，获取章节目录信息
+     * 功能点：阅读小说界面获取目录信息
      * @param request
      * @param response
      * @return

@@ -1,7 +1,6 @@
 package com.shaohuashuwu.util;
 
 import org.springframework.stereotype.Service;
-
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;

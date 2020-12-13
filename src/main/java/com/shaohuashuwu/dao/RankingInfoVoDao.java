@@ -4,7 +4,6 @@ import com.shaohuashuwu.domain.vo.RankingInfoVo;
 import com.shaohuashuwu.domain.vo.RankingInputInfoVo;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

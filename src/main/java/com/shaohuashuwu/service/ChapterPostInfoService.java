@@ -1,6 +1,5 @@
 package com.shaohuashuwu.service;
 
-import org.apache.ibatis.annotations.Select;
 
 public interface ChapterPostInfoService {
 

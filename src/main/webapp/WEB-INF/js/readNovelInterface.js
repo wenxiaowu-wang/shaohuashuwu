@@ -13,9 +13,6 @@ new Vue({
             readSettingInfo:[],
 
 
-
-
-
             /**
              * 获取数据
              * */
@@ -40,13 +37,6 @@ new Vue({
                 setting_font_type:'1',
                 setting_font_size:'18',
             },
-
-
-
-
-
-
-
 
 
 

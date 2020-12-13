@@ -83,10 +83,10 @@
             <!--对应作品-->
             <div class="worksInfoList_class">
                 <div class="workInfo_class" v-for="worksInfo in worksInfoList">
-                    <a href="#">
+                    <a href="#" @click="gotoDetail(worksInfo.work_id)">
                         <img class="work_cover_class" :src="worksInfo.work_cover">
                     </a>
-                    <a class="worksInfomation-one-class" id="work_name-id" @click="oktiaozhuan()" href="#">{{worksInfo.work_name}}</a>
+                    <a class="worksInfomation-one-class" id="work_name-id" @click="gotoDetail(worksInfo.work_id)" href="#">{{worksInfo.work_name}}</a>
                     <a class="worksInfomation-two-class" id="work_main_label-id" >○ {{worksInfo.work_main_label}} |</a>
                     <a class="worksInfomation-two-class" id="work_vice_label-id" >{{worksInfo.work_vice_label}} |</a>
                     <a class="worksInfomation-two-class" id="work_serial_state-id" >{{worksInfo.work_serial_state}}</a>

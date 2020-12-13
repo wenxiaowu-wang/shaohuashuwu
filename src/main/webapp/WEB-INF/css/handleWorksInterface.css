@@ -1,11 +1,18 @@
+#administrators_mainInfoLeft_p1_id{
+    color: #409EFF;
+}
 
+#administrators_mainInfoLeft_p1_id:hover{
+    color: red;
+}
 
 .administrators_mainInfoRight_div_class{
+    margin-left: 2%;
 
     width: 81%;
-    height: 500px;
-    margin-left: 2%;
+    height: 950px;
     background: #ffffff;
+
     float: left;
 }
 .administrators_mainInfoRight_Listdiv_class{
@@ -15,35 +22,35 @@
 }
 
 .administrators_mainInfoRight_Listp_class{
+    margin-top: 10px;
+    margin-left: 15px;
+
     display: block;
     font-size: 17px;
     width: 105px;
     height: 20px;
     background: #ffffff;
-
-    margin-top: 10px;
-    margin-left: 15px;
     font-weight:bold;
-    float: left;
 
+    float: left;
 }
 
 .administrators_mainInfoRight_Listp2_class{
+    margin-top: 12px;
+    margin-left: 5px;
+
     display: block;
     font-size: 15px;
     width: 110px;
     height: 20px;
     background: #ffffff;
 
-    margin-top: 12px;
-    margin-left: 5px;
-    /*font-weight:bold;*/
     float: left;
-
 }
 
 .administrators_divhr_class{
     margin-left: 20px;
+
     height: 1px;
     width: 96%;
     background: #aaaaaa;
@@ -51,65 +58,60 @@
 
 .detailshanleWork_div_class{
     margin-left: 15px;
+    margin-top: 15px;
+
     width: 96%;
-    height: 650px;
+    height: 850px;
     background: #eeeeee;
     /*设置为圆角*/
     border-radius:15px 15px 15px 15px;
-    margin-top: 15px;
 }
 
 .reportInfo_everydiv_class{
     position: relative;
     top: 10px;
-    /*margin-top: 50px;*/
+
     height: 20px;
     width: 100%;
-    /*background: #9a8888;*/
 }
 
 .reportInfo_everypname_class{
     margin-top: 0px;
+
     display: block;
     width: 15%;
     height: 20px;
     font-weight:bold;
     font-size: 15px;
-    float: left;
-    /*background: #409EFF;*/
-    /*组件位于中间*/
     text-align: center;
 
+    float: left;
 }
 
 .reportInfo_everyp_class{
-
     margin-top: 0px;
-    display: block;
 
+    display: block;
     width: 84%;
     height: 20px;
-    /*font-size: 13px;*/
-    /*font-weight:bold;*/
+
     float: left;
-    /*background: #ff0000;*/
 }
 
 .reportInfo_contentp_class{
+    margin-top: 0px;
+
     display: block;
     font-size: 15px;
     width: 82%;
-    max-height: 350px;
+    height: 550px;
     background: #ffffff;
-
-    margin-top: 0px;
-    /*margin-left: 5px;*/
-    /*font-weight:bold;*/
-    float: left;
     overflow-y:auto;
     /*设置为圆角*/
     border-radius:5px 5px 5px 5px;
     border:1px solid #aaaaaa;
+
+    float: left;
 }
 
 /*优化滚动条*/

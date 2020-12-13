@@ -37,10 +37,10 @@ public class TestChapterInfo {
     }
 
 
-    @Test
-    public  void Testselectchaptercatalog() throws Exception {
-        System.out.println(chapterInfoService.selectchaptercatalog(1,34));
-    }
+//    @Test
+//    public  void Testselectchaptercatalog() throws Exception {
+//        System.out.println(chapterInfoService.selectchaptercatalog(1,34));
+//    }
 
     @Test
     public void tset1(){

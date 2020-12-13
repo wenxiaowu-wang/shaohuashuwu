@@ -1,7 +1,6 @@
 package com.shaohuashuwu.dao;
 
 import com.shaohuashuwu.domain.UserInfo;
-import com.shaohuashuwu.domain.WorksInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -18,10 +17,12 @@ import java.util.List;
 public interface UserInfoDao {
 
     //依据用户名称获取用户登录信息
+    //功能点：用户界面上的登录的用户信息
     @Select("select user_name,user_id from user_info where user_id = #{user_id}")
     public UserInfo selectUserLogiInfoByuser_id(int user_id);
 
     //获取网站注册人数
+    //功能点：用户界面上的获取的用户数量
     @Select("SELECT COUNT(*) FROM user_info ")
     public int selectUserNum();
 
@@ -35,51 +36,8 @@ public interface UserInfoDao {
     public UserInfo selectUserInfoByWork_id(int work_id);
 
     //依据章节id查询作者信息
+    //功能点：阅读小说界面获取作者信息
     @Select("SELECT u.user_id,u.user_name FROM user_info u,chapter_post_info c WHERE u.user_id = c.user_id AND c.chapter_id = #{chapter_id}")
     public UserInfo selectauthorInfoByChapter_id(int chapter_id);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /***********未修改****************/
-
-    //依据用户名称查询用户id
-    @Select("select user_id from user_info where user_name = #{user_name}")
-    public int selectuser_idByusername(String user_name);
-
-
-    //依据用户名称查询用户信息
-    @Select("select * from user_info where user_id = #{user_id}")
-    public UserInfo selectuserInfoByuserid(int user_id);
-
-
-
-
-    //获取网站注册人数
-    //依据用户名称获取用户登录信息
-//    @Select("select user_name,user_id from user_info where user_id = #{user_id}")
-//    public int selectUserLogiInfoByuser_id(int user_id);
 }

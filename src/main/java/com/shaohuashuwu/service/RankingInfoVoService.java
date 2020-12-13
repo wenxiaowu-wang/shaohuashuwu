@@ -2,7 +2,6 @@ package com.shaohuashuwu.service;
 
 import com.shaohuashuwu.domain.vo.RankingInfoVo;
 import com.shaohuashuwu.domain.vo.RankingInputInfoVo;
-
 import java.util.List;
 
 public interface RankingInfoVoService {

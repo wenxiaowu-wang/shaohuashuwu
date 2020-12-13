@@ -85,20 +85,21 @@
                 <div class="responseWorksInfo_div_class" v-for="worksWholeInfoVo in worksWholeInfoVoList">
                     <div class="responseWorkcover_div_class">
                         <a href="#">
-                            <img class="responseWorkcover_img_class" :src="worksWholeInfoVo.work_cover">
+                            <img class="responseWorkcover_img_class" :src="worksWholeInfoVo.work_cover" @click="gotoDetail(worksWholeInfoVo.work_id)">
                         </a>
                     </div>
                     <div class="responseotherWork_div_class">
                         <a class="work_name_a_class" href="#">{{worksWholeInfoVo.work_name}}</a>
                         <div class="work_hang2_div_class">
                             <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">{{worksWholeInfoVo.user_name}}</a>
+                            <a class="username_a_class" href="#" @click="gotoDetail(worksWholeInfoVo.work_id)">{{worksWholeInfoVo.user_name}}</a>
                             <p class="otherworkInfo_hang2_info">{{worksWholeInfoVo.work_main_label}} &nbsp; | &nbsp; {{worksWholeInfoVo.work_serial_state}}</p>
                         </div>
                         <p class="workintroduct_p_class">
                             {{worksWholeInfoVo.work_introduct}}
                         </p>
                         <div class="work_hang4_div_class">
+                            <a class="newchapter_b_class" >最新章节：</a>
                             <a class="newchapter_a_class" href="#">{{worksWholeInfoVo.chapter_title}}</a>
                             <a class="newchapter_time_a_class">更新时间： {{worksWholeInfoVo.chapter_time}}</a>
                         </div>
@@ -118,8 +119,6 @@
             </div>
 
         <div class="tuijian_class" id="tuijian-id">
-
-
         </div>
 
     </div>
@@ -133,13 +132,7 @@
             <p class="userbottom_p2_class">郝振威</p>
             <p class="userbottom_p2_class">耿建强</p>
         </div>
-
-
     </div>
-
-
-
-
 
 </div>
 </body>

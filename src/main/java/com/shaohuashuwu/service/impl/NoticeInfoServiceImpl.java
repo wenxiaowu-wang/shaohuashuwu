@@ -1,12 +1,7 @@
 package com.shaohuashuwu.service.impl;
 
-import com.shaohuashuwu.dao.NoticeInfoDao;
-import com.shaohuashuwu.domain.NoticeInfo;
 import com.shaohuashuwu.service.NoticeInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.service.impl
@@ -18,7 +13,6 @@ import java.util.List;
 @Service("noticeInfoService")
 public class NoticeInfoServiceImpl implements NoticeInfoService {
 
-    @Autowired
-    public NoticeInfoDao noticeInfoDao;
+
 
 }

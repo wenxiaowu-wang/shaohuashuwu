@@ -13,12 +13,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class TestAttention {
 
-    @Autowired
-    private AttentionInfoService attentionInfoService;
-
-    @Test
-    public void tseAttentionInfoService(){
-        int attentionnum = attentionInfoService.selectCountAttentionNum(11);
-        System.out.println("输出数量"+attentionnum);
-    }
+//    @Autowired
+//    private AttentionInfoService attentionInfoService;
+//
+//    @Test
+//    public void tseAttentionInfoService(){
+//        int attentionnum = attentionInfoService.selectCountAttentionNum(11);
+//        System.out.println("输出数量"+attentionnum);
+//    }
 }

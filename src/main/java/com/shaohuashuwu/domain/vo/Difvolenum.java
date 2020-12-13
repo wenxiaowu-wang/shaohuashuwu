@@ -1,9 +1,11 @@
 package com.shaohuashuwu.domain.vo;
 
+import java.io.Serializable;
+
 /**
  * 各个不同类型数量
  */
-public class Difvolenum {
+public class Difvolenum   implements Serializable {
 
     private Integer xuanhuannum;
     private Integer qihuannum;

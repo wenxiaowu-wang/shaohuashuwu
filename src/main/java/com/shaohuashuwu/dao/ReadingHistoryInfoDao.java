@@ -1,11 +1,6 @@
 package com.shaohuashuwu.dao;
 
-import com.shaohuashuwu.domain.ReadingHistoryInfo;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.dao

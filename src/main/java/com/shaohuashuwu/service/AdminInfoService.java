@@ -1,6 +1,5 @@
 package com.shaohuashuwu.service;
 
-import com.shaohuashuwu.domain.AdminInfo;
 
 /**
  * 包:com.shaohuashuwu.service

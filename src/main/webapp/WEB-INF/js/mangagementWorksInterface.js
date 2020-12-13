@@ -95,7 +95,7 @@ new Vue({
             axios.post('http://localhost:8080/worksInfoController/updateWorkSerialStateByid',_this.worksInfo)
                 .then(function (respone) {
                     //改变界面显示效果
-                    _this.showwork_serial_state();
+                    _this.selectworkByid();
                 })
                 .catch(function (error){
                     console.log(error);

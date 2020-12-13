@@ -1,7 +1,6 @@
 package com.shaohuashuwu.service.impl;
 
 import com.shaohuashuwu.dao.ChapterPostInfoDao;
-import com.shaohuashuwu.dao.ReadSettingInfoDao;
 import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.service.UserInfoService;
@@ -28,6 +27,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 获取网站注册人数
+     * 功能点：用户界面上的获取的用户数量
      * @return
      */
     @Override
@@ -37,6 +37,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 获取用户登录信息
+     * 功能点：用户界面上的登录的用户信息
      * @param user_id
      * @return
      */
@@ -45,8 +46,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoDao.selectUserLogiInfoByuser_id(user_id);
     }
 
+
+
+
+
     /**
      * 根据作品id获取用户信息
+     * 功能点：作品详情时获取作者信息，
      * @param work_id
      * @return
      */
@@ -57,6 +63,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 根据章节id获取作者信息
+     * 功能点：阅读小说界面获取作者信息
      * @param chapter_id
      * @return
      */
@@ -88,34 +95,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
 
-
-    /********以下未修改**********/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * 依据用户名获取用户id
-     * @param user_name
-     * @return
-     */
-    @Override
-    public int getuser_idByusername(String user_name) {
-
-
-        return userInfoDao.selectuser_idByusername(user_name);
-    }
 
 
 

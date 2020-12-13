@@ -1,9 +1,6 @@
 package com.shaohuashuwu.service.impl;
 
-import com.shaohuashuwu.dao.AdminInfoDao;
-import com.shaohuashuwu.domain.AdminInfo;
 import com.shaohuashuwu.service.AdminInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Service;
 @Service("adminInfoService")
 public class AdminInfoServiceImpl implements AdminInfoService {
 
-    @Autowired
-    private AdminInfoDao adminInfoDao;
 
 
 }

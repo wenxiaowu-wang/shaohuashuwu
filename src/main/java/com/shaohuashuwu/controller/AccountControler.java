@@ -53,29 +53,29 @@ public class AccountControler {
     }
 
 
-    @RequestMapping("/findworksAll")
-    public String findworksAll(Model model){
+//    @RequestMapping("/findworksAll")
+//    public String findworksAll(Model model){
+//
+//        System.out.println("测试1");
+//        List list1 = worksInfoService.selectAllworks();
+//        System.out.println(list1);
+//        List<WorksInfo> list = worksInfoService.selectAllworks();
+//        System.out.println("测试2");
+//        System.out.println(list);
+//        model.addAttribute("list",list);
+//
+//        return "testworks.jsp";
+//    }
 
-        System.out.println("测试1");
-        List list1 = worksInfoService.selectAllworks();
-        System.out.println(list1);
-        List<WorksInfo> list = worksInfoService.selectAllworks();
-        System.out.println("测试2");
-        System.out.println(list);
-        model.addAttribute("list",list);
-
-        return "testworks.jsp";
-    }
-
-    @ResponseBody
-    @RequestMapping("/findallworksdate")
-    public List<WorksInfo> findalldate(){
-
-        System.out.println("测试输出数据");
-        List<WorksInfo> list = worksInfoService.selectAllworks();
-        System.out.println(list);
-        return list;
-    }
+//    @ResponseBody
+//    @RequestMapping("/findallworksdate")
+//    public List<WorksInfo> findalldate(){
+//
+//        System.out.println("测试输出数据");
+//        List<WorksInfo> list = worksInfoService.selectAllworks();
+//        System.out.println(list);
+//        return list;
+//    }
 
     @RequestMapping("/findallworks")
     public String findallworks(){
@@ -113,7 +113,7 @@ public class AccountControler {
 
         System.out.println("添加书籍-------------");
         System.out.println(worksInfodata);
-        worksInfoService.addworksdate(worksInfodata,11);
+        worksInfoService.addworkInfo(worksInfodata,11);
         return  "forward:/account/findallworks";
     }
 
@@ -132,6 +132,30 @@ public class AccountControler {
 
 
         return  num;
+    }
+
+    @RequestMapping("/adminhtml")
+    public String adminhtml(){
+
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "handlingReportInfoInterface.html";
+    }
+
+    @RequestMapping("/jubao")
+    public String jubao(){
+
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "handlingReportInfoInterface.html";
+    }
+
+    @RequestMapping("/chuli")
+    public String chuli(){
+
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "changeTheProcessingResultInterface.html";
     }
 
 }

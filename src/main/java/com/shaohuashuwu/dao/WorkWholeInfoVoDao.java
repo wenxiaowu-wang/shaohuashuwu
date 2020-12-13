@@ -4,7 +4,6 @@ import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -31,6 +30,7 @@ public interface WorkWholeInfoVoDao {
     public List<WorkWholeInfoVo> selectNewWorkWholeInfoVoDao(int work_serial_state);
 
     //通过作品名称查询作品全部信息，并且作品状态不能为3
+    //功能点：关键字搜索搜索内容，
     @Select(
             {"<script>",
             " SELECT w2.work_id work_id,w2.work_cover work_cover,w2.work_name work_name," +

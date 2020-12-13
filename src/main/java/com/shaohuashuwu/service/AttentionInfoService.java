@@ -1,11 +1,6 @@
 package com.shaohuashuwu.service;
 
-import com.shaohuashuwu.domain.AttentionInfo;
-import com.shaohuashuwu.domain.vo.AttentionInfoVo;
-import com.shaohuashuwu.domain.vo.UserandWorksInfoVo;
-import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.service
@@ -17,6 +12,5 @@ import java.util.List;
 public interface AttentionInfoService {
 
 
-    //    查询关注数量
-    public int selectCountAttentionNum(int user_id);
+
 }

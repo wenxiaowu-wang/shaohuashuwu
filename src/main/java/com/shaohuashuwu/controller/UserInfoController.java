@@ -1,15 +1,11 @@
 package com.shaohuashuwu.controller;
 
-import com.shaohuashuwu.domain.ChapterInfo;
 import com.shaohuashuwu.domain.UserInfo;
-import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,7 +36,8 @@ public class UserInfoController {
 
 
     /**
-     *  获取用户登录信息
+     *  获取用户登录信息，
+     *  功能点：用户界面上的登录的用户信息,
      * @return
      */
     //需要去掉设置额session——id
@@ -56,6 +53,7 @@ public class UserInfoController {
 
     /**
      * 获取网站注册人数
+     * 功能点：用户界面上的获取的用户数量
      * @return
      */
     @ResponseBody
@@ -70,6 +68,7 @@ public class UserInfoController {
 
     /**
      *依据作品id查询作者信息
+     * 功能点：作品详情时获取作者信息，
      * @param request
      * @param response
      * @return
@@ -88,6 +87,7 @@ public class UserInfoController {
 
     /**
      * 根据章节id获取用户信息
+     * 功能点：阅读小说界面获取作者信息
      * @param request
      * @param response
      * @return
@@ -102,58 +102,5 @@ public class UserInfoController {
         userInfo = userInfoService.getauthorInfoBychapterid(chapter_id);
         return userInfo;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /***********修改未完成功能******************/
-
-
-    //依据章节id查询作品信息
-
-    /**
-     *
-     * @param request
-     * @param response
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/selectuserInfoByuserid")
-    public UserInfo selectuserInfoByuserid(HttpServletRequest request, HttpServletResponse response){
-
-        System.out.println("查询作者信息selectworkByid测试输出数据：");
-        HttpSession session = request.getSession();
-//        session.setAttribute("chapter_id",);
-        Object msg = session.getAttribute("chapter_id");
-        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("获取作者功能输出chapter——id："+a);
-
-        userInfo = userInfoService.getauthorInfoBychapterid(a);
-
-
-
-        return userInfo;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

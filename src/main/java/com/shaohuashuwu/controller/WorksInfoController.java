@@ -9,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -69,6 +67,7 @@ public class WorksInfoController {
 
     /**
      * 获取全部作品页面，作品信息
+     * 功能点：获取用全部作品界面的作品信息
      * @param pageInfo
      * @return
      */
@@ -80,6 +79,7 @@ public class WorksInfoController {
 
     /**
      * 获取全部作品页面，作品数量
+     * 功能点：获取用全部作品界面的作品数量
      * @param pageInfo
      * @return
      */
@@ -91,6 +91,7 @@ public class WorksInfoController {
 
     /**
      * 根据作品id获取作品信息
+     * 功能点：作品详情时获取作品信息，添加章节获取作品信息，作品设置中获取作品信息，下架作品中获取作品信息
      * @param request
      * @param response
      * @return
@@ -107,6 +108,7 @@ public class WorksInfoController {
 
     /**
      * 根据作品id获取作者的其他作品信息
+     * 功能点：作品详情时获取作者其他作品信息，
      * @param request
      * @param response
      * @return
@@ -123,6 +125,7 @@ public class WorksInfoController {
 
     /**
      *依据章节id查询作品信息
+     * 功能点：阅读小说界面获取作品信息
      * @param request
      * @param response
      * @return
@@ -139,6 +142,7 @@ public class WorksInfoController {
 
     /**
      *依据用户id查询该用户作品数量
+     * 功能点：作者端顶部作品数量，
      * @param request
      * @param response
      * @return
@@ -156,6 +160,7 @@ public class WorksInfoController {
 
     /**
      *根据用户id获取作品信息
+     * 功能点：作者端工作台作品信息，
      * @param request
      * @param response
      * @return
@@ -174,6 +179,7 @@ public class WorksInfoController {
 
     /**
      *根据作品名称判断作品是否存在
+     * 功能点：添加作品功能验证作品是否存在
      * @param worksInfodata
      * @return
      */
@@ -185,150 +191,40 @@ public class WorksInfoController {
         return  num;
     }
 
+    /**
+     * 添加作品
+     * 功能点：添加作品功能添加作品
+     * @param worksInfodata
+     * @param request
+     * @param response
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/addworkInfo")
-    public int addworksdate(@RequestBody WorksInfo worksInfodata,HttpServletRequest request, HttpServletResponse response) {
+    public int addworkInfo(@RequestBody WorksInfo worksInfodata,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.setAttribute("user_id",1);
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
 
 
-        int isaddok = worksInfoService.addworksdate(worksInfodata,user_id);
-        return  isaddok;
+        int insertResult = worksInfoService.addworkInfo(worksInfodata,user_id);
+        return insertResult;
     }
 
 
     /**
-     * 修改作品信息
+     * 修改作品信息，
+     * 功能点：下架作品中修改作品设置信息
      * @param worksInfodata
      * @return
      */
     @ResponseBody
     @RequestMapping("/updateWorkSerialStateByid")
     public int updateWorkSerialStateByid(@RequestBody WorksInfo worksInfodata) {
-        int num = worksInfoService.updateWorkInfoByworkid(worksInfodata);
-        return  num;
+        int updateResult = worksInfoService.updateWorkInfoByworkid(worksInfodata);
+        return  updateResult;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /***********修改未完成功能******************/
-
-    /**
-     * 将work_id存入sesssion
-     * @param work_id
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    @RequestMapping("/selectworksByworkid")
-    public void selectworksByworkid(Integer work_id, HttpServletRequest request, HttpServletResponse response)  {
-        System.out.println("controller层根据work_id查询");
-        System.out.println(work_id);
-        HttpSession session = request.getSession();
-        session.setAttribute("work_id",work_id);
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @ResponseBody
-    @RequestMapping("/selectworkbyinfoResult")
-    public List<WorksInfo> selectworkbyinfoResult(HttpServletRequest request, HttpServletResponse response){
-
-
-        System.out.println("controller层查看session--");
-        HttpSession session = request.getSession();
-        Object msg = session.getAttribute("selectinput");
-//        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session获取1----"+String.valueOf(msg));
-        String a =String.valueOf(msg);
-        System.out.println("session获取----"+a);
-//        session.setMaxInactiveInterval(60);
-//        session.removeAttribute("selectinput");
-//        String b=String.valueOf(msg);
-//        System.out.println("销毁后的session----"+b);
-
-        worksInfo = new WorksInfo();
-        worksInfo.setWork_name(a);
-        System.out.println("worksInfo---"+worksInfo);
-        List<WorksInfo> list =worksInfoService.selectworkbyinfoResult(worksInfo);;
-        System.out.println("listssss====输出:"+list);
-        return list;
-    }
-
-
-    @ResponseBody
-    @RequestMapping("/selectworkbyinfoResult2")
-    public List<WorksInfo> selectworkbyinfoResult2(@RequestBody WorksInfo worksInfomation, HttpServletRequest request, HttpServletResponse response){
-
-
-        System.out.println("controller层查看session--");
-        HttpSession session = request.getSession();
-        Object msg = session.getAttribute("selectinput");
-//        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("session获取1----"+String.valueOf(msg));
-        String a =String.valueOf(msg);
-        System.out.println("session获取----"+a);
-//        session.removeAttribute("selectinput");
-//        String b=String.valueOf(msg);
-//        System.out.println("销毁后的session----"+b);
-
-
-        worksInfomation.setWork_name(a);
-        System.out.println("worksInfomation---"+worksInfomation);
-        List<WorksInfo> list =worksInfoService.selectworkbyinfoResult(worksInfomation);;
-        System.out.println("listssss====输出:"+list);
-        return list;
-    }
-
-    //依据章节id查询作品信息
-    @ResponseBody
-    @RequestMapping("/selectworkInfoByChapter_id")
-    public WorksInfo selectworkInfoByChapter_id(HttpServletRequest request, HttpServletResponse response){
-
-        System.out.println("selectworkByid测试输出数据");
-
-
-        HttpSession session = request.getSession();
-//        session.setAttribute("chapter_id",10);
-        Object msg = session.getAttribute("chapter_id");
-        int a=Integer.parseInt(String.valueOf(msg));
-        System.out.println("依据章节获取作者信息的章节id："+a);
-
-         worksInfo = worksInfoService.getworkInfoByChapter_id(a);
-
-
-
-        return worksInfo;
-    }
-
-
 
 
 }

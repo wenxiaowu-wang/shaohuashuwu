@@ -1,9 +1,6 @@
 package com.shaohuashuwu.dao;
 
 
-import com.shaohuashuwu.domain.AdminInfo;
-import org.apache.ibatis.annotations.*;
-
 /**
  * 包:com.shaohuashuwu.dao
  * 作者:王洪斌

@@ -3,9 +3,10 @@ package com.shaohuashuwu.domain.vo;
 import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class UserandWorksInfoVo extends WorksInfo {
+public class UserandWorksInfoVo extends WorksInfo  implements Serializable {
 
 
     //用户属性

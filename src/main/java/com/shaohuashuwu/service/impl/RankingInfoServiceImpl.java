@@ -8,7 +8,6 @@ import com.shaohuashuwu.service.RankingInfoVoService;
 import com.shaohuashuwu.util.ThisCurrentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service("rankingInfoService")

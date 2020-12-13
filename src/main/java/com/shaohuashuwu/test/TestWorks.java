@@ -25,12 +25,12 @@ public class TestWorks {
     private WorksInfo worksInfo;
     private PageInfo pageInfo;
 
-    @Test
-    public void testfindAll(){
-        List list = worksInfoService.selectAllworks();
-
-        System.out.println(list);
-    }
+//    @Test
+//    public void testfindAll(){
+//        List list = worksInfoService.selectAllworks();
+//
+//        System.out.println(list);
+//    }
 
     @Test
     public void testaddWorks(){
@@ -39,7 +39,7 @@ public class TestWorks {
                 "东方玄幻",null,
                 "这是一个作品介绍","这是作者给读者的话",null,null,null,null,null);
 
-        int list = worksInfoService.addworksdate(worksInfo,1);
+        int list = worksInfoService.addworkInfo(worksInfo,1);
 
 
         System.out.println(list);
@@ -90,31 +90,31 @@ public class TestWorks {
     }
 
 
-    @Test
-    public  void selectworkbyinfoResult(){
+//    @Test
+//    public  void selectworkbyinfoResult(){
+//
+//
+//        worksInfo = new WorksInfo("不可思议","玄幻",null,null);
+//
+//        List list = worksInfoService.selectworkbyinfoResult(worksInfo);
+////        List list = worksInfoService.selectworksneed(pageInfo);
+//
+//        System.out.println("数组中长度为：---"+list.size());
+//        System.out.println("最终结果"+list);
+//    }
 
-
-        worksInfo = new WorksInfo("不可思议","玄幻",null,null);
-
-        List list = worksInfoService.selectworkbyinfoResult(worksInfo);
-//        List list = worksInfoService.selectworksneed(pageInfo);
-
-        System.out.println("数组中长度为：---"+list.size());
-        System.out.println("最终结果"+list);
-    }
-
-    @Test
-    public  void selectUserandWork(){
-
-
-        worksInfo = new WorksInfo(14);
-
-        List list = worksInfoService.selectUserandWork(worksInfo);
-//        List list = worksInfoService.selectworksneed(pageInfo);
-
-        System.out.println("数组中长度为：---"+list.size());
-        System.out.println("最终结果"+list);
-    }
+//    @Test
+//    public  void selectUserandWork(){
+//
+//
+//        worksInfo = new WorksInfo(14);
+//
+//        List list = worksInfoService.selectUserandWork(worksInfo);
+////        List list = worksInfoService.selectworksneed(pageInfo);
+//
+//        System.out.println("数组中长度为：---"+list.size());
+//        System.out.println("最终结果"+list);
+//    }
 
 
 

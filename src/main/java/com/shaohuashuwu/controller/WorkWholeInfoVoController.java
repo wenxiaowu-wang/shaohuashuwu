@@ -1,7 +1,6 @@
 package com.shaohuashuwu.controller;
 
 import com.shaohuashuwu.domain.WorksInfo;
-import com.shaohuashuwu.domain.vo.Difvolenum;
 import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
 import com.shaohuashuwu.service.WorkWholeInfoVoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,11 +23,12 @@ public class WorkWholeInfoVoController {
     private WorkWholeInfoVo workWholeInfoVo;
     private List<WorkWholeInfoVo> workWholeInfoVoList;
 
-//    private WorksInfo worksInfo;
+
 
 
     /**
      * 获取主页不同分类的作品信息
+     * 功能点：获取主页信息
      * @return 分类数量
      */
     @ResponseBody
@@ -42,6 +41,7 @@ public class WorkWholeInfoVoController {
 
     /**
      * 通过搜索信息获取作品全部信息
+     * 功能点：关键字搜索搜索内容，
      * @param request
      * @param response
      * @return

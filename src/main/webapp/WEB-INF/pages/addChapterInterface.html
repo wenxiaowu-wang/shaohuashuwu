@@ -65,7 +65,7 @@
                         <a class="chapterCataloginfo_a_class" >{{catalogInfoVo.chapter_title}}</a>
                     </div>
                     <div class="chpterCatalog_charge_div_class" id="chapter_charge_needdiv_id">
-                        <img class="chpterCatalog_charge_img_class"  :style=" {'visibility':( (catalogInfoVo.chapter_charge==1&&catalogInfoVo.subscribe==1)? '':'hidden')}"     :src="(catalogInfoVo.subscribe==1)?'../images/money-32.png':'../images/jinggao-32.png'" >
+                        <img class="chpterCatalog_charge_img_class"  :style=" {'visibility':( (catalogInfoVo.chapter_charge==1||catalogInfoVo.subscribe!=1)? '':'hidden')}"     :src="(catalogInfoVo.subscribe==1)?'../images/authormoney-32.png':'../images/jinggao-32.png'" >
                     </div>
                 </div>
 

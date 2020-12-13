@@ -12,11 +12,12 @@ public class ReadSettingInfoServiceImpl implements ReadSettingInfoService {
     @Autowired
     public ReadSettingInfoDao readSettingInfoDao;
 
-//    @Autowired
+
     public ReadSettingInfo readSettingInfo;
 
     /**
      * 获取设置信息
+     * 功能点：用阅读小说界面设置获取，
      * @param user_id
      * @return
      */
@@ -40,6 +41,7 @@ public class ReadSettingInfoServiceImpl implements ReadSettingInfoService {
 
     /**
      * 通过用户id修改设置信息
+     * 功能点：阅读小说界面修改设置，
      * @param readSettingInfo
      * @return
      */
@@ -48,34 +50,6 @@ public class ReadSettingInfoServiceImpl implements ReadSettingInfoService {
         int updataResult = readSettingInfoDao.updateReadSettingInfoByid(readSettingInfo);
         return updataResult;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /***********************以下未修改***************/
-
-
-
-
-
 
 
 }

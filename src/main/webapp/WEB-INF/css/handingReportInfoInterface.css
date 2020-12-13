@@ -1,116 +1,22 @@
 
-/*.administrators_mainInfoRight_div_class{*/
+#administrators_mainInfoLeft_p1_id{
+    color: #409EFF;
+}
 
-/*    width: 81%;*/
-/*    height: 500px;*/
-/*    margin-left: 2%;*/
-/*    background: #ffffff;*/
-/*    float: left;*/
-/*}*/
-/*.administrators_mainInfoRight_Listdiv_class{*/
-/*    width: 100%;*/
-/*    height: 40px;*/
-/*    background: #ffffff;*/
-/*}*/
-
-/*.administrators_mainInfoRight_Listp_class{*/
-/*    display: block;*/
-/*    font-size: 17px;*/
-/*    width: 105px;*/
-/*    height: 20px;*/
-/*    background: #ffffff;*/
-
-/*    margin-top: 10px;*/
-/*    margin-left: 15px;*/
-/*    font-weight:bold;*/
-/*    float: left;*/
-
-/*}*/
-
-/*.administrators_mainInfoRight_Listp2_class{*/
-/*    isplay: block;*/
-/*    font-size: 15px;*/
-/*    width: 110px;*/
-/*    height: 20px;*/
-/*    background: #ffffff;*/
-
-/*    margin-top: 12px;*/
-/*    margin-left: 5px;*/
-/*    !*font-weight:bold;*!*/
-/*    float: left;*/
-
-/*}*/
-
-/*.administrators_divhr_class{*/
-/*    margin-left: 20px;*/
-/*    height: 1px;*/
-/*    width: 96%;*/
-/*    background: #aaaaaa;*/
-/*}*/
-
-/*.detailshanleWork_div_class{*/
-/*    margin-left: 15px;*/
-/*    width: 96%;*/
-/*    height: 600px;*/
-/*    background: #dddddd;*/
-/*    !*设置为圆角*!*/
-/*    border-radius:15px 15px 15px 15px;*/
-/*    margin-top: 15px;*/
-/*}*/
-
-/*.reportInfo_everydiv_class{*/
-/*    position: relative;*/
-/*    top: 10px;*/
-/*    !*margin-top: 50px;*!*/
-/*    height: 20px;*/
-/*    width: 100%;*/
-/*    !*background: #9a8888;*!*/
-/*}*/
-
-/*.reportInfo_everypname_class{*/
-/*    margin-top: 0px;*/
-/*    display: block;*/
-/*    width: 15%;*/
-/*    height: 20px;*/
-/*    font-weight:bold;*/
-/*    float: left;*/
-/*    background: #409EFF;*/
-/*    !*组件位于中间*!*/
-/*    text-align: center;*/
-
-/*}*/
-
-/*.reportInfo_everyp_class{*/
-
-/*    margin-top: 0px;*/
-/*    display: block;*/
-/*    width: 85%;*/
-/*    height: 20px;*/
-/*    !*font-weight:bold;*!*/
-/*    float: left;*/
-/*    background: red;*/
-/*}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#administrators_mainInfoLeft_p1_id:hover{
+    color: red;
+}
 
 .administrators_mainInfoRight_div_class{
+    margin-left: 2%;
 
     width: 81%;
-    height: 500px;
-    margin-left: 2%;
+    height: auto;
+    min-height: calc(100vh);
     background: #ffffff;
+    /*y阴影*/
+    box-shadow: 0px 5px 10px #b2d1d4;
+
     float: left;
 }
 
@@ -121,121 +27,78 @@
 }
 
 .administrators_mainInfoRight_Listp_class{
-    display: block;
-
-    font-size: 17px;
-
     margin-top: 10px;
     margin-left: 20px;
+
+    display: block;
+    font-size: 17px;
     font-weight:bold;
-
     width: 240px;
-    /*float: left;*/
     background: #ffffff;
 }
-.needwork_name_class{
-    display: block;
-    font-size: 15px;
-
-    margin-top: 21px;
-    margin-left: 100px;
-    /*font-weight:bold;*/
-
-    width: 80px;
-    float: left;
-    background: #ffffff;
-}
-
-.needwork_nameinput_class{
-    display: block;
-    margin-top: 17px;
-    /*margin-left: 100px;*/
-    float: left;
-}
-
-.needwork_time_class{
-    display: block;
-    font-size: 15px;
-
-    margin-top: 21px;
-    margin-left: 50px;
-    width: 80px;
-    float: left;
-    background: #ffffff;
-}
-
-.needwork_timeinput_class{
-    /*display: block;*/
-    margin-top: 17px;
-}
-
-
 
 
 .administrators_mainInfoRight_divhr_class{
-
     margin-top: 10px;
-    width: 96%;
     margin-left: 20px;
+
+    width: 96%;
     height: 1px;
     background: #999999;
 }
 
 .administrators_mainInfoRight_needdiv_class{
-    width: 96%;
     margin-left: 20px;
-    height: 180px;
-    background: #eeeeee;
     margin-top: 20px;
 
+    width: 96%;
+    height: 180px;
+    background: #eeeeee;
     /*设置为圆角*/
     border-radius:15px 15px 15px 15px;
 }
 
 .reportleft_div_class{
-    width: 78%;
     margin-left: 2%;
-    height: 180px;
-    /*background: #888888;*/
-    float: left;
 
+    width: 78%;
+    height: 180px;
+
+    float: left;
 }
 
 .reportright_div_class{
-    width: 18%;
     margin-right: 2%;
+
+    width: 18%;
     height: 180px;
-    /*background: #de9393;*/
+
     float: left;
 }
 
 .reportInfo_everydiv_class{
     width: 100%;
     height: 35px;
-    /*background: #cf9236;*/
-
 }
 
 .reportInfo_pname_class{
+    margin-top: 6px;
+    margin-left: 15px;
+
     display: block;
     width: 12%;
     font-size: 15px;
-
-    margin-top: 6px;
-    margin-left: 15px;
     font-weight:bold;
-    /*background: red;*/
+
     float: left;
 }
 .reportInfo_pinfo_class{
+    margin-top: 6px;
+
     display: block;
     width: 84%;
     font-size: 15px;
 
-    margin-top: 6px;
-    /*margin-left: 20px;*/
-    /*font-weight:bold;*/
-    /*background: #37ff00;*/
     float: left;
 }
 
@@ -244,9 +107,23 @@
     margin-left: 20px;
 }
 
+.fenyediv{
+    margin-left: 400px;
+    margin-top: 40px;
 
+    width: 800px;
+    height: 100px;
 
+    float: left;
+}
 
+.bottom_div_class{
+    margin-top: 10px;
 
+    height: 30px;
+    width: 100%;
+    /*background: #c2e7b0;*/
 
+    float: left;
+}
 

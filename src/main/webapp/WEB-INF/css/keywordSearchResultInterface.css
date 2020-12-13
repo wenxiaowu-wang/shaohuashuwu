@@ -191,6 +191,19 @@
     float: left;
 }
 
+.newchapter_b_class{
+    display: block;
+    height: 20px;
+    font-size: 15px;
+    max-width: 250px;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    float: left;
+}
+
 .newchapter_a_class:hover {
     color: #ff0000
 }

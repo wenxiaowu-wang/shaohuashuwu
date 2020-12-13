@@ -13,108 +13,117 @@
 </head>
 <body>
 <div id="app">
-    <div class="administrators_topNavigation_div_class" id="administr_topNavigation_div_id">
+    <!--顶部导航-->
+    <div class="administrators_topNavigation_div_class" id="administrators_topNavigation_div_id">
         <div class="topNavigation_content_div_class">
             <div class="administrators_topNavigation_subdiv_class">
                 <img class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
-<!--                <p class="topintroduce_p_class">管理员·专区</p>-->
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="topintroduce_div_id">
                 <p class="topintroduce_p_class">管理员·专区</p>
-<!--                <p class="topintroduce_p_class"></p>-->
             </div>
 
             <div class="administrators_topNavigation_subdiv_class" id="changepassword_div_id">
                 <el-tooltip class="item" effect="dark" content="密码修改" placement="top-start">
-
                     <img class="changepassword_img_class" id="changepassword_img_id" src="../images/password-32.png" @click="writerGradehelp()">
-
                 </el-tooltip>
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="help_div_id">
                 <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
-
                     <img class="changepassword_img_class" id="help_img_id" src="../images/authorhelp-32.png" @click="writerGradehelp()">
-
                 </el-tooltip>
-
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="administratorsme_div_id">
-                <el-tooltip class="item" effect="dark" content="管理员：12121" placement="top-start">
-
+                <el-tooltip class="item" effect="dark" :content="administrator" placement="top-start">
                     <img class="changepassword_img_class" id="cadministratorsme_img_id" src="../images/authorme-36.png" @click="writerGradehelp()">
-
                 </el-tooltip>
             </div>
         </div>
-
-
     </div>
 
+
     <div class="administrators_mainInfo_div_class">
+        <!--左侧导航-->
         <div class="administrators_mainInfoLeft_div_class">
             <div class="administrators_mainInfoLeft_Listdiv_class">
-                <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">处理举报信息</p>
+                <img class="administrators_mainInfoLeft_img_class" src="../images/password-32.png">
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p1_id" href="#">处理举报信息</a>
             </div>
             <div class="administrators_mainInfoLeft_Listdiv_class">
-                <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">更改处理结果</p>
+                <img class="administrators_mainInfoLeft_img_class" src="../images/password-32.png">
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p2_id" href="#">更改处理结果</a>
             </div>
             <div class="administrators_mainInfoLeft_Listdiv_class">
-                <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">更改密码</p>
+                <img class="administrators_mainInfoLeft_img_class" src="../images/password-32.png">
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p3_id" href="#">更改密码</a>
             </div>
-<!--            <img class src="">-->
-<!--            <div class="administrators_mainInfoLeft_divhr_class"></div>-->
-
         </div>
 
-        <div class="administrators_mainInfoRight_div_class">
+
+        <!--主要内容-->
+        <div class="administrators_mainInfoRight_div_class" id="administrators_mainInfoRight_div_id">
             <div class="administrators_mainInfoRight_Listdiv_class">
                 <p class="administrators_mainInfoRight_Listp_class">更改处理结果</p>
                 <p class="needwork_name_class">作品名称：</p>
-                <el-input class="needwork_nameinput_class" placeholder="请输入作品名称" size="mini" style="width: 130px ; height: 15px"></el-input>
+                <el-input class="needwork_nameinput_class" v-model="adminSelectInfoVo.work_name" placeholder="请输入作品名称" size="mini" style="width: 130px ; height: 15px"></el-input>
                 <p class="needwork_time_class">处理时间：</p>
                 <el-date-picker
                         class="needwork_timeinput_class"
                         size="mini"
                         style="width: 130px"
-                        v-model="value1"
+                        v-model="needdate"
                         type="date"
+                        format="yyyy-MM-dd"
                         placeholder="选择日期">
                 </el-date-picker>
 
-                <el-button icon="el-icon-search" circle size="small"></el-button>
+                <el-button icon="el-icon-search" @click="getneedReportInfo()" circle size="small"></el-button>
 
             </div>
 
             <div class="administrators_mainInfoRight_divhr_class"></div>
-            <div class="administrators_mainInfoRight_needdiv_class">
+            <div class="administrators_mainInfoRight_needdiv_class"  v-for="handleResult in handleResultList">
                 <div class="reportleft_div_class">
                     <div class="reportInfo_everydiv_class">
-                `       <p class="reportInfo_pname_class">举报人：</p>
-                        <p class="reportInfo_pinfo_class">洪水茫茫</p>
+                        <p class="reportInfo_pname_class">举报人：</p>
+                        <p class="reportInfo_pinfo_class">{{handleResult.user_name}}</p>
                     </div>
                     <div class="reportInfo_everydiv_class">
-                        <p class="reportInfo_pname_class">处理作品：</p>
-                        <p class="reportInfo_pinfo_class">求魔</p>
+                        <p class="reportInfo_pname_class">举报作品：</p>
+                        <p class="reportInfo_pinfo_class">{{handleResult.work_name}}</p>
                     </div>
                     <div class="reportInfo_everydiv_class">
-                        <p class="reportInfo_pname_class">处理章节：</p>
-                        <p class="reportInfo_pinfo_class">第九十九章 再见落枫</p>
+                        <p class="reportInfo_pname_class">举报章节：</p>
+                        <p class="reportInfo_pinfo_class">{{handleResult.chapter_title}}</p>
                     </div>
                     <div class="reportInfo_everydiv_class">
                         <p class="reportInfo_pname_class">处理时间：</p>
-                        <p class="reportInfo_pinfo_class">2020-11-1 12:33:11</p>
+                        <p class="reportInfo_pinfo_class">{{handleResult.report_time}}</p>
                     </div>
+
 
                 </div>
                 <div class="reportright_div_class">
-                    <el-button class="reportright_button_class" type="primary"  size="small" style="width: 100px">去更改</el-button>
+                    <el-button class="reportright_button_class" @click="gotohandlingWorks(handleResult.report_id)" type="primary"  size="small" style="width: 100px">去更改</el-button>
                 </div>
             </div>
 
+
+
+            <div class="fenyediv">
+                <el-pagination
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="8"
+                        :page-size="8"
+                        layout="total,sizes,prev, pager, next, jumper"
+                        :total="total">
+                </el-pagination>
+            </div>
+        </div>
+
+
+        <div class="bottom_div_class">
         </div>
 
     </div>
@@ -125,6 +134,7 @@
 <script src="../js/axios.js"></script>
 
 <script src="../js/administratorsTopNavigationFragment.js"></script>
+<script src="../js/changeTheProcessingResultInterface.js"></script>
 
 
 </body>

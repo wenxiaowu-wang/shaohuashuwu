@@ -1,8 +1,5 @@
 package com.shaohuashuwu.service;
 
-import com.shaohuashuwu.domain.NoticeInfo;
-
-import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.service

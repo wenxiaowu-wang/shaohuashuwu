@@ -96,10 +96,14 @@ new Vue( {
             this.stateSelected();
         },
 
+
+
+
+        /*****************8*/
+
         /*
         * 点击事件
         * */
-
         /**
          *点击主类型标签
          * */
@@ -269,7 +273,6 @@ new Vue( {
 
 
         },
-
         /**
          *点击已选副标签
          * */
@@ -297,7 +300,6 @@ new Vue( {
              * */
             this.gettotalNum();
         },
-
         /**
          * 点击想要选择的作品状态按钮
          * */
@@ -334,7 +336,6 @@ new Vue( {
              * */
             this.gettotalNum();
         },
-
         /*
         * 点击已选的主类型，返回全部信息
         * */
@@ -351,14 +352,12 @@ new Vue( {
             this.mianwork(this.worksInfoneed.work_main_label);
 
         },
-
         /*
         * 点击已选的状态类型，返回取消副类型选项
         * */
         stateSelected(){
             this.serialstatework("全部");
         },
-
         /*
         * 获取输入当前的页数
         * */
@@ -371,17 +370,27 @@ new Vue( {
              * */
             this.getworksInfoList();
         },
-
         //点击作品时按钮
-        oktiaozhuan(){
-            alert("可以000")
+        gotoDetail(work_id){
+            var _this = this;
+            axios.post('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+                .then(function (response) {
+                    window.location.assign("../pages/novelDetailsInterface.html");
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
         },
+
+
+
+        /****************/
 
 
         /*
         * 公共类
         * */
-
         /**
          * 设置组件已选副标签隐藏
          * */
@@ -406,6 +415,27 @@ new Vue( {
             axios.post('http://localhost:8080/worksInfoController/getworksneed',_this.worksInfoneed)
                 .then(function (respone){
                     _this.worksInfoList = respone.data;//相应数据给worksInfoList
+
+                    for( var i = 0 ;i<_this.worksInfoList.length;i++){
+                        /*将1或2转为连载或完结*/
+                        if( _this.worksInfoList[i].work_serial_state == 1){
+                            _this.worksInfoList[i].work_serial_state = "连载";
+                        }
+                        else if(_this.worksInfoList[i].work_serial_state == 2){
+                            _this.worksInfoList[i].work_serial_state = "完结";
+                        }
+                        /*字数大于10万字就变为小数*/
+                        if(_this.worksInfoList[i].work_word_num>100000){
+                            var divisornum = _this.worksInfoList[i].work_word_num/10000;
+                            _this.worksInfoList[i].work_word_num = divisornum.toFixed(2);
+                            _this.worksInfoList[i].work_word_num = _this.worksInfoList[i].work_word_num + "万";
+                        }
+                        else {
+                            _this.worksInfoList[i].work_word_num = _this.worksInfoList[i].work_word_num;
+                        }
+
+
+                    }
                 })
                 .catch(function (error){
                     alert("相应失败");

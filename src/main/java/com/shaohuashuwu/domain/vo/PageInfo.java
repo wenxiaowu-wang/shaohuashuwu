@@ -2,7 +2,9 @@ package com.shaohuashuwu.domain.vo;
 
 import com.shaohuashuwu.domain.WorksInfo;
 
-public class PageInfo extends WorksInfo {
+import java.io.Serializable;
+
+public class PageInfo extends WorksInfo  implements Serializable {
 
     private Integer works_page;
     private Integer works_page_num;

@@ -3,9 +3,10 @@ package com.shaohuashuwu.domain.vo;
 import com.shaohuashuwu.domain.UserInfo;
 
 import java.beans.IntrospectionException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class AuthorInfoVo  extends UserInfo {
+public class AuthorInfoVo  extends UserInfo  implements Serializable {
 
 
     private BigDecimal attention_num;  //关注数量

@@ -1,7 +1,6 @@
 package com.shaohuashuwu.service;
 
 import com.shaohuashuwu.domain.Account;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

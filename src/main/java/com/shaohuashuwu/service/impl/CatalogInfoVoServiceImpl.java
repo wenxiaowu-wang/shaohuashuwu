@@ -7,7 +7,6 @@ import com.shaohuashuwu.service.CatalogInfoVoService;
 import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service("catalogInfoVoService")
@@ -25,6 +24,7 @@ public class CatalogInfoVoServiceImpl implements CatalogInfoVoService {
 
     /**
      * 依据用户id和作品id，获取章节目录信息
+     * 功能点：作品详情时获取目录新信息，阅读小说界面获取目录信息,
      * @param user_id
      * @param work_id
      * @return
@@ -37,6 +37,7 @@ public class CatalogInfoVoServiceImpl implements CatalogInfoVoService {
 
     /**
      * 依据章节id，获取章节目录信息
+     * 功能点：阅读小说界面获取目录信息
      * @param user_id
      * @param chapter_id
      * @return
@@ -50,6 +51,12 @@ public class CatalogInfoVoServiceImpl implements CatalogInfoVoService {
         return getchaptercatalogBywork_id(user_id,worksInfo.getWork_id());
     }
 
+    /**
+     * 依据用户id和作品id，获取章节目录信息，包括被下架章节
+     * 功能点：添加作品获取章节信息
+     * @param work_id
+     * @return
+     */
     @Override
     public List<CatalogInfoVo> getchaptercatalogBywork_id2(int work_id) {
         return catalogInfoVoDao.selectchaptercatalogBywork_id2(work_id);

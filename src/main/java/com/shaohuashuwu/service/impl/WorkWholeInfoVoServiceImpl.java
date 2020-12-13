@@ -7,12 +7,8 @@ import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
 import com.shaohuashuwu.service.UserInfoService;
 import com.shaohuashuwu.service.WorkWholeInfoVoService;
 import com.shaohuashuwu.service.WorksInfoService;
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
-import org.apache.commons.collections.list.AbstractLinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.java2d.opengl.WGLSurfaceData;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +41,7 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
 
     /**
      * 获取主页不同分类的作品信息
+     * 功能点：获取主页信息
      * @param differentStateWork
      * @return
      */
@@ -76,6 +73,7 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
 
     /**
      * 通过搜索信息获取作品全部信息
+     * 功能点：关键字搜索搜索内容，
      * @param needworksInfo
      * @return
      */
@@ -220,13 +218,5 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
             return workWholeInfoVoList;
     }
 
-    /**
-     * 通过作品名称查询作品全部信息，并且作品状态不能为3
-     * @param worksInfo
-     * @return
-     */
-    @Override
-    public List<WorkWholeInfoVo> getWorkWholeInfoVobywork_name(WorksInfo worksInfo) {
-        return workWholeInfoVoDao.selectWorkWholeInfoVobyuser_name(worksInfo);
-    }
+
 }

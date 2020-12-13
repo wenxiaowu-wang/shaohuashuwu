@@ -2,77 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>处理举报信息</title>
+    <title>处理结果信息</title>
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/workbeanchFragment.css">
     <link rel="stylesheet" href="../css/administratorsTopNavigationFragment.css">
     <link rel="stylesheet" href="../css/administratorsMainInfoLeftFragment.css">
-    <link rel="stylesheet" href="../css/changeTheProcessingInterface.css">
+    <link rel="stylesheet" href="../css/handleWorksInterface.css">
 
 
 </head>
 <body>
 <div id="app">
-    <div class="administrators_topNavigation_div_class" id="administr_topNavigation_div_id">
+    <!--顶部导航-->
+    <div class="administrators_topNavigation_div_class" id="administrators_topNavigation_div_id">
         <div class="topNavigation_content_div_class">
             <div class="administrators_topNavigation_subdiv_class">
                 <img class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
-<!--                <p class="topintroduce_p_class">管理员·专区</p>-->
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="topintroduce_div_id">
                 <p class="topintroduce_p_class">管理员·专区</p>
-<!--                <p class="topintroduce_p_class"></p>-->
             </div>
 
             <div class="administrators_topNavigation_subdiv_class" id="changepassword_div_id">
                 <el-tooltip class="item" effect="dark" content="密码修改" placement="top-start">
-
                     <img class="changepassword_img_class" id="changepassword_img_id" src="../images/password-32.png" @click="writerGradehelp()">
-
                 </el-tooltip>
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="help_div_id">
                 <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
-
                     <img class="changepassword_img_class" id="help_img_id" src="../images/authorhelp-32.png" @click="writerGradehelp()">
-
                 </el-tooltip>
-
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="administratorsme_div_id">
-                <el-tooltip class="item" effect="dark" content="管理员：12121" placement="top-start">
-
+                <el-tooltip class="item" effect="dark" :content="administrator" placement="top-start">
                     <img class="changepassword_img_class" id="cadministratorsme_img_id" src="../images/authorme-36.png" @click="writerGradehelp()">
-
                 </el-tooltip>
             </div>
         </div>
-
-
     </div>
 
+
+
     <div class="administrators_mainInfo_div_class">
+        <!--左侧导航-->
         <div class="administrators_mainInfoLeft_div_class">
             <div class="administrators_mainInfoLeft_Listdiv_class">
                 <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">处理举报信息</p>
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p1_id" href="#">处理举报信息</a>
             </div>
             <div class="administrators_mainInfoLeft_Listdiv_class">
                 <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">更改处理结果</p>
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p2_id" href="#">更改处理结果</a>
             </div>
             <div class="administrators_mainInfoLeft_Listdiv_class">
                 <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">更改密码</p>
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p3_id" href="#">更改密码</a>
             </div>
-<!--            <img class src="">-->
-<!--            <div class="administrators_mainInfoLeft_divhr_class"></div>-->
-
         </div>
-
-        <div class="administrators_mainInfoRight_div_class">
+        <!--主要内容-->
+        <div class="administrators_mainInfoRight_div_class" id="administrators_mainInfoRight_div_id">
             <div class="administrators_mainInfoRight_Listdiv_class">
-                <p class="administrators_mainInfoRight_Listp_class">更改处理结果</p>
+                <p class="administrators_mainInfoRight_Listp_class">处理结果信息</p>
                 <p class="administrators_mainInfoRight_Listp2_class">·详情</p>
             </div>
             <div class="administrators_divhr_class"></div>
@@ -82,47 +72,23 @@
                         举报人：
                     </p>
                     <p class="reportInfo_everyp_class">
-                        洪水茫茫
+                        {{reportWholeInfoVo.user_name}}
                     </p>
                 </div>
                 <div class="reportInfo_everydiv_class">
                     <p class="reportInfo_everypname_class">
-                        处罚作品：
+                        处理作品：
                     </p>
                     <p class="reportInfo_everyp_class">
-                        斌哥找女友
+                        {{reportWholeInfoVo.work_name}}
                     </p>
                 </div>
                 <div class="reportInfo_everydiv_class">
                     <p class="reportInfo_everypname_class">
-                        处罚章节：
+                        处理章节：
                     </p>
                     <p class="reportInfo_everyp_class">
-                        第一百一十二章 娶了个白富美
-                    </p>
-                </div>
-                <div class="reportInfo_everydiv_class">
-                    <p class="reportInfo_everypname_class">
-                        举报时间：
-                    </p>
-                    <p class="reportInfo_everyp_class">
-                        2020-11-22 10:22:22
-                    </p>
-                </div>
-                <div class="reportInfo_everydiv_class">
-                    <p class="reportInfo_everypname_class">
-                        处罚原因：
-                    </p>
-                    <p class="reportInfo_everyp_class">
-                        色情暴力
-                    </p>
-                </div>
-                <div class="reportInfo_everydiv_class">
-                    <p class="reportInfo_everypname_class">
-                        处理管理员：
-                    </p>
-                    <p class="reportInfo_everyp_class">
-                        1223123
+                        {{reportWholeInfoVo.chapter_title}}
                     </p>
                 </div>
                 <div class="reportInfo_everydiv_class">
@@ -130,56 +96,40 @@
                         处理时间：
                     </p>
                     <p class="reportInfo_everyp_class">
-                        2020-11-22 10:22:22
+                        {{reportWholeInfoVo.report_time}}
                     </p>
                 </div>
                 <div class="reportInfo_everydiv_class">
                     <p class="reportInfo_everypname_class">
-                        举报内容：
+                        处理原因：
+                    </p>
+                    <p class="reportInfo_everyp_class">
+                        {{reportWholeInfoVo.report_reason}}
+                    </p>
+                </div>
+                <div class="reportInfo_everydiv_class">
+                    <p class="reportInfo_everypname_class">
+                        处理结果：
+                    </p>
+                    <p class="reportInfo_everyp_class">
+                        {{reportWholeInfoVo.handle_state}}
+                    </p>
+                </div>
+                <div class="reportInfo_everydiv_class">
+                    <p class="reportInfo_everypname_class">
+                        处理内容：
                     </p>
                     <p class="reportInfo_contentp_class">
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-                        将用户人工反馈的举报信息进行处理，查看小说是否存在违规现象。
-
+                        {{reportWholeInfoVo.chapter_content}}
                     </p>
 
                 </div>
 
-
-
                 <div class="reportInfo_everydiv_class">
-                    <el-button class="reject_button_class" type="primary" size="small" style="width: 100px">驳回申请</el-button>
-                    <el-button class="agree_button_class" type="danger" size="small" style="width: 100px;margin-left: 70px">下架该章节</el-button>
+                    <el-button class="reject_button_class" @click="gotochangeTheProcessingResultInterface()" type="primary" size="small" style="width: 100px">不予处理</el-button>
+                    <el-button class="agree_button_class" @click="updateReportInfoByReport_id(4)" type="danger" size="small" style="width: 100px;margin-left: 70px">上架该章节</el-button>
                 </div>
             </div>
-
-
-
-
-
 
         </div>
 
@@ -191,6 +141,7 @@
 <script src="../js/axios.js"></script>
 
 <script src="../js/administratorsTopNavigationFragment.js"></script>
+<script src="../js/handleWorksInterface.js"></script>
 
 
 </body>

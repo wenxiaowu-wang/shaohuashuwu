@@ -13,93 +13,98 @@
 </head>
 <body>
 <div id="app">
-    <div class="administrators_topNavigation_div_class" id="administr_topNavigation_div_id">
+    <!--顶部导航-->
+    <div class="administrators_topNavigation_div_class" id="administrators_topNavigation_div_id">
         <div class="topNavigation_content_div_class">
             <div class="administrators_topNavigation_subdiv_class">
                 <img class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
-<!--                <p class="topintroduce_p_class">管理员·专区</p>-->
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="topintroduce_div_id">
                 <p class="topintroduce_p_class">管理员·专区</p>
-<!--                <p class="topintroduce_p_class"></p>-->
             </div>
 
             <div class="administrators_topNavigation_subdiv_class" id="changepassword_div_id">
                 <el-tooltip class="item" effect="dark" content="密码修改" placement="top-start">
-
                     <img class="changepassword_img_class" id="changepassword_img_id" src="../images/password-32.png" @click="writerGradehelp()">
-
                 </el-tooltip>
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="help_div_id">
                 <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
-
                     <img class="changepassword_img_class" id="help_img_id" src="../images/authorhelp-32.png" @click="writerGradehelp()">
-
                 </el-tooltip>
-
             </div>
             <div class="administrators_topNavigation_subdiv_class" id="administratorsme_div_id">
-                <el-tooltip class="item" effect="dark" content="管理员：12121" placement="top-start">
-
+                <el-tooltip class="item" effect="dark" :content="administrator" placement="top-start">
                     <img class="changepassword_img_class" id="cadministratorsme_img_id" src="../images/authorme-36.png" @click="writerGradehelp()">
-
                 </el-tooltip>
             </div>
         </div>
-
-
     </div>
 
+
     <div class="administrators_mainInfo_div_class">
+        <!--左侧导航-->
         <div class="administrators_mainInfoLeft_div_class">
             <div class="administrators_mainInfoLeft_Listdiv_class">
                 <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">处理举报信息</p>
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p1_id" href="#">处理举报信息</a>
             </div>
             <div class="administrators_mainInfoLeft_Listdiv_class">
                 <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">更改处理结果</p>
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p2_id" href="#">更改处理结果</a>
             </div>
             <div class="administrators_mainInfoLeft_Listdiv_class">
                 <img class="administrators_mainInfoLeft_img_class"src="../images/password-32.png">
-                <p class="administrators_mainInfoLeft_p_class">更改密码</p>
+                <a class="administrators_mainInfoLeft_p_class" id="administrators_mainInfoLeft_p3_id" href="#">更改密码</a>
             </div>
-<!--            <img class src="">-->
-<!--            <div class="administrators_mainInfoLeft_divhr_class"></div>-->
-
         </div>
-
-        <div class="administrators_mainInfoRight_div_class">
+        <!--主要内容-->
+        <div class="administrators_mainInfoRight_div_class" id="administrators_mainInfoRight_div_id">
             <p class="administrators_mainInfoRight_Listp_class">处理举报信息</p>
             <div class="administrators_mainInfoRight_divhr_class"></div>
-            <div class="administrators_mainInfoRight_needdiv_class">
+            <div class="administrators_mainInfoRight_needdiv_class" v-for="reportWholeInfoVo in reportWholeInfoVoList">
                 <div class="reportleft_div_class">
                     <div class="reportInfo_everydiv_class">
-                `       <p class="reportInfo_pname_class">举报人：</p>
-                        <p class="reportInfo_pinfo_class">洪水茫茫</p>
+                        `       <p class="reportInfo_pname_class">举报人：</p>
+                        <p class="reportInfo_pinfo_class">{{reportWholeInfoVo.user_name}}</p>
                     </div>
                     <div class="reportInfo_everydiv_class">
                         <p class="reportInfo_pname_class">举报作品：</p>
-                        <p class="reportInfo_pinfo_class">求魔</p>
+                        <p class="reportInfo_pinfo_class">{{reportWholeInfoVo.work_name}}</p>
                     </div>
                     <div class="reportInfo_everydiv_class">
                         <p class="reportInfo_pname_class">举报章节：</p>
-                        <p class="reportInfo_pinfo_class">第九十九章 再见落枫</p>
+                        <p class="reportInfo_pinfo_class">{{reportWholeInfoVo.chapter_title}}</p>
                     </div>
                     <div class="reportInfo_everydiv_class">
                         <p class="reportInfo_pname_class">举报时间：</p>
-                        <p class="reportInfo_pinfo_class">2020-11-1 12:33:11</p>
+                        <p class="reportInfo_pinfo_class">{{reportWholeInfoVo.report_time}}</p>
                     </div>
+
 
                 </div>
                 <div class="reportright_div_class">
-                    <el-button class="reportright_button_class" type="primary"  size="small" style="width: 100px">去看详情</el-button>
+                    <el-button class="reportright_button_class" @click="gotohandlingWorks(reportWholeInfoVo.report_id)" type="primary"  size="small" style="width: 100px">去看详情</el-button>
                 </div>
             </div>
 
+
+
+            <div class="fenyediv">
+                <el-pagination
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="8"
+                        :page-size="8"
+                        layout="total,sizes,prev, pager, next, jumper"
+                        :total="total">
+                </el-pagination>
+            </div>
         </div>
 
+
+        <div class="bottom_div_class">
+        </div>
     </div>
 </div>
 
@@ -108,6 +113,7 @@
 <script src="../js/axios.js"></script>
 
 <script src="../js/administratorsTopNavigationFragment.js"></script>
+<script src="../js/handlingReportInfoInterface.js"></script>
 
 
 </body>

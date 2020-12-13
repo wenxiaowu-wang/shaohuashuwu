@@ -1,5 +1,6 @@
 package com.shaohuashuwu.domain.vo;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Arrays;
  * 项目:shaohuashuwu
  * 描述:
  */
-public class AttentionInfoVo {
+public class AttentionInfoVo  implements Serializable {
 
     private int user_id;            //用户ID
     private String user_name;       //用户名

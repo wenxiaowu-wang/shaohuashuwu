@@ -1,9 +1,5 @@
 package com.shaohuashuwu.dao;
 
-import com.shaohuashuwu.domain.NoticeInfo;
-import org.apache.ibatis.annotations.*;
-
-import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.dao
