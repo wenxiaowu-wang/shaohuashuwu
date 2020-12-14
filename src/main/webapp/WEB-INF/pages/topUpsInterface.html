@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购买金豆</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/topUp.css">
+
+</head>
+<body>
+
+
+
+
+<!-- Form -->
+
+<div id="dialogForm">
+    <button  @click="dialogFormVisible = true">充值表单显示</button>
+    <br>
+    <el-button type="text" @click="dialogFormVisible = true">金豆充值的 Dialog</el-button>
+    <br>
+    <el-dialog title="金豆充值￥" :visible.sync="dialogFormVisible" width="45%" class="dialog_bg_all">
+
+        <el-form :model="form" class="dialog_form">
+            <el-form-item label="账号：" :label-width="formLabelWidth" class="form_item">
+<!--                <el-avatar shape="circle" size="small" fit="none" :src="avatarURL" class="form_item_avatar"></el-avatar>-->
+                <div class="form_item_div">
+                    <div class="form_item_avatar">
+                        <img :src="avatarURL" id="avatar"/>
+                    </div>
+                    <label class="form_user_name">{{form.name}}</label>
+                </div>
+            </el-form-item>
+            <el-form-item label="支付方式：" :label-width="formLabelWidth">
+                <el-radio-group  v-model="form.method">
+<!--                    autofocus="true"-->
+                    <el-radio-button label="0" class="form_item_button">支付宝</el-radio-button>
+                    <el-radio-button label="1" class="form_item_button">微信</el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="充值金额：" :label-width="formLabelWidth">
+                <el-radio-group  v-model="form.money">
+<!--                    autofocus="true"-->
+                    <el-radio-button label=10 class="form_item_button">￥10（1000金豆）</el-radio-button>
+                    <el-radio-button label=20 class="form_item_button">￥20（2000金豆）</el-radio-button>
+                    <el-radio-button label=30 class="form_item_button">￥30（3000金豆）</el-radio-button>
+                    <el-radio-button label=50 class="form_item_button">￥50（5000金豆）</el-radio-button>
+                    <el-radio-button label=100 class="form_item_button">￥100（10,000金豆）</el-radio-button>
+                </el-radio-group>
+                <!--                <el-select v-model="form.region" placeholder="请选择活动区域">-->
+                <!--                    <el-option label="区域一" value="shanghai"></el-option>-->
+                <!--                    <el-option label="区域二" value="beijing"></el-option>-->
+                <!--                </el-select>-->
+            </el-form-item>
+        </el-form>
+
+        <div slot="footer" class="dialog_footer">
+            <div class="dialog_footer_label">
+                <label>理性消费 *最终解释权归【韶华书屋】平台所有</label>
+            </div>
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="topUpsCheck">确 定</el-button>
+        </div>
+
+    </el-dialog>
+
+    <!--  支付宝收款码  -->
+    <el-dialog title="支付宝收款码" :visible.sync="alipayVisible" width="375px" class="dialog_receivables">
+        <div class="dialog_receivables_content">
+            <div class="photo">
+                <div class="demonstration">支付宝扫一扫付款</div>
+                <div class="photo_img">
+                    <img :src="alipayImg" />
+                </div>
+            </div>
+            <div class="checkPaymentInput">
+                <div class="checkPaymentInput_tips">接收验证码：</div>
+                <div>
+                    <el-input v-model="paymentCheck" placeholder="请输入付款接收码"></el-input>
+                </div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="alipayVisible = false">取 消</el-button>
+                <el-button type="primary" @click="paymentCommit">确 定</el-button>
+            </div>
+        </div>
+
+    </el-dialog>
+    <!--  微信收款码  -->
+    <el-dialog title="微信收款码" :visible.sync="weChatVisible" width="375px" class="dialog_receivables">
+        <div class="dialog_receivables_content">
+            <div class="photo">
+                <div class="demonstration">微信扫一扫付款</div>
+                <div class="photo_img">
+                    <img :src="weChatImg" />
+                </div>
+            </div>
+            <div class="checkPaymentInput">
+                <div class="checkPaymentInput_tips">接收验证码：</div>
+                <div>
+                    <el-input v-model="paymentCheck" placeholder="请输入付款接收码"></el-input>
+                </div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="weChatVisible = false">取 消</el-button>
+                <el-button type="primary" @click="paymentCommit">确 定</el-button>
+            </div>
+        </div>
+
+    </el-dialog>
+
+</div>
+
+
+<script src="../js/axios.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/topUps.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+.body_content{
+    /*border: 1px solid red;*/
+    margin: 5px auto;
+    width: 80%;
+    height: 70%;
+    background-color: #fcf9f9;
+    /*border-radius: 2%;*/
+    /*box-shadow: #6f7180;*/
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+}
+.content_title{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+.content_from{
+    margin: 30px auto;
+}
+.content_from_row{
+    border: 1px solid black;
+    width: 78%;
+    height: 50px;
+    margin: 5px auto;
+}
+.from_row_label{
+    width: 30%;
+    margin-top: 10px;
+    text-align: right;
+    float: left;
+    /*border: 1px solid red;*/
+}
+.from_row_input{
+    width: 60%;
+    margin: 1px auto;
+    float: left;
+    /*border: 1px solid blue;*/
+}
+.check_result{
+    width: 6%;
+    height: 30px;
+    margin-top: 5px;
+    border: 1px solid black;
+    float: left;
+}
+.input_tip{
+    width: 68%;
+    height: 15px;
+    float: left;
+    font-size: 10px;
+    font-weight: lighter;
+    border: 1px solid red;
+    margin-left: 30%;
+}
+.from_operate_row{
+    border: 1px solid black;
+    width: 80%;
+    height: 60px;
+    margin-top: 25px;
+    margin-left: 10%;
+}
+.op_button_left{
+    border: 1px solid red;
+    float: left;
+}
+.op_button{
+    border: 1px solid red;
+    margin-right: 10px;
+    float: right;
+}

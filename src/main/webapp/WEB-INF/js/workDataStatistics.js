@@ -21,9 +21,9 @@ let workDataStatisticsInterface_vm = new Vue({
             label: '作品5'
         }],
         select:{
-            value_1:0,
-            value_2:0,
-            value_3:0
+            value_1:'',
+            value_2:'',
+            value_3:''
         },
         //----end----
         //订阅数据统计
@@ -36,29 +36,154 @@ let workDataStatisticsInterface_vm = new Vue({
 
     },
     methods:{
-        selectWork(){
-            //提现按钮点击后提示
-            this.$message({
-                type:'info',
-                message:'您当前已经在提现界面，您可以选择或输入提现金豆数量'
-            });
-        },
-        createSubscriptionFigure(xAxisData,data1,data2){
-            xAxisData = [];
-            data1 = [];
-            data2 = [];
-            for (let i = 0; i < 101; i++) {
-                xAxisData.push('类目' + i);
-                // data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
-                // data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
-                if (i%3 === 0) {
-                    data1.push(10+i);
-                    data2.push(8+i);
-                }else{
-                    data1.push(0);
-                    data2.push(0);
-                }
+        selectWork_1(){
+            if (this.select.value_1 === ''){
+                this.$message({
+                    type:'error',
+                    message:'请选择作品'
+                });
+            }else{
+                //根据作品ID获取该作品订阅统计分布
+                axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getSubscriptionStatisticsData/" +
+                    this.select.value_1).then(resp =>{
+
+                    let objectData = resp.data;
+                    // console.log("data eval后数据 objectData类型为："+typeof (objectData));
+                    // console.log("data eval后 objectData为:"+objectData);
+                    let list_nan = eval(objectData["男"]);
+                    let list_nv = eval(objectData["女"]);
+                    // console.log("list_nan的数据类型为："+typeof (list_nan));
+                    // console.log("list_nan的数据为："+list_nan);
+
+                    let data_nan = [];
+                    let data_nv = [];
+                    let xAxisData = [];
+                    list_nan.forEach(function (value,index,array) {
+                        xAxisData.push(value["date_day"]);
+                        data_nan.push(value["subscription_quantity"]);
+                    });
+                    list_nv.forEach(function (value) {
+                        data_nv.push(value["subscription_quantity"]);
+                    });
+                    this.createSubscriptionFigure(xAxisData,data_nan,data_nv);
+                    console.log("订阅数据获取并展示成功。");
+                }).catch(error =>{
+                    console.log("获取订阅分布数据错误。"+error);
+                });
+                //获取该作品的其它订阅情况
+                axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getOtherSubscriptionStatisticsData/" +
+                    this.select.value_1).then(response =>{
+                    let objectData = response.data;
+                    this.subscription_data.all = objectData["all_subscription_num"];
+                    this.subscription_data.yesterday = objectData["yesterday_subscription_num"];
+                    this.subscription_data.average = objectData["chapter_avg_subscription_num"];
+                    this.subscription_data.most = objectData["chapter_max_subscription_num"];
+                    console.log("获取其它订阅数据成功。");
+                }).catch(error =>{
+                    console.log("获取其它订阅统计失败。");
+                })
             }
+
+
+        },
+        selectWork_2(){
+            //提现按钮点击后提示
+            if (this.select.value_2 === ''){
+                this.$message({
+                    type:'error',
+                    message:'请选择作品'
+                });
+            }else{
+                axios.get("/shaohuashuwu_war_exploded/readingHistoryInfoController/getReaderAgeDistributionByWorkId/" +
+                    this.select.value_2).then(resp =>{
+                    let object = resp.data;
+                    let list_nan = eval(object["男"]);
+                    let list_nv = eval(object["女"]);
+
+                    let data_nan = this.analysisReadingData(list_nan)["data"];
+                    let data_nv = this.analysisReadingData(list_nv)["data"];
+                    //装配数据
+                    this.createReadersGroupFigure("male",data_nan);
+                    this.createReadersGroupFigure("female",data_nv);
+                    console.log("读者年龄段分布统计并展示成功。");
+                }).catch(error =>{
+                    console.log("读者年龄段分布统计或展示失败！"+error);
+                });
+            }
+        },
+        selectWork_3(){
+            //提现按钮点击后提示
+            if (this.select.value_3 === ''){
+                this.$message({
+                    type:'error',
+                    message:'请选择作品'
+                });
+            }else{
+                //获取该作品对应的读者于都时间段分布数据
+                axios.get("/shaohuashuwu_war_exploded/readingHistoryInfoController/getReadingTimeDistributionByWorkId/" +
+                    this.select.value_3).then(resp =>{
+                    let object = resp.data;
+                    let list_nan = eval(object["男"]);
+                    let list_nv = eval(object["女"]);
+                    let data_nan = this.analysisReadingData(list_nan)["data"];
+                    let data_nv = this.analysisReadingData(list_nv)["data"];
+                    let max_value_nan = this.analysisReadingData(list_nan)["max_value"];
+                    let max_value_nv = this.analysisReadingData(list_nv)["max_value"];
+                    let max_value = max_value_nan > max_value_nv ? max_value_nan:max_value_nv;
+                    this.createReadingTimeFigure(data_nan,data_nv,(max_value+1));
+                    console.log("读者阅读时间段分布数据获取并展示成功。"+data_nan);
+                    console.log(data_nv);
+                }).catch(error =>{
+                    console.log("读者阅读时间段分布诗句获取或展示失败！"+error);
+                });
+                //获取该作品对应的读者于都时间段分布数据
+                axios.get("/shaohuashuwu_war_exploded/bookshelfInfoController/getReaderLikeDistributionByWorkId/" +
+                    this.select.value_3).then(resp =>{
+                    let object = resp.data;
+                    let list_nan = eval(object["男"]);
+                    let list_nv = eval(object["女"]);
+                    //js push 列表到首位
+                    let nan_like_data = this.analysisReaderLike(list_nan)["data"];
+                    let nv_like_data = this.analysisReaderLike(list_nv)["data"];
+                    let yAxis_data = this.analysisReaderLike(list_nv)["label"];
+
+                    this.createBehaviorLikeFigure(yAxis_data,nan_like_data,nv_like_data);
+                    console.log("读者喜欢作品类型分布数据获取并展示成功。"+nan_like_data);
+                    console.log(data_nv);
+                }).catch(error =>{
+                    console.log("读者喜欢作品类型分布数据获取并展示失败！"+error);
+                });
+            }
+        },
+        //解析读者年龄段信息或者读者阅读时间段信息，返回可直接传入构造图形的值以及最大值
+        analysisReadingData(list_data){
+            let data = [];
+            let max_value = 0;
+            list_data.forEach(function (value,index,array) {
+                data.push(value["reader_num"]);
+                max_value = max_value > value["reader_num"] ? max_value:value["reader_num"];
+            });
+            return {
+                "data":data,
+                "max_value":max_value
+            };
+        },
+        //解析读者喜欢的作品标签分类信息，返回可直接传入构造图形已排好序的值
+        analysisReaderLike(list_data){
+            let data = [];
+            let label = [];
+            list_data.forEach(function (value,index,array) {
+                data.unshift(value["reader_num"]);
+                label.unshift(value["work_main_label"]);
+            });
+            return {
+                "data":data,
+                "label":label
+            };
+        },
+
+        //构造订阅统计分布柱状图
+        createSubscriptionFigure(xAxisData,data1,data2){
             let myChart = echarts.init(document.getElementById('figure_subscription'));
             let option = {
                 title: {
@@ -119,42 +244,8 @@ let workDataStatisticsInterface_vm = new Vue({
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         },
-        _createSubscriptionFigure(xAxis_data,series_data){
-            let myChart = echarts.init(document.getElementById('figure_subscription'));
-            // let xAxis_data = [];
-            // let series_data = [];
-            // 指定图表的配置项和数据
-            let option = {
-                title: {
-                    text: '订阅量统计折线图',
-                    subtext: "（金豆个数/日期）",
-                    left:'center',
-                    textStyle: {
-                        fontWeight:'normal',
-                        fontSize: 15
-                    },
-                    subtextStyle: {
-                        fontWeight:'normal',
-                        fontSize: 13
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    data: xAxis_data
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [{
-                    data: series_data,
-                    type: 'line'
-                }]
-            };
-
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
-        },
-        createMaleReadersGroupFigure(gender,data_value){
+        //构造读者年龄段分布统计饼状图
+        createReadersGroupFigure(gender,data_value){
             let title_text = "";
             let id = ""
             if (gender === "male"){
@@ -218,7 +309,8 @@ let workDataStatisticsInterface_vm = new Vue({
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         },
-        createBehaviorTimeFigure(series_data_value_male,series_data_value_female,indicator_max){
+        //构造读者阅读时间段分布统计雷达图
+        createReadingTimeFigure(series_data_value_male,series_data_value_female,indicator_max){
             let myChart = echarts.init(document.getElementById('figure_behavior_time'));
             let option = {
                 title: {
@@ -258,7 +350,18 @@ let workDataStatisticsInterface_vm = new Vue({
                         { name: '9点', max: indicator_max},
                         { name: '10点', max: indicator_max},
                         { name: '11点', max: indicator_max},
-                        { name: '12点', max: indicator_max}
+                        { name: '12点', max: indicator_max},
+                        { name: '13点', max: indicator_max},
+                        { name: '14点', max: indicator_max},
+                        { name: '15点', max: indicator_max},
+                        { name: '16点', max: indicator_max},
+                        { name: '17点', max: indicator_max},
+                        { name: '18点', max: indicator_max},
+                        { name: '19点', max: indicator_max},
+                        { name: '20点', max: indicator_max},
+                        { name: '21点', max: indicator_max},
+                        { name: '22点', max: indicator_max},
+                        { name: '23点', max: indicator_max}
                     ]
                 },
                 series: [{
@@ -345,26 +448,59 @@ let workDataStatisticsInterface_vm = new Vue({
             this.user_id = userId;
             this.user_name = userName;
             console.log("用户数据装配成功");
+            //获取该作者所有作品ID以及名字
+            axios.get("/shaohuashuwu_war_exploded/worksInfoController/getAllWorksNameAndIdByAuthorId/" +
+                this.user_id).then(response =>{
+                //根据用户的ID获取该作者的作品数据
+                let objectData = eval(JSON.stringify(response.data));//将字符串转化为数组对象
+                console.log("作品数据对象的数据类型为："+typeof (objectData));
+                console.log("作品数据为："+objectData);
+                // value是当前元素，index当前元素索引，array为当前数组
+                this.work_options = [];
+                let this_ = this;       //注意一进入function内嵌函数中，this代表的是其函数，不是vue本身了
+                objectData.forEach(function (value,index,array) {
+                    let one_value = {
+                        value:value["work_id"],
+                        label:value["work_name"]
+                    };
+                    this_.work_options.push(one_value);
+                });
+                console.log("装配作品数据成功。");
+            }).catch(error =>{
+                console.log("装配作品数据失败。");
+            });
         }).catch(error =>{
             console.log("获取本用户ID和name错误。");
         });
-        //xAxis_data数据为所有订阅时间 series_data为某个时间（天）进行的订阅量
-        let xAxis_data = ['周一', '周二', '周三', 'Thu', 'Fri', 'Sat', 'Sun'];
-        let series_data = [820, 932, 901, 934, 1290, 1330, 1320];
-        //this.createSubscriptionFigure(xAxis_data,series_data);
-        this.createSubscriptionFigure(xAxis_data,series_data,series_data);
 
-        //data_value数据为不同岁数段的人数统计
-        let data_value = [335,310,234,235,1548];
-        let data_value_2 = [300,1000,333,235,1548];
-        this.createMaleReadersGroupFigure("male",data_value);
-        this.createMaleReadersGroupFigure("female",data_value_2);
+        //xAxis_data数据为所有订阅时间 series_data为某个时间（天）进行的订阅量
+        let xAxis_data = ['某天', '某天', '某天', '某天', '某天', '某天', '某天'];
+        let series_data_nan = [820, 932, 901, 934, 1290, 1330, 1320];
+        let series_data_nv = [1320, 1330, 1290, 934, 901, 932, 820];
+        //this.createSubscriptionFigure(xAxis_data,series_data);
+        this.createSubscriptionFigure(xAxis_data,series_data_nan,series_data_nv);
+
+        //data_value数据为不同岁数段的人数统计300,1000,333,235,1548
+        let data_value = [0,0,0,0,0];
+        let data_value_2 = [0,0,0,0,0];
+
+        //初始化一些假数据，等待选择作品后统计
+        /*for (let i=0;i<5;i++){
+            let map = new Map();
+            map.set("age_type","年龄段"+(i+1));
+            map.set("reader_num",0);
+            data_value.push(map);
+            data_value_2.push(map);
+        }*/
+
+        this.createReadersGroupFigure("male",data_value);
+        this.createReadersGroupFigure("female",data_value_2);
 
         //数据为每个时间段所获取的阅读人数（随机抽取100以内个数据）max为雷达图的每个属性的最大值
         let indicator_max = 52000;
         let series_data_value_male = [4300, 10000, 28000, 35000, 50000, 19000,4300, 10000, 28000, 35000, 50000, 19000];
         let series_data_value_female = [5000, 14000, 28000, 31000, 42000, 21000,5000, 14000, 28000, 31000, 42000, 21000];
-        this.createBehaviorTimeFigure(series_data_value_male,series_data_value_female,indicator_max);
+        this.createReadingTimeFigure(series_data_value_male,series_data_value_female,indicator_max);
 
         //数据为所有大标签，以及对应男生女生读者喜欢某类标签的人数（200名读者以内）
         let series_like_data_male = [18203, 23489, 29034, 104970, 131744,18203, 23489, 29034, 104970, 131744, 29034, 104970, 131744, 630230];

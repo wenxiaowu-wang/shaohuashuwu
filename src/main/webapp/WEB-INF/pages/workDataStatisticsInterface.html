@@ -112,7 +112,7 @@
                                 </el-select>
                             </div>
                             <div class="pane_header_button">
-                                <el-button type="primary" plain @click="selectWork">查看</el-button>
+                                <el-button type="primary" plain @click="selectWork_1">查看</el-button>
                             </div>
                         </div>
                         <div class="pane_header_hr">
@@ -161,7 +161,7 @@
                                 <label>选择作品：</label>
                             </div>
                             <div class="pane_header_selector">
-                                <el-select v-model="select.value_1" placeholder="请选择作品">
+                                <el-select v-model="select.value_2" placeholder="请选择作品">
                                     <el-option
                                             v-for="item in work_options"
                                             :key="item.value"
@@ -171,7 +171,7 @@
                                 </el-select>
                             </div>
                             <div class="pane_header_button">
-                                <el-button type="primary" plain @click="selectWork">查看</el-button>
+                                <el-button type="primary" plain @click="selectWork_2">查看</el-button>
                             </div>
                         </div>
                         <div class="pane_header_hr">
@@ -202,7 +202,7 @@
                                 <label>选择作品：</label>
                             </div>
                             <div class="pane_header_selector">
-                                <el-select v-model="select.value_1" placeholder="请选择作品">
+                                <el-select v-model="select.value_3" placeholder="请选择作品">
                                     <el-option
                                             v-for="item in work_options"
                                             :key="item.value"
@@ -212,7 +212,7 @@
                                 </el-select>
                             </div>
                             <div class="pane_header_button">
-                                <el-button type="primary" plain @click="selectWork">查看</el-button>
+                                <el-button type="primary" plain @click="selectWork_3">查看</el-button>
                             </div>
                         </div>
                         <div class="pane_header_hr">

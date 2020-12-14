@@ -1,7 +1,5 @@
 package com.shaohuashuwu.domain;
 
-import com.shaohuashuwu.domain.vo.NoticeInfoVo;
-
 import java.sql.Timestamp;
 
 public class NoticeInfo {

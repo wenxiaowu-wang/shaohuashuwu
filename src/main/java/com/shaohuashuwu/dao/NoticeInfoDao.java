@@ -15,7 +15,12 @@ import java.util.List;
 public interface NoticeInfoDao {
 
     //获取该用户所有的通知信息
-    @Select("select * from notice_info where send_to = #{user_id}")
+    @Select("SELECT DISTINCT notice_info.notice_id AS notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_state_info.read_state AS notice_tip \n" +
+            "FROM notice_info,bookshelf_info,works_info,attention_info,notice_state_info \n" +
+            "WHERE notice_info.notice_id = notice_state_info.notice_id AND \n" +
+            "(send_to = viewer_id AND viewer_id = #{param1} AND delete_state = 0) OR \n" +
+            "(notice_type = 2 AND send_by = bookshelf_info.work_id AND bookshelf_info.user_id = #{param1} AND viewer_id = #{param1} AND delete_state = 0) OR\n" +
+            "(notice_type = 2 AND notice_type = 2 AND send_by = works_info.work_id AND works_info.user_id = attention_info.author_id AND attention_info.reader_id = #{param1} AND viewer_id = #{param1} AND delete_state = 0) ORDER BY read_state ASC,send_time DESC")
     @Results(id = "noticeInfo",value = {
             @Result(id = true,column = "notice_id",property = "notice_id"),
             @Result(column = "send_by",property = "send_by"),
@@ -28,37 +33,24 @@ public interface NoticeInfoDao {
     })
     public List<NoticeInfo> selectAllNoticeInfoByUserId(int user_id);
 
+    //当消息类型为更新提醒时，根据发送者ID（作品ID）获取消息ID
+    @Select("SELECT IFNULL((SELECT notice_id FROM notice_info WHERE send_by = #{send_by} AND notice_type = 2),-1) AS notice_id")
+    public int selectWorkUpdateNoticeIdBySendBy(int send_by);
+
     //获取该用户所有的通知信息值对象(猜测获取不成功，因为数据库不对应)
-
-    //更新该用户所有的通知提示(取消该用户所有通知的提示)(未用到)
-    @Update("update notice_info set notice_tip = 0 where send_to = #{user_id}")
-    public int updateAllNoticeTipByUserId(int user_id);
-
-    //更新一条通知提示（取消提示）--未用到
-    @Update("update notice_info set notice_tip = 0 where notice_id = #{notice_id}")
-    public int updateOneNoticeTipByNoticeId(int notice_id);
-
-    //更新该用户对应类型所有的信息
-    @Update("UPDATE notice_info SET notice_tip = 0 WHERE send_to = #{param1} AND notice_type = #{param2}")
-    public int updateAllNoticeTipByIdAndType(int user_id,int notice_type);
-
-    //删除一条通知信息
-    @Delete("delete from notice_info where notice_id = #{notice_id}")
-    public int deleteNoticeInfoByNoticeId(int notice_id);
-
-    //删除该用户所有通知(未使用)
-    @Delete("delete from notice_info where send_to = #{user_id}")
-    public int deleteNoticeInfoByUserId(int user_id);
-
-    //删除该用户所有对应类型的消息通知
-    @Delete("delete from notice_info where send_to = #{param1} and notice_type = #{param2}")
-    public int deleteAllNoticeInfoByIdAndType(int user_id,int notice_type);
 
     //插入一条通知消息
     @Insert("insert into notice_info(notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_tip)" +
             "values(#{notice_id},#{send_by},#{send_to},#{notice_type},#{notice_content},#{notice_title},#{send_time},#{notice_tip})")
     public int insertOneNoticeInfo(NoticeInfo noticeInfo);
 
+    @Insert("REPLACE INTO notice_info(notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_tip)" +
+            "values(#{notice_id},#{send_by},#{send_to},#{notice_type},#{notice_content},#{notice_title},#{send_time},#{notice_tip})")
+    public int insertOrUpdateOneNoticeInfo(NoticeInfo noticeInfo);
+
+    //根据发送者、接受者、消息类型获取对应的最近的一条消息
+    @Select("SELECT * FROM notice_info WHERE send_by = #{param1} AND send_to = #{param2} AND notice_type = #{param3} ORDER BY send_time DESC LIMIT 0,1")
+    public NoticeInfo selectRecentTimeNoticeInfoBySendByToAndType(int send_by,int send_to,int notice_type);
 
 
 }

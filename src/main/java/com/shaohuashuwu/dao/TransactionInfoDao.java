@@ -61,7 +61,7 @@ public interface TransactionInfoDao {
     public List<TransactionInfo> selectSubscribeInfoByWorkId(int work_id);
 
     //根据用户ID统计该用户的金币收入数量
-    @Select("select sum(transaction_quantity)from transaction_info where recipient_id = #{user_id}")
+    @Select("select IFNULL(sum(transaction_quantity),0)from transaction_info where recipient_id = #{user_id}")
     public int selectAllIncomeGoldNum(int user_id);
 
     //根据交易id更新一条对应交易记录信息
@@ -77,10 +77,22 @@ public interface TransactionInfoDao {
     public List<TransactionInfo> selectSomeTimeOfTransactionInfo(String time_1,String time_2);
 
     //1.统计某一时间段的订阅记录的条数（选择时间段【精确到日%Y-%m-%d】、选择性别、选择作品ID）
-    @Select("SELECT DATE_FORMAT(subscription_time,'%Y-%m-%d')date_day,SUM(transaction_quantity)subscription_quantity FROM subscription_view WHERE gender = #{param4} AND subscription_time >= #{param2} AND subscription_time <= #{param3} AND work_id = #{param1} GROUP BY DATE_FORMAT(subscription_time,'%Y-%m-%d')")
+    @Select("SELECT DATE_FORMAT(subscription_time,'%Y-%m-%d')date_day,IFNULL(SUM(transaction_quantity),0)subscription_quantity FROM subscription_view WHERE gender = #{param4} AND subscription_time >= #{param2} AND subscription_time <= #{param3} AND work_id = #{param1} GROUP BY DATE_FORMAT(subscription_time,'%Y-%m-%d')")
     public List<Map<String,Object>> selectSubscriptionStatisticsData(int work_id,String start_time,String end_time,String gender);
 
     //测试返回map集合数据
     @Select("SELECT user_id,user_name FROM user_info WHERE user_name like #{param1}")
     public List<Map<String,Object>> selectTestResultMapData(String work_name);
+
+    //1.01根据作品ID获取总订阅数量
+    @Select("SELECT IFNULL(SUM(transaction_quantity),0) AS all_subscription_num FROM subscription_view WHERE work_id = #{work_id}")
+    public int selectAllSubscriptionNumByWorkId(int work_id);
+
+    //1.02根据作品ID获取某天的订阅量
+    @Select("SELECT IFNULL(SUM(transaction_quantity),0) AS yesterday_subscription_num FROM subscription_view WHERE work_id = #{param1} and DATE_FORMAT(subscription_time,'%Y-%m-%d') = #{param2}")
+    public int selectOneDaySubscriptionNumByWorkID(int work_id,String one_day);
+
+    //1.04根据作品ID获取章节对稿订阅量
+    @Select("SELECT MAX(T.chapter_subscription_num) AS chapter_max_subscription_num FROM (SELECT IFNULL(SUM(transaction_quantity),0) AS chapter_subscription_num, chapter_id FROM subscription_view WHERE work_id = #{param1} GROUP BY chapter_id) AS T")
+    public int selectChapterMaxSubscriptionNumByWorkId(int work_id);
 }

@@ -156,70 +156,86 @@ let personalAccountInterface_vm = new Vue({
             this.user_id = userId;
             this.user_name = userName;
             this.user_avatar = userAvatar;
-            //获取所有该用户的通知消息
-            axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllConsumptionTransactionInfo/"+userId).then(resp =>{
-                console.log("获取成功");
-                let objectData = eval(JSON.stringify(resp.data));//将字符串转化为数组对象
-                // value是当前元素，index当前元素索引，array为当前数组
-                //将所有通知信息按照类别分类放置
-                let length1 = 0;
-                let length2 = 0;
-                let length3 = 0;
-                let length4 = 0;
-                this.topUpData = [];
-                this.rewardData = [];
-                this.subscriptionData = [];
-                this.voteTicketData = [];
-                let _this = this;
-                console.log("数据装配中······");
-                objectData.forEach(function (value,index,array) {
-                    switch (value.transaction_type) {
-                        case "充值":{
-                            // length1 = this.systemMessageData.push(value); //注意在这里使用this，指的是function
-                            length1 = _this.topUpData.push(value); //注意在这里使用this，指的是function
-                            break;
-                        }
-                        case "打赏":{
-                            length2 = _this.rewardData.push(value);
-                            break;
-                        }
-                        case "订阅":{
-                            length3 = _this.subscriptionData.push(value);
-                            break;
-                        }
-                        case "投票":{
-                            length4 = _this.voteTicketData.push(value);
-                            break;
-                        }
-                        default:break;
-                    }
-                });
-                this.totals.total1 = length1;
-                this.totals.total2 = length2;
-                this.totals.total3 = length3;
-                this.totals.total4 = length4;
-                console.log("数据装配成功");
-                console.log("订阅记录信息条数："+this.subscriptionData.length+"条");
-
-            }).catch(error =>{
-                console.log("获取交易记录失败："+error);
-            });
-            //获取用户金豆数量
-            axios.get("/shaohuashuwu_war_exploded/userInfoController/getGoldBeanNum/"+userId).then(response_getGoldBeanNum =>{
-                let str_goldBean = JSON.stringify(response_getGoldBeanNum.data);
-                this.goldBeanNum = parseInt(str_goldBean);
-            }).catch(error =>{
-                console.log("获取金豆数量："+error);
-            });
-            //获取用户推荐票数量
-            axios.get("/shaohuashuwu_war_exploded/userInfoController/getTicketNum/"+userId).then(response_getTicketNum =>{
-                let str_ticketNum = JSON.stringify(response_getTicketNum.data);
-                this.ticketNum = parseInt(str_ticketNum);
-            }).catch(error =>{
-               console.log("获取推荐票数量："+error);
-            });
         }).catch(error =>{
-            alert("获取本用户ID和name错误。"+error);
+            this.$message({
+                type:'error',
+                message:'获取用户信息失败！'
+            });
+            console.log("获取用户信息失败！"+error);
         });
+        //获取所有该用户的通知消息
+        axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllConsumptionTransactionInfo").then(resp =>{
+            let objectData = eval(JSON.stringify(resp.data));//将字符串转化为数组对象
+            // value是当前元素，index当前元素索引，array为当前数组
+            //将所有通知信息按照类别分类放置
+            let length1 = 0;
+            let length2 = 0;
+            let length3 = 0;
+            let length4 = 0;
+            this.topUpData = [];
+            this.rewardData = [];
+            this.subscriptionData = [];
+            this.voteTicketData = [];
+            let _this = this;
+            console.log("数据装配中······");
+            objectData.forEach(function (value,index,array) {
+                switch (value.transaction_type) {
+                    case "充值":{
+                        // length1 = this.systemMessageData.push(value); //注意在这里使用this，指的是function
+                        length1 = _this.topUpData.push(value); //注意在这里使用this，指的是function
+                        break;
+                    }
+                    case "打赏":{
+                        length2 = _this.rewardData.push(value);
+                        break;
+                    }
+                    case "订阅":{
+                        length3 = _this.subscriptionData.push(value);
+                        break;
+                    }
+                    case "投票":{
+                        length4 = _this.voteTicketData.push(value);
+                        break;
+                    }
+                    default:break;
+                }
+            });
+            this.totals.total1 = length1;
+            this.totals.total2 = length2;
+            this.totals.total3 = length3;
+            this.totals.total4 = length4;
+            console.log("数据装配成功");
+            console.log("订阅记录信息条数："+this.subscriptionData.length+"条");
+
+        }).catch(error =>{
+            this.$message({
+                type:'error',
+                message:'获取并装配交易记录失败'
+            });
+            console.log("获取交易记录失败："+error);
+        });
+        //获取用户金豆数量
+        axios.get("/shaohuashuwu_war_exploded/userInfoController/getGoldBeanNum").then(response_getGoldBeanNum =>{
+            let str_goldBean = JSON.stringify(response_getGoldBeanNum.data);
+            this.goldBeanNum = parseInt(str_goldBean);
+        }).catch(error =>{
+            this.$message({
+                type:'error',
+                message:'获取金豆数量失败！'
+            });
+            console.log("获取金豆数量失败！"+error);
+        });
+        //获取用户推荐票数量
+        axios.get("/shaohuashuwu_war_exploded/userInfoController/getTicketNum").then(response_getTicketNum =>{
+            let str_ticketNum = JSON.stringify(response_getTicketNum.data);
+            this.ticketNum = parseInt(str_ticketNum);
+        }).catch(error =>{
+            this.$message({
+                type:'error',
+                message:'获取推荐票数量失败！'
+            });
+           console.log("获取推荐票数量失败！"+error);
+        });
+
     },
 })

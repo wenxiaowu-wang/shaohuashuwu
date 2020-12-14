@@ -1,3 +1,126 @@
+.left_drawer{
+    /*width: 500px;*/
+    min-width: 1200px;
+    /*max-width: 1234px;*/
+    min-height: 700px;
+    border: 1px solid blue;
+}
+.left_private_letter{
+    /*position:absolute;*/
+    /*width: 500px;*/
+    /*height: 500px;*/
+    /*border: #e51818 solid 2px;*/
+    /*z-index:0;*/
+}
+.letter_body{
+    width: 100%;
+    height: 100%;
+    background-color: #f8f3eb;
+    background-image: url("../images/letter/002.jpg") ;
+    /*background-size: 100% 100%;*/
+    border: #5cee0e solid 2px;
+    opacity: 1;/* 整个div透明度变为50%*/
+
+}
+.letter_send_to{
+    border: 1px solid red;
+    width: 75%;
+    height: 60px;
+    margin-left: 12%;
+    margin-top: 23%;
+    margin-bottom: 10px;
+    float: left;
+}
+.send_to_user_portrait{
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border: 1px solid blue;
+    float: left;
+}
+.send_to_user_portrait img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.send_to_user_name{
+    font-weight: bolder;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 35px;
+    float: left;
+}
+.letter_title{
+    border: 1px solid #36f50b;
+    width: 70%;
+    height: 10%;
+    margin-left: 15%;
+    margin-bottom: 10px;
+    float: left;
+}
+.letter_tips{
+    width: 99%;
+    height: auto;
+    font-weight: normal;
+    font-size: 14px;
+    color: #414149;
+    float: left;
+}
+.letter_title_word{
+    width: 80%;
+    height: 100%;
+    font-weight: bolder;
+    font-size: 13px;
+    float: left;
+}
+.letter_content{
+    width: 70%;
+    height: 30%;
+    font-size: 12px;
+    margin-left: 15%;
+    font-weight: normal;
+    float: left;
+    border: 1px solid red;
+}
+.letter_content_word{
+    width: 80%;
+    height: 100%;
+    float: left;
+
+}
+.letter_send_by{
+    border: 1px solid red;
+    width: 60%;
+    height: 60px;
+    margin-left: 15%;
+    margin-top: 3%;
+    float: left;
+}
+.send_by_user_portrait{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid blue;
+    float: right;
+}
+.send_by_user_portrait img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.send_by_user_name{
+    font-weight: bolder;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 30px;
+    float: right;
+}
+.letter_send{
+    width: 18%;
+    float: right;
+    margin-right: 15%;
+    border: 1px solid red;
+}
 .body_left_carousel{
     width: 100%;
     height: auto;
@@ -18,6 +141,7 @@
 .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
 }
+/*以上为左边轮播图的内容*/
 .body_header{
     background-color: #faf8f8;
 }
@@ -44,14 +168,16 @@
     float: left;
 }
 #avatar{
+    width: 95px;
+    height: 95px;
     /*  <img>标签的样式  */
     border-radius: 50%;
 }
 .body_img_content{
     /*background-color: #e6e6e6;*/
     width: 60%;
-    height: 30%;
-    border: 1px solid #00ff00;
+    height: 30%;        /*大头像后面的内容div*/
+    /*border: 1px solid #00ff00;*/
     border-radius: 5px;
     text-align: left;
     margin-top: 115px;
@@ -61,8 +187,8 @@
 }
 .body_img_content label{
     margin-left: 20px;
-    color: #a31919;
-    border:1px solid blue;
+    /*color: #a31919;*/
+    /*border:1px solid blue;*/ /*为显示关注信息总数的div*/
     font-weight: normal;
     margin-bottom: 5px;
     float: bottom;
@@ -88,39 +214,81 @@
     /*  如果没有理解错的话应该是每一个user的div  */
     width: 100%;
     height: 100px;
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     margin: 2px auto;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .users_avatar{
-    width: 17%;
-    height: 80%;
-    border: 2px solid black;
-    padding: 10px;
+    width: 15%;
+    height: 90%;
+    /*border: 2px solid black;*/
+    padding: 4px;
     text-align: center;
     float: left;
 }
 .users_avatar img{
-    width: 75%;
-    height: 75%;
+    width: 80px;
+    height: 80px;
+    margin-top: 4px;
     border-radius: 50%;
-    margin: 3px 3px;
+    /*border: blue solid 1px;*/
     text-align: center;
 }
 .users_content{
-    width: 55%;
-    height: 80%;
-    padding: 10px;
-    border: 2px solid blue;
+    width: 62%;
+    height: 90%;
+    /*border: 2px solid blue;*/
     float: left;
+}
+
+.users_name{
+    width: 90%;
+    height: 40%;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    /*border: red solid 1px;*/
+    float: left;
+}
+.users_works_all{
+    width: 99%;
+    height: 45%;        /*为用户作品显示的div*/
+    /*border: black solid 1px;*/
+    float: left;
+}
+.el-popover.el_popover{
+    border: 2px solid #5c5e6a;
+    width: 400px;
+}
+.users_works{
+    /*border: 2px solid red;*/
+    width: 100%;
+    max-width: 480px;
+    height: 60%;
+    float: left;
+    font-weight: lighter;
+    font-size: larger;
+    color: #5c5e6a;
+    overflow: hidden;   /*  文本溢出隐藏  */
+    white-space: nowrap; /*  文本强制显示为一行  */
+    text-overflow: ellipsis; /*  文本溢出显示为三点  */
 }
 .users_operate{
     width: 15%;
     height: 80%;
+    margin-top: 2px;
     padding: 5px;
-    text-align: center;
-    border: 2px solid black;
-    float: left;
+    text-align: center;     /*为操作用户关注信息的div*/
+    /*border: 2px solid black;*/
+    border-left: 1px solid #6f7180;
+    background-color: #ffffff;
+    /*position: static;*/
+    z-index: 2;
+    float: right;
+}
+.operate_button{
+    margin-bottom: 3px;
+    margin-top: 1px;
 }
 .noDataTips{
     width: 80%;

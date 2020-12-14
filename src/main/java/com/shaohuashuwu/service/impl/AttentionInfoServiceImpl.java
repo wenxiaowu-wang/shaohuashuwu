@@ -1,8 +1,10 @@
 package com.shaohuashuwu.service.impl;
 
 import com.shaohuashuwu.dao.AttentionInfoDao;
+import com.shaohuashuwu.dao.WorksInfoDao;
 import com.shaohuashuwu.domain.AttentionInfo;
 import com.shaohuashuwu.domain.UserInfo;
+import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.AttentionInfoVo;
 import com.shaohuashuwu.service.AttentionInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AttentionInfoServiceImpl implements AttentionInfoService {
 
     @Autowired
     public AttentionInfoDao attentionInfoDao;
+
+    @Autowired
+    public WorksInfoDao worksInfoDao;
 
 
     //判断是否已经关注该作者
@@ -45,14 +50,31 @@ public class AttentionInfoServiceImpl implements AttentionInfoService {
         return addResult;
     }
 
-    //获取所有关注作者的信息
+    //获取所有关注作者的信息 值对象集合
     @Override
     public List<AttentionInfoVo> getAttentionAuthorInfo(int user_id) {
         List<AttentionInfoVo> getResult = new ArrayList<AttentionInfoVo>();
         List<UserInfo> userInfoList = attentionInfoDao.selectAttentionUserInfoByUserId(user_id);
         if (userInfoList.size()!=0){
             for (int i=0;i<userInfoList.size();i++){
-                getResult.add(userInfoList.get(i).toAttentionInfoVo());    //装配关注信息值对象
+                List<WorksInfo> works = worksInfoDao.selectAllByUserId(userInfoList.get(i).getUser_id());
+                StringBuilder works_name = new StringBuilder();
+                for (int j=0;j<works.size();j++){
+                    if (j+1 < works.size()){
+                        works_name.append("《").append(works.get(j).getWork_name()).append("》、");
+                    }else{
+                        works_name.append("《").append(works.get(j).getWork_name()).append("》等");
+                    }
+                }
+                if (works.size() == 0){
+                    works_name.append("暂无");
+                }
+                AttentionInfoVo attentionInfoVo = new AttentionInfoVo();
+                attentionInfoVo.setUser_id(userInfoList.get(i).getUser_id());
+                attentionInfoVo.setUser_name(userInfoList.get(i).getUser_name());
+                attentionInfoVo.setHead_portrait(userInfoList.get(i).getHead_portrait());
+                attentionInfoVo.setWorks_name(works_name.toString());
+                getResult.add(attentionInfoVo);    //装配关注信息值对象
             }
         }
         return getResult;
@@ -65,7 +87,24 @@ public class AttentionInfoServiceImpl implements AttentionInfoService {
         List<UserInfo> userInfoList = attentionInfoDao.selectWereAttentionUserInfoByAuthorId(user_id);
         if (userInfoList.size()!=0){
             for (int i=0;i<userInfoList.size();i++){
-                getResult.add(userInfoList.get(i).toAttentionInfoVo());    //装配关注信息值对象
+                List<WorksInfo> works = worksInfoDao.selectAllByUserId(userInfoList.get(i).getUser_id());
+                StringBuilder works_name = new StringBuilder();
+                for (int j=0;j<works.size();j++){
+                    if (j+1 < works.size()){
+                        works_name.append("《").append(works.get(j).getWork_name()).append("》、");
+                    }else{
+                        works_name.append("《").append(works.get(j).getWork_name()).append("》等");
+                    }
+                }
+                if (works.size() == 0){
+                    works_name.append("暂无");
+                }
+                AttentionInfoVo attentionInfoVo = new AttentionInfoVo();
+                attentionInfoVo.setUser_id(userInfoList.get(i).getUser_id());
+                attentionInfoVo.setUser_name(userInfoList.get(i).getUser_name());
+                attentionInfoVo.setHead_portrait(userInfoList.get(i).getHead_portrait());
+                attentionInfoVo.setWorks_name(works_name.toString());
+                getResult.add(attentionInfoVo);    //装配关注信息值对象    //装配关注信息值对象
             }
         }
         return getResult;
@@ -78,7 +117,24 @@ public class AttentionInfoServiceImpl implements AttentionInfoService {
         List<UserInfo> userInfoList = attentionInfoDao.selectEachAttentionUserInfoByUserId(user_id);
         if (userInfoList.size()!=0){
             for (int i=0;i<userInfoList.size();i++){
-                getResult.add(userInfoList.get(i).toAttentionInfoVo());    //装配关注信息值对象
+                List<WorksInfo> works = worksInfoDao.selectAllByUserId(userInfoList.get(i).getUser_id());
+                StringBuilder works_name = new StringBuilder();
+                for (int j=0;j<works.size();j++){
+                    if (j+1 < works.size()){
+                        works_name.append("《").append(works.get(j).getWork_name()).append("》、");
+                    }else{
+                        works_name.append("《").append(works.get(j).getWork_name()).append("》等");
+                    }
+                }
+                if (works.size() == 0){
+                    works_name.append("暂无");
+                }
+                AttentionInfoVo attentionInfoVo = new AttentionInfoVo();
+                attentionInfoVo.setUser_id(userInfoList.get(i).getUser_id());
+                attentionInfoVo.setUser_name(userInfoList.get(i).getUser_name());
+                attentionInfoVo.setHead_portrait(userInfoList.get(i).getHead_portrait());
+                attentionInfoVo.setWorks_name(works_name.toString());
+                getResult.add(attentionInfoVo);    //装配关注信息值对象    //装配关注信息值对象
             }
         }
         return getResult;

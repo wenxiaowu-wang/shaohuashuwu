@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>消息中心</title>
+    <link rel="stylesheet" href="../css/userModel.css">
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/messageCenter.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
 </head>
 <body>
     <div id="messageCenter">
@@ -56,22 +58,22 @@
 
                             <span class="op_span2">
                                 <el-badge :value="tipTotals.tipTotal1" class="item">
-                                    <el-button size="mini" :disabled="button_disabled" @click="readAllMessage(1)">全部已读</el-button>
+                                    <el-button size="mini" :disabled="readAll_disabled.button1" @click="readAllMessage(1)">全部已读</el-button>
                                 </el-badge>
                             </span>
                             <span class="op_span1">
                                 <el-badge :value="totals.total1" class="item" type="primary">
-                                    <el-button size="mini" :disabled="button_disabled" @click="deleteAllMessage(1)">清空</el-button>
+                                    <el-button size="mini" :disabled="deleteAll_disabled.button1" @click="deleteAllMessage(1)">清空</el-button>
                                 </el-badge>
                             </span>
                         </div>
                         <div class="message" v-for="(message,index) in displayData.systemMessageData">
                             <div class="tip_img" >
                                 <!--  提示图片  -->
-                                <img :src="imageURL_header+tip_img_url+imageURL_suffix" v-if="message.notice_tip==1">
+                                <img src="../images/message/bell.png" v-if="message.notice_tip==0">
                             </div>
                             <div class="message_avatar">
-                                <img :src="imageURL_header+bell_img_url+imageURL_suffix">
+                                <img :src="imageURL_header+'message.jpg'">
                             </div>
                             <div class="message_content">
                                 <!--  铃铛图片后面、删除按钮之前的元素-->
@@ -79,7 +81,19 @@
                                     <label>{{message.notice_title}}</label>
                                 </div>
                                 <div class="message_content_content">
-                                    <label>{{message.notice_content}}</label>
+                                    <el-popover
+                                            placement="left-start"
+                                            :title="'【'+message.notice_title+'】'"
+                                            width="400"
+                                            trigger="hover"
+                                            :content="'[内容]:'+message.notice_content"
+                                            popper-class="el_popover">
+                                        <el-button size="medium" type="text" slot="reference" style="width:100%;text-align: left;font-size: 17px;color: #2b3453;">
+                                            <div class="notice_content">
+                                                <label>{{message.notice_content}}</label>
+                                            </div>
+                                        </el-button>
+                                    </el-popover>
                                 </div>
                                 <div class="message_content_bottom">
                                     <div class="message_content_time">
@@ -91,21 +105,16 @@
                                 </div>
                             </div>
                             <div class="message_operate">
-                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,1,message.notice_tip,index)">删除</el-button>
-                                <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
-                                <el-popover
-                                        placement="left-start"
-                                        :title="'【'+message.notice_title+'】'"
-                                        width="400"
-                                        trigger="click"
-                                        :content="'[内容]:'+message.notice_content">
-                                    <el-button size="mini" type="text" slot="reference">全部内容</el-button>
-                                </el-popover>
+                                <div class="operate_button">
+                                    <el-button size="small" type="text" :disabled="message.notice_tip == 1" style="border-bottom: 1px solid #6f7180;" icon="el-icon-view" @click="readOneMessage(message,index)">标记已读</el-button>
+                                </div>
+                                <div class="operate_button">
+                                    <el-button size="small" type="text"  icon="el-icon-delete" @click="deleteOneMessage(message,index)">删除</el-button>
+                                </div>
                             </div>
 
                         </div>
                         <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
-                            <!--                        <p>hello world</p>-->
                         </div>
                         <div class="message_pagination">
                             <el-pagination
@@ -123,22 +132,34 @@
 
                             <span class="op_span2">
                                 <el-badge :value="tipTotals.tipTotal2" class="item">
-                                    <el-button size="mini" :disabled="button_disabled" @click="readAllMessage(2)">全部已读</el-button>
+                                    <el-button size="mini" :disabled="readAll_disabled.button2" @click="readAllMessage(2)">全部已读</el-button>
                                 </el-badge>
                             </span>
                             <span class="op_span1">
                                 <el-badge :value="totals.total2" class="item" type="primary">
-                                    <el-button size="mini" :disabled="button_disabled" @click="deleteAllMessage(2)">清空</el-button>
+                                    <el-button size="mini" :disabled="deleteAll_disabled.button2" @click="deleteAllMessage(2)">清空</el-button>
                                 </el-badge>
+                            </span>
+                            <span class="op_span1">
+                                <el-popover
+                                        placement="left-start"
+                                        title="【更新提醒】解释说明"
+                                        width="400"
+                                        trigger="hover"
+                                        content="更新提醒为公共消息，当用户关注的某作者的某作品更新，或者用户书架中的某作品更新时，系统发布公共消息，提醒用户更新。【显示某作品最新动态】"
+                                        popper-class="el_popover">
+                                        <el-button size="mini" icon="el-icon-chat-line-round" circle slot="reference" style="color: #2b3453;">
+                                        </el-button>
+                                    </el-popover>
                             </span>
                         </div>
                         <div class="message" v-for="(message,index) in displayData.updateMessageData">
                             <div class="tip_img" >
                                 <!--  提示图片  -->
-                                <img :src="imageURL_header+tip_img_url+imageURL_suffix" v-if="message.notice_tip==1">
+                                <img src="../images/message/bell.png" v-if="message.notice_tip==0">
                             </div>
                             <div class="message_avatar">
-                                <img :src="imageURL_header+bell_img_url+imageURL_suffix">
+                                <img :src="imageURL_header+'book.png'">
                             </div>
                             <div class="message_content">
                                 <!--  铃铛图片后面、删除按钮之前的元素-->
@@ -146,7 +167,19 @@
                                     <label>{{message.notice_title}}</label>
                                 </div>
                                 <div class="message_content_content">
-                                    <label>{{message.notice_content}}</label>
+                                    <el-popover
+                                            placement="left-start"
+                                            :title="'【'+message.notice_title+'】'"
+                                            width="400"
+                                            trigger="hover"
+                                            :content="'[内容]:'+message.notice_content"
+                                            popper-class="el_popover">
+                                        <el-button size="medium" type="text" slot="reference" style="width:100%;text-align: left;font-size: 17px;color: #2b3453;">
+                                            <div class="notice_content">
+                                                <label>{{message.notice_content}}</label>
+                                            </div>
+                                        </el-button>
+                                    </el-popover>
                                 </div>
                                 <div class="message_content_bottom">
                                     <div class="message_content_time">
@@ -159,20 +192,16 @@
                             </div>
 
                             <div class="message_operate">
-                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,2,message.notice_tip,index)">删除</el-button>
-                                <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
-                                <el-popover
-                                        placement="left-start"
-                                        :title="'【'+message.notice_title+'】'"
-                                        width="400"
-                                        trigger="click"
-                                        :content="'[内容]:'+message.notice_content">
-                                    <el-button size="mini" type="text" slot="reference">全部内容</el-button>
-                                </el-popover>
+                                <div class="operate_button">
+                                    <el-button size="small" type="text" :disabled="message.notice_tip == 1" style="border-bottom: 1px solid #6f7180;" icon="el-icon-view" @click="readOneMessage(message,index)">标记已读</el-button>
+                                </div>
+                                <div class="operate_button">
+                                    <el-button size="small" type="text"  icon="el-icon-delete" @click="deleteOneMessage(message,index)">删除</el-button>
+                                </div>
                             </div>
 
                         </div>
-                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
+                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv2+';'">
                             <!--                        <p>hello world</p>-->
                         </div>
                         <div class="message_pagination">
@@ -191,22 +220,22 @@
 
                             <span class="op_span2">
                                 <el-badge :value="tipTotals.tipTotal3" class="item">
-                                    <el-button size="mini" :disabled="button_disabled" @click="readAllMessage(3)">全部已读</el-button>
+                                    <el-button size="mini" :disabled="readAll_disabled.button3" @click="readAllMessage(3)">全部已读</el-button>
                                 </el-badge>
                             </span>
                             <span class="op_span1">
                                 <el-badge :value="totals.total3" class="item" type="primary">
-                                    <el-button size="mini" :disabled="button_disabled" @click="deleteAllMessage(3)">清空</el-button>
+                                    <el-button size="mini" :disabled="deleteAll_disabled.button3" @click="deleteAllMessage(3)">清空</el-button>
                                 </el-badge>
                             </span>
                         </div>
                         <div class="message" v-for="(message,index) in displayData.chatMessageData">
                             <div class="tip_img" >
                                 <!--  提示图片  -->
-                                <img :src="imageURL_header+tip_img_url+imageURL_suffix" v-if="message.notice_tip==1">
+                                <img src="../images/message/bell.png" v-if="message.notice_tip==0">
                             </div>
                             <div class="message_avatar">
-                                <img :src="imageURL_header+bell_img_url+imageURL_suffix">
+                                <img :src="imageURL_header+'email.png'">
                             </div>
                             <div class="message_content">
                                 <!--  铃铛图片后面、删除按钮之前的元素-->
@@ -214,7 +243,19 @@
                                     <label>{{message.notice_title}}</label>
                                 </div>
                                 <div class="message_content_content">
-                                    <label>{{message.notice_content}}</label>
+                                    <el-popover
+                                            placement="left-start"
+                                            :title="'【'+message.notice_title+'】'"
+                                            width="400"
+                                            trigger="hover"
+                                            :content="'[内容]:'+message.notice_content"
+                                            popper-class="el_popover">
+                                        <el-button size="medium" type="text" slot="reference" style="width:100%;text-align: left;font-size: 17px;color: #2b3453;">
+                                            <div class="notice_content">
+                                                <label>{{message.notice_content}}</label>
+                                            </div>
+                                        </el-button>
+                                    </el-popover>
                                 </div>
                                 <div class="message_content_bottom">
                                     <div class="message_content_time">
@@ -226,20 +267,16 @@
                                 </div>
                             </div>
                             <div class="message_operate">
-                                <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteMessage(message.notice_id,3,message.notice_tip,index)">删除</el-button>
-                                <!--                                    <el-button size="mini" type="danger" plain @click="chat(message.notice_id)">删除</el-button>-->
-                                <el-popover
-                                        placement="left-start"
-                                        :title="'【'+message.notice_title+'】'"
-                                        width="400"
-                                        trigger="click"
-                                        :content="'[内容]:'+message.notice_content">
-                                    <el-button size="mini" type="text" slot="reference">全部内容</el-button>
-                                </el-popover>
+                                <div class="operate_button">
+                                    <el-button size="small" type="text" :disabled="message.notice_tip == 1" style="border-bottom: 1px solid #6f7180;" icon="el-icon-view" @click="readOneMessage(message,index)">标记已读</el-button>
+                                </div>
+                                <div class="operate_button">
+                                    <el-button size="small" type="text"  icon="el-icon-delete" @click="deleteOneMessage(message,index)">删除</el-button>
+                                </div>
                             </div>
 
                         </div>
-                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
+                        <div class="noDataTips" :style="'display:'+displayDivs.displayDiv3+';'">
                             <!--                        <p>hello world</p>-->
                         </div>
                         <div class="message_pagination">
@@ -261,8 +298,8 @@
 
         </div>
         <div class="footing">
-
-
+            <div class="address">地址:山东省烟台市莱山区山东工商学院软件2017级 邮编：264003 电话：123-123-1234 传真：123-1234567</div>
+            <div class="beian">鲁ICP备08001421号鲁公网安备110108007702 人工客服QQ：1404661805</div>
         </div>
     </div>
 

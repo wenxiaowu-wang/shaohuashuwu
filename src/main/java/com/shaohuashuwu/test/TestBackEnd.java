@@ -5,6 +5,7 @@ import com.shaohuashuwu.dao.*;
 import com.shaohuashuwu.domain.AdminInfo;
 import com.shaohuashuwu.domain.TransactionInfo;
 import com.shaohuashuwu.domain.UserInfo;
+import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.AttentionInfoVo;
 import com.shaohuashuwu.domain.vo.NoticeInfoVo;
 import com.shaohuashuwu.domain.vo.TransactionInfoVo;
@@ -268,8 +269,139 @@ public class TestBackEnd {
 
     }
 
+    @Autowired
+    public ReadingHistoryInfoDao readingHistoryInfoDao;
+
+    @Test
+    public void testSelectReaderAge(){
+        int work_id = 32;
+        Map<String,List<Map<String,Object>>> theResult = new HashMap<String,List<Map<String,Object>>>();
+        List<Map<String,Object>> getDao_nan = readingHistoryInfoDao.selectReaderAgeDistributionByWorkIdAndGender(work_id,"男");
+        List<Map<String,Object>> getDao_nv = readingHistoryInfoDao.selectReaderAgeDistributionByWorkIdAndGender(work_id,"女");
+        System.out.println("数据类型：age_type:"+getDao_nan.get(0).get("age_type").getClass().getName().toString()+"reader_num:"+getDao_nan.get(0).get("reader_num").getClass().getName().toString());
+
+        //使用StatisticalHelp工具类进行数据解析以及补充
+        List<String> type = new ArrayList<String>();
+        type.add("10岁以下");
+        type.add("10~18岁");
+        type.add("18~25岁");
+        type.add("25~35岁");
+        type.add("35岁及以上");
+        StatisticalHelp statisticalHelp = new StatisticalHelp();
+        getDao_nan = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nan);
+        getDao_nv = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nv);
+
+        theResult.put("男",getDao_nan);
+        theResult.put("女",getDao_nv);
+        System.out.println("男性读者："+getDao_nan.toString());
+        System.out.println("女性读者："+getDao_nv.toString());
 
 
+    }
+
+    @Test
+    public void testGetReadingTimeDistributionByWorkId(){
+        int work_id = 32;
+        Map<String, List<Map<String,Object>>> theResult = new HashMap<String,List<Map<String,Object>>>();
+        List<Map<String,Object>> getDao_nan = readingHistoryInfoDao.selectReadingTimeDistributionByWorkIdAndGender(work_id,"男");
+        List<Map<String,Object>> getDao_nv = readingHistoryInfoDao.selectReadingTimeDistributionByWorkIdAndGender(work_id,"女");
+        System.out.println("数据类型：date_hour:"+getDao_nan.get(0).get("date_hour").getClass().getName().toString()+" reader_num:"+getDao_nan.get(0).get("reader_num").getClass().getName().toString());
+
+        //使用StatisticalHelp工具类进行数据解析以及补充
+        List<String> type = new ArrayList<String>();
+        for (int i =1;i<13;i++){
+            type.add(i+"点");
+        }
+        StatisticalHelp statisticalHelp = new StatisticalHelp();
+        getDao_nan = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nan);
+        getDao_nv = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nv);
+
+        theResult.put("男",getDao_nan);
+        theResult.put("女",getDao_nv);
+        System.out.println("男性读者："+getDao_nan.toString());
+        System.out.println("女性读者："+getDao_nv.toString());
+    }
+
+    @Autowired
+    public BookshelfInfoDao bookshelfInfoDao;
+
+    @Test
+    public void testGetReaderLikeDistributionByWorkId(){
+        int work_id = 32;
+        Map<String, List<Map<String,Object>>> theResult = new HashMap<String,List<Map<String,Object>>>();
+        List<Map<String,Object>> getDao_nan = bookshelfInfoDao.selectReaderLikeDistributionByWorkIdAndGender(work_id, "男");
+        List<Map<String,Object>> getDao_nv = bookshelfInfoDao.selectReaderLikeDistributionByWorkIdAndGender(work_id, "女");
+//        System.out.println("数据类型：work_main_label:"+getDao_nan.get(0).get("work_main_label").getClass().getName().toString()+" reader_num:"+getDao_nan.get(0).get("reader_num").getClass().getName().toString());
+
+        //使用StatisticalHelp工具类进行数据解析以及补充
+        List<String> type = new ArrayList<String>();
+        type.add("玄幻");
+        type.add("奇幻");
+        type.add("武侠");
+        type.add("仙侠");
+        type.add("都市");
+        type.add("历史");
+        type.add("军事");
+        type.add("悬疑");
+        type.add("科幻");
+        type.add("游戏");
+        type.add("体育");
+        type.add("现实");
+        type.add("轻小说");
+        StatisticalHelp statisticalHelp = new StatisticalHelp();
+        getDao_nan = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nan);
+        getDao_nv = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nv);
+
+//        System.out.println("男性读者："+getDao_nan.toString());
+//        System.out.println("女性读者："+getDao_nv.toString());
+
+        theResult = statisticalHelp.sortingReaderNumASC(getDao_nan,getDao_nv);
+        System.out.println("男性读者："+theResult.get("男").toString());
+        System.out.println("女性读者："+theResult.get("女").toString());
+    }
+
+
+    @Autowired
+    public BookshelfInfoService bookshelfInfoService;
+
+    @Test
+    public void testBookshelfInfoService(){
+        List<String> type = new ArrayList<String>();
+        type.add("玄幻");
+        type.add("奇幻");
+        type.add("武侠");
+        type.add("仙侠");
+        type.add("都市");
+        type.add("历史");
+        type.add("军事");
+        type.add("悬疑");
+        type.add("科幻");
+        type.add("游戏");
+        type.add("体育");
+        type.add("现实");
+        type.add("轻小说");
+        Map<String, List<Map<String, Object>>> map = bookshelfInfoService.getReaderLikeDistributionByWorkIdAndGender(type,32);
+
+    }
+
+    @Test
+    public void testVoteWork(){
+        List<WorksInfo> list = worksInfoDao.selectAllByUserId(190);
+        System.out.println(list);
+    }
+
+    @Autowired
+    public NoticeInfoDao noticeInfoDao;
+    @Test
+    public void testNoticeDao(){
+        int result = noticeInfoDao.selectWorkUpdateNoticeIdBySendBy(3);
+        if (result == -1){
+            System.out.println("获取为空");
+
+        }else{
+            System.out.println("获取信息不为空");
+        }
+    }
 
     
 }

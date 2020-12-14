@@ -18,7 +18,7 @@ public class NoticeInfoVo {
     private String notice_title;        //通知标题
     private String send_time;        //通知时间(将其由TimeStamp转为String类型，方便展示)
     private Integer notice_tip;             //提示通知（1通知、未读，0不通知、已读）
-    private String send_by_name;        //通知人名字
+    private String send_by_name;        //通知发送人名字（更新提醒为作品名）
 
     public NoticeInfoVo() {
 

@@ -1,92 +1,3 @@
-*{
-    margin: 0px;
-    padding: 0px;
-}
-body{
-    background-color: #f7f6f2;
-    min-width: 1210px;          /*  防止过度缩放导致页面变形*/
-}
-.top{
-    width: 100%;
-    height: 72px;
-    background-color: #545c64;
-}
-.top_img{
-    width: 14%;
-    height: 65px;
-    /*border: 2px solid red;*/
-    background-image: url("../images/icon/shaohua-ps-cut.png");
-    margin-left: 15px;
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: center center;
-    float: left;
-}
-.top_content{
-    width: 73%;
-    height: 70px;
-    margin: 0px 5px;/*  上下为0px，左右自适应，自适应有默认居中的效果  */
-    border: 2px solid #3a8ee6;
-    text-align: left;
-    /*background-color: #545c64;*/
-    float: left;
-
-}
-.top_tips{
-    width: 15%;
-    height: 100%;
-    padding-left: 15px;
-    padding-top: 10px;
-    font-size: 25px;
-    font-weight: bolder;
-    float: left;
-}
-.top_menu{
-    width: 60%;/*  所占其父级元素的70% 即占top_contend宽度的70%*/
-    height: 100%;
-    padding-left: 10px;
-    border: 2px solid red;
-    float: left;
-
-}
-.top_data{
-    width: 15%;
-    height: 100%;
-    text-align: right;
-    padding-right: 15px;
-    font-size: 15px;
-    font-weight: normal;
-    border: 2px solid red;
-    float: right;
-}
-/*.top_content el-menu label{*/
-/*    font-size: 20px;*/
-/*    font-weight: bolder;*/
-/*}*/
-.body_left{
-    width: 18%;
-    height: 800px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
-    border: 1px solid red;
-    margin-left: 12.5%;
-    margin-right: 20px;
-    margin-top: 20px;
-    float: left;
-}
-.body{
-    margin: 20px auto;
-    width: 55%;/*  若为100%会充满全屏  */
-    height: 800px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
-    /*background-color: #e6e6e6;*/
-    border: 1px solid blue;
-    float: left;
-}
-.footing{
-    margin: 0px 12.5%;
-    width: 75%;
-    height: 150px;
-    background-color: #e6a23c;
-    float: left;
-}
 .body_header{
     background-color: #ffffff;
     width: auto;
@@ -162,8 +73,8 @@ body{
     text-align: right;
     padding: 5px;
     float: top;
-    border: 1px solid red;
-
+    /*border: 1px solid red;*/
+/* 显示消息总数，以及未读消息总数，可操作的按钮 */
 }
 .op_span2{
     margin-right: 15px;
@@ -177,60 +88,78 @@ body{
     /*  如果没有理解错的话应该是每一个user的div  */
     width: 100%;
     height: 100px;
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     margin: 2px auto;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5%;
     float: top;
 }
 .tip_img{
-    width: 3%;
+    width: 20px;
     height: auto;
     margin: 2px;
     text-align: center;
+    /*border: 1px solid green;*/
     float: left;
 }
+.tip_img img{
+    width: 25px;
+    height: 25px;
+    z-index: 2;
+}
 .message_avatar{
-    width: 8%;
-    height: 60%;
-    border: 2px solid black;
-    padding: 10px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    /*border: 1px solid black;*/
+    margin-top: 10px;
     text-align: center;
     float: left;
 }
 .message_avatar img{
-    width: 75%;
-    height: 75%;
-    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border-radius: 2%;
     margin: 3px 3px;
     text-align: center;
 }
 .message_content{
-    width: 65%;
-    height: 80%;
-    padding: 10px;
-    border: 2px solid blue;
+    width: 68%;
+    height: 87%;
     float: left;
 }
 .message_content_title{
-    border: 1px solid red;
+    margin-top: 2px;
+    /*border: 1px solid red;*/
     font-weight: bolder;
     font-size: larger;
+    font-family: "华文楷体", "arial", serif;
     overflow: hidden;   /*  文本溢出隐藏  */
     white-space: nowrap; /*  文本强制显示为一行  */
     text-overflow: ellipsis; /*  文本溢出显示为三点  */
     float: top;
 }
 .message_content_content{
-    border: 1px solid black;
-    font-weight: normal;
-    font-size: medium;
+    /*border: 2px solid green;*/
+    /*font-weight: normal;*/
+    /*font-size: medium;*/
     /*font-style: italic;*/
+
+    font-family: "宋体", "arial", serif;
+    /*margin-top: 3px;*/
+    /*margin-bottom: 5px;*/
+    float: top;
+}
+.notice_content{
+    width: 100%;
     overflow: hidden;   /*  文本溢出隐藏  */
     white-space: nowrap; /*  文本强制显示为一行  */
     text-overflow: ellipsis; /*  文本溢出显示为三点  */
-    margin-top: 3px;
-    margin-bottom: 5px;
-    float: top;
+    /*border: 1px solid blue;*/
+}
+.el-popover.el_popover{
+    border: 2px solid #5c5e6a;
+    width: 400px;
 }
 .message_content_bottom{
 
@@ -238,16 +167,21 @@ body{
 }
 .message_content_time{
     width: auto;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     font-weight: lighter;
     font-size: small;
     float: left;
 }
 .message_content_sendBy{
     width: auto;
-    border: 1px solid green;
+    max-width: 250px;
+    /*border: 1px solid green;*/
     font-weight: lighter;
     font-size: smaller;
+    text-align: right;
+    overflow: hidden;   /*  文本溢出隐藏  */
+    white-space: nowrap; /*  文本强制显示为一行  */
+    text-overflow: ellipsis; /*  文本溢出显示为三点  */
     float: right;
 }
 .message_operate{
@@ -255,11 +189,12 @@ body{
     height: auto;
     padding: 5px;
     text-align: center;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
+    border-left: 1px solid #6f7180;
     font-size: small;
-    margin-right: 15px;
-    margin-top: 30px;
-    float: right;
+    margin-left: 3%;
+    margin-top: 10px;
+    float: left;
 }
 .noDataTips{
     width: 80%;

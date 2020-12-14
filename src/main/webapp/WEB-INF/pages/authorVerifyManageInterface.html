@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成为作者</title>
+    <link rel="stylesheet" href="../css/authorVerifyManage.css">
+    <link rel="stylesheet" href="../css/userModel.css">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+</head>
+<body>
+<div id="authorVerifyManage">
+
+    <div class="top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips">{{topTips}}</div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+            <div class="top_data">
+                <br/>
+                {{user_name}}<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+    <div class="body_left">
+
+    </div>
+    <div class="body">
+        <div class="body_content">
+            <div class="content_title">
+                <label>{{title}}</label>
+            </div>
+            <div class="content_from">
+                <div class="content_from_row" v-if="interfaceState === 2">
+                    <div class="from_row_label">
+                        <label>原二级密码：</label>
+                    </div>
+                    <div class="from_row_input">
+                        <!-- :@focus=""加上“:”表示循环执行-->
+                        <el-input placeholder="请输入原密码" @focus="onInputPasswordFocus(1)" @blur="onInputPasswordBlur(1)" v-model="oldPass" show-password maxlength="15" show-word-limit></el-input>
+                    </div>
+                    <div class="check_result" :style="'display: '+checkImage.old_img.display+';'">
+                        <i :class="checkImage.old_img.name" :style="'color: '+checkImage.old_img.color+';'"></i>
+                    </div>
+                    <div class="input_tip">
+                        <label>{{passwordTips}}</label>
+                    </div>
+                </div>
+                <div class="content_from_row">
+                    <div class="from_row_label">
+                        <label>二级密码：</label>
+                    </div>
+                    <div class="from_row_input">
+                        <el-input placeholder="请输入密码" @focus="onInputPasswordFocus(2)" @blur="onInputPasswordBlur(2)" v-model="pass" show-password maxlength="15" show-word-limit></el-input>
+                    </div>
+                    <div class="check_result" :style="'display: '+checkImage.pass_img.display+';'">
+                        <i :class="checkImage.pass_img.name" :style="'color: '+checkImage.pass_img.color+';'"></i>
+                    </div>
+                    <div class="input_tip">
+                        <label>{{passwordTips}}</label>
+                    </div>
+                </div>
+                <div class="content_from_row" v-if="interfaceState !== 1">
+                    <div class="from_row_label">
+                        <label>密码确认：</label>
+                    </div>
+                    <div class="from_row_input">
+                        <el-input placeholder="请再次输入密码" @focus="onInputPasswordFocus(3)" @blur="onInputPasswordBlur(3)" v-model="checkPass" show-password maxlength="15" show-word-limit></el-input>
+                    </div>
+                    <div class="check_result" :style="'display: '+checkImage.check_img.display+';'">
+                        <i :class="checkImage.check_img.name" :style="'color: '+checkImage.check_img.color+';'"></i>
+                    </div>
+                    <div class="input_tip">
+                        <label>确认输入的密码</label>
+                    </div>
+                </div>
+                <div class="from_operate_row">
+                    <div class="op_button_left" v-if="interfaceState === 1">
+                        <el-tooltip content="修改二级密码" placement="bottom">
+                            <el-button size="medium" type="text" icon="el-icon-edit" @click="updateInterfaceState(2)">修改二级密码</el-button>
+                        </el-tooltip>
+                    </div>
+                    <div class="op_button_left" v-if="interfaceState === 2">
+                        <el-tooltip content="返回【作者登录验证】" placement="bottom">
+                            <el-button size="medium" type="text" icon="el-icon-back" @click="updateInterfaceState(1)">返回</el-button>
+                        </el-tooltip>
+                    </div>
+                    <div class="op_button">
+                        <el-button @click="resetForm">重置</el-button>
+                    </div>
+                    <div class="op_button">
+                        <el-button type="primary" @click="submitForm">提交</el-button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="footing">
+        <div class="address">地址:山东省烟台市莱山区山东工商学院软件2017级 邮编：264003 电话：123-123-1234 传真：123-1234567</div>
+        <div class="beian">鲁ICP备08001421号鲁公网安备110108007702 人工客服QQ：1404661805</div>
+    </div>
+</div>
+<script src="../js/axios.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/authorVerifyManage.js"></script>
+</body>
+</html>

@@ -43,5 +43,8 @@ public interface TransactionInfoService {
     public List<TransactionInfo> getSubscribeInfo(int work_id);
 
     //统计近一个月的某作品的订阅总量分布
-    public List<Map<String,Object>> getSubscriptionStatisticsData(int work_id);
+    public Map<String,List<Map<String,Object>>> getSubscriptionStatisticsData(int work_id);
+
+    //获取该作品订阅的其它统计数据
+    public Map<String,Object> getOtherSubscriptionStatisticsData(int work_id);
 }

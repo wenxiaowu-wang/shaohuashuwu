@@ -4,16 +4,15 @@ import com.shaohuashuwu.dao.*;
 import com.shaohuashuwu.domain.TransactionInfo;
 import com.shaohuashuwu.domain.vo.TransactionInfoVo;
 import com.shaohuashuwu.service.TransactionInfoService;
+import com.shaohuashuwu.utils.DateCalculation;
+import com.shaohuashuwu.utils.StatisticalHelp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 包:com.shaohuashuwu.service.impl
@@ -82,12 +81,12 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
                 && transactionInfoDao.insertTransactionInfo(tipInfo)!=(0)){
             tipResult = true;
         }
-        System.out.println("log: 打赏成功 ["+tipInfo.getConsumer_id()+"]消费了 ["+tipInfo.getTransaction_quantity()+"]金豆|***|["+author_id+"]被打赏了["+tipInfo.getTransaction_quantity()/10+"]金币");
+//        System.out.println("log: 打赏成功 ["+tipInfo.getConsumer_id()+"]消费了 ["+tipInfo.getTransaction_quantity()+"]金豆|***|["+author_id+"]被打赏了["+tipInfo.getTransaction_quantity()/10+"]金币");
         return tipResult;
     }
 
     /**
-     * 待完成(暂未减少使用推荐票的用户的推荐票数)
+     * 投票作品
      * @param voteInfo
      * @return
      */
@@ -96,7 +95,7 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
     public boolean voteWork(TransactionInfo voteInfo,int work_id) {
         boolean voteResult = false;
         if (/*根据消费者ID扣除对应用户推荐票数，根据作品ID增加目标图书的推荐票数*/
-                userInfoDao.updateTicketNumByUserId(work_id,voteInfo.getTransaction_quantity() * (-1)) != 0
+                userInfoDao.updateTicketNumByUserId(voteInfo.getConsumer_id(),voteInfo.getTransaction_quantity() * (-1)) != 0
                 && worksInfoDao.updateWorkVoteNumByWorkId(work_id,voteInfo.getTransaction_quantity()) != 0
                 && transactionInfoDao.insertTransactionInfo(voteInfo)!=(0)){
             voteResult = true;
@@ -116,35 +115,37 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
         List<TransactionInfo> getDao = new ArrayList<TransactionInfo>();
         getDao = transactionInfoDao.selectConsumptionInfoByUserId(user_id);
         if (getDao.size() != 0){
-            for (int i=0;i<getDao.size();i++){
-                String name = "";
-                switch (getDao.get(i).getTransaction_type()){
+            for (TransactionInfo transactionInfo : getDao) {
+                StringBuilder name = new StringBuilder("");
+                switch (transactionInfo.getTransaction_type()) {
                     case 0:
-                    case 4:{
+                    case 4: {
                         //接收人名字获取：充值接收人为韶华书屋平台，打赏、订阅、投票的接收人为作者以及作品名字，提现的接收人为用户
-                        name = userInfoDao.selectUserNameById(getDao.get(i).getRecipent_id());
+                        name.append(userInfoDao.selectUserNameById(transactionInfo.getRecipent_id()));
                         break;
                     }
                     case 1:
                     case 2:
-                    case 3:{
+                    case 3: {
                         //获取接受者ID对应的作品名和章节标题，将其进行字符串拼接
-                        name = chapterPostInfoDao.selectWorkNameByChapterId(getDao.get(i).getRecipent_id());
-                        name += chapterInfoDao.selectChapterTitleByChapterId(getDao.get(i).getRecipent_id());
+                        name.append("《").append(chapterPostInfoDao.selectWorkNameByChapterId(transactionInfo.getRecipent_id())).append("》");
+                        name.append(chapterInfoDao.selectChapterTitleByChapterId(transactionInfo.getRecipent_id()));
                         break;
                     }
-                    default:name = "未知";break;
+                    default:
+                        name.append("未知");
+                        break;
                 }
                 TransactionInfoVo transactionInfoVo = new TransactionInfoVo();
-                transactionInfoVo.setTransaction_id(getDao.get(i).getTransaction_id());
-                transactionInfoVo.setConsumer_id(getDao.get(i).getConsumer_id());
-                transactionInfoVo.setRecipient_id(getDao.get(i).getRecipent_id());
-                transactionInfoVo.setRecipient_name(name);
-                transactionInfoVo.setTransaction_type(getDao.get(i).analysisType());
-                transactionInfoVo.setTransaction_mode(getDao.get(i).analysisMode());
-                transactionInfoVo.setTransaction_time(getDao.get(i).analysisTime());
-                transactionInfoVo.setTransaction_quantity(getDao.get(i).getTransaction_quantity());
-                transactionInfoVo.setTransaction_unit(getDao.get(i).getTransaction_unit());
+                transactionInfoVo.setTransaction_id(transactionInfo.getTransaction_id());
+                transactionInfoVo.setConsumer_id(transactionInfo.getConsumer_id());
+                transactionInfoVo.setRecipient_id(transactionInfo.getRecipent_id());
+                transactionInfoVo.setRecipient_name(name.toString());
+                transactionInfoVo.setTransaction_type(transactionInfo.analysisType());
+                transactionInfoVo.setTransaction_mode(transactionInfo.analysisMode());
+                transactionInfoVo.setTransaction_time(transactionInfo.analysisTime());
+                transactionInfoVo.setTransaction_quantity(transactionInfo.getTransaction_quantity());
+                transactionInfoVo.setTransaction_unit(transactionInfo.getTransaction_unit());
                 getResult.add(transactionInfoVo);
             }
         }
@@ -166,50 +167,53 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
         List<TransactionInfo> getDao = transactionInfoDao.selectIncomeInfoByUserId(user_id);
         //遍历从dao层获取到的数据，处理后封装到transactionInfoVo对象中
         if (getDao.size() != 0){
-            for (int i=0;i<getDao.size();i++){
-                String work_name = "待赋值";
-                String chapter_name = "待赋值";
-                String consumer_name = "待赋值";
-                int type = getDao.get(i).getTransaction_type();
+            for (TransactionInfo transactionInfo : getDao) {
+                StringBuilder work_name = new StringBuilder("");
+                StringBuilder chapter_name = new StringBuilder("");
+                StringBuilder consumer_name = new StringBuilder("");
+                int type = transactionInfo.getTransaction_type();
                 //如果是0(充值)，暂不考虑，先行跳过
-                if ( type == 0){
+                if (type == 0) {
                     continue;
                 }
-                switch (getDao.get(i).getTransaction_type()){
-                    case 0:{
-                        consumer_name = "韶华书屋平台";
+                switch (transactionInfo.getTransaction_type()) {
+                    case 0: {
+                        consumer_name.append("韶华书屋平台");
                         break;
                     }
-                    case 4:{
-                        consumer_name = "韶华书屋平台";
+                    case 4: {
+                        consumer_name.append("韶华书屋平台");
                         System.out.println("Service层有提现记录");
                         //此处的chapter_name代表的是第三方的账号
-                        chapter_name = thirdPartyInfoDao.selectThirdNumberById(getDao.get(i).getTransaction_id());
+                        chapter_name.append(thirdPartyInfoDao.selectThirdNumberById(transactionInfo.getTransaction_id()));
                         break;
                     }
                     case 1:
                     case 2:
-                    case 3:{
+                    case 3: {
                         //获取接受者ID对应的作品名和章节标题，将其进行字符串拼接(打赏、订阅、投票接受者都是对应章节ID)
-                        work_name = chapterPostInfoDao.selectWorkNameByChapterId(getDao.get(i).getRecipent_id());
-                        chapter_name = chapterInfoDao.selectChapterTitleByChapterId(getDao.get(i).getRecipent_id());
-                        consumer_name = userInfoDao.selectUserNameById(getDao.get(i).getConsumer_id());
+                        work_name.append("《").append(chapterPostInfoDao.selectWorkNameByChapterId(transactionInfo.getRecipent_id())).append("》");
+                        chapter_name.append(chapterInfoDao.selectChapterTitleByChapterId(transactionInfo.getRecipent_id()));
+                        consumer_name.append(userInfoDao.selectUserNameById(transactionInfo.getConsumer_id()));
                         break;
                     }
-                    default:work_name = "未知"; chapter_name = "未知";break;
+                    default:
+                        work_name.append("未知");
+                        chapter_name.append("未知");
+                        break;
                 }
                 TransactionInfoVo transactionInfoVo = new TransactionInfoVo();
-                transactionInfoVo.setTransaction_id(getDao.get(i).getTransaction_id());
-                transactionInfoVo.setConsumer_id(getDao.get(i).getConsumer_id());
-                transactionInfoVo.setConsumer_name(consumer_name);
-                transactionInfoVo.setRecipient_id(getDao.get(i).getRecipent_id());//还是对应的章节ID（打赏、订阅、投票）
-                transactionInfoVo.setRecipient_name(work_name);
-                transactionInfoVo.setRecipient_name_other(chapter_name);
-                transactionInfoVo.setTransaction_type(getDao.get(i).analysisType());
-                transactionInfoVo.setTransaction_mode(getDao.get(i).analysisMode());
-                transactionInfoVo.setTransaction_time(getDao.get(i).analysisTime());
-                transactionInfoVo.setTransaction_quantity(getDao.get(i).getTransaction_quantity());
-                transactionInfoVo.setTransaction_unit(getDao.get(i).getTransaction_unit());
+                transactionInfoVo.setTransaction_id(transactionInfo.getTransaction_id());
+                transactionInfoVo.setConsumer_id(transactionInfo.getConsumer_id());
+                transactionInfoVo.setConsumer_name(consumer_name.toString());
+                transactionInfoVo.setRecipient_id(transactionInfo.getRecipent_id());//还是对应的章节ID（打赏、订阅、投票）
+                transactionInfoVo.setRecipient_name(work_name.toString());
+                transactionInfoVo.setRecipient_name_other(chapter_name.toString());
+                transactionInfoVo.setTransaction_type(transactionInfo.analysisType());
+                transactionInfoVo.setTransaction_mode(transactionInfo.analysisMode());
+                transactionInfoVo.setTransaction_time(transactionInfo.analysisTime());
+                transactionInfoVo.setTransaction_quantity(transactionInfo.getTransaction_quantity());
+                transactionInfoVo.setTransaction_unit(transactionInfo.getTransaction_unit());
                 getResult.add(transactionInfoVo);
             }
         }
@@ -268,16 +272,93 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
 
     //统计近一个月的某作品的订阅量分布
     @Override
-    public List<Map<String, Object>> getSubscriptionStatisticsData(int work_id) {
-        //将timestamp类型格式化为String
-        Date date = new Date();
-        System.out.println("date is "+date.toString());
-        Timestamp timestamp = new Timestamp(date.getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("格式化日期后："+sdf.format(timestamp)); //2009-07-16
-        return null;
+    public Map<String,List<Map<String,Object>>> getSubscriptionStatisticsData(int work_id) {
+        //初始化返回值
+        Map<String,List<Map<String,Object>>> theResult_all = new HashMap<String,List<Map<String,Object>>>();
+
+        //初始化日期计算工具类
+        String dateFormat = "yyyy-MM-dd";
+        DateCalculation dateCalculation = new DateCalculation(dateFormat);
+
+        //计算当前时间 以及 前30天的日期
+        int dayNum = -30;
+        String day = dateCalculation.getCertainTime(dateCalculation.getRightNow(),dayNum);
+        System.out.println(dateCalculation.getRightNow()+" 的前"+dayNum*(-1)+"天为："+day);
+
+        //获取作品发布时间
+        Timestamp timestamp = worksInfoDao.selectWorkCreateTimeByWorkId(work_id);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        String workCreateTime = sdf.format(timestamp);
+        System.out.println("转化后的作品发布时间："+workCreateTime);
+
+        //比较作品发布时间是否早于一月前时间，根据比较结果进行赋值
+        String startTime = dateCalculation.compareTime(workCreateTime,day) ? workCreateTime:day;
+
+        //设置日期计算类的开始以及结束时间
+        dateCalculation.setEndDate(dateCalculation.stringToDate(dateCalculation.getRightNow()));
+        dateCalculation.setStartDate(dateCalculation.stringToDate(startTime));
+        System.out.println("开始时间与结束时间相差天数："+dateCalculation.getDateDifferenceDayNum());
+
+        //获取开始时间到结束时间的所有日期（精确到天）
+        List<String> days = dateCalculation.getAllDayBetweenTwo();
+
+        //获取某一时间段的订阅记录统计分布结果（男，女）
+        List<Map<String,Object>> getDao_nan = transactionInfoDao.selectSubscriptionStatisticsData(work_id,startTime,dateCalculation.getRightNow(),"男");
+        List<Map<String,Object>> getDao_nv = transactionInfoDao.selectSubscriptionStatisticsData(work_id,startTime,dateCalculation.getRightNow(),"女");
+
+        //使用自定义的统计帮助工具类的装配方法，将每一天的数据都装起来(男，女)
+        StatisticalHelp statisticalHelp = new StatisticalHelp();
+        List<Map<String,Object>> theResult_nan = statisticalHelp.assemblySubscriptionStatistics(days,getDao_nan);
+        List<Map<String,Object>> theResult_nv = statisticalHelp.assemblySubscriptionStatistics(days,getDao_nv);
+
+        //装配最终返回结果
+        theResult_all.put("男",theResult_nan);
+        theResult_all.put("女",theResult_nv);
+        return theResult_all;
     }
 
+    //获取该作品订阅的其它统计数据
+    @Override
+    public Map<String, Object> getOtherSubscriptionStatisticsData(int work_id) {
+
+        //*获取该作品总订阅量
+        int all_subscription_num = transactionInfoDao.selectAllSubscriptionNumByWorkId(work_id);
+        //*获取该作品昨日新增订阅量
+        int yesterday_subscription_num = 0;
+        //初始化日期计算工具类
+        String dateFormat = "yyyy-MM-dd";
+        DateCalculation dateCalculation = new DateCalculation(dateFormat);
+
+        //计算当前时间 以及 前1天的日期
+        int dayNum = -1;
+        String day = dateCalculation.getCertainTime(dateCalculation.getRightNow(),dayNum);
+        System.out.println(dateCalculation.getRightNow()+" 的前"+dayNum*(-1)+"天为："+day);
+
+        //获取作品发布时间
+        Timestamp timestamp = worksInfoDao.selectWorkCreateTimeByWorkId(work_id);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        String workCreateTime = sdf.format(timestamp);
+        System.out.println("转化后的作品发布时间："+workCreateTime);
+
+        //比较作品发布时间是否早于一月前时间，根据比较结果进行赋值
+        if (!dateCalculation.compareTime(workCreateTime,day)){
+            yesterday_subscription_num = transactionInfoDao.selectOneDaySubscriptionNumByWorkID(work_id,day);
+        }
+
+        //*获取该作品章节平均订阅量
+        int chapter_num = chapterPostInfoDao.selectChapterNumByWorkId(work_id);
+        double chapter_avg_subscription_num = (chapter_num == 0 ? 0:((double)all_subscription_num/chapter_num));
+        //*获取该作品章节最高订阅量
+        int chapter_max_subscription_num = transactionInfoDao.selectChapterMaxSubscriptionNumByWorkId(work_id);
+
+        //装配订阅量信息到结果集合
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("all_subscription_num",all_subscription_num);
+        map.put("yesterday_subscription_num",yesterday_subscription_num);
+        map.put("chapter_avg_subscription_num",chapter_avg_subscription_num);
+        map.put("chapter_max_subscription_num",chapter_max_subscription_num);
+        return map;
+    }
 
 
 }

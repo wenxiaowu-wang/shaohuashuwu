@@ -10,11 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * 包:com.shaohuashuwu.controller
@@ -25,11 +22,31 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(path = "/transactionInfoController")
-@SessionAttributes(value = {"user_name","user_id"},types = {String.class,Integer.class})
+@SessionAttributes(value = {"user_name","user_id","work_id","work_name","chapter_id","chapter_title"},types = {String.class,Integer.class})
 public class TransactionInfoController {
 
     @Autowired
     private TransactionInfoService transactionInfoService;
+
+    /*
+    * 获取session中的某些值的请求
+    * */
+
+    /**
+     * 获取session中的作品名字和章节名字
+     * @param modelMap
+     * @return 获取到的作品名以及章节名
+     */
+    @ResponseBody
+    @RequestMapping(path = "/getWorkNameAndChapterNameFromSession")
+    public HashMap<String,Object> getWorkNameAndChapterNameFromSession(ModelMap modelMap){
+        String work_name = (String)modelMap.get("work_name");
+        String chapter_title = (String)modelMap.get("chapter_title");
+        HashMap<String,Object> map = new HashMap();
+        map.put("work_name",work_name);
+        map.put("chapter_title",chapter_title);
+        return map;
+    }
 
     //添加交易信息（充值）[单纯保存信息，未进行更改用户金豆数量等操作]
     @RequestMapping(path = "/addTopUpsInfo")
@@ -82,7 +99,7 @@ public class TransactionInfoController {
         String user_name = (String)modelMap.get("user_name");
         System.out.println("user_id = "+user_id+",user_name = "+user_name);
 
-        HashMap<String,Object> map = new HashMap();
+        HashMap<String,Object> map = new HashMap<String, Object>();
         map.put("user_id",user_id);
         map.put("user_name",user_name);
         return map;
@@ -90,16 +107,17 @@ public class TransactionInfoController {
 
     /**
      * 充值金豆
-     * @param id        用户ID
+     * @param modelMap  用户信息缓存
      * @param method    充值方式
      * @param money     充值金额（元）
      * @return          充值结果，Boolean
      */
     //充值
     @ResponseBody
-    @RequestMapping(path = "/topUpsGoldBean/{id}/{method}/{money}")
-    public boolean topUpsGoldBean(@PathVariable(value = "id") Integer id,@PathVariable(value = "method") Integer  method,@PathVariable(value = "money") Integer money){
-        boolean topUpsResult = false;
+    @RequestMapping(path = "/topUpsGoldBean/{method}/{money}")
+    public boolean topUpsGoldBean(ModelMap modelMap,@PathVariable(value = "method") Integer  method,@PathVariable(value = "money") Integer money){
+        //通过此代码块从session中获取
+        Integer id = (Integer)modelMap.get("user_id");
         ////        name = URLDecoder.decode(name,"UTF-8");
 //        id = URLDecoder.decode(id);
 //        System.out.println("name is "+id);
@@ -121,22 +139,23 @@ public class TransactionInfoController {
         transactionInfo.setTransaction_unit("元人民币");
         System.out.println("充值信息为："+transactionInfo.toString());
         //金豆充值操作service
-        topUpsResult = transactionInfoService.topUpsGoldBean(transactionInfo);
-        return topUpsResult;
+        return transactionInfoService.topUpsGoldBean(transactionInfo);
     }
 
     /**
      * 打赏作品
-     * @param userId    用户ID
-     * @param chapterId    章节ID
      * @param beanNum   打赏金豆数量
      * @return  打赏结果 Boolean
      */
     //打赏作品
     @ResponseBody
-    @RequestMapping(path = "/tipsWork/{userId}/{chapterId}/{work_id}/{beanNum}")
-    public boolean tipsWork(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "chapterId") Integer chapterId,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "beanNum") Integer beanNum){
+    @RequestMapping(path = "/tipsWork/{beanNum}")
+    public boolean tipsWork(ModelMap modelMap,@PathVariable(value = "beanNum") Integer beanNum){
         boolean tipsResult = false;
+
+        Integer userId = (Integer)modelMap.get("user_id");
+        Integer chapterId = (Integer)modelMap.get("chapter_id");
+        Integer work_id = (Integer)modelMap.get("work_id");
 
         TransactionInfo transactionInfo = new TransactionInfo();
         Date date = new Date();
@@ -159,15 +178,19 @@ public class TransactionInfoController {
 
     /**
      * 投推荐票
-     * @param userId    用户ID
-     * @param chapterId 章节ID
+     * @param modelMap session域中的一块域的变量名
      * @param voteNum   投票数量
      * @return  投票结果 Boolean
      */
     @ResponseBody
-    @RequestMapping(path = "/voteWork/{userId}/{chapterId}/{work_id}/{voteNum}")
-    public boolean voteWork(@PathVariable(value = "userId")Integer userId,@PathVariable(value = "chapterId")Integer chapterId,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "voteNum")Integer voteNum){
+    @RequestMapping(path = "/voteWork/{voteNum}")
+    public boolean voteWork(ModelMap modelMap,@PathVariable(value = "voteNum")Integer voteNum){
         boolean voteResult = false;
+
+        Integer userId = (Integer)modelMap.get("user_id");
+        Integer chapterId = (Integer)modelMap.get("chapter_id");
+        Integer work_id = (Integer)modelMap.get("work_id");
+
         TransactionInfo transactionInfo = new TransactionInfo();
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
@@ -211,12 +234,13 @@ public class TransactionInfoController {
 
     /**
      * 获取该用户所有的消费记录（除去提现记录的记录）
-     * @param user_id
+     * @param modelMap session中的域变量 可用来获取该用户ID
      * @return
      */
-    @RequestMapping(path = "/getAllConsumptionTransactionInfo/{user_id}")
+    @RequestMapping(path = "/getAllConsumptionTransactionInfo")
     @ResponseBody
-    public List<TransactionInfoVo> getAllConsumerRecords(@PathVariable(value = "user_id")Integer user_id){
+    public List<TransactionInfoVo> getAllConsumerRecords(ModelMap modelMap){
+        Integer user_id = (Integer)modelMap.get("user_id");
         List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
         List<TransactionInfoVo> getService = transactionInfoService.getAllConsumptionTransactionInfo(user_id);
         for(int i=0;i<getService.size();i++){
@@ -274,4 +298,22 @@ public class TransactionInfoController {
         return "personalAccountInterface.html";
     }
 
+    @RequestMapping(path = "/toWorkDataStatisticsInterface")
+    public String toWorkDataStatisticsInterface(){
+        return "workDataStatisticsInterface.html";
+    }
+
+    //获取作品的订阅记录统计分布信息
+    @RequestMapping(path = "/getSubscriptionStatisticsData/{work_id}")
+    @ResponseBody
+    public Map<String,List<Map<String,Object>>> getSubscriptionStatisticsData(@PathVariable(value = "work_id") int work_id){
+        return transactionInfoService.getSubscriptionStatisticsData(work_id);
+    }
+
+    //获取作品的其它订阅统计数据getOtherSubscriptionStatisticsData
+    @RequestMapping(path = "/getOtherSubscriptionStatisticsData/{work_id}")
+    @ResponseBody
+    public Map<String,Object> getOtherSubscriptionStatisticsData(@PathVariable(value = "work_id") int work_id){
+        return transactionInfoService.getOtherSubscriptionStatisticsData(work_id);
+    }
 }

@@ -123,7 +123,8 @@ public class TransactionInfo implements Serializable {
 
     //解析交易时间（Timestamp --> String ）
     public String analysisTime(){
-        return this.getTransaction_time().toString();
+        //TimeStamp转化为String类型(通过substirng去掉毫秒值)
+        return this.getTransaction_time().toString().substring(0, this.getTransaction_time().toString().indexOf("."));
     }
 
 }

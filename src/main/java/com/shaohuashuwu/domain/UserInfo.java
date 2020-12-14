@@ -156,16 +156,4 @@ public class UserInfo {
                 '}';
     }
 
-    /**
-     * 获取对应的关注信息值对象
-     * @return
-     */
-
-    public AttentionInfoVo toAttentionInfoVo(){
-        AttentionInfoVo attentionInfoVo = new AttentionInfoVo();
-        attentionInfoVo.setUser_id(this.getUser_id());
-        attentionInfoVo.setUser_name(this.getUser_name());
-        attentionInfoVo.setHead_portrait(this.getHead_portrait());
-        return attentionInfoVo;
-    }
 }
