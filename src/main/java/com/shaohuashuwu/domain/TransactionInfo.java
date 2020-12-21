@@ -19,6 +19,8 @@ public class TransactionInfo implements Serializable {
     public TransactionInfo() {
     }
 
+   
+
     public Integer getTransaction_id() {
         return transaction_id;
     }

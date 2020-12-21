@@ -1,0 +1,255 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    min-width: 1420px;
+}
+/*最顶部导航栏*/
+.top{
+    width: 100%;
+    height: 72px;
+    background-color: #545c64;
+}
+.top_img{
+    width: 14%;
+    height: 65px;
+    /*border: 2px solid red;*/
+    background-image: url("../images/icon/shaohua-ps.png");
+    margin-left: 15px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center center;
+    float: left;
+}
+.top_content{
+    width: 73%;
+    height: 70px;
+    margin: 0px 5px;/*  上下为0px，左右自适应，自适应有默认居中的效果  */
+    /*border: 2px solid #3a8ee6;*/
+    text-align: left;
+    /*background-color: #545c64;*/
+    float: left;
+
+}
+.top_tips{
+    width: 15%;
+    height: 100%;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: "宋体";
+    float: left;
+}
+.top_menu{
+    width: 60%;/*  所占其父级元素的70% 即占top_contend宽度的70%*/
+    height: 100%;
+    padding-left: 10px;
+    /*border: 2px solid red;*/
+    float: left;
+
+}
+.top_data{
+    width: 15%;
+    height: 100%;
+    text-align: right;
+    padding-right: 15px;
+    font-size: 15px;
+    font-weight: normal;
+    /*border: 2px solid red;*/
+    float: right;
+}
+
+/*左侧栏*/
+
+.body_left{
+    width: 18%;
+    height: 600px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
+    border: 1px solid red;
+    margin-left: 12.5%;
+    margin-right: 20px;
+    margin-top: 20px;
+    /*background-image: url("../images/QQ.jpg");*/
+    float: left;
+}
+
+
+.body{
+    margin: 20px auto;
+    width: 55%;/*  若为100%会充满全屏  */
+    height: 800px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
+    /*border: 1px solid blue;*/
+    float: left;
+}
+
+/*头部css*/
+header {
+    display: block;
+}
+
+.body_header{
+    background-color: #faf8f8;
+}
+.body_img{
+    width: 100%;
+    height: 170px;
+    margin: 0px auto;/*  设置上下外边距为0px，左右自动，默认居中*/
+
+    background-image: url("../images/bg_card.png");
+    background-position: left top;
+    background-repeat: repeat-x;
+    /*border: 2px solid red;*/
+    box-shadow: 2px 2px 1px #685224;
+}
+.body_img_img{
+    width: auto;
+    min-width: 10%;
+    height: auto;
+    min-height: 40%;
+    text-align: center;
+    /*border:  2px solid red;*/
+    margin-top: 50px;
+    margin-left: 15px;
+    float: left;
+}
+#avatar{
+    /*  <img>标签的样式  */
+    border-radius: 50%;
+}
+.body_img_content{
+    width: 60%;
+    height: 30%;
+    /*border: 1px solid #00ff00;*/
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 115px;
+    margin-left: 35px;
+    float: left;
+
+}
+.body_img_content label{
+    margin-left: 20px;
+    /*color: #a31919;*/
+    /*border:1px solid blue;*/
+    font-weight: normal;
+    margin-bottom: 5px;
+    float: bottom;
+}
+.body_img_content label span{
+    font-size: 10px;
+    color: #121212;
+    font-weight: bold;
+}
+
+
+.userName {
+    font-weight: 900;
+    font-size: 15px;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.introduce {
+    font-size: 14px;
+    color: #666;
+    line-height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 25px;
+}
+
+
+.num {
+    margin-top: 20px;
+}
+
+.num span {
+    display: inline-block;
+    font-size: 14px;
+    color: #999;
+    letter-spacing: 1.08px;
+    width: 300px;
+}
+
+/* 修改密码模块 css*/
+.form-box {
+    outline-color: #2EA5E6;
+    margin: 20px 0 0;
+    overflow: hidden;
+    zoom: 1;
+}
+.form-box .form {
+    outline-color: #2EA5E6;
+    overflow: hidden;
+    zoom: 1;
+    margin: 20px 0 0;
+    line-height: 30px;
+}
+
+.form-box .form .label {
+    outline-color: #2EA5E6;
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    color: #666;
+}
+
+
+.modifyPassword-btn{
+    background-color: #2EA5E6;
+    margin: 30px 10px 10px 200px;
+    width:100px;
+    height: 35px;
+    color: #ffffff;
+    border-radius:10px;
+    border: 1px solid #ccc;
+    outline-color: #ccc;
+    cursor:pointer;
+}
+
+/*基本资料模块 css*/
+
+.Nickname {
+    outline-color: #2EA5E6;
+    width: 210px;
+    height: 35px;
+    line-height: 28px;
+    border: 1px solid #ccc;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+
+.selectP{
+    margin-left: 90px;
+    outline-color: #2EA5E6;
+    width: 160px;
+    height: 25px;
+    line-height: 28px;
+    border: 1px solid #ccc;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+.selectC{
+    outline-color: #2EA5E6;
+    width: 160px;
+    height: 25px;
+    line-height: 28px;
+    border: 1px solid #ccc;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+.btnSelectCity{
+    background-color: #2EA5E6;
+    width:50px;
+    height: 25px;
+    color: #ffffff;
+    border-radius:10px;
+    border: 1px solid #ccc;
+    outline-color: #ccc;
+    cursor:pointer;
+
+}

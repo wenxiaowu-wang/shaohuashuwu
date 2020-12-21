@@ -25,4 +25,5 @@ public interface ChapterInfoDao {
     @Select("select distinct chapter_title from chapter_info where chapter_id = #{param1}")
     public String selectChapterTitleByChapterId(int chapter_id);
 
+    //根据章节ID
 }

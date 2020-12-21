@@ -25,21 +25,8 @@
                         active-text-color="#ffd04b">
                     <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
                     <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
-                    <!-- <el-submenu index="2">
-                        <template slot="title">我的书架</template>
-                        <el-menu-item index="2-1">书架1</el-menu-item>
-                        <el-menu-item index="2-2">书架2</el-menu-item>
-                        <el-menu-item index="2-3">书架3</el-menu-item>
-                        <el-submenu index="2-4">
-                            <template slot="title">书架4</template>
-                            <el-menu-item index="2-4-1">书架4-1</el-menu-item>
-                            <el-menu-item index="2-4-2">书架4-2</el-menu-item>
-                            <el-menu-item index="2-4-3">书架4-3</el-menu-item>
-                        </el-submenu>
-                   </el-submenu>-->
-<!--                    <el-menu-item index="3" disabled>消息中心</el-menu-item>-->
+
                     <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
-<!--                    <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">个人账户</a></el-menu-item>-->
                     <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
                 </el-menu>
             </div>
@@ -51,12 +38,6 @@
         </div>
     </div>
     <div class="body_left">
-        <!--
-        <p>查看关注信息</p>
-        <p>编辑个人资料</p>
-        <p>更改账户信息</p>
-        <p></p>
-        <p>关注信息</p>-->
         <div class="body_left_carousel">
             <el-carousel :interval="4000" type="card" height="200px">
                 <el-carousel-item v-for="item in 6" :key="item">
@@ -81,6 +62,8 @@
         <div class="body_center">
             <el-tabs type="border-card">
                 <el-tab-pane label="互相关注">
+
+
                     <div class="users" v-for="user in displayData.eachAttentionData">
                         <div class="users_avatar">
                             <!-- <img :src="'../images/avatar/'+user.head_portrait+'.jpg'">-->
@@ -93,18 +76,12 @@
                             <el-button type="danger" plain @click="chat(user.user_id)">私信</el-button>
                         </div>
                     </div>
+
+
                     <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
-<!--                        <p>hello world</p>-->
                     </div>
                     <div class="users_pagination">
-                        <!--
-                            size-change:pageSize 改变时会触发,参数：每页条数
-                            current-change:currentPage 改变时会触发
-                            current-page.sync:当前页数，支持 .sync 修饰符
-                            page-size:每页显示条目个数，支持 .sync 修饰符
-                            layout:组件布局，子组件名用逗号分隔 String：'prev, pager, next, jumper, ->, total'
-                            total:总条目数
-                        -->
+
                         <el-pagination
                                 @size-change="handleSizeChange"
                                 @current-change="handleCurrentChange_each"
@@ -116,6 +93,7 @@
                     </div>
                 </el-tab-pane>
                 <el-tab-pane label="我的关注">
+
                     <div class="users" v-for="(user,index) in displayData.attentionData">
                         <div class="users_avatar">
 <!--                            <img :src="'../images/avatar/'+user.head_portrait+'.jpg'">-->
@@ -134,6 +112,7 @@
 <!--                            </el-popconfirm>-->
                         </div>
                     </div>
+
                     <div class="noDataTips" :style="'display:'+displayDivs.displayDiv2+';'"></div>
                     <div class="users_pagination">
                         <!--

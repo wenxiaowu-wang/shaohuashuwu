@@ -18,6 +18,17 @@ public class CommentInfo {
     public CommentInfo() {
     }
 
+    public CommentInfo(Integer user_id,Timestamp comment_time,String comment_content,Integer work_id,Integer comment_pid) {
+        this.user_id = user_id;
+        this.comment_time = comment_time;
+        this.comment_content = comment_content;
+        this.work_id = work_id;
+        this.comment_pid = comment_pid;
+    }
+
+
+
+
     public Integer getComment_id() {
         return comment_id;
     }

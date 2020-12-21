@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的书架</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/bookShelf.css">
+    <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/basic.min.css"/>
+    <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/home.min.css"/>
+
+</head>
+<body>
+<div id="bookShelfInterface">
+
+    <div class="bookshelf_top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips">{{topTips}}</div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+
+            <div class="top_data">
+                <br/>
+                {{user_name}}
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="body">
+        <div class="hsub">
+            <div class="hsub_tab">
+                <ul>
+                    <li class="bookshelf"><a href="bookShelfInterface.html"><font color="black">我的书架</font></a></li>
+                    <li class="spline"></li>
+                    <li class=""><a href="readingHistory.html">最近阅读</a></li>
+                </ul>
+            </div>
+            <div class="hsub_r">
+                当前书架收藏书籍{{book_num}}本
+            </div>
+        </div>
+        <!-- 主箱体 -->
+        <div class="home-main">
+            <!-- 列表箱体 -->
+            <div class="home_innerwrap">
+                <div class="shelf_list_tit listType_a">
+                    <div class="catName">类别</div>
+                    <div class="bookName">书名</div>
+                    <div class="author">作者</div>
+                    <div class="upDateChapter">最新章节</div>
+                    <div class="bookStatus">状态</div>
+                    <div class="updateTime">更新时间</div>
+                    <div></div>
+                    <div class="ctrlBook">操作</div>
+                    <div></div>
+                </div>
+
+                <template v-if=" book_num == 0 ">
+                    <div class="no-data"><img src="../images/no-book.png">
+                        <p>书架空了，快去添加吧~ </p></div>
+                </template>
+                <template v-else>
+                    <li class="shelf_bookLine listType_a" v-for="work in tableData">
+                        <!--                        <div class="bookSelecter">-->
+                        <!--                            <label>-->
+                        <!--                                <input type="checkbox" autocomplete="on" class="chapter-checkbox" data-bookId=""-->
+                        <!--                                ><em-->
+                        <!--                                    class="checkbox em_checked"></em>-->
+                        <!--                            </label>-->
+                        <!--                        </div>-->
+                        <div class="catName">{{work.work_main_label}}</div>
+                        <div class="bookName">
+                            <a href="" target="_blank" class="txtove">{{work.work_name}}</a>
+                        </div>
+                        <div class="author"><a href="" class="txtove" target="_blank">{{work.user_name}}</a></div>
+                        <div class="upDateChapter"><a href="" class="txtove" target="_blank">{{work.chapter_title}}</a>
+                        </div>
+                        <div class="bookStatus">{{work.work_serial_state}}</div>
+                        <div class="updateTime">{{work.chapter_time}}</div>
+                        <div class="ctrlBook"><a href="" target="_blank" class="redbtn">继续阅读</a>
+
+                        </div>
+                        <div>
+                            <button class="deleteBook" @click="deleteBookshelfWork(work.work_id)">移出书架</button>
+                        </div>
+                    </li>
+                </template>
+
+            </div>
+        </div>
+
+        <button class="deleteAllRecord"  @click="deleteAll()" >清空书架</button>
+    </div>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/bookShelfInterface.js"></script>
+</body>
+</html>

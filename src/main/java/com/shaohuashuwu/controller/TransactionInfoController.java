@@ -264,6 +264,34 @@ public class TransactionInfoController {
         return getResult;
     }
 
+
+
+    //订阅单个章节H
+    @ResponseBody
+    @RequestMapping(path = "/subscribeChapter/{userId}/{chapterId}/{beanNum}")
+    public boolean subscribeChapter(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "chapterId") Integer chapterId,@PathVariable(value = "beanNum") Integer beanNum){
+        boolean subsResult = false;
+
+        System.out.println("订阅     订阅666666666666");
+        TransactionInfo transactionInfo = new TransactionInfo();
+        Date date = new Date();
+        System.out.println("date is "+date.toString());
+        Timestamp timestamp = new Timestamp(date.getTime());
+        System.out.println("timestamp is "+timestamp.toString());
+        //交易记录流水ID不用设置，在数据库中自增补齐
+        transactionInfo.setConsumer_id(userId);//消费者ID
+        transactionInfo.setRecipent_id(chapterId);//接受者ID（作品ID）(更改为章节ID)
+        transactionInfo.setTransaction_type(2);//1表示交易类型是打赏
+        transactionInfo.setTransaction_mode(11);//交易方式(除了0和1外，其它的不进行解析)
+        transactionInfo.setTransaction_time(timestamp);//交易时间
+        transactionInfo.setTransaction_quantity(beanNum);//交易数量
+        transactionInfo.setTransaction_unit("个金豆");
+        System.out.println("打赏信息为："+transactionInfo.toString());
+        //打赏作品操作service
+        subsResult = transactionInfoService.subscribeChapter(transactionInfo);
+        return subsResult;
+    }
+
     @RequestMapping(path = "/toRemunerationInterface")
     public String toRemunerationInterface(){
         return "remunerationInterface.html";

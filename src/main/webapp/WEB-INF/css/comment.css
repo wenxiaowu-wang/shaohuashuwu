@@ -1,0 +1,146 @@
+
+.dialog_chapter{
+    min-width: 1200px;
+}
+
+.dialog_work {
+    min-width: 1200px;
+}
+
+.comment_btn {
+    margin-left: 87%;
+    display: inline-block;
+    height: 35px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color: #66b1ff;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.comment-parent {
+    margin-top: 20px;
+}
+
+.comment-parent_info {
+
+    height: 50px;
+    width: 100%;
+    /*background:red;*/
+}
+
+.comment-parent_head {
+    width: 10%;
+    height: 50px;
+    /*background: #5c6b77;*/
+
+    float: left;
+}
+
+.comment-parent_info3 {
+    width: 90%;
+    height: 50px;
+    /*background: #66b1ff;*/
+
+    float: left;
+}
+
+.reply_comment_btn {
+
+    height: 20px;
+    width: 40px;
+    background-color: #66b1ff;
+    color: #fff;
+    font-size: 11px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+
+}
+
+.reply_comment_btn_2{
+    height: 20px;
+    width: 40px;
+    background-color: #66b1ff;
+    color: #fff;
+    font-size: 11px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.username {
+
+    font-weight: 800;
+    font-size: medium;
+}
+
+.comment_content {
+
+    margin-left: 10%;
+    background-color: #F8F8FF;
+
+}
+
+.reply_comment_input {
+    margin-left: 10%;
+}
+
+.comment_btn2 {
+    margin-left: 87%;
+    display: inline-block;
+    height: 30px;
+    margin-top: 1%;
+    padding: 0 17px;
+    background-color: #66b1ff;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.comment-child_info {
+
+    height: 50px;
+    width: 100%;
+    margin-left: 10%;
+
+}
+
+.comment-child_head {
+    width: 10%;
+    height: 50px;
+
+    float: left;
+}
+
+
+.username_child {
+
+    font-weight: 700;
+    font-size: small;
+}
+
+.comment-child_content{
+    width: 80%;
+    background-color: #F8F8FF;
+    margin-left: 10%;
+}
+
+.reply_comment_input-child{
+    margin-left: 10%;
+    margin-top: 1%;
+}
+
+
+
+
+

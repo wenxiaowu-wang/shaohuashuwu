@@ -1,10 +1,8 @@
 package com.shaohuashuwu.dao;
 
 import com.shaohuashuwu.domain.WorksInfo;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -15,6 +13,7 @@ import java.util.List;
  * 项目:shaohuashuwu
  * 描述:
  */
+//@Repository
 public interface WorksInfoDao {
 
     //根据作者ID获取所有对应的作品信息
@@ -50,4 +49,26 @@ public interface WorksInfoDao {
     //根据作品ID更新投票数量
     @Update("update works_info set work_vote_num = work_vote_num + (#{param2}) where work_id = #{param1}")
     public int updateWorkVoteNumByWorkId(int work_id,int voteNum);
+
+
+//    //根据用户id从关注表中获取作品信息
+//    @Select("select w1.* from works_info w1 where w1.work_id in (select b1.work_id from )")
+//    public String selectWorkInfoByWorkNameFromBookShelf(int work_id);
+
+    //根据用户ID获取用户加入书架的作品的作品名字
+    @Select("SELECT w1.* FROM bookshelf_info,works_info w1 WHERE bookshelf_info.work_id = w1.work_id AND bookshelf_info.user_id = #{user_id} ORDER BY collection_time DESC")
+    @ResultMap("worksInfo")
+    public List<WorksInfo> selectBookshelfWorkNameByWorkID(int user_id);
+
+
+    //根据用户ID获取用户加入书架的作品的作品名字
+    @Select("SELECT w1.* FROM reading_history_info,works_info w1 WHERE reading_history_info.work_id = w1.work_id AND reading_history_info.user_id = #{user_id} ORDER BY reading_time DESC")
+    @ResultMap("worksInfo")
+    public List<WorksInfo> selectReadingHistoryWorkNameByWorkID(int user_id);
+
+
+    //根据用户的ID获取该用户写过的作品ID、作品名字
+    @Select("select work_id,work_name from works_info where user_id = #{user_id}")
+    public List<WorksInfo> selectWorkIdNameByUserId(int user_id);
+
 }

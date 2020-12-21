@@ -1,0 +1,615 @@
+
+/*顶部导航栏*/
+.detailstopNavigation-div-class{
+    height: 28px;
+    width: 100%;
+    background: #3e3d43;
+
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.detailstopNavigation-ul-class{
+    width: 1160px;
+    max-height: 28px;
+    background: #3e3d43;
+
+    margin:auto;
+    display:table;
+    list-style-type: none;
+
+    padding-left: 0px;
+}
+
+.detailstopNavigation-button-class{
+    float: left;
+    margin-left: 0px;
+    background: #3e3d43;
+    border-color: #3e3d43;
+}
+
+#user_name_id{
+    /*float: left;*/
+    /*height: 28px;*/
+    /*width: 100px;*/
+    margin-left: 200px;
+    /*background: #3a8ee6;*/
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#shujia_id{
+
+    max-height: 28px;
+    /*margin-left: 264px;*/
+    float: right;
+}
+
+.shaohualogo{
+    width: 18px;
+    height: 18px;
+    float: left;
+    position: relative;
+    top:-2px;
+}
+
+.work_name_p_class{
+    float: left;
+    margin-left: 10px;
+    position: relative;
+    top:-12px;
+}
+
+
+
+/*横幅*/
+
+.banner_div_class{
+
+    width: 101%;
+    background: #3e3d43;
+    /*margin:0 auto;*/
+    margin-left: -10px;
+    /*position: fixed;*/
+    /*top:0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*z-index: 0;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.banner_img_class{
+    min-width: 100%;
+    min-height: 300px;
+    /*margin: -10px;*/
+    /*margin:0 auto;*/
+}
+
+/*主要内容*/
+.mainInfo_div_class{
+    /*background: #9c5858;*/
+    width: 1500px;
+    height: auto;
+    min-height: calc(100vh - 1000px);
+
+    /*margin-top: 250px;*/
+    z-index: 0;
+
+    margin:auto;
+    display:table;
+
+    position: relative;
+    top:-100px;
+
+
+}
+
+.mainInfo_div2_class{
+
+    width: 1000px;
+
+    /*background: #b87d95;*/
+    height: auto;
+    margin-left: 250px;
+
+
+
+}
+
+/*模块1，书籍信息不动模块*/
+.workinfo1_div_class{
+    height: 260px;
+    width: 100%;
+    background: #FFFFFF;
+}
+.work_cover_div_class{
+    height: 220px;
+    width: 170px;
+    background: #ffffff;
+    float: left;
+}
+
+.work_cover_class{
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 150px;
+    height: 205px;
+}
+
+
+.workInfo_right_class{
+    width: 800px;
+    height: 220px;
+    background: #ffffff;
+    float: left;
+    /*padding-left: 15px;*/
+}
+/*第一行*/
+.one_line_class{
+    width: 100%;
+    background: #ffffff;
+    height: 65px;
+}
+.work_name_h_class{
+    margin-top: 20px;
+    margin-left: 15px;
+    /*width: 150px;*/
+    height: 30px;
+    display:inline-block;
+    /*background: red;*/
+    /*position: relative;*/
+    /*left: 150px;*/
+}
+
+.user_name_p_class{
+    /*width: ;*/
+    height: 30px;
+    display:inline-block;
+    margin-left: 20px;
+}
+/*第二行*/
+.div_line_class{
+    width: 100%;
+    background: #ffffff;
+    height: 40px;
+}
+
+.line_el_tag_class{
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+
+
+.label_h_class{
+
+    margin-left: 15px;
+    position: relative;
+    top:10px;
+}
+
+
+.num_label_p_class{
+    margin-left: 15px;
+    font-size: 20px;
+    position: relative;
+    top:1px;
+
+}
+
+
+.workinfo1_div_button_class{
+    margin-left: 15px;
+}
+
+
+.hr_class{
+    background: #c6c6c6;
+    height: 1px;
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+
+/*第二部分*/
+.workinfo2_div_class{
+    /*height: ;*/
+    width: 100%;
+    height: auto;
+    /*background: #e56363;*/
+}
+
+/*左边部分*/
+.workinfo2_leftdiv_class{
+    height: auto;
+    width: 75%;
+    background: #ffffff;
+    float: left;
+}
+
+/*当时作品信息时*/
+.workinfo2_leftdiv1_class{
+    width:95%;
+    height: auto;
+    margin-left: 5px;
+    background: #ffffff;
+}
+
+.work_introduct_div_class{
+    height:auto;
+    /*background: #806262;*/
+}
+.work_introduct_class{
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    /*height: 35px;*/
+    color: #888888;
+}
+
+.label_custom_class{
+    position: relative;
+    color: #888888;
+    top:15px;
+    display: block;
+    width: 10%;
+    font-size: 15px;
+    float: left;
+}
+
+.label_custominfo_class{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+/*最新章节信息*/
+.newchapter_div_info{
+    height: 30px;
+    width: 100%;
+    /*background: red;*/
+}
+.newchapter_info{
+    position: relative;
+
+    top:15px;
+    color: #888888;
+    display: block;
+    width: 10%;
+    /*height: 20px;*/
+    font-size: 15px;
+    float: left;
+}
+
+.newchapter1_info{
+    position: relative;
+    color: #424242;
+    top:15px;
+    left: 15px;
+    display: block;
+    width: 80%;
+    /*height: 20px;*/
+    font-size: 15px;
+    float: left;
+}
+
+.chapter_div_info{
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    /*background: #e3e3e3;*/
+    overflow-y:auto;
+}
+
+/*优化滚动条*/
+.chapter_div_info::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chapter_div_info::-webkit-scrollbar-track {
+    background-color: #f6f6f6;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+
+.chapter_div_info::-webkit-scrollbar-thumb {
+    background-color: #cbcbcb;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+
+
+.thischapter_info{
+    display: block;
+    width: 100%;
+    height: 20px;
+    font-size: 15px;
+    color: #888888;
+
+
+}
+
+.allchapter_info_class{
+    display: block;
+    width: 88%;
+    margin-left: 12%;
+    margin-top: 5px;
+    /*background: #13ce66;*/
+    text-decoration: none;
+    color: #888888;
+
+}
+
+/*.work_introduct_class{*/
+/*    margin-top: 10px;*/
+/*    width: 100%;*/
+/*    !*height:auto!important;*!*/
+/*    !*height:200px;*!*/
+/*    !*min-height:200px;*!*/
+
+/*    !*边框不能调整大小*!*/
+/*    resize:none;*/
+/*    !*输出框去掉边框*!*/
+/*    border:0;*/
+/*    font-size: 16px;*/
+/*    vertical-align: middle;*/
+/*}*/
+
+.workinfo_rightbo_class{
+    width: 50%;
+    height: 100px;
+    background: #ffffff;
+}
+/*右边部分*/
+.workinfo2_rightdiv_class{
+
+    width: 21%;
+    height: 600px;
+    background: #efe9d3;
+    float: left;
+    margin-left: 4%;
+
+}
+
+
+.head_portrait_class{
+    width: 100px;
+    height: 100px;
+    /*设置为圆角*/
+    border-radius: 50% 50% 50% 50%;
+    margin-left: 27%;
+    margin-top: 20px;
+}
+
+.user_name_div_class{
+    margin: 0 auto;
+    /*background: #ce1338;*/
+    text-align: center;
+}
+
+.user_name_class{
+    /*display: block;*/
+    /*background: #c4b5e8;*/
+    /*width: 100%;*/
+    margin-top:  10px;
+    /*margin-left:   auto;*/
+    /*position:absolute;*/
+    /*width:450px;*/
+    /*height:198px;*/
+    /*left:50%;*/
+    /*top:50%;*/
+
+    /*position: relative;*/
+    /*top:10px;*/
+    /*left: 50%;*/
+
+    color: #424242;
+}
+
+.workinfo2_hr_class{
+    background: #888888;
+    width: 90%;
+    height: 1px;
+    margin-top: 10px;
+    margin-left: 5%;
+}
+
+
+/*作者的作品信息*/
+.user_info_class{
+    margin-top: 10px;
+    /*background: #ffffff;*/
+    height: 90px;
+
+}
+
+.user1_info1_class{
+    width: 50%;
+    height: 40px;
+    /*background: #ffffff;*/
+    float: left;
+    text-align: center;
+}
+
+.user1_info1_img_class{
+    height: 40px;
+    width: 40px;
+    /*设置为圆角*/
+    border-radius: 50% 50% 50% 50%;
+    background: #5e5e5e;
+}
+
+
+
+/*作者的作品信息,第二行*/
+.user2_info2_class{
+    width: 50%;
+    height: 30px;
+    /*background: #aa9f3d;*/
+    float: left;
+    text-align: center;
+}
+
+.user2_info1_p_class{
+    /*margin-top: -1px;*/
+    position: relative;
+    top: -10px;
+    font-size: 15px;
+}
+
+
+.user2_info2_p_class{
+    font-size: 13px;
+    position: relative;
+    top: -10px;
+    color: #ff2b2b;
+}
+
+
+/*其他作品*/
+.userwork_info_class{
+    width: 100%;
+    height: 300px;
+    /*background: #13ce66;*/
+    position: relative;
+    top: -10px;
+}
+
+.morework_class{
+    height: 40px;
+    width: 100%;
+    /*background: #5e5e5e;*/
+}
+
+.other_work_class{
+    font-size: 14px;
+    display: block;
+    margin-left: 10px;
+    /*background: #13ce66;*/
+    width: 50%;
+    float: left;
+}
+
+.more_work_class{
+    font-size: 14px;
+    display: block;
+    margin-left: 20%;
+    /*background: #c813ce;*/
+    width: 20%;
+    float: left;
+
+    position: relative;
+    top: 15px;
+
+    text-decoration: none;
+}
+
+.moreworklunbo_class{
+    width: 100%;
+    height: 200px;
+    /*background: #13ce66;*/
+}
+
+.carousel_class{
+    width: 100%;
+    height: 300px;
+    /*background: #fdfdfd;*/
+
+}
+
+
+
+
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+}
+.el-carousel__item:nth-child(2n) {
+    /*background-color: #99a9bf;*/
+}
+
+.el-carousel__item:nth-child(2n+1) {
+    /*background-color: #d3dce6;*/
+}
+
+.otherwork_cover_div_class{
+    width: 100%;
+    height: 130px;
+    text-align: center;
+}
+
+.otherwork_cover_class{
+
+    width: 90px;
+    height: 120px;
+}
+
+.othername_div_class{
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    /*background: #ffffff;*/
+}
+.othername_p_class{
+    font-size: 15px;
+    margin-top: -5px;
+}
+
+.otherint_div_class{
+    width: 100%;
+    height: 59px;
+    /*background: #3a8ee6;*/
+    text-align: center;
+
+}
+
+.otherint_p_class{
+    margin-left: 5%;
+    display: block;
+    width: 90%;
+    height: 59px;
+    font-size: 14px;
+    color: #888888;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.otherButton_div_class{
+
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    /*background: #13ce66;*/
+}
+
+.other_button_class{
+    margin-top: 10px;
+    background: #efe9d3;
+    color: red;
+
+
+}
+
+/**/
+/*底部div*/
+.bottom_div_class{
+    width: 110%;
+    height: 300px;
+    background: #b6b6b6;
+    margin-bottom: 0px;
+
+    margin-left: -10px;
+
+
+}

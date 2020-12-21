@@ -40,4 +40,8 @@ public interface TransactionInfoService {
 
     //获取该作品的被订阅的所有记录
     public List<TransactionInfo> getSubscribeInfo(int work_id);
+
+    //单个章节订阅H
+    public boolean subscribeChapter(TransactionInfo subscribeChapterInfo);
+
 }

@@ -1,0 +1,136 @@
+
+/*.clearfix:before,*/
+/*.clearfix:after {*/
+/*    content: ' ';*/
+/*    display: table;*/
+/*}*/
+
+/*.clearfix:after {*/
+/*    clear: both;*/
+/*}*/
+
+/*input {*/
+/*    outline: none;*/
+/*}*/
+
+/*ol,*/
+/*ul {*/
+/*    list-style: none;*/
+/*}*/
+
+/*body {*/
+/*    padding: 20px;*/
+/*}*/
+
+.select-box {
+    position: relative;
+}
+
+.select-box .curr {
+    width: 240px;
+    padding-left: 15px;
+    padding-right: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    position: relative;
+    z-index: 15;
+    background-color: white;
+}
+
+.select-box .curr:hover {
+    border-color: #aaa;
+    cursor: pointer;
+}
+
+.arrow {
+    position: absolute;
+    right: 10px;
+    top: 17px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid #aaa;
+    border-top: 1px solid #aaa;
+    transform: rotate(225deg);
+    transform-origin: 2px 2px;
+    transition: 200ms;
+}
+
+.on .arrow {
+    transform: rotate(45deg);
+}
+
+.list-box {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 8px 0px #ccc;
+    padding: 5px 0;
+    z-index: 10;
+    transition: 200ms;
+}
+
+.on .list-box {
+    top: 50px;
+}
+
+.list-box .list {
+    float: left;
+    width: 180px;
+    height: 204px;
+    overflow: auto;
+    border-left: 1px solid #ccc;
+}
+
+.list-box .list.first {
+    border: none;
+}
+
+.list .item {
+    height: 38px;
+    line-height: 38px;
+    padding-left: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+}
+
+.list .item:hover {
+    background-color: rgb(245, 247, 250);
+}
+
+.list .item.active {
+    color: #409EFF;
+    font-weight: bold;
+}
+
+.list .icon {
+    position: absolute;
+    top: -6px;
+    left: 30px;
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    z-index: 20;
+    transform: rotate(45deg);
+    background-color: white;
+}
+
+.list .arrow-icon {
+    position: absolute;
+    right: 10px;
+    top: 17px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-left: 1px solid #aaa;
+    border-top: 1px solid #aaa;
+    transform: rotate(135deg);
+    transform-origin: 2px 2px;
+    transition: 200ms;
+}

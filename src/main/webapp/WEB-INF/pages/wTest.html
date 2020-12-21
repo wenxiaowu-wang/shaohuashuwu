@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div id="app">
+
+
+    <el-checkbox
+            :indeterminate="isIndeterminate"
+            v-model="checkAll"
+            @change="handleCheckAllChange"
+    >全选</el-checkbox>
+
+    <el-checkbox-group v-model="check" @change="handleCheckedCitiesChange">
+        <el-row>
+            <el-col :span="12" v-for="item in checkedList" :key="item.id" style="padding:10px">
+                <el-checkbox :label="item.id">
+                    <span>{{item.name}}</span>
+                    <span>{{item.phone}}</span>
+                </el-checkbox>
+            </el-col>
+        </el-row>
+    </el-checkbox-group>
+
+
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data:{
+
+            isIndeterminate: false,
+            checkAll: false,
+            check: [],
+            checkedGameId: [],
+            checkedList: [
+                {
+                    id: 1,
+                    name: "张三",
+                    phone: "13554006475"
+                },
+                {
+                    id: 2,
+                    name: "李四",
+                    phone: "13514002475"
+                },
+                {
+                    id: 3,
+                    name: "王五",
+                    phone: "13558992475"
+                }
+            ]
+        },
+        methods: {
+            init() {
+                for (let i = 0; i < this.checkedList.length; i++) {
+                    this.checkedGameId.push(this.checkedList[i].id);
+                }
+            },
+            handleCheckAllChange(val) {
+                this.check = val ? this.checkedGameId : [];
+                this.isIndeterminate = false;
+            },
+            handleCheckedCitiesChange(value) {
+                let checkedCount = value.length;
+                this.checkAll = checkedCount === this.checkedList.length;
+                this.isIndeterminate =
+                    checkedCount > 0 && checkedCount < this.checkedList.length;
+            }
+        },
+        created() {
+            this.init();
+        }
+    })
+</script>
+
+</body>
+</html>

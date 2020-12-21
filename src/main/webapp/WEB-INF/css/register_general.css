@@ -1,0 +1,57 @@
+
+
+.dialog_register{
+    min-width: 1300px;
+
+}
+
+.center{
+    margin: 20px auto;
+    width: 55%;/*  若为100%会充满全屏  */
+    height: 500px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
+    border: 1px solid blue;
+}
+.register{
+margin-left: 12%;
+    width: 70%;
+    height: 50%;
+}
+.phone{
+    width: 238px;
+}
+
+.code{
+    width: 238px;
+}
+.smsCodeBtn{
+    width: 90px;
+    height: 30px;
+    color: white;
+    background-color: #409EFE;
+    border: 1px solid gainsboro;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.pwd1{
+    width: 238px;
+}
+.rule{
+    font-size: 12px;
+    color: grey;
+    margin-left: 30%;
+}
+.pwd2{
+    width: 238px;
+}
+
+.label {
+    height: 50px;
+    outline-color: #2EA5E6;
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    color: #666;
+}
+.loginBtn{
+    margin-left: 32%;
+}

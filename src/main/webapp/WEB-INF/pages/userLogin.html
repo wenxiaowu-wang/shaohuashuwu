@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../images/favicon.ico">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="../css/elementui.css"/>
+    <link rel="stylesheet" href="../css/userLogin.css"/>
+</head>
+<body>
+
+<div id="app">
+    <button @click="dialogFormVisible = 'ture' ">登录</button>
+    <el-dialog class="dialog_login" :visible.sync="dialogFormVisible">
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="账号密码登录" name="first">
+                <div class="normal">
+                    <form class="login1">
+                        <div class="form">
+                            <span class="label">手机号：</span>
+                            <el-input class="phone" placeholder="请输入手机号" v-model="userInfo.phone_number"
+                                      clearable></el-input>
+                        </div>
+
+                        <div class="form">
+                            <span class="label">密码：</span>
+                            <el-input class="pwd" placeholder="请输入密码" v-model="userInfo.password"
+                                      show-password></el-input>
+                        </div>
+                        <div class="Warning">
+                            <span>登录即代表登录即代表同意</span><a href="userAgreement.html" >《用户服务协议》</a><span>和</span><a href="privacyPolicy.html" >《隐私政策》</a>
+                        </div>
+                        <el-row>
+                            <el-button class="loginBtn1" type="primary" round @click="normalLogin()">登录</el-button>
+                            <a href="register_general.html" class="register_text">没有账号？点击注册</a>
+                        </el-row>
+
+                    </form>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="手机号快速登录" name="second">
+                <form class="codeLogin">
+                    <span class="label">手机号：</span>
+                    <el-input class="phone" type="text" placeholder="请输入你的手机号" v-model="phone_number" clearable
+                              ></el-input>
+                    <input class="smsCodeBtn" type="button" id="btn" value="发送验证码" @click="sendSms()"
+                           onclick="time(this)"/>
+                    <div class="form-box">
+                        <div class="form">
+                            <span class="label">验证码：</span>
+                            <el-input class="code" type="code" placeholder="输入验证码" v-model="smsCode"></el-input>
+                        </div>
+                    </div>
+                    <div class="Warning">
+                        <span>登录即代表登录即代表同意</span><a href="userAgreement.html" >《用户服务协议》</a><span>和</span><a href="privacyPolicy.html" >《隐私政策》</a>
+                    </div>
+                    <el-row class="loginBtn1">
+                        <el-button type="primary" round @click="codeLogin">登录</el-button>
+                        <a href="register_general.html" class="register_text">没有账号？点击注册</a>
+                    </el-row>
+                </form>
+            </el-tab-pane>
+        </el-tabs>
+    </el-dialog>
+
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/userLogin.js"></script>
+<script type="text/javascript">
+    let wait = 60;
+    function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.value = "发送验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.value = "重新发送(" + wait + ")";
+            wait--;
+            setTimeout(function () {
+                    time(o)
+                },
+                1000)
+        }
+    }
+
+    document.getElementById("btn").onclick = function () {
+        time(this);
+    }
+</script>
+
+</body>
+</html>

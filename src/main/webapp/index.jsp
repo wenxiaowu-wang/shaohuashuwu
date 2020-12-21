@@ -13,6 +13,18 @@
 </head>
 <body>
 
+<h2>神奇的网页</h2></br>
+<a href="userInfoController/userLoginInterface">用户登录</a></br>
+<h2>神奇的网页</h2></br>
+<a href="userInfoController/register_generalInterface">用户注册</a></br>
+<h2>神奇的网页</h2></br>
+<a href="bookshelfInfoController/bookshelfInterface">我的书架</a></br>
+<h2>神奇的网页</h2></br>
+<a href="bookshelfInfoController/readingHistoryInterface">最近阅读</a></br>
+<h2>神奇的网页</h2></br>
+<h2>神奇的网页</h2></br>
+
+
 <a href="account/findAll">cceshi</a>
 
 <form action="account/save" method="post">
@@ -73,8 +85,6 @@
 <br>
 <a href="adminInfoController/adminLoginInterface2">管理员登录页面(静态资源分离)</a>
 
-
-
 <script src="js/axios.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/elementui.js"></script>
@@ -91,7 +101,6 @@
             }
         },
         created(){
-            alert("发送post请求")
             axios.post("userSession/saveUser/" +
                 11+"/"+encodeURI("我吃唐家土豆")+"/004").then(response =>{
                 console.log(JSON.stringify(response.data));

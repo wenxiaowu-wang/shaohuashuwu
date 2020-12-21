@@ -1,19 +1,20 @@
 package com.shaohuashuwu.domain;
 
 import com.shaohuashuwu.domain.vo.AttentionInfoVo;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.sql.Timestamp;
 
 
-public class UserInfo {
+import java.io.Serializable;
+
+
+
+public class UserInfo implements Serializable {
 
     //属性
     private Integer user_id;                //用户ID
     private String user_name;           //用户昵称
     private String head_portrait;         //用户头像
     private String gender;              //用户性别
-    private Timestamp birthday;         //用户生日
+    private String birthday;         //用户生日
     private String area;                //用户所在地
     private String phone_number;        //用户手机号
     private String password;            //用户密码
@@ -31,6 +32,11 @@ public class UserInfo {
         System.out.println("userinfo无参构造方法,自动注入参数");
     }
 
+    public UserInfo(String phone_number, String password) {
+        this.phone_number = phone_number;
+        this.password = password;
+    }
+
     public UserInfo(String user_name, String gender, String area, String phone_number, String password, Integer gold_bean_num, Integer gold_coin_num, Integer ticket_num) {
         this.user_name = user_name;
         this.gender = gender;
@@ -41,6 +47,28 @@ public class UserInfo {
         this.gold_coin_num = gold_coin_num;
         this.ticket_num = ticket_num;
     }
+
+    public UserInfo(String phone_number, String password, String user_name, String head_portrait, String gender, String area, String birthday, int gold_bean_num, int gold_coin_num, int ticket_num) {
+        this.user_name = user_name;
+        this.gender = gender;
+        this.area = area;
+        this.phone_number = phone_number;
+        this.password = password;
+        this.head_portrait = head_portrait;
+        this.birthday = birthday;
+        this.gold_bean_num =gold_bean_num;
+        this.gold_coin_num = gold_coin_num;
+        this.ticket_num = ticket_num;
+    }
+
+    public UserInfo(int user_id, String user_name, String gender, String birthday, String area) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.gender = gender;
+        this.area = area;
+        this.birthday = birthday;
+    }
+
 
     public Integer getUser_id() {
         return user_id;
@@ -74,11 +102,11 @@ public class UserInfo {
         this.gender = gender;
     }
 
-    public Timestamp getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Timestamp birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -143,9 +171,9 @@ public class UserInfo {
         return "UserInfo{" +
                 "user_id=" + user_id +
                 ", user_name='" + user_name + '\'' +
-                ", head_portrait=" + head_portrait +
+                ", head_portrait='" + head_portrait + '\'' +
                 ", gender='" + gender + '\'' +
-                ", birthday=" + birthday +
+                ", birthday='" + birthday + '\'' +
                 ", area='" + area + '\'' +
                 ", phone_number='" + phone_number + '\'' +
                 ", password='" + password + '\'' +

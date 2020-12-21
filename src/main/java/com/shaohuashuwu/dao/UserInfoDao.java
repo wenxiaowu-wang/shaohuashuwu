@@ -62,4 +62,48 @@ public interface UserInfoDao {
     @Select("select double_password from user_info where user_id = #{user_id}")
     public String selectDoublePasswordById(int user_id);
 
+    //hzwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+
+    //根据用户手机号查询密码*********************
+    @Select("select password from user_info where phone_number = #{phone_number}")
+    public String selectUserPasswordByPhoneNumber(String phone_number);
+
+
+
+    //注册账号密码22222222222222222
+    @Insert("insert into user_info(phone_number,password,user_name,head_portrait,gender,area,birthday,gold_bean_num,gold_coin_num,ticket_num)values" +
+            "(#{phone_number},#{password},#{user_name},#{head_portrait},#{gender},#{area},#{birthday},#{gold_bean_num},#{gold_coin_num},#{ticket_num})")
+    public void insertUserInfoByAccount(UserInfo userInfo);
+
+    //更新个人资料
+    @Update("update user_info set user_name = #{user_name},gender = #{gender},birthday = #{birthday},area = #{area} where user_id = #{user_id}")
+    public int updatePersonalDataByID(UserInfo userInfo);
+
+    //根据手机号 获取用户ID 用户昵称 头像 性别 地区 生日
+    @Select("select * from user_info where phone_number = #{phone_number}")
+    public UserInfo selectUserInfoByPhoneNumber(String phone_number);
+
+    //更改密码
+    @Update("update user_info set password = #{password} where phone_number = #{phone_number}")
+    public int updateUserPwd(UserInfo userInfo);
+
+
+    //依据手机号判断账号是否存在
+    @Select("select count(*) from user_info where phone_number = #{phone_number}")
+    public int isUserInfohaveByphone_number(String phone_number);
+
+    //查询数据库用户注册的总条数
+    @Select("select count(*) from user_info")
+    public int selectUserInfoAllCount(String phone_number);
+
+
+    //查询用户昵称是否存在
+    @Select("select count(*) from user_info where user_name = #{param1} and user_id != #{param2}")
+    public Boolean isUserNameHaveByUsername(String user_name,int user_id);
+
+    //根据章节ID获取作者的id
+    @Select("select user_id from chapter_post_info where chapter_id = #{chapter_id}")
+    public int selectAuthorIDByChapterID(int chapter_id);
+
+
 }

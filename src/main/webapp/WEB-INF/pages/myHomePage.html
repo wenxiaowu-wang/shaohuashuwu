@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的首页</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/myHomePage.css">
+    <link rel="stylesheet" href="../css/wTest.css">
+</head>
+<body>
+
+<div id="myHomePage">
+    <div class="top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips">{{topTips}}</div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+
+            <div class="top_data">
+                <br/>
+                {{user_name}}
+                &nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="body_left">
+
+    </div>
+
+    <div class="body">
+
+        <div class="body_header">
+            <div class="body_img">
+                <div class="body_img_img">
+                    <img id="avatar" :src="imageURL_header+user_avatar+imageURL_suffix">
+                </div>
+                <div class="body_img_content">
+
+                    <label>{{user_name2}}<br/>&nbsp;&nbsp;&nbsp;<span>互相关注：666 </span>&nbsp;&nbsp;
+                        <span>关注：777 </span>&nbsp;&nbsp;<span>粉丝：888 </span>&nbsp;&nbsp;</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="body_center">
+            <el-tabs type="border-card">
+
+                <el-tab-pane label="基本资料">
+                    <div class="form-box">
+                        <div class="form">
+                            <span class="label">昵称：</span>
+                            <span class="text">
+                                <input class="Nickname" v-model="user_name">
+                             </span>
+                        </div>
+                        <div class="form">
+                            <span class="label">韶华ID：</span>
+                            <span class="text">
+                                <input class="Nickname" v-model="user_id" disabled>
+                            </span>
+                        </div>
+                        <div class="form">
+                            <span class="label">性别：</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <template>
+                                <el-radio v-model="gender" label="男">男</el-radio>
+                                <el-radio v-model="gender" label="女">女</el-radio>
+                            </template>
+                        </div>
+                        <div class="form">
+                            <span class="label">生日：</span>
+                            <el-date-picker
+                                    v-model="dateValue"
+                                    type="date"
+                                    placeholder="选择日期">
+                            </el-date-picker>
+                        </div>
+                        <div class="form">
+                            <span class="label">地区：</span>
+
+<!--                            <input class="Nickname" v-model="area">-->
+                            <el-cascader
+                                    ref = "cascaderAddr"
+                                    v-model="value"
+                                    :options="CityInfo"
+                                    placeholder ="请选择地区"
+                                    @change="handleChange"></el-cascader>{{value}}
+
+                        </div>
+                        <div>
+                            <button class="modifyPassword-btn" @click="updatePersonData">保存修改</button>
+                        </div>
+                    </div>
+                </el-tab-pane>
+
+                <el-tab-pane label="修改密码">
+                    <div class="form-box">
+                        <div class="form">
+                            <span class="label">原密码：</span>
+                            <span class="text">
+                                <input type="password" class="Nickname" v-model="oldPwd">
+                             </span>
+                        </div>
+                        <div class="form">
+                            <span class="label">新密码：</span>
+                            <span class="text">
+                                <input type="password" class="Nickname" v-model="newPwd">
+                            </span>
+                        </div>
+                        <div class="form">
+                            <span class="label">重复新密码：</span>
+                            <span class="text">
+                                <input type="password" class="Nickname" v-model="newPwd2">
+                            </span>
+                        </div>
+                        <div>
+                            <button class="modifyPassword-btn" @click="updatePwd">确认修改</button>
+                        </div>
+                    </div>
+                </el-tab-pane>
+
+
+                <el-tab-pane label="城市选择器2">
+                    <div class="form-box">
+                        <div class="form">
+                            <span class="label">地区：</span>
+
+
+                            <input type="text" value="" id="addr-show" disabled>
+
+                            <br/>
+
+                            <!--省份选择-->
+                            <select id="prov" onchange="showCity(this)">
+                                <option>=请选择省份=</option>
+                            </select>
+
+                            <!--城市选择-->
+                            <select id="city" onchange="showCountry(this)">
+                                <option>=请选择城市=</option>
+                            </select>
+
+                            <!--县区选择-->
+                            <select id="country" onchange="selecCountry(this)">
+                                <option>=请选择县区=</option>
+                            </select>
+                            <button type="button" class="btn met1" onClick="showAddr()">确定</button>
+
+                        </div>
+                    </div>
+                </el-tab-pane>
+
+            </el-tabs>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/myHomePage.js"></script>
+<script src="../js/citys01.js"></script>
+<script src="../js/method01.js"></script>
+
+
+</body>
+</html>

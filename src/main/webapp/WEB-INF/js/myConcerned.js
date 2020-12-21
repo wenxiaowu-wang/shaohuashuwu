@@ -47,6 +47,7 @@ let attentionInterface_vm = new Vue({
                 id:0
             }
         ],
+
         displayData:{
             eachAttentionData:[],
             attentionData:[],

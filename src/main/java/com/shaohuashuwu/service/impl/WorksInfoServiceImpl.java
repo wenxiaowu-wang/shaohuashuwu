@@ -27,4 +27,21 @@ public class WorksInfoServiceImpl implements WorksInfoService {
         return worksInfoDao.selectAllByUserId(user_id);
     }
 
+    //根据用户ID获取用户加入书架的作品的作品名字
+    @Override
+    public List<WorksInfo> getBookshelfWorkNameByWorkID(int user_id) {
+        return worksInfoDao.selectBookshelfWorkNameByWorkID(user_id);
+    }
+
+    //根据用户ID获取用户阅读历史的作品的作品名字
+    @Override
+    public List<WorksInfo> getReadingHistoryWorkNameByWorkID(int user_id) {
+        return worksInfoDao.selectReadingHistoryWorkNameByWorkID(user_id);
+    }
+
+    @Override
+    public List<WorksInfo> getWorkIdNameByUserId(int user_id) {
+        return worksInfoDao.selectWorkIdNameByUserId(user_id);
+    }
+
 }

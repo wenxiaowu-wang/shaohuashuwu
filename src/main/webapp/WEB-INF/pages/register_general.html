@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>个人注册</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css"/>
+    <link rel="stylesheet" href="../css/register_general.css"/>
+
+</head>
+
+<body>
+<div class="center" id="app">
+
+    <button @click="dialogFormVisible = 'ture' ">注册</button>
+    <el-dialog class="dialog_register" :visible.sync="dialogFormVisible">
+        <form class="register" name="one">
+            <span class="label">手机号：</span>
+            <el-input class="phone" type="text" name="two" placeholder="请输入你的手机号" v-model="pojo.phone_number"
+                      onkeyup="yz()"></el-input>
+            <input class="smsCodeBtn" type="button" id="btn" value="发送验证码" @click="sendSms()" onclick="setTime(this)">
+            <div class="form-box">
+                <div class="form" name=>
+                    <span class="label">验证码：</span>
+                    <el-input class="code" type="code" placeholder="输入验证码" v-model="smsCode"></el-input>
+                </div>
+                <div class="form">
+                    <span class="label">密码：</span>
+                    <el-input class="pwd1" type="password" placeholder="设置登录密码" v-model="pojo.password"
+                              show-password></el-input>
+                </div>
+                <span class="rule">(密码至少8个字符，至少1个大写字母，1个小写字母和1个数字)</span>
+                <div class="form">
+                    <span class="label">确认密码：</span>
+                    <el-input class="pwd2" type="password" placeholder="再次确认密码" v-model="password"
+                              show-password></el-input>
+                </div>
+            </div>
+            <el-row class="loginBtn">
+                <el-button type="primary" round @click="save">立即注册</el-button>
+            </el-row>
+        </form>
+    </el-dialog>
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="../js/register_general.js"></script>
+
+<script language="javascript" type="text/javascript">
+    let button = document.getElementById("btn");
+    let regphoto = /^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/;
+
+    function yz() {
+        if (regphoto.test(document.one.two.value)) {
+            button.disabled = false;
+        } else {
+            button.disabled = true;
+        }
+    }
+</script>
+<script>
+
+    let countdown = 60;
+
+    function setTime(obj) {
+        if (countdown == 0) {
+            obj.removeAttribute("disabled");
+            obj.value = "再次发送";
+            countdown = 60;
+            return;
+        } else {
+            obj.setAttribute("disabled", true);
+            obj.value = "重新发送(" + countdown + ")";
+            countdown--;
+        }
+        setTimeout(function () {
+            setTime(obj)
+        }, 1000)
+    }
+</script>
+
+</body>
+
+</html>

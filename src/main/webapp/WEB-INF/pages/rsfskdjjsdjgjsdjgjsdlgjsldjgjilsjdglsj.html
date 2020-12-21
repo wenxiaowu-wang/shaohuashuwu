@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
+    <link rel="stylesheet" href="../css/mangagementWorksInterface.css">
+    <link rel="stylesheet" href="../css/comment.css">
+    <style>
+        .selected {
+            width: 100%;
+        }
+
+        .selectedWork {
+            margin-left: 25%;
+            margin-top: 5%;
+            width: 15%;
+            font-family: "宋体", "arial";
+            float: left;
+        }
+
+        .selectedWork2 {
+            margin-top: 3.5%;
+            width: 25%;
+            float: left;
+
+        }
+
+        .comment {
+            width: 95%;
+            margin-top: 15%;
+            margin-left: 2%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+
+    <div id="mangagenmentWorksInfo_id">
+        <p id="mangemnetWork_id">互动管理</p>
+        <hr id="mangemnetWorkhr_id">
+        <div class="selected">
+            <div class="selectedWork">
+                &nbsp;请选择作品：
+            </div>
+            <div class="selectedWork2">
+                <el-select v-model="workValue" placeholder="请选择" @change="selectWork($event);passWorkId($event)">
+                    <el-option
+                            v-for="item in Works"
+                            :key="item.work_id"
+                            :label="item.work_name"
+                            :value="item.work_id">
+                    </el-option>
+                </el-select>
+            </div>
+        </div>
+
+
+        <div class="comment">
+            <el-table
+                    :data="commentData"
+                    border
+                    style="width: 100%">
+                <el-table-column
+                        fixed
+                        prop="comment_time"
+                        label="日期"
+                        width="100">
+                </el-table-column>
+
+                <el-table-column
+                        prop="user_name"
+                        label="网名"
+                        width="120">
+                </el-table-column>
+
+                <el-table-column
+                        prop="comment_content"
+                        label="评论内容"
+                        width="500">
+                </el-table-column>
+
+                <el-table-column
+                        fixed="right"
+                        label="操作"
+                        width="100">
+                    <template slot-scope="scope">
+                        <el-button type="text" size="small" @click="dialogFormVisible = 'ture';passCommentId(scope.row.comment_id)">回复</el-button>
+                        <el-button type="text" size="small" @click="deleteComment(scope.row.comment_id);passDeleteIndex(scope.$index)" >删除</el-button>
+                    </template>
+                </el-table-column>
+
+            </el-table>
+
+        </div>
+
+        <el-dialog title="回复评论" :visible.sync="dialogFormVisible">
+            <el-input
+                    type="textarea"
+                    :rows="2"
+                    placeholder="请输入内容"
+                    v-model="textarea">
+            </el-input>
+            <br>
+            <br>
+            <button class="comment_btn" @click="replyComment()">发表评论</button>
+        </el-dialog>
+
+    </div>
+
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/111.js"></script>
+
+</body>
+</html>

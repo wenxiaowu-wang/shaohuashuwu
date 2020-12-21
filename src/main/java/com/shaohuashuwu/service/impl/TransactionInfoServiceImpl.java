@@ -260,4 +260,15 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
     public List<TransactionInfo> getSubscribeInfo(int work_id) {
         return transactionInfoDao.selectSubscribeInfoByWorkId(work_id);
     }
+
+
+    //单个订阅章节H
+    @Override
+    public boolean subscribeChapter(TransactionInfo subscribeChapterInfo) {
+        boolean Result = false;
+        if(transactionInfoDao.insertTransactionInfo(subscribeChapterInfo)!=0){
+            Result = true;
+        }
+        return Result;
+    }
 }

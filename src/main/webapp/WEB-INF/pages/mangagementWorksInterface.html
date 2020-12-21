@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
+    <link rel="stylesheet" href="../css/mangagementWorksInterface.css">
+
+</head>
+<body>
+<div >
+
+    <!--顶部标题栏-->
+    <div class="authorMainTop_div_class" id="authorMainTop_div_id">
+
+        <div class="authorMainTopCenter_div_class">
+            <div class="shaohualogo_div_class">
+                <img  class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
+            </div>
+            <div class="authorMainTopUserInfo_div_class">
+                <p class="authorMainTopUserInfo_p_class">欢迎进入作者平台！</p>
+            </div>
+            <div class="authorMainTopButton_div_class">
+                <el-tooltip class="item" effect="dark" content="返回读者平台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div3_class">
+
+                <img   class="authorMainTop_button_class" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="authorMainTop_hidediv_class" id="authorMainTop_hidediv_id">
+                    <a class="authorMainTop_adiv1_class">用户名：{{authorInfo.user_name}}</a>
+                    <a class="authorMainTop_adiv1_class">作品数量：{{worksNum}}</a>
+                    <a class="authorMainTop_adiv1_class">可提现金币：{{authorInfo.gold_coin_num}}</a>
+                    <div style="width:170px;border:1px solid #cccccc;"></div>
+                    <a class="authorMainTop_adiv2_class" id="signOut_id" href="//www.runoob.com">退出</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!--左部标题栏和主题内容-->
+    <div class="authorMain_class" >
+
+
+        <div class="authorMainLeft_div_class">
+
+            <ul class="authorMainLeft_ul_class">
+                <li  id="worksBean"  class="authorMainLeft_li_class"   >
+                    <img src="../images/authorworks-36.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id">工作台</a></li>
+                </li>
+
+                <li id="worksMangagement" class="authorMainLeft_li_class" >
+                    <img src="../images/authormangagmentNew-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="worksMangagementp_id">作品管理</a></li>
+                </li>
+                <li id="workDataStatistics" class="authorMainLeft_li_class" >
+                    <img src="../images/authordata-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="workeDatap-id">数据中心</a></li>
+
+                </li>
+                <li id="remuneration"  class="authorMainLeft_li_class" >
+                    <img src="../images/authorremunration-32.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="renmunerationp-id">稿酬收入</a></li>
+
+                </li>
+                <li id="interactionManagement"  class="authorMainLeft_li_class">
+                    <img src="../images/authorinteraction-32.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="interactionManagementp-id">互动管理</a></li>
+                </li>
+
+            </ul>
+
+
+        </div>
+
+<!--    主要内容-->
+    <div id="app">
+
+        <div id="mangagenmentWorksInfo_id">
+            <p id = "mangemnetWork_id">管理作品</p>
+            <hr id="mangemnetWorkhr_id">
+            <el-form  label-width="100px" class="demo-ruleForm">
+                <img :src="worksInfo.work_cover" class="work_cover_class">
+                <ul class="showworkInfo_ul_class">
+                    <li class="showworkInfo_li_class">
+                        <p class="showworkInfoTips_class" id="work_name_tipid">作品名称:</p>
+                        <p class="showworkInfo_class" id="work_name_id">{{worksInfo.work_name}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips_class" id="work_serial_state_tipid">作品状态:</p>
+                        <p class="showworkInfo_class" id="work_serial_state_id">{{work_serial_state_show}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips_class" id="work_word_num_tipid">作品字数:</p>
+                        <p class="showworkInfo_class" id="work_word_num_id">{{worksInfo.work_word_num}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips_class" id="work_tip_num_tipid">打赏数量:</p>
+                        <p class="showworkInfo_class" id="work_tip_num_id">{{worksInfo.work_tip_num}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips_class" id="work_subscribe_num_tipid">订阅数量:</p>
+                        <p class="showworkInfo_class" id="work_subscribe_num_id">{{worksInfo.work_subscribe_num}}</p>
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips_class" id="work_vote_num_tipid">推荐票数:</p>
+                        <p class="showworkInfo_class" id="work_vote_num_id">{{worksInfo.work_vote_num}}</p>
+
+                    </li>
+                    <li>
+
+                        <p class="showworkInfoTips_class" id="work_create_time_tipid">创建时间:</p>
+                        <p  value-format="yyyy-MM-dd HH:mm:ss" class="showworkInfo_class" id="work_create_time_id">{{worksInfo.work_create_time}}</p>
+
+                    </li>
+                </ul>
+
+                <el-form-item>
+                    <el-button type="success" type="text" @click="onwork()" :disabled="workstate == 1  || workstate == 2 ?true:false" class="onbutton">上架作品</el-button>
+                    <el-button type="danger" @click="offwork()"  :disabled="workstate != 1 && workstate != 2 ?true:false" class="offbutton">下架作品</el-button>
+
+                </el-form-item>
+
+            </el-form>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+</div>
+
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/workbeanchTopFragment.js"></script>
+<script src="../js/mangagementWorkInter.js"></script>
+
+
+</html>
