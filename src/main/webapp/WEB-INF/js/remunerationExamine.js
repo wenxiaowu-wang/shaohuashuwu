@@ -174,106 +174,133 @@ let remunerationInterface_vm = new Vue({
             this.user_id = userId;
             this.user_name = userName;
             console.log("用户数据装配成功");
-            //根据用户的ID获取该作者的作品数据
-            axios.get("/shaohuashuwu_war_exploded/worksInfoController/getAllWorksNameByAuthorId/" +
-                this.user_id).then(response =>{
-                //根据用户的ID获取该作者的作品数据
-                let objectData = eval(JSON.stringify(response.data));//将字符串转化为数组对象
-                // value是当前元素，index当前元素索引，array为当前数组
-                this.work_options = [];
-                let one_work_option = {
-                    value:0,
-                    label:'全部'
-                };
-                this.work_options.push(one_work_option);
-                let this_ = this;       //注意一进入function内嵌函数中，this代表的是其函数，不是vue本身了
-                objectData.forEach(function (value,index,array) {
-                    let one_value = {
-                        value:index+1,
-                        label:value
-                    };
-                    this_.work_options.push(one_value);
-                });
-                console.log("装配作品数据成功。");
-            }).catch(error =>{
-                console.log("装配作品数据失败。");
-            });
-            //根据用户的ID获取接受者为该作者作品的交易信息
-            axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllIncomeTransactionInfo/" +
-                this.user_id).then(response =>{
-                //装配交易信息
-                let objectData = eval(JSON.stringify(response.data));
-                this.tableData_display = [];
-                let goldCoin_total_income = 0;
-                let goldCoin_already_withdraw = 0;
-
-                let this_ = this;
-
-                objectData.forEach(function (value,index,array) {
-                   switch (value.transaction_type) {
-                       case "打赏":
-                       case "订阅":{
-                           goldCoin_total_income += value.transaction_quantity/10;
-                           let one_data = {
-                               work_name: value.recipient_name,
-                               chapter_title: value.recipient_name_other,
-                               consumer_name: value.consumer_name,
-                               transaction_quantity:value.transaction_quantity/10,
-                               transaction_time:value.transaction_time,
-                               transaction_type:value.transaction_type
-                           };
-                           this_.tableData_all.push(one_data);
-                           break;
-                       }
-                       case "投票":{
-                           let one_data = {
-                               work_name: value.recipient_name,
-                               chapter_title: value.recipient_name_other,
-                               consumer_name: value.consumer_name,
-                               transaction_quantity:value.transaction_quantity,
-                               transaction_time:value.transaction_time,
-                               transaction_type:value.transaction_type
-                           };
-                           this_.tableData_all.push(one_data);
-                           break;
-                       }
-                       case "提现":{
-                           goldCoin_already_withdraw += value.transaction_quantity;
-                           this_.withdrawData.push(value);//待后面的数据类型（point:带着数据跳转界面）
-                       }
-                   }
-                });
-                this.header.goldCoin_total_income = goldCoin_total_income;
-                this.header.goldCoin_already_withdraw = goldCoin_already_withdraw;
-                this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
-                //调用该js封装好的切换数据的方法（初始展示数据）
-               this.tableData_display = this.changeTableDataDisplay([0],"打赏");
-               this.statistics = this.toStatistics(this.tableData_display);
-
-               //获取该用户的所有提现记录，用来统计已提现金币数
-                axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllWithdrawInfo/" +
-                    this.user_id).then(resp =>{
-                    let objectData = eval(JSON.stringify(resp.data));
-                    let total_already = 0;
-                    objectData.forEach(function (value,index,array) {
-                        total_already += value.transaction_quantity;
-                    });
-                    this.header.goldCoin_already_withdraw = total_already;
-                    this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
-                    console.log("统计已提现金币成功。");
-                }).catch(error =>{
-                    console.log("统计已提现金币失败。");
-                })
-               console.log("装配交易信息成功。");
-                /*
-                *根据用户的ID统计该作者的总收入（金币数）以及总提现数（金币数）【封装到map集合中】
-                * 注意：总收入以及已提现金币数在前端统计即可
-                */
-            }).catch(error =>{
-               console.log("装配交易信息失败。");
-            });
         }).catch(error =>{
-            alert("获取本用户ID和name错误。");
+            this.$confirm('获取用户信息失败！', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //执行操作
+
+            }).catch(() => {
+                //执行操作
+            });
+            console.log("获取本用户ID和name错误。");
+        });
+        //根据用户的ID获取该作者的作品数据
+        axios.get("/shaohuashuwu_war_exploded/worksInfoController/getAllWorksNameByAuthorId").then(response =>{
+            //根据用户的ID获取该作者的作品数据
+            let objectData = eval(JSON.stringify(response.data));//将字符串转化为数组对象
+            // value是当前元素，index当前元素索引，array为当前数组
+            this.work_options = [];
+            let one_work_option = {
+                value:0,
+                label:'全部'
+            };
+            this.work_options.push(one_work_option);
+            let this_ = this;       //注意一进入function内嵌函数中，this代表的是其函数，不是vue本身了
+            objectData.forEach(function (value,index,array) {
+                let one_value = {
+                    value:index+1,
+                    label:value
+                };
+                this_.work_options.push(one_value);
+            });
+            console.log("装配作品数据成功。");
+        }).catch(error =>{
+            this.$confirm('网络或系统原因，获取界面相关信息失败！', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //执行操作
+
+            }).catch(() => {
+                //执行操作
+            });
+            console.log("装配作品数据失败。");
+        });
+        //根据用户的ID获取接受者为该作者作品的交易信息
+        axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllIncomeTransactionInfo").then(response =>{
+            //装配交易信息
+            let objectData = eval(JSON.stringify(response.data));
+            this.tableData_display = [];
+            let goldCoin_total_income = 0;
+            let goldCoin_already_withdraw = 0;
+
+            let this_ = this;
+
+            objectData.forEach(function (value,index,array) {
+                switch (value.transaction_type) {
+                    case "打赏":
+                    case "订阅":{
+                        goldCoin_total_income += value.transaction_quantity/10;
+                        let one_data = {
+                            work_name: value.recipient_name,
+                            chapter_title: value.recipient_name_other,
+                            consumer_name: value.consumer_name,
+                            transaction_quantity:value.transaction_quantity/10,
+                            transaction_time:value.transaction_time,
+                            transaction_type:value.transaction_type
+                        };
+                        this_.tableData_all.push(one_data);
+                        break;
+                    }
+                    case "投票":{
+                        let one_data = {
+                            work_name: value.recipient_name,
+                            chapter_title: value.recipient_name_other,
+                            consumer_name: value.consumer_name,
+                            transaction_quantity:value.transaction_quantity,
+                            transaction_time:value.transaction_time,
+                            transaction_type:value.transaction_type
+                        };
+                        this_.tableData_all.push(one_data);
+                        break;
+                    }
+                    case "提现":{
+                        goldCoin_already_withdraw += value.transaction_quantity;
+                        this_.withdrawData.push(value);//待后面的数据类型（point:带着数据跳转界面）
+                    }
+                }
+            });
+            this.header.goldCoin_total_income = goldCoin_total_income;
+            this.header.goldCoin_already_withdraw = goldCoin_already_withdraw;
+            this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
+            //调用该js封装好的切换数据的方法（初始展示数据）
+            this.tableData_display = this.changeTableDataDisplay([0],"打赏");
+            this.statistics = this.toStatistics(this.tableData_display);
+
+            //获取该用户的所有提现记录，用来统计已提现金币数
+            axios.get("/shaohuashuwu_war_exploded/transactionInfoController/getAllWithdrawInfo").then(resp =>{
+                let objectData = eval(JSON.stringify(resp.data));
+                let total_already = 0;
+                objectData.forEach(function (value,index,array) {
+                    total_already += value.transaction_quantity;
+                });
+                this.header.goldCoin_already_withdraw = total_already;
+                this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
+                console.log("统计已提现金币成功。");
+            }).catch(error =>{
+                this.$confirm('网络或系统原因，获取界面相关信息失败！', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //执行操作
+
+                }).catch(() => {
+                    //执行操作
+                });
+                console.log("统计已提现金币失败。");
+            })
+            console.log("装配交易信息成功。");
+            /*
+            *根据用户的ID统计该作者的总收入（金币数）以及总提现数（金币数）【封装到map集合中】
+            * 注意：总收入以及已提现金币数在前端统计即可
+            */
+        }).catch(error =>{
+            console.log("装配交易信息失败。");
         });
     },
 })

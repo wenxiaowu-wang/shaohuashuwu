@@ -5,11 +5,9 @@ import com.shaohuashuwu.domain.vo.TransactionInfoVo;
 import com.shaohuashuwu.service.TransactionInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URLDecoder;
 import java.util.*;
 import java.sql.Timestamp;
 
@@ -65,7 +63,7 @@ public class TransactionInfoController {
 //        model.addAttribute("user_id",11);
 //        model.addAttribute("user_name","我吃唐家土豆");
 
-        return "topUpsInterface.html";
+        return "topUpsDialog.html";
 //        return "loginSuccess.jsp";
     }
 
@@ -260,21 +258,23 @@ public class TransactionInfoController {
 
     /**
      * 根据用户（作者ID）获取对应收入的交易记录信息（值对象集合）
-     * @param author_id 用户（作者）ID
+     * @param modelMap 用于从session中获取用户（作者）ID
      * @return 对应收入记录值对象
      */
-    @RequestMapping(path = "/getAllIncomeTransactionInfo/{author_id}")
+    @RequestMapping(path = "/getAllIncomeTransactionInfo")
     @ResponseBody
-    public List<TransactionInfoVo> getAllIncomeTransactionInfo(@PathVariable(value = "author_id")Integer author_id){
+    public List<TransactionInfoVo> getAllIncomeTransactionInfo(ModelMap modelMap){
+        Integer author_id = (Integer)modelMap.get("user_id");
         List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
         getResult = transactionInfoService.getAllIncomeTransactionInfo(author_id);
         return getResult;
     }
 
     //获取该用户所有提现记录
-    @RequestMapping(path = "/getAllWithdrawInfo/{author_id}")
+    @RequestMapping(path = "/getAllWithdrawInfo")
     @ResponseBody
-    public List<TransactionInfoVo> getAllWithdrawInfo(@PathVariable(value = "author_id")Integer author_id){
+    public List<TransactionInfoVo> getAllWithdrawInfo(ModelMap modelMap){
+        Integer author_id = (Integer)modelMap.get("user_id");
         List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
         List<TransactionInfoVo> getService = transactionInfoService.getTransactionOfWithdraw(author_id);
         //筛选出来提现信息

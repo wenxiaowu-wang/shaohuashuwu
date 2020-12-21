@@ -157,9 +157,15 @@ let personalAccountInterface_vm = new Vue({
             this.user_name = userName;
             this.user_avatar = userAvatar;
         }).catch(error =>{
-            this.$message({
-                type:'error',
-                message:'获取用户信息失败！'
+            this.$confirm('获取用户信息失败!', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //执行操作
+
+            }).catch(() => {
+                //执行操作
             });
             console.log("获取用户信息失败！"+error);
         });
@@ -210,7 +216,7 @@ let personalAccountInterface_vm = new Vue({
         }).catch(error =>{
             this.$message({
                 type:'error',
-                message:'获取并装配交易记录失败'
+                message:'获取并装配交易记录失败!'
             });
             console.log("获取交易记录失败："+error);
         });

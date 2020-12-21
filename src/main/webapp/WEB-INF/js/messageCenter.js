@@ -149,7 +149,8 @@ let messageCenterInterface_vm = new Vue({
                 notice_tip:1,        //通知提示
                 notice_type:2
             }],
-            chatMessageData:[{
+            chatMessageData:[
+                {
                 notice_id:0,        //通知ID
                 send_by:0,          //发送者ID
                 send_by_name:"王勃",    //发送者名字
@@ -167,7 +168,8 @@ let messageCenterInterface_vm = new Vue({
                 send_time:"2020-10-31 10:45:38",       //通知时间
                 notice_tip:1,        //通知提示
                 notice_type:3
-            }]
+            }
+            ]
         },
 
 
@@ -265,7 +267,7 @@ let messageCenterInterface_vm = new Vue({
                     console.log("知道了");
                 }).catch(error =>{
                     console.log("I know ");
-                })
+                });
                 return ;
             }
             //删除对应类型的所有的通知
@@ -284,45 +286,52 @@ let messageCenterInterface_vm = new Vue({
                 //删除关注信息
                 axios.post("/shaohuashuwu_war_exploded/noticeStateInfoController/updateAllDeleteStateOfNoticeType/" +
                     type).then(response =>{
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功。'
-                    });
-                    //更新页面的数据(很重要)，删除所有对应类型信息后，进行视图数据更新。
-                    switch (type) {
-                        case 1:{
-                            this.displayData.systemMessageData = [];
-                            this.systemMessageData = [];
-                            this.totals.total1 = 0;
-                            this.tipTotals.tipTotal1 = 0;
-                            this.dynamicCurrentPage1 = 1;
-                            this.handleCurrentChange_each(1);
-                            this.displayDivs.displayDiv1 = "block";
-                            break;
+                    if (response.data){
+                        this.$message({
+                            type: 'success',
+                            message: '删除该类型所有消息成功。'
+                        });
+                        //更新页面的数据(很重要)，删除所有对应类型信息后，进行视图数据更新。
+                        switch (type) {
+                            case 1:{
+                                this.displayData.systemMessageData = [];
+                                this.systemMessageData = [];
+                                this.totals.total1 = 0;
+                                this.tipTotals.tipTotal1 = 0;
+                                this.dynamicCurrentPage1 = 1;
+                                this.handleCurrentChange_each(1);
+                                this.displayDivs.displayDiv1 = "block";
+                                break;
+                            }
+                            case 2:{
+                                this.displayData.updateMessageData = [];
+                                this.updateMessageData = [];
+                                this.totals.total2 = 0;
+                                this.tipTotals.tipTotal2 = 0;
+                                this.dynamicCurrentPage2 = 1;
+                                this.handleCurrentChange_attention(1);
+                                this.displayDivs.displayDiv2 = "block";
+                                break;
+                            }
+                            case 3:{
+                                this.displayData.chatMessageData = [];
+                                this.chatMessageData = [];
+                                this.totals.total3 = 0;
+                                this.tipTotals.tipTotal3 = 0;
+                                this.dynamicCurrentPage3 = 1;
+                                this.handleCurrentChange_fans(1);
+                                this.displayDivs.displayDiv3 = "block";
+                                break;
+                            }
+                            default:break;
                         }
-                        case 2:{
-                            this.displayData.updateMessageData = [];
-                            this.updateMessageData = [];
-                            this.totals.total2 = 0;
-                            this.tipTotals.tipTotal2 = 0;
-                            this.dynamicCurrentPage2 = 1;
-                            this.handleCurrentChange_attention(1);
-                            this.displayDivs.displayDiv2 = "block";
-                            break;
-                        }
-                        case 3:{
-                            this.displayData.chatMessageData = [];
-                            this.chatMessageData = [];
-                            this.totals.total3 = 0;
-                            this.tipTotals.tipTotal3 = 0;
-                            this.dynamicCurrentPage3 = 1;
-                            this.handleCurrentChange_fans(1);
-                            this.displayDivs.displayDiv3 = "block";
-                            break;
-                        }
-                        default:break;
+                        this.updateReadAllAndDeleteAllButton();     //更新所有类型的 已读所有、删除所有 按钮的可用状态
+                    }else{
+                        this.$message({
+                            type:'error',
+                            message:'删除所有该类型消息失败！'
+                        });
                     }
-                    this.updateReadAllAndDeleteAllButton();     //更新所有类型的 已读所有、删除所有 按钮的可用状态
                 }).catch(error =>{
                     this.$message({
                         type: 'info',
@@ -468,7 +477,7 @@ let messageCenterInterface_vm = new Vue({
                     console.log("知道了");
                 }).catch(error =>{
                     console.log("I know ");
-                })
+                });
                 return ;
             }
             console.log("测试是否执行");
@@ -572,9 +581,16 @@ let messageCenterInterface_vm = new Vue({
             this.user_name = userName;
             this.user_avatar = userAvatar;
         }).catch(error =>{
-            this.$message({
-                type:'error',
-                message:'获取用户数据信息失败！'
+            this.$confirm('获取用户数据信息失败!', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //执行操作
+
+            }).catch(() => {
+                //执行操作
+
             });
             console.log("获取用户数据信息失败！"+error);
         });

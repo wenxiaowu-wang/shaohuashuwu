@@ -449,8 +449,7 @@ let workDataStatisticsInterface_vm = new Vue({
             this.user_name = userName;
             console.log("用户数据装配成功");
             //获取该作者所有作品ID以及名字
-            axios.get("/shaohuashuwu_war_exploded/worksInfoController/getAllWorksNameAndIdByAuthorId/" +
-                this.user_id).then(response =>{
+            axios.get("/shaohuashuwu_war_exploded/worksInfoController/getAllWorksNameAndIdByAuthorId").then(response =>{
                 //根据用户的ID获取该作者的作品数据
                 let objectData = eval(JSON.stringify(response.data));//将字符串转化为数组对象
                 console.log("作品数据对象的数据类型为："+typeof (objectData));

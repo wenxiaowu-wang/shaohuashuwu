@@ -4,6 +4,7 @@ import com.shaohuashuwu.domain.AdminInfo;
 import com.shaohuashuwu.service.AdminInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,36 +17,38 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(path = "/adminInfoController")
+@SessionAttributes(value = {"admin_id"},types = {String.class})
 public class AdminInfoController {
 
     @Autowired
     private AdminInfoService adminInfoService;
 
-    @RequestMapping(path = "/adminLogin/{admin_id}/{admin_password}")
+    @RequestMapping(path = "/adminLogin/{admin_password}")
     @ResponseBody
-    public Boolean adminLogin(@PathVariable(value = "admin_id")String admin_id,@PathVariable(value = "admin_password")String admin_password){
+    public Boolean adminLogin(ModelMap modelMap,@PathVariable(value = "admin_password")String admin_password){
             //POJO对象
            // @RequestParam(value = "admin_id",required = true)String admin_id,
            // @RequestParam(value = "admin_password",required = true)String admin_password){
 
+        String admin_id = (String)modelMap.get("admin_id");
         System.out.println("admin_id = "+admin_id+",admin_password = "+admin_password);
-        Boolean adminLoginResult = false;
+        boolean adminLoginResult = false;
         adminLoginResult = adminInfoService.isAdmainRight(admin_id,admin_password);
         return adminLoginResult;
     }
 
-    @RequestMapping(path = "/updateAdminPassword/{admin_id}/{admin_password}")
+    @RequestMapping(path = "/updateAdminPassword/{admin_password}")
     @ResponseBody
-    public Boolean updateAdminPassword(@PathVariable(value = "admin_id")String admin_id,@PathVariable(value = "admin_password")String admin_password){
-        Boolean updateResult = false;
+    public Boolean updateAdminPassword(ModelMap modelMap,@PathVariable(value = "admin_password")String admin_password){
+        String admin_id = (String)modelMap.get("admin_id");
+        boolean updateResult = false;
         updateResult = adminInfoService.updateAdminPassword(admin_id,admin_password);
         return updateResult;
     }
 
     @RequestMapping(path = "/forwardToLoginResult")
     public String forwardToLoginResult(){
-        String result = "loginSuccess.html";
-        return result;
+        return "loginSuccess.html";
     }
 
     /**

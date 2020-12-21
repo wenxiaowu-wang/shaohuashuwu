@@ -13,14 +13,14 @@ let changeAdminPasswordInterface_vm = new Vue({
     methods:{
         submitForm() {
             //检测已经存在二级密码的输入情况
-            if (this.pass == "" || this.checkPass == "" || this.oldPass == ""){
+            if (this.pass === "" || this.checkPass === "" || this.oldPass === ""){
                 this.$message({
                     type: 'error',
                     message: '输入不可为空！'
                 });
             }else{
                 if (this.passwordPattern()){
-                    if(this.pass != this.checkPass){
+                    if(this.pass !== this.checkPass){
                         this.$message({
                             type: 'error',
                             message: '两次密码不一致！'
@@ -47,13 +47,13 @@ let changeAdminPasswordInterface_vm = new Vue({
         updatePassword(adminId,oldPass,pass){
             //两次密码一致,设置二级密码
             axios.post("/shaohuashuwu_war_exploded/adminInfoController/adminLogin/" +
-                adminId+"/"+oldPass).then(response =>{
+                oldPass).then(response =>{
                 let isOldPass = response.data;
                 if (isOldPass){
                     //原密码正确
                     //更新二级密码
                     axios.post("/shaohuashuwu_war_exploded/adminInfoController/updateAdminPassword/" +
-                        adminId+"/"+pass).then(resp =>{
+                        pass).then(resp =>{
                         console.log("更新密码成功。");
                         this.$message({
                             type:'success',

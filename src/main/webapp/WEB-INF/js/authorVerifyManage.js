@@ -17,17 +17,17 @@ let authorVerifyManageInterface_vm = new Vue({
             old_img:{
                 name:"el-icon-success",
                 color:"green",
-                display:"block"
+                display:"none"
             },
             pass_img:{
                 name:"el-icon-success",
                 color:"green",
-                display:"block"
+                display:"none"
             },
             check_img:{
                 name:"el-icon-success",
                 color:"green",
-                display:"block"
+                display:"none"
             },
         },      //输入框右边的检查结果显示（图片）
         passwordTips:"必须包含大小写字母和数字的组合，不能使用特殊字符，长度在 8-10 之间",
@@ -450,6 +450,7 @@ let authorVerifyManageInterface_vm = new Vue({
         },
     },
     mounted(){
+
         //获取当前用户的ID以及将要打赏作品的ID（后端模拟session域取值）
         axios.get("/shaohuashuwu_war_exploded/userSession/getUser").then(response =>{
             let info = response.data;
@@ -459,6 +460,16 @@ let authorVerifyManageInterface_vm = new Vue({
             user_id = parseInt(user_id);
             this.user_id = user_id;
         }).catch(error =>{
+            this.$confirm('获取用户信息失败！', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //执行操作
+
+            }).catch(() => {
+                //执行操作
+            });
             console.log(error);
         });
         axios.get("/shaohuashuwu_war_exploded/userInfoController/isAlreadyBecameAuthor").then(resp =>{
@@ -476,6 +487,6 @@ let authorVerifyManageInterface_vm = new Vue({
             });
             console.log("判断是否已经成为作者失败"+error);
         });
-        //created钩子函数是在HTML渲染前执行，若涉及到尚未渲染的变量，会无法找到
+        //created钩子函数是在HTML渲染前执行
     },
 })

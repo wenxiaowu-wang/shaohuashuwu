@@ -5,7 +5,7 @@
     <title>举报作品</title>
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/reportingWorks.css">
-
+    <link rel="stylesheet" href="../css/theme-chalk.css">
 </head>
 <body>
 
@@ -16,7 +16,7 @@
     <br>
     <el-button type="text" @click="dialogFormVisible = true">显示举报作品dialog</el-button>
     <br>
-    <el-dialog title="举报作品" :visible.sync="dialogFormVisible">
+    <el-dialog title="举报作品" :visible.sync="dialogFormVisible" width="40%" class="el_dialog">
         <div class="dialog_content">
             <div class="dialog_content_header">
                 <div class="dialog_content_header_title">
@@ -25,7 +25,7 @@
                     <br/>
                 </div>
                 <div class="dialog_content_header_content">
-                    <label>举报作品：</label>&nbsp;&nbsp;{{workName}}<br/>
+                    <label>举报作品：</label>&nbsp;&nbsp;{{workName}}<br/><br/>
                     <label>举报章节：</label>&nbsp;&nbsp;{{chapterTitle}}<br/>
                 </div>
             </div>
@@ -34,7 +34,6 @@
                 <div class="center_title">
                     <label>举报原因</label>&nbsp;&nbsp;
                     <el-button type="text" @click="toReportAnnouncement">？</el-button>
-
                 </div>
                 <div class="center_checkbox_group">
                     <el-checkbox-group

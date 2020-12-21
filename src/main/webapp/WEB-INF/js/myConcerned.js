@@ -140,6 +140,21 @@ let attentionInterface_vm = new Vue({
             this.privateLetter.sendToId = 0;
         },
         sendLetter(){
+            if(this.privateLetter.title.length < 2 || this.privateLetter.content.length < 10){
+                // this.$message({
+                //     type:'error',
+                //     message:'标题不少于2个字，内容不少于10个字'
+                // });
+                this.$message({
+                    type:'error',
+                    message:'网络或其它原因，信件发送失败'
+                });
+                // this.$message({
+                //     type:'success',
+                //     message:'信件发送成功！'
+                // });
+                return ;
+            }
             this.$confirm('是否发送私信?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -160,10 +175,9 @@ let attentionInterface_vm = new Vue({
                     }else{
                         this.$message({
                             type:'error',
-                            message:'信件发送失败'
+                            message:'网络或其它原因，信件发送失败!'
                         });
                     }
-                    console.log("发送信件成功");
                 }).catch(error =>{
                     this.$message({
                         type:'error',
@@ -350,6 +364,17 @@ let attentionInterface_vm = new Vue({
             this.user_name = userName;
             this.user_avatar = userAvatar;
         }).catch(error =>{
+            this.$confirm('获取该用户信息错误。', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                //回退页面
+
+            }).catch(() => {
+                //回退页面
+
+            });
             console.log("获取本用户ID和name错误。");
         });
         //获取与该用户相互关注的用户信息
