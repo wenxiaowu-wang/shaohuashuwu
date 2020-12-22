@@ -80,8 +80,6 @@ public class ReportWholeInfoVoServiceImpl implements ReportWholeInfoVoService {
         if (end > reportWholeInfoVoList.size()) {
             end = reportWholeInfoVoList.size();
         }
-        System.out.println("输出信息开始"+start);
-        System.out.println("输出信息结束");
         return reportWholeInfoVoList.subList(start, end);
 
     }

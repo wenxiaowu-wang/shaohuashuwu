@@ -19,7 +19,6 @@ public class CatalogInfoVoController {
     @Autowired
     public CatalogInfoVoService catalogInfoVoService;
 
-    private ChapterInfo chapterInfo;
 
     /**
      * 依据作品id，作者id，获取章节目录信息
@@ -40,9 +39,6 @@ public class CatalogInfoVoController {
         Object user_id_o = session.getAttribute("user_id");
         int work_id=Integer.parseInt(String.valueOf(work_id_o));
         int user_id=Integer.parseInt(String.valueOf(user_id_o));
-
-        System.out.println("目录信息为+++++++++++++++++++++++++++++++=="+catalogInfoVoService.getchaptercatalogBywork_id(user_id,work_id));
-
         return catalogInfoVoService.getchaptercatalogBywork_id(user_id,work_id);
     }
 
@@ -59,14 +55,9 @@ public class CatalogInfoVoController {
     @RequestMapping(value = "/getchaptercatalogBywork_id2")
     public List<CatalogInfoVo> getchaptercatalogBywork_id2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        System.out.println("获取目录信息---------------------------------------");
         HttpSession session = request.getSession();
         Object work_id_o = session.getAttribute("work_id");
-
         int work_id=Integer.parseInt(String.valueOf(work_id_o));
-
-        System.out.println("目录信息为+++++++++++++++++++++++++++++++=="+catalogInfoVoService.getchaptercatalogBywork_id2(work_id));
-
         return catalogInfoVoService.getchaptercatalogBywork_id2(work_id);
     }
 

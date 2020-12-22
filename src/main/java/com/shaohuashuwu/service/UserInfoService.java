@@ -27,8 +27,4 @@ public interface UserInfoService {
     //功能点：阅读小说界面获取作者信息
     public UserInfo getauthorInfoBychapterid(int chapter_id);
 
-
-
-
-
 }

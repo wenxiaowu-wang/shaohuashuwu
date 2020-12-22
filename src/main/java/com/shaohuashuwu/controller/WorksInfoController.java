@@ -20,19 +20,17 @@ public class WorksInfoController {
     @Autowired
     private WorksInfoService worksInfoService;
 
-    private WorksInfo worksInfo;
-
     /**
      * 将关键字搜索信息存入session，跳转后获取搜索的session
-     * @param worksInfodta
+     * @param worksInfo
      * @param request
      * @param response
      * @throws Exception
      */
     @RequestMapping("/addSelectInfotoSession")
-    public void addSelectInfotoSession(@RequestBody WorksInfo worksInfodta,HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void addSelectInfotoSession(@RequestBody WorksInfo worksInfo,HttpServletRequest request, HttpServletResponse response) throws Exception {
         //1.获取前端数据
-        String select_input = worksInfodta.getWork_name();
+        String select_input = worksInfo.getWork_name();
         //2.将获取数据存入session
         HttpSession session = request.getSession();
         session.setAttribute("selectinput",select_input);
@@ -60,6 +58,7 @@ public class WorksInfoController {
      */
     @RequestMapping("/addWork_idSession")
     public void addWork_idSession(Integer work_id, HttpServletRequest request, HttpServletResponse response)  {
+        System.out.println("作品id"+work_id);
         HttpSession session = request.getSession();
         session.setAttribute("work_id",work_id);
     }
@@ -101,7 +100,9 @@ public class WorksInfoController {
     public WorksInfo getworkInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("work_id");
+
         int work_id=Integer.parseInt(String.valueOf(msg));
+        System.out.println("chan");
         return worksInfoService.getworkInfoByWork_id(work_id);
     }
 
@@ -180,13 +181,13 @@ public class WorksInfoController {
     /**
      *根据作品名称判断作品是否存在
      * 功能点：添加作品功能验证作品是否存在
-     * @param worksInfodata
+     * @param worksInfo
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/isworkname")
-    public int isworkname(@RequestBody WorksInfo worksInfodata) {
-        String works_name = worksInfodata.getWork_name();
+    public int isworkname(@RequestBody WorksInfo worksInfo) {
+        String works_name = worksInfo.getWork_name();
         int num = worksInfoService.isworkname(works_name);
         return  num;
     }
@@ -194,21 +195,21 @@ public class WorksInfoController {
     /**
      * 添加作品
      * 功能点：添加作品功能添加作品
-     * @param worksInfodata
+     * @param worksInfo
      * @param request
      * @param response
      * @return
      */
     @ResponseBody
     @RequestMapping("/addworkInfo")
-    public int addworkInfo(@RequestBody WorksInfo worksInfodata,HttpServletRequest request, HttpServletResponse response) {
+    public int addworkInfo(@RequestBody WorksInfo worksInfo,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.setAttribute("user_id",1);
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
 
 
-        int insertResult = worksInfoService.addworkInfo(worksInfodata,user_id);
+        int insertResult = worksInfoService.addworkInfo(worksInfo,user_id);
         return insertResult;
     }
 
@@ -216,15 +217,26 @@ public class WorksInfoController {
     /**
      * 修改作品信息，
      * 功能点：下架作品中修改作品设置信息
-     * @param worksInfodata
+     * @param worksInfo
      * @return
      */
     @ResponseBody
     @RequestMapping("/updateWorkSerialStateByid")
-    public int updateWorkSerialStateByid(@RequestBody WorksInfo worksInfodata) {
-        int updateResult = worksInfoService.updateWorkInfoByworkid(worksInfodata);
+    public int updateWorkSerialStateByid(@RequestBody WorksInfo worksInfo) {
+        int updateResult = worksInfoService.updateWorkInfoByworkid(worksInfo);
         return  updateResult;
     }
 
+    /**
+     * 修改作品信息，
+     * 功能点：下架作品中修改作品设置信息
+     * @param worksInfo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateworkInfoByWork_id")
+    public void updateworkInfoByWork_id(@RequestBody WorksInfo worksInfo) {
+         worksInfoService.updateworkInfoByWork_id(worksInfo);
+    }
 
 }

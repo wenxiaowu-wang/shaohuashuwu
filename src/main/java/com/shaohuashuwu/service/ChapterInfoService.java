@@ -11,8 +11,6 @@ import com.shaohuashuwu.domain.ChapterInfo;
  */
 public interface ChapterInfoService {
 
-
-
     //根据作品id查询最新章节信息
     //功能点：作品详情时获取最新章节信息，
     public ChapterInfo getnewChapterInfoByword_id(int work_id);
@@ -20,7 +18,6 @@ public interface ChapterInfoService {
     //依据chapter_id查询章节信息
     //功能点：阅读小说界面获取章节信息
     public ChapterInfo getchapterInfoByChapter_id(int chapter_id);
-
 
     //保存章节信息
     //功能点：添加章节功能添加章节

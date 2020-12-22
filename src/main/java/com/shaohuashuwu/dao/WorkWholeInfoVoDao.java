@@ -79,53 +79,6 @@ public interface WorkWholeInfoVoDao {
     public WorkWholeInfoVo selectWorkWholeInfoVobywork_name(WorksInfo worksInfo);
 
 
-    //通过作者名称查询作品全部信息，并且作品状态不能为3
-    @Select(
-            {"<script>",
-                    " SELECT w2.work_id work_id,w2.work_cover work_cover,w2.work_name work_name," +
-                            " u1.user_id user_id,w2.work_main_label work_main_label,w2.work_serial_state work_serial_state," +
-                            " w2.work_introduct work_introduct,w2.work_vote_num work_vote_num,u1.user_name user_name," +
-                            " c1.chapter_id chapter_id,c1.chapter_title chapter_title,c1.chapter_time chapter_time " +
-                            " FROM works_info w2,chapter_info c1,user_info u1 " +
-                            " WHERE 1=1 and w2.work_serial_state != 3" +
-                            " and u1.user_id = " +
-                            "   (SELECT cp2.user_id " +
-                            "       FROM chapter_post_info cp2 " +
-                            "       WHERE cp2.chapter_id = " +
-                            "           (SELECT MAX(cp1.chapter_id) " +
-                            "               FROM chapter_post_info cp1 " +
-                            "                   WHERE cp1.work_id =  " +
-                            "                   (SELECT w1.work_id FROM works_info w1 WHERE w1.work_name = #{work_name}))) " +
-                            " AND c1.chapter_id =  " +
-                            "   (SELECT cp2.chapter_id " +
-                            "       FROM chapter_post_info cp2 " +
-                            "       WHERE cp2.chapter_id = " +
-                            "           (SELECT MAX(cp1.chapter_id) " +
-                            "               FROM chapter_post_info cp1 " +
-                            "               WHERE cp1.work_id =  " +
-                            "               (SELECT w1.work_id FROM works_info w1 WHERE w1.work_name = #{work_name}))) " +
-                            " AND w2.work_id = " +
-                            "   (SELECT cp2.work_id " +
-                            "       FROM chapter_post_info cp2 " +
-                            "       WHERE cp2.chapter_id = " +
-                            "           (SELECT MAX(cp1.chapter_id) " +
-                            "               FROM chapter_post_info cp1 " +
-                            "               WHERE cp1.work_id = " +
-                            "                   (SELECT w1.work_id FROM works_info w1 WHERE w1.work_name = #{work_name})))" +
-                            " and w2.work_serial_state != 3 ",
-                    " <if test='work_main_label != null and work_main_label != \" \" '>",
-                    " and w2.work_main_label = #{work_main_label} ",
-                    " </if>",
-                    " <if test='work_vice_label != null and work_vice_label != \" \" '>",
-                    " and w2.work_vice_label = #{work_vice_label} ",
-                    " </if>",
-                    " <if test='work_serial_state != null and work_serial_state != \" \" '>",
-                    " and w2.work_serial_state = #{work_serial_state} ",
-                    " </if>",
 
-                    "</script>"
-            }
-    )
-    public List<WorkWholeInfoVo> selectWorkWholeInfoVobyuser_name(WorksInfo worksInfo);
 
 }

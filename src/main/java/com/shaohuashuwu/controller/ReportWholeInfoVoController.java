@@ -31,8 +31,6 @@ public class ReportWholeInfoVoController {
     @ResponseBody
     @RequestMapping("/getreportWholeInfoVoList")
     public List<ReportWholeInfoVo> getreportWholeInfoVoList(@RequestBody AdminSelectInfoVo adminSelectInfoVo, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-
         return reportWholeInfoVoService.getreportWholeInfoVoList(adminSelectInfoVo);
     }
 
@@ -93,7 +91,6 @@ public class ReportWholeInfoVoController {
     @ResponseBody
     @RequestMapping("/gethandleResultListTotal")
     public int gethandleResultListTotal(@RequestBody AdminSelectInfoVo adminSelectInfoVo,HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("输出数量"+adminSelectInfoVo);
         return reportWholeInfoVoService.gethandleResultListTotal(adminSelectInfoVo);
     }
 

@@ -17,10 +17,6 @@ public class UserInfoController {
     @Autowired
     public UserInfoService userInfoService;
 
-    private UserInfo userInfo;
-
-
-
     /**
      * 将user_id存入sesssion
      * @param author_id
@@ -80,8 +76,7 @@ public class UserInfoController {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("work_id");
         int work_id=Integer.parseInt(String.valueOf(msg));
-        userInfo = userInfoService.getUserInfoByWork_id(work_id);
-        return userInfo;
+        return userInfoService.getUserInfoByWork_id(work_id);
     }
 
 
@@ -99,8 +94,7 @@ public class UserInfoController {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("chapter_id");
         int chapter_id=Integer.parseInt(String.valueOf(msg));
-        userInfo = userInfoService.getauthorInfoBychapterid(chapter_id);
-        return userInfo;
+        return userInfoService.getauthorInfoBychapterid(chapter_id);
     }
 
 }

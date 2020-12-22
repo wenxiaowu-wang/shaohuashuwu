@@ -42,24 +42,19 @@ public class ReportInfoServiceImpl implements ReportInfoService {
         Timestamp timestamp=Timestamp.valueOf(date);
         //驳回申请
         if (handle_state == 2){
-            System.out.println("驳回申请");
             reportInfo = new ReportInfo(report_id,timestamp,handle_state);
             return reportInfoDao.updateReportInfoByReport_id(reportInfo);
         }
         //同意申请处理,下架章节
         else if(handle_state == 3){
-            System.out.println("下架章节");
             reportInfo = new ReportInfo(report_id,timestamp,handle_state);
             int updateResult = reportInfoDao.updateReportInfoByReport_id(reportInfo);
             int chapter_id = reportInfoDao.selectChapter_idByReport_id(report_id);
-            System.out.println("下架章节id:"+chapter_id);
-             chapterInfoDao.updateChapter_stateByChapter_id(chapter_id);
-             return updateResult;
-
+            chapterInfoDao.updateChapter_stateByChapter_id(chapter_id);
+            return updateResult;
         }
         //撤销吹结果，上架章节
         else if(handle_state == 4){
-            System.out.println("上架章节");
             reportInfo = new ReportInfo(report_id,timestamp,2);
             int updateResult = reportInfoDao.updateReportInfoByReport_id(reportInfo);
             int chapter_id = reportInfoDao.selectChapter_idByReport_id(report_id);

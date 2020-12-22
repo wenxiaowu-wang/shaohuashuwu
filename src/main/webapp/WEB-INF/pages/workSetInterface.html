@@ -6,151 +6,244 @@
 
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/workbeanchFragment.css">
-    <link rel="stylesheet" href="../css/newlyCreatedWorksInterface.css">
+    <link rel="stylesheet" href="../css/workSetInterface.css">
 
 </head>
 <body>
 <div >
 
-<!--顶部标题栏-->
-<div class="authorMainTopdiv">
-    <ul class="authorMainTopdul">
-        <li id="shaohualog" class="woketopall">
-            <img src="../images/SHAOHUALOGO.png" >
-        </li>
+    <!--顶部标题栏-->
+    <div class="authorMainTop_div_class" id="authorMainTop_div_id">
 
-        <li id="authortips" class="woketopall">
-            <p id="authortips-a">欢迎进入作者平台！</p>
-        </li>
-        <li  id="worketbeach"   class="authorMainTopdli" >
-            <img  src="../images/authorworks-32.png" class="woketopall">
-        </li>
-        <li id="workhelp" class="authorMainTopdli">
-            <img  src="../images/authorhelp-32.png" class="woketopall">
-        </li>
-        <li id="workeinfo" class="authorMainTopdli" >
-            <img  src="../images/authorInf-32.png" class="woketopall">
-        </li>
-        <li id="workeme"  class="authorMainTopdli" >
-            <!--            <img id="workeme-img" src="../images/img1.png" class="woketopall">-->
-            <div class="dropdown">
-                <img   class="woketopall" src="../images/authorme-36.png" type="button" id="workeme-img">
-                <div class="dropdown-content" id="workeMe-dropdown">
-                    <a href="//www.runoob.com">点我</a>
-                    <a href="//www.runoob.com">点我</a>
+        <div class="authorMainTopCenter_div_class">
+            <div class="shaohualogo_div_class">
+                <img  class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
+            </div>
+            <div class="authorMainTopUserInfo_div_class">
+                <p class="authorMainTopUserInfo_p_class">欢迎进入作者平台！</p>
+            </div>
+            <div class="authorMainTopButton_div_class">
+                <el-tooltip class="item" effect="dark" content="返回读者平台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div3_class">
+
+                <img   class="authorMainTop_button_class" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="authorMainTop_hidediv_class" id="authorMainTop_hidediv_id">
+                    <a class="authorMainTop_adiv1_class">用户名：{{authorInfo.user_name}}</a>
+                    <a class="authorMainTop_adiv1_class">作品数量：{{worksNum}}</a>
+                    <a class="authorMainTop_adiv1_class">可提现金币：{{authorInfo.gold_coin_num}}</a>
                     <div style="width:170px;border:1px solid #cccccc;"></div>
-                    <a href="//www.runoob.com">点我</a>
+                    <a class="authorMainTop_adiv2_class" id="signOut_id" href="//www.runoob.com">退出</a>
                 </div>
             </div>
-        </li>
-    </ul>
-
-</div>
-
-<!--左部标题栏和主题内容-->
-<div class="authorMain" >
-
-
-    <div class="authorMainLeftdiv">
-        <ul class="authorMainLeftdul">
-            <!--        <li class="nulllist">-->
-            <!--            作家专区-->
-            <!--        </li>-->
-            <li  id="worksBean"  class="authorMainLeftdli"  onclick="workeBeanOnclick(this)" >
-                <img src="../images/authorworks-36.png" class="authorMainLeftimg" id="worksBeanimg-id">
-                <h href="#home" class="authorMainLefta" id="worksBeanp-id">工作台</h></li>
-            </li>
-
-            <li id="worksMangagement" class="authorMainLeftdli" onclick="worksMangagementOnclick(this)">
-                <img src="../images/authormangagmentNew-32.png" class="authorMainLeftimg"  id="worksMangagementimg-id">
-                <h href="#home" class="authorMainLefta" id="worksMangagementp-id">作品管理</h></li>
-            </li>
-            <li id="workDataStatistics" class="authorMainLeftdli" onclick="workDataStatisticsOnclick(this)">
-                <img src="../images/authordata-32.png" class="authorMainLeftimg"  id="workeDataimg-id" >
-                <h href="#home" class="authorMainLefta" id="workeDatap-id">数据中心</h></li>
-
-            </li>
-            <li id="remuneration"  class="authorMainLeftdli" onclick="remunerationOnclick(this)">
-                <img src="../images/authorremunration-32.png" class="authorMainLeftimg" id="renmunerationimg-id">
-                <h href="#home" class="authorMainLefta" id="renmunerationp-id">稿酬收入</h></li>
-
-            </li>
-            <li id="interactionManagement"  class="authorMainLeftdli" onclick="interactionManagementOnclick(this)">
-                <img src="../images/authorinteraction-32.png" class="authorMainLeftimg"  id="interactionManagementimg-id">
-                <h href="#home" class="authorMainLefta" id="interactionManagementp-id">互动管理</h></li>
-            </li>
-            </li>
-        </ul>
+        </div>
 
 
     </div>
 
-<!--    主要内容-->
-    <div id="app">
-        <div id="addWorksInfo">
-            <p id = "creatework">作品设置</p>
-            <hr id="addworkhr">
+
+    <!--左部标题栏和主题内容-->
+    <div class="authorMain_class" >
+        <div class="authorMainLeft_div_class">
+            <ul class="authorMainLeft_ul_class">
+                <li  id="worksBean"  class="authorMainLeft_li_class"   >
+                    <img src="../images/authorworks-36.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id">工作台</a></li>
+                </li>
+                <li id="worksMangagement" class="authorMainLeft_li_class" >
+                    <img src="../images/authormangagmentNew-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="worksMangagementp_id">作品管理</a></li>
+                </li>
+                <li id="workDataStatistics" class="authorMainLeft_li_class" >
+                    <img src="../images/authordata-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="workeDatap-id">数据中心</a></li>
+                </li>
+                <li id="remuneration"  class="authorMainLeft_li_class" >
+                    <img src="../images/authorremunration-32.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="renmunerationp-id">稿酬收入</a></li>
+                </li>
+                <li id="interactionManagement"  class="authorMainLeft_li_class">
+                    <img src="../images/authorinteraction-32.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="interactionManagementp-id">互动管理</a></li>
+                </li>
+            </ul>
+        </div>
 
 
 
+        <div id="workSet_id">
+            <div class="top_div_class">
+                <p id = "myselfInfo_p_id">作品设置</p>
+            </div>
+            <div class="divhr_class"></div>
+            <div class="workSet_main_div_class">
 
-            <el-form :model="worksInfo"  ref="worksInfo" label-width="100px"                              class="demo-ruleForm">
-
-
-<!--               上传书籍头像-->
-               
-
-
-
-
+                <div class="workSet_mainLeft_div_class" >
 
 
+                    <p class="work_handle_p_class">作品封面</p>
+                    <p class="work_handle_p2_class">作品名称</p>
+                    <p class="work_handle_p3_class">作品类型</p>
+                    <p class="work_handle_p3_class">作品状态</p>
+                    <p class="work_handle_p3_class">作者自定义标签</p>
+                    <p class="work_handle_p4_class">作品介绍</p>
+                    <p class="work_handle_p5_class">给读者的话</p>
+                </div>
 
-<!--               -->
+                <div class="workSet_mainRight_div_class">
+                    <div class="work_handle_div_class">
+                        <el-upload
+                                class="avatar-uploader"
+                                :action="doUpload"
+                                :show-file-list="false"
+                                :on-success="handleAvatarSuccess"
+                                :before-upload="beforeAvatarUpload"
+                                name="image">
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
 
-                <el-form-item label="书籍名称"                                                                            class="creatwork_include_p" id="creatwork_include_namep">
-                    <el-input v-model="worksInfo.work_name" @blur="isworkname"                                          class="creatwork_include_input" id="creatwork_include_nameinput"        style="width: 510px">1111</el-input>
-                </el-form-item>
+                    </div>
+                    <div class="work_handle_div2_class">
+                        <p class="work_handle_div2p1_class">
+                            注意
+                        </p>
+                        <p class="work_handle_div2p1_class">
+                            1.超过2M的JPG图片；
+                        </p>
+                        <p class="work_handle_div2p1_class">
+                            2.作品封面应显示作品名和笔名；
+                        </p>
+                        <p class="work_handle_div2p1_class">
+                            3.建议使用原创图片；
+                        </p>
+                        <p class="work_handle_div2p1_class">
+                            4.严禁上传色情、暴力、广告宣传的图片;
+                        </p>
+                        <p class="work_handle_div2p1_class">
+                            5.封面上传后，将在2个工作日内审核完成。
+                        </p>
+                    </div>
+                    <div class="work_handle_div3_class">
+                        <p class="work_handle_div3p1_class">{{worksInfo.work_name}}</p>
+                    </div>
+                    <div class="work_handle_div4_class">
+                        <el-select v-model="worksInfoVo.work_main_label" :placeholder="worksInfoVo.work_main_label" @change="mainlabelchange" size="mini" style="width: 210px ; height: 20px">
+                            <el-option v-for="labels in labelList" :label="labels" :value="labels"></el-option>
+                        </el-select>
+                        <el-select v-model="worksInfoVo.work_vice_label" :placeholder="worksInfoVo.work_vice_label" size="mini" style="width: 210px ; height: 20px">
+                            <el-option v-for="vicelabel in vicelabelList" :label="vicelabel" :value="vicelabel"></el-option>
+                        </el-select>
 
-                <p class="createworkTips" id="work_name_tipid">{{work_Tips.work_name_tip}}</p>
+                    </div>
+                    <div class="work_handle_div5_class">
+                        <el-select v-model="worksInfoVo.work_serial_state" :placeholder="worksInfoVo.work_serial_state"  size="mini" style="width: 210px ; height: 20px">
+                            <el-option v-for="workState in workStateList" :label="workState" :value="workState"></el-option>
+                        </el-select>
+                    </div>
+                    <div class="work_handle_div6_class">
+
+                        <el-checkbox v-model="customLabelList" :label="optionalList[0]" id="customLabel0" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[1]" id="customLabel1" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[2]" id="customLabel2" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[3]" id="customLabel3" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[4]" id="customLabel4" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        </el-checkbox>
+                    </div>
+                    <div class="work_handle_div7_class">
+
+                        <el-checkbox v-model="customLabelList" :label="optionalList[5]" id="customLabel5" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[6]" id="customLabel6" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[7]" id="customLabel7" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[8]" id="customLabel8" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[9]" id="customLabel9" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+
+                    </div>
+                    <div class="work_handle_div7_class">
+                        <el-checkbox v-model="customLabelList" :label="optionalList[10]" id="customLabel10" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[11]" id="customLabel11" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[12]" id="customLabel12" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[13]" id="customLabel13" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[14]" id="customLabel14" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
 
 
+                    </div>
+                    <div class="work_handle_div7_class">
 
+                        <el-checkbox v-model="customLabelList" :label="optionalList[15]" id="customLabel15" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[16]" id="customLabel16" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[17]" id="customLabel17" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[18]" id="customLabel18" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[19]" id="customLabel19" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
 
-                <el-form-item label="活动区域"  class="creatwork_include_p" id="creatwork_include_labelp">
-                    <el-select v-model="worksInfo.work_main_label" placeholder="请选择活动区域"   @change="mainlabelchange"                                              style="width: 250px">
-                        <el-option v-for="labels in labelList" :label="labels" :value="labels"></el-option>
+                    </div>
+                    <div class="work_handle_div7_class">
+                        <el-checkbox v-model="customLabelList" :label="optionalList[20]" id="customLabel20" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[21]" id="customLabel21"  @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[22]" id="customLabel22" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[23]" id="customLabel23" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[24]" id="customLabel24" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
 
-                    </el-select>
+                    </div>
+                    <div class="work_handle_div7_class">
 
-                    <el-select v-model="worksInfo.work_vice_label" placeholder="请选择活动区域"                                             style="width: 250px">
-                        <el-option v-for="vicelabels in vicelabelList" :label="vicelabels" :value="vicelabels"></el-option>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[25]" id="customLabel25" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[26]" id="customLabel26" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[27]" id="customLabel27" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[28]" id="customLabel28" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
+                        <el-checkbox v-model="customLabelList" :label="optionalList[29]" id="customLabel29" @change="checkedCustomLabel()" border size="mini" style="width: 80px ; height: 25px"></el-checkbox>
 
-                    </el-select>
-                </el-form-item>
+                    </div>
 
-                <p class="createworkTips">{{work_Tips.work_label_tip}}</p>
+                    <div class="work_handle_divp_class">
+                        <p class="work_checkbox_tipclass" id="work_checkbox_tipid">
+                            {{work_Tips.custom_label}}
+                        </p>
+                    </div>
+                    <div class="work_handle_div8_class">
+                        <el-input type="textarea" v-model="worksInfoVo.work_introduct" @blur="isworkintroduct()" class="creatwork_include_input" id="creatwork_include_otherinput"       style="width: 510px "></el-input>
+                    </div>
+                    <div class="work_handle_divp_class">
+                        <p class="work_checkbox_tipclass" id="work_introduct_tipid">
+                            {{work_Tips.work_introduct_tip}}
+                        </p>
+                    </div>
+                    <div class="work_handle_div9_class">
+                        <el-input type="textarea" v-model="worksInfoVo.work_other_word" @blur="isworkotherwork()" class="creatwork_include_input" id="creatwork_include_otherinput"       style="width: 510px "></el-input>
 
+                    </div>
+                    <div class="work_handle_divp_class">
+                        <p class="work_checkbox_tipclass" id="work_otherwork_tipid">
+                            {{work_Tips.work_otherword_tip}}
+                        </p>
+                    </div>
+                    <div class="work_handle_div10_class">
+                        <!--依据上面条件判断按钮是否处于可选状态-->
+                        <el-button type="primary"   class="updatework_to_button" @click="updatebutton()" :disabled="work_introductResult==1&&work_other_wordResult==1&&customLabelResult==1?false:true">修改作品</el-button>
+                        <el-button @click="resetForm('worksInfo')"  class="notupdatework_to_button">重置信息</el-button>
+                    </div>
 
-                <el-form-item label="作品介绍"                                                                           class="creatwork_include_p" id="creatwork_include_otherp">
-                    <el-input type="textarea" v-model="worksInfo.work_introduct"   @blur="isworkintroduct"              class="creatwork_include_input" id="creatwork_include_otherinput"       style="width: 510px"></el-input>
-                </el-form-item>
+                </div>
 
-                <p class="createworkTips" id="work_introduct_tipid">{{work_Tips.work_introduct_tip}}</p>
-
-                <el-form-item label="给读者的话"                                                                         class="creatwork_include_p" id="creatwork_include_otherp">
-                    <el-input type="textarea" v-model="worksInfo.work_other_word" @blur="isworkotherwork"               class="creatwork_include_input" id="creatwork_include_otherinput"       style="width: 510px "       style="width: 510px"></el-input>
-                </el-form-item>
-
-                <p class="createworkTips" id="work_otherwork_tipid">{{work_Tips.work_otherword_tip}}</p>
-
-                <el-form-item>
-                    <el-button type="primary"  @click="submitForm('worksInfo')"   :disabled="iswork_name==0&&iswork_otherword==0&&iswork_introduct==0&&worksInfo.work_vice_label!=null?false:true" class="addwork_to_button" id="addwork_to_buttonid" >立即创建</el-button>
-                    <el-button @click="resetForm('worksInfo')"                                                          class="notaddwork_to_button">重置</el-button>
-                </el-form-item>
-            </el-form>
-<!--            <button @click="hreftwo" class="test-one">点我到第二个页面</button>-->
-
+            </div>
 
 
         </div>
@@ -159,15 +252,13 @@
     </div>
 </div>
 
-</div>
-
 
 </body>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
-
-<script src="../js/newlyCreatedWorksInterface.js"></script>
+<!--<script src="../js/workbeanchTopFragment.js"></script>-->
+<script src="../js/workSetInterface.js"></script>
 
 
 </html>

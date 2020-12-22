@@ -262,27 +262,6 @@ new Vue({
         },
 
 
-
-
-
-
-
-
-
-        hreftwo(){
-            var _this= this;
-            axios.get('http://localhost:8080/account/findAll')
-                .then(function (response) {
-                    window.location.assign("https://www.w3school.com.cn")
-                    console.log(response.data);
-                })
-                .catch(function (error){
-
-                    alert("相应失败");
-                })
-
-        },
-
         //重置表单
         resetForm(worksInfo) {
             this.worksInfo.work_name=null;

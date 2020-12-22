@@ -158,4 +158,11 @@ public class AccountControler {
         return "changeTheProcessingResultInterface.html";
     }
 
+    @RequestMapping("/paihang")
+    public String paihang(){
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "novelRankingInterface.html";
+    }
+
 }

@@ -3,6 +3,7 @@ package com.shaohuashuwu.service;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.Difvolenum;
 import com.shaohuashuwu.domain.vo.PageInfo;
+
 import java.util.List;
 
 /**
@@ -67,7 +68,9 @@ public interface WorksInfoService {
     //功能点：下架作品中修改作品设置信息
     public int updateWorkInfoByworkid(WorksInfo worksInfo);
 
-
+    //修改作品信息
+    //功能点：修改作品信息
+    public void updateworkInfoByWork_id(WorksInfo worksInfo);
 
 
 }

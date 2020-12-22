@@ -24,21 +24,10 @@ public class ChapterInfoServiceImpl implements ChapterInfoService {
     @Autowired
     public ChapterPostInfoDao chapterPostInfoDao;
     @Autowired
-    public WorksInfoDao worksInfoDao;
-    @Autowired
-    public TransactionInfoDao transactionInfoDao;
-
-
-
-    public ChapterPostInfo chapterPostInfo;
-    public ChapterPostInfo nullchapterPostInfo;
-    public WorksInfo worksInfo;
-    public CatalogInfoVo catalogInfoVo;
-    public ChapterInfo chapterInfo;
-    public TransactionInfo transactionInfo;
-
-    @Autowired
     public ThisCurrentTime thisCurrentTime;
+
+    ChapterPostInfo chapterPostInfo;
+    ChapterPostInfo nullchapterPostInfo;
 
 
     /**

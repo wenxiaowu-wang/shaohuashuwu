@@ -20,11 +20,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     public UserInfoDao userInfoDao;
 
-    @Autowired
-    public ChapterPostInfoDao chapterPostInfoDao;
-
-
-
     /**
      * 获取网站注册人数
      * 功能点：用户界面上的获取的用户数量
@@ -45,10 +40,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfo getUserLoginInfo(int user_id) {
         return userInfoDao.selectUserLogiInfoByuser_id(user_id);
     }
-
-
-
-
 
     /**
      * 根据作品id获取用户信息
@@ -72,32 +63,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         return userInfoDao.selectauthorInfoByChapter_id(chapter_id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

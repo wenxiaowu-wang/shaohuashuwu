@@ -20,12 +20,6 @@ public class WorkWholeInfoVoController {
     @Autowired
     private WorkWholeInfoVoService workWholeInfoVoService;
 
-    private WorkWholeInfoVo workWholeInfoVo;
-    private List<WorkWholeInfoVo> workWholeInfoVoList;
-
-
-
-
     /**
      * 获取主页不同分类的作品信息
      * 功能点：获取主页信息
@@ -38,7 +32,6 @@ public class WorkWholeInfoVoController {
         return workWholeInfoVoService.getdifferentStateWork(differentStateWork);
     }
 
-
     /**
      * 通过搜索信息获取作品全部信息
      * 功能点：关键字搜索搜索内容，
@@ -48,20 +41,49 @@ public class WorkWholeInfoVoController {
      */
     @ResponseBody
     @RequestMapping("/getWorkWholeInfoBySelectinput")
-    public List<WorkWholeInfoVo> getWorkWholeInfoBySelectinput(@RequestBody WorksInfo worksInfomation, HttpServletRequest request, HttpServletResponse response){
+    public List<WorkWholeInfoVo> getWorkWholeInfoBySelectinput(@RequestBody WorksInfo worksInfo, HttpServletRequest request, HttpServletResponse response){
         //获取搜索内容
         HttpSession session = request.getSession();
         Object selectinputObj = session.getAttribute("selectinput");
         String selectinput =String.valueOf(selectinputObj);
-
-        System.out.println("获取得到信息"+worksInfomation);
         //设置作品信息
+        worksInfo.setWork_name(selectinput);
+        return workWholeInfoVoService.getWorkWholeInfoBySelectinput(worksInfo);
+    }
 
-        worksInfomation.setWork_name(selectinput);
-        System.out.println("需要搜索信息"+worksInfomation);
-        workWholeInfoVoList = workWholeInfoVoService.getWorkWholeInfoBySelectinput(worksInfomation);
+    /**
+     * 通过作者id信息获取作品全部信息
+     * 功能点：作品信息内容，
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getworkWholeInfoVoByauthor_id")
+    public List<WorkWholeInfoVo> getworkWholeInfoVoByauthor_id(HttpServletRequest request, HttpServletResponse response){
+        //获取搜索内容
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("author_id");
+        int author_id=Integer.parseInt(String.valueOf(msg));
+        return workWholeInfoVoService.getworkWholeInfoVoByauthor_id(author_id);
+    }
 
-        return workWholeInfoVoList;
+    /**
+     * 通过用户id信息获取作品全部信息
+     * 功能点：个性推荐作品
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getworkWholeInfoVoByuser_id")
+    public List<WorkWholeInfoVo> getworkWholeInfoVoByuser_id(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //获取用户id
+        HttpSession session = request.getSession();
+        session.setAttribute("user_id",0);
+        Object msg = session.getAttribute("user_id");
+        int user_id=Integer.parseInt(String.valueOf(msg));
+        return workWholeInfoVoService.getworkWholeInfoVoByuser_id(user_id);
     }
 
 

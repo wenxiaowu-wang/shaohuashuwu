@@ -1,13 +1,9 @@
 package com.shaohuashuwu.service.impl;
 
-import com.shaohuashuwu.dao.ChapterPostInfoDao;
-import com.shaohuashuwu.dao.UserInfoDao;
 import com.shaohuashuwu.dao.WorksInfoDao;
-import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.Difvolenum;
 import com.shaohuashuwu.domain.vo.PageInfo;
-import com.shaohuashuwu.service.AttentionInfoService;
 import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,21 +23,8 @@ public class WorksInfoServiceImpl implements WorksInfoService {
 
     @Autowired
     public WorksInfoDao worksInfoDao;
-    @Autowired
-    public ChapterPostInfoDao chapterPostInfoDao;
-    @Autowired
-    public UserInfoDao userInfoDao;
 
-
-
-    @Autowired
-    public AttentionInfoService attentionInfoService;
-
-
-    private WorksInfo worksInfo;
     private Difvolenum difvolenum;
-    private UserInfo userInfo;
-
 
     /**
      * 获取分类统计的作品信息
@@ -92,8 +75,6 @@ public class WorksInfoServiceImpl implements WorksInfoService {
     public List<WorksInfo> getVaguework_nameBywork_name(WorksInfo worksInfo) {
         return worksInfoDao.selectVaguework_nameBywork_name(worksInfo);
     }
-
-
 
     /**
      * 根据不同条件查询书籍，sql拼接查询寻
@@ -210,77 +191,49 @@ public class WorksInfoServiceImpl implements WorksInfoService {
 
 //      设置作品其他信息
         String work_main_label = worksinfo.getWork_main_label();
-        System.out.println("添加作品类型");
+
         if(work_main_label.equals("都市")){
-            System.out.println("--都市");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/dushicover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("军事")){
-            System.out.println("--军事");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/junshicover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("科幻")){
-            System.out.println("--科幻");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/kehuancover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("历史")){
-            System.out.println("--历史");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/lishicover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("奇幻")){
-            System.out.println("--奇幻");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/qihaucover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("轻小说")){
-            System.out.println("--轻小说");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/qingxiaoshuocover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("体育")){
-            System.out.println("--体育");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/tiyucover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("武侠")){
-            System.out.println("--武侠");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/wuxiacover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("现实")){
-            System.out.println("--现实");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xianshicover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("仙侠")){
-            System.out.println("--仙侠");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xianxiacover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("玄幻")){
-            System.out.println("--玄幻");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xuanhuancover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("悬疑")){
-            System.out.println("--悬疑");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/xuanyicover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
         else if(work_main_label.equals("游戏")){
-            System.out.println("--游戏");
             worksinfo.setWork_cover("https://shaohuashuwu.oss-cn-beijing.aliyuncs.com/cover/youxicover.png");
-            System.out.println("作品类型----："+worksinfo.getWork_cover());
         }
-        System.out.println("作品类型----："+worksinfo.getWork_cover());
         worksinfo.setUser_id(user_id);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
-        System.out.println("时间："+date);
         worksinfo.setWork_create_time(date);
         worksinfo.setWork_serial_state(1);
         worksinfo.setWork_word_num(0);
@@ -304,8 +257,16 @@ public class WorksInfoServiceImpl implements WorksInfoService {
         return updateResult;
     }
 
-
-
+    /**
+     * 修改作品信息
+     *功能点：修改作品信息
+     * @param worksInfo
+     * @return
+     */
+    @Override
+    public void updateworkInfoByWork_id(WorksInfo worksInfo) {
+         worksInfoDao.updateworkInfoByWork_id(worksInfo);
+    }
 
 
 }

@@ -13,8 +13,4 @@ public interface ReadSettingInfoService {
     public int updateReadSettingInfoByid(ReadSettingInfo readSettingInfo);
 
 
-
-
-
-
 }

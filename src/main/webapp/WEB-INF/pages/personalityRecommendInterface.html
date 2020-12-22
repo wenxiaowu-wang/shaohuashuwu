@@ -5,7 +5,7 @@
     <title>用户主界面</title>
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/userMainInterfaceFragment.css">
-    <link rel="stylesheet" href="../css/userhomepage.css">
+    <link rel="stylesheet" href="../css/personalityRecommendInterface.css">
 </head>
 <body>
 <div >
@@ -54,6 +54,62 @@
         </div>
     </div>
 
+    <!--主要内容-->
+    <div class="personality_class" >
+        <div class="personality_title_class">
+            <img class="title_img_class" src="../images/xiaolian-32.png">
+            <p class="title_p_class">我们将根据内平时感兴趣的作品类型为您推荐作品</p>
+        </div>
+
+        <div class="personality_left_class" id="personalityRecommend_id" >
+
+            <!--每个作品信息-->
+            <div class="responseWorksInfo_div_class" v-for="workWholeInfoVo in workWholeInfoVoList" >
+
+
+                <div class="responseWorkcover_div_class">
+                    <a href="#">
+                        <img class="responseWorkcover_img_class" :src="workWholeInfoVo.work_cover" >
+                    </a>
+                </div>
+                <div class="responseotherWork_div_class">
+                    <a class="work_name_a_class" href="#">{{workWholeInfoVo.work_name}}</a>
+                    <div class="work_hang2_div_class">
+                        <img class="rankingme_img_class" src="../images/authorme-36.png">
+                        <a class="username_a_class" href="#" >{{workWholeInfoVo.user_name}}</a>
+                        <p class="otherworkInfo_hang2_info">{{workWholeInfoVo.work_main_label}} &nbsp; | &nbsp; {{workWholeInfoVo.work_serial_state}}</p>
+                    </div>
+                    <p class="workintroduct_p_class">
+                        {{workWholeInfoVo.work_introduct}}
+                    </p>
+                    <div class="work_hang4_div_class">
+                        <a class="newchapter_b_class" >最新章节：</a>
+                        <a class="newchapter_a_class" href="#">{{workWholeInfoVo.chapter_title}}</a>
+                        <a class="newchapter_time_a_class">更新时间： {{workWholeInfoVo.chapter_time}}</a>
+                    </div>
+
+                </div>
+                <div class="rankingWorkButton_div_class">
+                    <a class="num_a_class">{{workWholeInfoVo.work_vote_num}} </a>
+                    <a class="num_a2_class">推荐票</a>
+
+                    <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
+                    <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
+
+                </div>
+                <div class="divhr_class"></div>
+            </div>
+
+        </div>
+
+        <div class="personality_right_class">
+
+
+
+        </div>
+    </div>
+
+
 
 
 
@@ -68,7 +124,7 @@
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
 <script src="../js/userMainInterface.js"></script>
-<script src="../js/userhomepage.js"></script>
+<script src="../js/personalityInterface.js"></script>
 
 
 

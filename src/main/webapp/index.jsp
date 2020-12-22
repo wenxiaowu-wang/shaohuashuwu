@@ -88,6 +88,11 @@
     <input type="submit" value="处理信息">
 
 </form>
+<form  action="account/paihang" method="post">
+
+    <input type="submit" value="排行信息">
+
+</form>
 <button @click="testgotochatpter(34)" value="用户主界面">11111</button>
 
 

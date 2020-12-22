@@ -11,26 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChapterPostInfoDao {
 
-
-
     //依据作品id查询作品章节数,判断章节是否存在
     //功能点：添加章节功能添加章节
     @Select("SELECT count(*) from chapter_post_info where work_id = #{work_id}")
     public int selectchapterNum(int work_id);
-
-    //依据作品名称，查询作品章节数
-    @Select("SELECT count(*) from chapter_post_info cp1 where cp1.work_id = " +
-            " (select work_id from works_info w1 where w1.work_name = #{work_name})")
-    public int getchapterNumBywork_name(String work_name);
-
-
-    //依据章节id查询作品信息
-    @Select("SELECT w.work_id,w.work_name FROM works_info w,chapter_post_info c WHERE w.`work_id` = c.`work_id` AND c.`chapter_id` = #{chapter_id}")
-    public WorksInfo selectworkInfoByChapter_id(int chapter_id);
-
-    //依据章节id查询作者信息
-    @Select("SELECT u.user_id,u.user_name FROM user_info u,chapter_post_info c WHERE u.`user_id` = c.`user_id` AND c.`chapter_id` = #{chapter_id}")
-    public UserInfo selectUserInfoByChapter_id(int chapter_id);
 
     //保存章节信息
     //功能点：添加章节功能添加章节

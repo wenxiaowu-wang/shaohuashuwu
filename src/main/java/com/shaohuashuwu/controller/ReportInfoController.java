@@ -16,11 +16,7 @@ import javax.servlet.http.HttpSession;
 public class ReportInfoController {
 
     @Autowired
-    private ReportWholeInfoVoService reportWholeInfoVoService;
-
-    @Autowired
     private ReportInfoService reportInfoService;
-
 
     /**
      * 将report_id保存进入session
@@ -34,8 +30,6 @@ public class ReportInfoController {
         //1.将获取数据存入session
         HttpSession session = request.getSession();
         session.setAttribute("report_id",report_id);
-        System.out.println("----"+report_id);
-
     }
 
 
@@ -49,7 +43,6 @@ public class ReportInfoController {
     public int updateReportInfoByReport_id(Integer handle_state,HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
-
         Object msg = session.getAttribute("report_id");
         int report_id=Integer.parseInt(String.valueOf(msg));
         return reportInfoService.updateReportInfoByReport_id(report_id,handle_state);

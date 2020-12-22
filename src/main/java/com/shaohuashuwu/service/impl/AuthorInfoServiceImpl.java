@@ -13,10 +13,6 @@ public class AuthorInfoServiceImpl implements AuthorInfoVoService {
     @Autowired
     private AuthorInfoVoDao authorInfoVoDao;
 
-    public UserInfo userInfo;
-
-
-
     /**
      * 获取作者信息
      * 功能点：作者端顶部用户信息，

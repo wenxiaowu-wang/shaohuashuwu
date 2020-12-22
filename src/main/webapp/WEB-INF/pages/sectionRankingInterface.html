@@ -9,132 +9,130 @@
     <link rel="stylesheet" href="../css/sectionRankingInterface.css">
 </head>
 <body>
-<div id="app">
+<!--    顶部导航信息-->
+<div id="usertop_all_div_id">
+    <!--顶部导航栏-->
     <div class="userMainTop_class">
-
         <ul class="user_navigation_bar">
             <li class="workclassification_class" id="user_main_li">
-                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >首      页</el-button>
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoUserMainIterface()" >首      页</el-button>
             </li>
             <li class="workclassification_class" id="allwork_li">
-                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >全 部 作 品</el-button>
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoAllWorksInterface()">全 部 作 品</el-button>
             </li>
             <li class="workclassification_class" id="paihang_li">
-                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >排      行</el-button>
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoNovelRankingInterface()">排      行</el-button>
             </li>
             <li class="workclassification_class" id="tuijian_li">
-                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >推      荐</el-button>
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoPersonalityRecommendInterface()">推      荐</el-button>
             </li>
             <li class="workclassification_class" id="chengweizuozhe_li">
-                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >成 为 作 者</el-button>
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoAuthorPrefecture()">作 者 专 区</el-button>
             </li>
             <li class="workclassification_class" id="gerenzhongxin_li">
-                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >个 人 中 心</el-button>
+                <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoMysqelfHtml()">个 人 中 心</el-button>
             </li>
         </ul>
     </div>
+    <!--顶部导航栏，用户信息获取-->
     <div class="dierhang">
         <div class="userInfo-class">
-            <a class="userInfo-p-class" id="username-p-id" href="http://www.w3school.com.cn">您好，昵称 </a>
-            <a class="userInfo-p-class" id="userout-p-id" href="http://www.w3school.com.cn">退出</a>
-            <a class="userInfo-p-class" id="haveuser-p-id" href="http://www.w3school.com.cn">网站注册人数5人</a>
+            <a class="userInfo-p-class" id="username-p-id" href="#" @click="gotoMysqelfHtml()">您好，{{userInfo.user_name}} </a>
+            <el-button type="text" class="userInfo-p-class" id="userout-p-id" href="#" @click="signOut()">退出</el-button>
+            <a class="userInfo-p-class" id="haveuser-p-id" >网站注册人数{{userNum}}人</a>
         </div>
-        <img src="../images/SHAOHUALOGO.png" class="imglogo">
-
-        <el-input class="el-select-my" v-model="input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
-        <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search">搜索</el-button>
-
-
-        <el-button class="el-shujia-my"  type="info" plain size="small" >
+        <!--logo，搜索，书架-->
+        <img class="imglogo" src="../images/SHAOHUALOGO.png">
+        <el-input class="el-select-my" v-model="select_input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
+        <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectworkInfobyinfo()">搜索</el-button>
+        <el-button class="el-shujia-my"  type="info" plain size="small" @click="gotoBookshelf()">
             <img src="../images/shujia-16.png">
-            <p>
-                书架
-            </p>
+            <p>书架</p>
         </el-button>
     </div>
 </div>
 
+<!--主要内容-->
 <div class="rankinginclue-class" id="rankinginclue-id">
     <div class="rankinginclue_left_class" id="rankinginclue_left_id">
-        <a class="ranking_name_a_class" href="#"  @click="clickalllistbutton()">人气榜单▶</a>
+        <a class="ranking_name_a_class" href="#"  @click="clicklistbutton(0)">人气榜单▶</a>
         <div class="hr_div_class"></div>
-        <a class="ranking_name_a_class" href="#" @click="clicklistbutton(3)">推荐榜</a>
         <a class="ranking_name_a_class" href="#" @click="clicklistbutton(4)">收藏榜</a>
+        <a class="ranking_name_a_class" href="#" @click="clicklistbutton(3)">推荐榜</a>
         <a class="ranking_name_a_class" href="#" @click="clicklistbutton(2)">订阅榜</a>
         <a class="ranking_name_a_class" href="#" @click="clicklistbutton(1)">打赏榜</a>
     </div>
     <div class="rankinginclue_right_class" id="rankinginclue_right_id">
         <div class="rankinginclue_leftneed_class">
-            <p class="ranking_need_p_class">人气榜单</p>
-            <p class="time_need_p_class">2020-11-16 09:33:22  更新</p>
+            <p class="ranking_need_p_class">{{rankingName}}</p>
+            <p class="ranking_need_p1_class">·{{rankingTimeType}}·{{mainlabel}}</p>
+            <p class="time_need_p_class">{{nowtime}}  更新</p>
         </div>
         <div class="rankinginclue_right_top_class" id="rankinginclue_right_top_id">
-            <a class="rankinginclue_right_top_a_class" id="allwork_id" href="#">全部作品</a>
+            <a class="rankinginclue_right_top_a_class" id="allwork_id" href="#" @click="clickmainlabel('全部')" >全部作品</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">玄幻</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('玄幻')" >玄幻</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">奇幻</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('奇幻')" >奇幻</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">武侠</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('武侠')" >武侠</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">仙侠</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('仙侠')" >仙侠</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">都市</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('都市')" >都市</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">现实</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('现实')" >现实</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">军事</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('军事')" >军事</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">历史</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('历史')" >历史</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">游戏</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('游戏')" >游戏</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">体育</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('体育')" >体育</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">科幻</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('科幻')" >科幻</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">悬疑</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('悬疑')" >悬疑</a>
             <a class="fenge_a_class" >·</a>
-            <a class="rankinginclue_right_top_a_class" href="#">轻小说</a>
-
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickmainlabel('轻小说')" >轻小说</a>
+        </div>
+        <div class="rankinginclue_right_top_class" >
+            <a class="rankinginclue_right_top_a_class" id="alltime_id" href="#" @click="clickneedallRanking()">总榜</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickneedmonthRanking()">月榜</a>
+            <a class="fenge_a_class" >·</a>
+            <a class="rankinginclue_right_top_a_class" href="#" @click="clickneeddayRanking()">日榜</a>
         </div>
         <!--推荐内容-->
         <div class="rankinginclue_right_bottom_class">
 
 
-
-
-
-            <div class="rankingWorksInfo_div_class" >
+            <div class="rankingWorksInfo_div_class" v-for="(rankingInfoVo,index) in rankingInfoVoList">
                 <div class="rankingWorksInfo_div1_class">
                     <div class="rankingWorkcover_div_class">
 
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
+                        <img class="rankingWorkcover_img_class" :src="rankingInfoVo.work_cover">
+                        <p class="rankingWorkcover_p_class" :style="{'background':( index == 1 ? '#aaaaaa':'#ff0000')}">
+                            {{index+1}}
                         </p>
                     </div>
                     <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
+                        <a class="work_name_a_class" href="#">{{rankingInfoVo.work_name}}</a>
                         <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
+
+
+                            <p class="otherworkInfo_hang2_info">{{rankingInfoVo.work_serial_state}} &nbsp; | &nbsp; {{rankingInfoVo.work_main_label}} &nbsp; | &nbsp; {{rankingInfoVo.work_vice_label}}</p>
                         </div>
                         <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
+                         {{rankingInfoVo.work_introduct}}
                         </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
+
 
                     </div>
                     <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
+                        <a class="num_a_class">{{rankingInfoVo.sumnum}} </a>
+                        <a class="num_a2_class">{{numName}}</a>
 
                         <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
                         <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
@@ -150,300 +148,6 @@
 
 
 
-
-
-
-
-            <div class="rankingWorksInfo_div_class" >
-                <div class="rankingWorksInfo_div1_class">
-                    <div class="rankingWorkcover_div_class">
-
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
-                        </p>
-                    </div>
-                    <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
-                        <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
-                        </div>
-                        <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
-                        </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
-
-
-
-                    </div>
-                    <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
-
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
-
-                    </div>
-
-                </div>
-
-                <div class="rankingWorksInfo_div2_class">
-                </div>
-
-            </div>
-            <div class="rankingWorksInfo_div_class" >
-                <div class="rankingWorksInfo_div1_class">
-                    <div class="rankingWorkcover_div_class">
-
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
-                        </p>
-                    </div>
-                    <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
-                        <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
-                        </div>
-                        <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
-                        </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
-
-
-
-                    </div>
-                    <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
-
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
-
-                    </div>
-
-                </div>
-
-                <div class="rankingWorksInfo_div2_class">
-                </div>
-
-            </div>
-            <div class="rankingWorksInfo_div_class" >
-                <div class="rankingWorksInfo_div1_class">
-                    <div class="rankingWorkcover_div_class">
-
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
-                        </p>
-                    </div>
-                    <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
-                        <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
-                        </div>
-                        <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
-                        </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
-
-
-
-                    </div>
-                    <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
-
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
-
-                    </div>
-
-                </div>
-
-                <div class="rankingWorksInfo_div2_class">
-                </div>
-
-            </div>
-            <div class="rankingWorksInfo_div_class" >
-                <div class="rankingWorksInfo_div1_class">
-                    <div class="rankingWorkcover_div_class">
-
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
-                        </p>
-                    </div>
-                    <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
-                        <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
-                        </div>
-                        <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
-                        </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
-
-
-
-                    </div>
-                    <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
-
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
-
-                    </div>
-
-                </div>
-
-                <div class="rankingWorksInfo_div2_class">
-                </div>
-
-            </div>
-            <div class="rankingWorksInfo_div_class" >
-                <div class="rankingWorksInfo_div1_class">
-                    <div class="rankingWorkcover_div_class">
-
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
-                        </p>
-                    </div>
-                    <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
-                        <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
-                        </div>
-                        <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
-                        </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
-
-
-
-                    </div>
-                    <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
-
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
-
-                    </div>
-
-                </div>
-
-                <div class="rankingWorksInfo_div2_class">
-                </div>
-
-            </div>
-            <div class="rankingWorksInfo_div_class" >
-                <div class="rankingWorksInfo_div1_class">
-                    <div class="rankingWorkcover_div_class">
-
-                        <img class="rankingWorkcover_img_class" src="../images/tset-1-work.jpg">
-                        <p class="rankingWorkcover_p_class">
-                            1
-                        </p>
-                    </div>
-                    <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">进化之船</a>
-                        <div class="work_hang2_div_class">
-                            <img class="rankingme_img_class" src="../images/authorme-36.png">
-                            <a class="username_a_class" href="#">天蚕土豆</a>
-                            <p class="otherworkInfo_hang2_info">玄幻 &nbsp; | &nbsp; 连载</p>
-                        </div>
-                        <p class="workintroduct_p_class">
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-                            用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。用户根据根据各个榜单查找热门小说，便于找到自己喜欢的小说。
-
-                        </p>
-                        <div class="work_hang4_div_class">
-                            <a class="newchapter_a_class" href="#">第四章 再见落枫1213洒水大所大所大所</a>
-                            <a class="newchapter_time_a_class">更新时间： 2020-10-22 10:23:11</a>
-                        </div>
-
-
-
-                    </div>
-                    <div class="rankingWorkButton_div_class">
-                        <a class="num_a_class">1111 </a>
-                        <a class="num_a2_class">推荐票</a>
-
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
-
-                    </div>
-
-                </div>
-
-                <div class="rankingWorksInfo_div2_class">
-                </div>
-
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div class="fenyediv">
-
-                <el-pagination
-
-                        @current-change="handleCurrentChange"
-                        :current-page="currentPage"
-                        :page-sizes="4"
-                        :page-size="4"
-                        layout="total,sizes,prev, pager, next, jumper"
-                        :total="total">
-                </el-pagination>
-            </div>
 
             <div class="bootom_div_class">
 

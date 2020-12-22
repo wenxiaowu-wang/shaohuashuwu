@@ -1,0 +1,268 @@
+
+#worksMangagementp_id{
+    color: #8cc5ff;
+}
+#worksMangagementp_id:hover{
+    color: red;
+}
+
+#workSet_id{
+    margin-left: 20px;
+    margin-top: 100px;
+    margin-bottom: 30px;
+
+    background: #ffffff;
+    width: 875px;
+    min-height: calc(100vh);
+    /*!*j渐变色阴影*!*/
+    box-shadow: 5px 5px 10px #b2d1d4;
+    /*设置为圆角*/
+    border-radius:5px 5px 5px 5px;
+
+    float: left;
+}
+
+
+.top_div_class{
+    width: 100%;
+    height: 40px;
+
+}
+
+#myselfInfo_p_id{
+    margin-left: 10px;
+    margin-top: 10px;
+
+    display: block;
+    width: 100px;
+    height: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    color: #494949;
+    float: left;
+}
+
+.divhr_class{
+    margin-left: 10px;
+
+    height: 1px;
+    width: 830px;
+    background: #656565;
+}
+
+.workSet_main_div_class{
+    margin-top: 20px;
+
+    width: 100%;
+    height: 1000px;
+}
+
+.workSet_mainLeft_div_class{
+    margin-left: 10%;
+
+    width: 15%;
+    height: 1000px;
+
+    float: left;
+}
+
+.work_handle_p_class{
+    margin-top: 10px;
+
+    display: block;
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: #444444;
+    text-overflow: ellipsis;
+}
+
+.work_handle_p2_class{
+    margin-top: 140px;
+
+    display: block;
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: #444444;
+    text-overflow: ellipsis;
+}
+
+.work_handle_p3_class{
+    margin-top: 10px;
+
+    display: block;
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: #444444;
+    text-overflow: ellipsis;
+}
+
+.work_handle_p4_class{
+    margin-top: 160px;
+
+    display: block;
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: #444444;
+    text-overflow: ellipsis;
+}
+
+.work_handle_p5_class{
+    margin-top: 170px;
+
+    display: block;
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: #444444;
+    text-overflow: ellipsis;
+}
+
+
+/*小说封面样式*/
+
+.avatar-uploader .el-upload {
+    border: 1px dashed #999999;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-width: 2px;
+    border-color: #ea6767;
+}
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #ea6767;
+    width: 105px;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+}
+.avatar {
+    width: 105px;
+    height: 140px;
+    display: block;
+}
+
+/*右侧*/
+.workSet_mainRight_div_class{
+    width: 60%;
+    height: 900px;
+
+    float: left;
+}
+
+.work_handle_div_class{
+    margin-top: 10px;
+
+    float: left;
+}
+
+.work_handle_div2_class{
+    margin-top: 10px;
+    margin-left: 20px;
+
+    width: 300px;
+    height: 140px;
+
+    float: left;
+}
+
+.work_handle_div2p1_class{
+    margin-top:1px;
+
+    display: block;
+    width: 100%;
+    height: 10px;
+    font-size: 14px;
+    color: #444444;
+    text-overflow: ellipsis;
+}
+
+.work_handle_div3_class{
+    margin-top:175px;
+
+    width: 100%;
+    height: 25px;
+}
+
+.work_handle_div3p1_class{
+    font-size: 17px;
+}
+
+.work_handle_div4_class{
+    margin-top:15px;
+
+    width: 100%;
+    height: 25px;
+}
+.work_handle_div5_class{
+    margin-top:17px;
+
+    width: 100%;
+    height: 25px;
+}
+.work_handle_div6_class{
+    margin-top:15px;
+
+    width: 100%;
+    height: 25px;
+}
+.work_handle_div7_class{
+    margin-top:5px;
+
+    width: 100%;
+    height: 25px;
+}
+
+.checkbox_id{
+    margin-left: 100px;
+}
+
+.work_handle_div8_class{
+    margin-top:10px;
+
+    width: 100%;
+    height: 150px;
+}
+
+#creatwork_include_otherinput{
+    width: 510px;
+    height: 150px;
+    resize: none;
+}
+
+.work_handle_div9_class{
+    margin-top:15px;
+
+    width: 100%;
+    height: 150px;
+}
+
+.work_handle_div10_class{
+    margin-top:25px;
+    margin-left: 20%;
+
+    width: 60%;
+    height: 70px;
+}
+
+.updatework_to_button{
+    /*position: relative;*/
+    /*left: 150px;*/
+    /*top: 40px;*/
+
+    width: 120px;
+    height: 40px;
+}
+
+.work_checkbox_tipclass{
+    font-size: 12px;
+    color: #868686;
+    width: 410px;
+}

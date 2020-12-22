@@ -17,7 +17,7 @@ public class AuthorInfoController {
 
     @Autowired
     private AuthorInfoVoService authorInfoVoService;
-    private AuthorInfoVo authorInfoVo;
+
 
     /**
      * 获取作者信息
@@ -29,13 +29,26 @@ public class AuthorInfoController {
     @ResponseBody
     @RequestMapping("/getAuthorInfoVo")
     public AuthorInfoVo getAuthorInfoVo( HttpServletRequest request, HttpServletResponse response){
-
-
         HttpSession session = request.getSession();
         session.setAttribute("user_id",1);
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
-
         return authorInfoVoService.getAuthorInfoVo(user_id);
+    }
+
+    /**
+     * 获取作者信息通过用户点击
+     * 功能点：查看作者信息，
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getAuthorInfoByUserclick")
+    public AuthorInfoVo getAuthorInfoByUserclick( HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        Object msg = session.getAttribute("author_id");
+        int author_id=Integer.parseInt(String.valueOf(msg));
+        return authorInfoVoService.getAuthorInfoVo(author_id);
     }
 }

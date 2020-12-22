@@ -33,7 +33,6 @@ public class ReadSettingInfoController {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
-
         return  readSettingInfoService.getReadSettinginfo(user_id);
     }
 

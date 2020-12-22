@@ -58,6 +58,7 @@ new Vue({
                 .then(function (response) {
                     _this.worksWholeInfoVoList = response.data;
                     _this.workTotal=_this.worksWholeInfoVoList.length;
+                    console.log("======="+_this.worksWholeInfoVoList)
 
                     for( var i = 0 ;i<_this.worksWholeInfoVoList.length;i++){
                         /*将1或2转为连载或完结*/
@@ -153,6 +154,22 @@ new Vue({
                     alert("相应失败");
                 })
         },
+        //点击用户名字
+        clickUser_name(author_id){
+            console.log("作者id："+author_id);
+            var _this = this;
+            axios.post('http://localhost:8080/userInfoController/addAuthor_idSession?author_id='+author_id)
+                .then(function (response) {
+                    window.location.assign("../pages/authorInfoInterface.html");
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+
+
+
 
 
 

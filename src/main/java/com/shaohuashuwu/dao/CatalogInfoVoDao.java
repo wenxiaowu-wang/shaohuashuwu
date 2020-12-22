@@ -35,5 +35,5 @@ public interface CatalogInfoVoDao {
             "   WHERE cp1.work_id = #{work_id} " +
             " ORDER BY cp1.chapter_id) " +
             " and c1.chapter_id != 1 ")
-    List<CatalogInfoVo> selectchaptercatalogBywork_id2(int work_id);
+    public List<CatalogInfoVo> selectchaptercatalogBywork_id2(int work_id);
 }

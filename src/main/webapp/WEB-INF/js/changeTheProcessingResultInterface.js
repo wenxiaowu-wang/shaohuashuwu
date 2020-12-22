@@ -61,7 +61,7 @@ new Vue({
             axios.post('http://localhost:8080/reportWholeInfoVoController/gethandleResultListTotal',_this.adminSelectInfoVo)
                 .then(function (response){
                     _this.total = response.data;
-                    console.log("----"+_this.total);
+
                 }.bind(this))
                 .catch(function (error){
                     console.log(error);

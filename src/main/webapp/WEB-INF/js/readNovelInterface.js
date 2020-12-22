@@ -123,7 +123,6 @@ new Vue({
             axios.post('http://localhost:8080/chapterInfoController/getChapterInfoByChapter_id')
                 .then(function (response) {
                     _this.chapterInfo = response.data;
-                    console.log("章节信息-----------------------------------------------------------------------"+_this.chapterInfo);
                 })
                 .catch(function (error){
                     console.log(error);

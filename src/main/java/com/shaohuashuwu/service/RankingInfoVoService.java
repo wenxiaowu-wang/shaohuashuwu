@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface RankingInfoVoService {
 
+    //获取排行信息
+    // 功能点：获取排行信息
+    public List<RankingInfoVo> getRankingInfo(RankingInputInfoVo rankingInputInfoVo);
+
+
     //排行榜
     public List<RankingInfoVo> getListInfo(RankingInputInfoVo rankingInputInfoVo);
 

@@ -33,7 +33,7 @@ new Vue({
                      _this.showwork_serial_state();
                 })
                 .catch(function (error){
-                    alert("相应失败");
+                    alert("相应作品失败");
             })
 
         },

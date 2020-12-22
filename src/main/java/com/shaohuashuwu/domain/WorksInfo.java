@@ -28,6 +28,21 @@ public class WorksInfo implements Serializable {
         this.work_id = work_id;
     }
 
+    /*
+    * 排行榜用到信息
+    * */
+
+    public WorksInfo(Integer work_id, String work_cover, String work_name, String work_main_label, String work_vice_label, Integer work_serial_state, String work_introduct, String work_other_word) {
+        this.work_id = work_id;
+        this.work_cover = work_cover;
+        this.work_name = work_name;
+        this.work_main_label = work_main_label;
+        this.work_vice_label = work_vice_label;
+        this.work_serial_state = work_serial_state;
+        this.work_introduct = work_introduct;
+        this.work_other_word = work_other_word;
+    }
+
     /**
      * WorkWholeInfoVo用到信息
      * */

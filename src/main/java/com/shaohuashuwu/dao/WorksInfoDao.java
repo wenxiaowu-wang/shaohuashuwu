@@ -1,7 +1,9 @@
 package com.shaohuashuwu.dao;
 
 
+import com.shaohuashuwu.domain.UserinterestInfo;
 import com.shaohuashuwu.domain.WorksInfo;
+import com.shaohuashuwu.domain.vo.PageInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -55,7 +57,7 @@ public interface WorksInfoDao {
             "</if>",
             "</script>"
     })
-    public List<WorksInfo> selectworksneed(WorksInfo worksInfo);
+    public List<WorksInfo> selectworksneed(PageInfo pageInfo);
 
     //依据作品id查询作品信息
     //功能点：作品详情时获取作品信息，添加章节获取作品信息，作品设置中获取作品信息，下架作品中获取作品信息
@@ -100,12 +102,43 @@ public interface WorksInfoDao {
     @Select("SELECT w.work_id,w.work_name FROM works_info w,chapter_post_info c WHERE w.`work_id` = c.`work_id` AND c.`chapter_id` = #{chapter_id}")
     public WorksInfo selectworkInfoByChapter_id(int chapter_id);
 
-
     //添加作品信息
     //功能点：添加作品功能添加作品
     @Insert("insert into works_info(work_name,work_cover,user_id,work_main_label,work_vice_label,work_serial_state,work_introduct,work_other_word,work_word_num,work_tip_num,work_subscribe_num,work_vote_num,work_create_time) " +
             "values (#{work_name},#{work_cover},#{user_id},#{work_main_label},#{work_vice_label},#{work_serial_state},#{work_introduct},#{work_other_word},#{work_word_num},#{work_tip_num},#{work_subscribe_num},#{work_vote_num},#{work_create_time} )")
-    public int insertworks_info(WorksInfo works_info);
+    public int insertworks_info(WorksInfo worksInfo);
+
+    //修改作品信息
+    //功能点：修改作品信息
+    @Update("UPDATE works_info SET work_cover = #{work_cover},work_main_label = #{work_main_label},work_vice_label = #{work_vice_label},work_serial_state = #{work_serial_state},work_introduct = #{work_introduct},work_other_word = #{work_other_word} WHERE work_id = #{work_id}")
+    public void updateworkInfoByWork_id(WorksInfo worksInfo);
+
+
+    //通过作品完结类型获取作品信息
+    //功能点：个性推荐
+    @Select(
+            {"<script>",
+                    " SELECT work_name FROM works_info WHERE work_serial_state = 2 " ,
+                    " <if test='label_name != null and label_name != \" \" '>",
+                    " and work_main_label = #{label_name} ",
+                    " </if>",
+                    " ORDER BY work_vote_num DESC LIMIT 10",
+                    "</script>"
+            })
+    public List<WorksInfo> selectworkInfoBywork_main_label1(UserinterestInfo userInterestInfo);
+
+    //通过作品连载类型获取作品信息
+    //功能点：个性推荐
+    @Select(
+            {"<script>",
+                    " SELECT work_name FROM works_info WHERE work_serial_state = 1 " ,
+                    " <if test='label_name != null and label_name != \" \" '>",
+                    " and work_main_label = #{label_name} ",
+                    " </if>",
+                    " ORDER BY work_vote_num DESC LIMIT 10",
+             "</script>"
+            })
+    public List<WorksInfo> selectworkInfoBywork_main_label2(UserinterestInfo userInterestInfo);
 
 }
 

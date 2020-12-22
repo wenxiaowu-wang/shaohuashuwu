@@ -15,5 +15,4 @@ public interface AuthorInfoVoDao {
             " FROM user_info u1 WHERE u1.user_id = #{user_id} ")
     public AuthorInfoVo selectAuthorInfoVoByuser_id(int user_id);
 
-
 }

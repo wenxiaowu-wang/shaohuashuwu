@@ -57,7 +57,6 @@ public interface ChapterInfoDao {
     @Select("SELECT Max(chapter_id) from chapter_info where chapter_pid = #{chapter_pid}")
     public int selectMaxChapter_idByChapter_pid (int chapter_pid);
 
-
     //依据举报id修改下架章节
     //功能点：处理举报章章节
     @Select("UPDATE chapter_info SET chapter_state = 2 where chapter_id = #{chapter_id}")
@@ -67,7 +66,6 @@ public interface ChapterInfoDao {
     //功能点：更改处理结果举报章章节
     @Select("UPDATE chapter_info SET chapter_state = 1 where chapter_id = #{chapter_id}")
     public void updateChapter_stateByChapter_id2 (int chapter_id);
-
 
 
 }

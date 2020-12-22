@@ -13,7 +13,7 @@ public class ReadSettingInfoServiceImpl implements ReadSettingInfoService {
     public ReadSettingInfoDao readSettingInfoDao;
 
 
-    public ReadSettingInfo readSettingInfo;
+    ReadSettingInfo readSettingInfo;
 
     /**
      * 获取设置信息

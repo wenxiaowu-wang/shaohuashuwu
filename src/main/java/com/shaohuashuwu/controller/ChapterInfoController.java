@@ -20,9 +20,6 @@ public class ChapterInfoController {
     @Autowired
     public ChapterInfoService chapterInfoService;
 
-    private  ChapterInfo chapterInfo;
-
-
     /**
      * 根据作品id查询最新章节信息
      * 功能点：作品详情时获取最新章节信息，
@@ -49,7 +46,6 @@ public class ChapterInfoController {
     public void saveChapter_idSession(Integer chapter_id, HttpServletRequest request, HttpServletResponse response)  {
         HttpSession session = request.getSession();
         session.setAttribute("chapter_id",chapter_id);
-        System.out.println("保存章节session-------------------------------"+chapter_id);
     }
 
     /**

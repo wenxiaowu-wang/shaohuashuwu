@@ -172,9 +172,215 @@
 }
 
 .authorInfoallwork_div_class{
-    height: 600px;
+    height: auto;
     width:  1100px;
     margin-left: 220px;
     margin-top: 40px;
-    background: #40cf36;
+    /*background: #40cf36;*/
+}
+
+/*********************************************************************************/
+/*相应作品信息*/
+.responseWorksInfo_div_class{
+    width: 100%;
+    height: 170px;
+    background: #ffffff;
+}
+
+/*左侧作品封面*/
+.responseWorkcover_div_class{
+    height: 150px;
+    width: 15%;
+    float: left;
+}
+
+.responseWorkcover_img_class{
+    z-index:-1;
+
+    height: 150px;
+    width:113px;
+}
+/*作品其他信息*/
+.responseotherWork_div_class{
+    width: 60%;
+    height: 150px;
+
+    float: left;
+}
+
+.work_name_a_class{
+    margin-left: 2%;
+    margin-top: 5px;
+
+    display: block;
+    width: 400px;
+    height: 25px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #444444;
+}
+
+.work_name_a_class:hover {
+    color: #ff0000
+}
+
+.work_hang2_div_class{
+    margin-top: 10px;
+    margin-left: 2%;
+
+    width: 98%;
+    height: 25px;
+}
+
+.rankingme_img_class{
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    float: left;
+}
+
+.username_a_class{
+    margin-left: 10px;
+
+    display: block;
+    height: 20px;
+    font-size: 15px;
+    text-decoration: none;
+    color: #444444;
+
+    float: left;
+}
+
+.username_a_class:hover {
+    color: #ff0000
+}
+
+.otherworkInfo_hang2_info{
+    margin-left: 10px;
+    margin-top: 0px;
+
+    display: block;
+    font-size: 15px;
+    min-width: 100px;
+    color: #555555;
+
+    float: left;
+}
+
+.workintroduct_p_class{
+    margin-left: 2%;
+    margin-top: 5px;
+
+    display: block;
+    width: 95%;
+    height: 35px;
+    font-size: 14px;
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.work_hang4_div_class{
+    margin-left: 2%;
+
+    width: 98%;
+    height: 20px;
+}
+
+.newchapter_a_class{
+    display: block;
+    height: 20px;
+    font-size: 15px;
+    max-width: 250px;
+    color: #060b99;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    float: left;
+}
+
+.newchapter_b_class{
+    display: block;
+    height: 20px;
+    font-size: 15px;
+    max-width: 250px;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    float: left;
+}
+
+.newchapter_a_class:hover {
+    color: #ff0000
+}
+
+.newchapter_time_a_class{
+    margin-left: 30px;
+    margin-top: 2px;
+
+    display: block;
+    height: 20px;
+    font-size: 13px;
+
+    float: left;
+}
+
+.rankingWorkButton_div_class{
+    width: 25%;
+    height: 150px;
+    float: left;
+}
+
+
+.num_a_class{
+    margin-top: 8px;
+
+    display: block;
+    width: 70%;
+    height: 20px;
+    /*组件位于右边*/
+    text-align: right;
+    font-size: 16px;
+
+    float: left;
+}
+
+.num_a2_class{
+    margin-top: 6px;
+
+    display: block;
+    width: 28%;
+    height: 20px;
+    /*组件位于右边*/
+    text-align: left;
+    font-size: 15px;
+    margin-left: 1%;
+
+    float: left;
+}
+
+.addto_button_class{
+    margin-top: 85px;
+    margin-left: 55px;
+}
+
+.divhr_class{
+    position: relative;
+    top: 160px;
+
+    width: 100%;
+    height: 1px;
+    background: #888888;
+}
+
+
+.bottom_div_class{
+    height: 100px;
+    width: 100%;
+    background: #eeeeee;
 }
