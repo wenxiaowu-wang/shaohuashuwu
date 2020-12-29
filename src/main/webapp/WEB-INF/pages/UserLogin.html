@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>韶华书屋登录</title>
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css"/>
+    <link rel="stylesheet" type="text/css" href="//static.zongheng.com/v2017/style/login_pc.min.css?v=13405670" />
+
+    <link rel="stylesheet" href="../css/userLogin.css"/>
+    <link rel="stylesheet" href="../css/userAgreement.css" />
+</head>
+<body >
+
+<div id="app">
+    <div class="wrap pass_header">
+        <div class="pass_logo">
+            <a href=""><img src="../images/shaohualogo.png" /></a>
+        </div>
+        <div class="pass_link">
+            没有账号 <a href="#" @click="gotoRegistration()" >点击注册</a>
+        </div>
+    </div>
+    <div class="passbg" >
+        <div class="wrap">
+            <div class="pass_ad">
+                <img src="../images/userloginbackground.jpg" width="560" height="410">
+            </div>
+            <div class="login box">
+                <el-tabs v-model="activeName" @tab-click="handleClick">
+                    <el-tab-pane label="账号密码登录" name="first">
+                        <div class="normal">
+                            <form class="login1">
+                                <div class="form">
+                                    <el-input class="phone" placeholder="请输入手机号" v-model="userInfo.phone_number"
+                                              clearable></el-input>
+                                </div>
+
+                                <div class="form">
+                                    <el-input class="pwd" placeholder="请输入密码" v-model="userInfo.password"
+                                              show-password></el-input>
+                                </div>
+                                <div class="Warning">
+                                    <span>登录即代表同意</span><a href="userAgreement.html" >《用户服务协议》</a><span>和</span><a href="privacyPolicy.html" >《隐私政策》</a>
+                                </div>
+                                <el-row>
+                                    <el-button class="loginBtn1" type="primary" round @click="normalLogin()" size="small">登录</el-button>
+                                </el-row>
+
+                            </form>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="手机号快速登录" name="second">
+                        <form class="codeLogin">
+
+                            <el-input class="phone" type="text" placeholder="请输入你的手机号" @blur="yz()" v-model="phone_number" clearable
+                            ></el-input>
+
+                            <div class="form-box">
+                                <div class="form">
+
+                                    <el-input class="code" type="code" placeholder="输入验证码" v-model="smsCode"></el-input>
+                                    <input class="smsCodeBtn" type="button" id="btn" value="发送验证码" @click="sendSms()"
+                                           onclick="time(this)"/>
+                                </div>
+                            </div>
+                            <div class="Warning">
+                                <span>登录即代表同意</span><a href="userAgreement.html" >《用户服务协议》</a><span>和</span><a href="privacyPolicy.html" >《隐私政策》</a>
+                            </div>
+                            <el-row class="loginBtn1">
+                                <el-button type="primary" round @click="codeLogin" size="small">登录</el-button>
+                            </el-row>
+                        </form>
+                    </el-tab-pane>
+                </el-tabs>
+            </div>
+            <div class="cl0"></div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="bottom">
+    <div class="address">地址:山东省烟台市莱山区山东工商学院软件2017级 邮编：264003 电话：123-123-1234 传真：123-1234567</div>
+    <div class="beian">鲁ICP备08001421号鲁公网安备110108007702</div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/userLogin.js"></script>
+<script type="text/javascript">
+    let wait = 60;
+    function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.value = "发送验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.value = "重新发送(" + wait + ")";
+            wait--;
+            setTimeout(function () {
+                    time(o)
+                },
+                1000)
+        }
+    }
+
+    document.getElementById("btn").onclick = function () {
+        time(this);
+    }
+</script>
+</body>
+</html>

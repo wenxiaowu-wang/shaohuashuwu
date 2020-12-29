@@ -209,11 +209,9 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
         workWholeInfoVoList = new ArrayList<WorkWholeInfoVo>();
         //获取用户管兴趣的标签
         userinterestInfo = userInterestInfoDao.selectUserinterestInfoByUser_id(user_id);
-        System.out.println("兴趣标签"+userinterestInfo);
+        System.out.println("用户兴趣标签-------------------"+userinterestInfo);
         worksInfoList = worksInfoDao.selectworkInfoBywork_main_label1(userinterestInfo);
         worksInfoList.addAll(worksInfoDao.selectworkInfoBywork_main_label2(userinterestInfo));
-        System.out.println("作品信息"+worksInfoList);
-
         //获取的作者作品未空，和不为空
         if (worksInfoList == null) {
             System.out.println("无作品");
@@ -221,19 +219,78 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
         else {
             for(int i = 0; i < worksInfoList.size() ; i++){
                 workWholeInfoVo = workWholeInfoVoDao.selectWorkWholeInfoVobywork_name(worksInfoList.get(i));
-                System.out.println("作品详细信息---"+workWholeInfoVo);
                 if(workWholeInfoVo == null){
 
                 }else {
                     workWholeInfoVoList.add(workWholeInfoVo);
                 }
-                System.out.println("作品详细信息+++++"+workWholeInfoVoList);
             }
         }
 
-        System.out.println("最终信息=============="+workWholeInfoVoList);
         return workWholeInfoVoList;
     }
+
+
+
+
+
+
+    /*
+    * 郝振威
+    * */
+
+
+
+
+
+    /**
+     * 根据用户id获取书架里的信息
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<WorkWholeInfoVo> getWorkWholeInfoByuser_id(int user_id) throws NullPointerException {
+
+        //根据用户id获取关注作品name
+        List<WorksInfo> work_nameList = worksInfoService.getBookshelfWorkNameByWorkID(user_id);
+
+        workWholeInfoVoList = new ArrayList<WorkWholeInfoVo>();
+        for (int i = 0; i < work_nameList.size(); i++) {
+
+            workWholeInfoVo = workWholeInfoVoDao.selectWorkWholeInfoVobywork_name(work_nameList.get(i));
+            if (workWholeInfoVo == null) {
+            } else {
+                workWholeInfoVoList.add(workWholeInfoVo);
+            }
+        }
+        return workWholeInfoVoList;
+    }
+
+
+    /**
+     * 根据用户id获取阅读历史的信息
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<WorkWholeInfoVo> getWorkWholeInfoToHistoryByUser_id(int user_id) throws NullPointerException {
+
+        //根据用户id获取阅读历史作品name
+        List<WorksInfo> work_nameList = worksInfoService.getReadingHistoryWorkNameByWorkID(user_id);
+
+        workWholeInfoVoList = new ArrayList<WorkWholeInfoVo>();
+        for (int i = 0; i < work_nameList.size(); i++) {
+            workWholeInfoVo = workWholeInfoVoDao.selectWorkWholeInfoVobywork_name(work_nameList.get(i));
+            if (workWholeInfoVo == null) {
+            } else {
+                workWholeInfoVoList.add(workWholeInfoVo);
+            }
+        }
+        return workWholeInfoVoList;
+    }
+
+
+
 
 
 }

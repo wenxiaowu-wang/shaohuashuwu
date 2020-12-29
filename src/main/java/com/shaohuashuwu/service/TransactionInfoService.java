@@ -12,4 +12,7 @@ package com.shaohuashuwu.service;
 public interface TransactionInfoService {
 
 
+    //单个章节订阅H（事务回滚）
+    public boolean subscribeAChapterGUN(int userId,int subBeanNum,int chapterId,int addBeanNum) ;
+
 }

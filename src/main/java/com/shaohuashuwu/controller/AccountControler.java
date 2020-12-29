@@ -165,4 +165,11 @@ public class AccountControler {
         return "novelRankingInterface.html";
     }
 
+    @RequestMapping("/loginusermain")
+    public String loginusermain(){
+
+        System.out.println("zzzzzzzzzzzzz--------");
+        return "UserLogin.html";
+    }
+
 }

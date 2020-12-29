@@ -4,7 +4,7 @@
 
     width: 1170px;
     height: 1000px;
-    background: #ececec;
+    /*background: #ececec;*/
 }
 
 .personality_title_class{
@@ -29,7 +29,7 @@
     margin-left: 10px;
 
     font-size: 15px;
-    color: #ff1818;
+    color: #74a3f5;
 
     float: left;
 }
@@ -45,17 +45,11 @@
     float: left;
 }
 
-.personality_right_class{
-    margin-left: 30px;
-    margin-top: 10px;
-
-    width: 195px;
-    height: 600px;
-    background: #c2e7b0;
 
 
-    float: left;
-}
+
+
+
 
 
 
@@ -274,3 +268,72 @@
     height: 1px;
     background: #888888;
 }
+
+
+
+/*右侧*/
+.personality_right_class{
+    margin-left: 15px;
+    margin-top: 10px;
+
+    width: 210px;
+    height: 600px;
+    background: #f5f3f1;
+
+    float: left;
+}
+
+.personality_rightp_class{
+    margin-top: 10px;
+    margin-left: 31%;
+
+    display: block;
+    width: 40%;
+    height: 10px;
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+}
+
+.personality_right_div_class{
+    margin-top: 5px;
+
+    width: 100%;
+    height: 40px;
+    /*background: #ff0000;*/
+}
+
+.main_label_class{
+    margin-left: 5px;
+    margin-top: 5px;
+
+    display: block;
+    width: 30%;
+    color: #444444;
+
+    float: left;
+}
+
+.work_name_class{
+    margin-top: 5px;
+    margin-left: 3%;
+
+    display: block;
+    width: 63%;
+    /*超出本分强制不换行*/
+    white-space:nowrap;
+    /*超出部分隐藏*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*去掉链接下划线*/
+    text-decoration:none;
+    color: #444444;
+
+    float: left;
+}
+
+.work_name_class:hover{
+    color:red;
+    font-weight: bold;
+}
+

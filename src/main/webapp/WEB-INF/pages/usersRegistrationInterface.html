@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>-->
+    <title>个人注册</title>
+    <link rel="stylesheet" type="text/css" href="https://static.zongheng.com/v2017/style/passport.css" />
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css"/>
+    <link rel="stylesheet" href="../css/register_general.css"/>
+</head>
+
+<body>
+
+<div class="head" id="head">
+    <div class="reg-logo fl">
+        <img src="../images/韶华Logo.png" alt="logo">
+    </div>
+    <div class="reg-login fr">
+        我已注册，现在就<a href="wTest.html" class="go-login">登录</a>
+    </div>
+</div>
+
+<div class="center" id="app">
+    <form class="register" name="one">
+        <span class="label">手机号：</span>
+        <el-input class="phone" placeholder="请输入你的手机号" v-model="pojo.phone_number" @blur="yz()"></el-input>
+
+        <div class="form-box">
+            <div class="form">
+                <span class="label">验证码：</span>
+                <el-input class="code" type="code" placeholder="输入验证码" v-model="smsCode"></el-input>
+                <el-button type="primary" class="smsCodeBtn" :loading="button.loading" @click="onClick(10);sendSms()" :disabled="button.canClick">{{button.buttonNum}}</el-button>
+            </div>
+            <div class="form">
+                <span class="label">密码：</span>
+                <el-input class="pwd1" type="password" placeholder="设置登录密码" v-model="pojo.password"
+                          show-password></el-input>
+            </div>
+            <span class="rule">(密码至少8个字符，至少1个大写字母，1个小写字母和1个数字)</span>
+            <div class="form">
+                <span class="label">确认密码：</span>
+                <el-input class="pwd2" type="password" placeholder="再次确认密码" v-model="password"
+                          show-password></el-input>
+            </div>
+        </div>
+        <el-row >
+            <el-button style="margin-left: 39%" @click="save()">立即注册</el-button>
+        </el-row>
+    </form>
+
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/register_general.js"></script>
+
+
+</body>
+
+</html>

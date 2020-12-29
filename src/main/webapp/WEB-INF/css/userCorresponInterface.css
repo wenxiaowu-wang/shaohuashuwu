@@ -1,0 +1,54 @@
+
+.user404_class{
+    margin-left: -10px;
+    margin-top: -10px;
+
+    width: 101%;
+    min-height: calc(100vh);
+    background: #7dc5eb;
+
+}
+
+.user404_div_class{
+    margin:auto;
+    display:table;
+
+    width: 300px;
+    height:200px;
+
+}
+
+.usercry_class{
+    margin-left: 50px;
+
+    width: 200px;
+    height:200px;
+}
+
+.userp1_class{
+    margin-left: 40px;
+
+    display: block;
+    width: 250px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+
+    float: left;
+}
+
+.userp2_class{
+    margin-left: 40px;
+
+    display: block;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+
+    float: left;
+}
+
+.backuserMianInter_class{
+    margin-left: 80px;
+}

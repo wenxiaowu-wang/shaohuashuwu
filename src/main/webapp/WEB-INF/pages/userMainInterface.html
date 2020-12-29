@@ -205,421 +205,65 @@
         <div class="rankingworkinfo_div">
 
             <div class="recommendRankingworkinfo_div_class">
-                <p class="rankingworkinfo_p_class">今日推荐榜</p>
+                <p class="rankingworkinfo_p_class">今日收藏榜</p>
 
-                <div class="rankingworkinfo_div_class">
+                <div class="rankingworkinfo_div_class" v-for="(collectionInfoVo,index) in collectionInfoVoList" :key="index">
                     <div class="rankingworkinfo_divhr2_class">
 
                     </div>
                     <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                        <a class="rankingworkinfo_mainlabela_class">「{{index+1}}」</a>
+                        <a class="rankingworkinfo_namea_class">{{collectionInfoVo.work_name}}</a>
+                        <a class="rankingworkinfo_authornamea_class">{{collectionInfoVo.work_main_label}}</a>
                     </div>
                 </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
 
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
 
             </div>
             <div class="collectionRankingworkinfo_div_class">
-                <p class="rankingworkinfo_p_class">今日收藏榜</p>
+                <p class="rankingworkinfo_p_class">今日推荐榜</p>
 
-                <div class="rankingworkinfo_div_class">
+                <div class="rankingworkinfo_div_class" v-for="(recommendInfoVo,index) in recommendInfoVoList">
                     <div class="rankingworkinfo_divhr2_class">
 
                     </div>
                     <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                        <a class="rankingworkinfo_mainlabela_class">「{{index+1}}」</a>
+                        <a class="rankingworkinfo_namea_class">{{recommendInfoVo.work_name}}</a>
+                        <a class="rankingworkinfo_authornamea_class">{{recommendInfoVo.work_main_label}}</a>
                     </div>
                 </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
 
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
 
             </div>
             <div class="subscribeRankingworkinfo_div_class">
                 <p class="rankingworkinfo_p_class">今日订阅榜</p>
 
-                <div class="rankingworkinfo_div_class">
+                <div class="rankingworkinfo_div_class" v-for="(subscribeInfoVo,index) in subscribeInfoVoList">
                     <div class="rankingworkinfo_divhr2_class">
 
                     </div>
                     <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                        <a class="rankingworkinfo_mainlabela_class">「{{index+1}}」</a>
+                        <a class="rankingworkinfo_namea_class">{{subscribeInfoVo.work_name}}</a>
+                        <a class="rankingworkinfo_authornamea_class">{{subscribeInfoVo.work_main_label}}</a>
                     </div>
                 </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
 
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
 
             </div>
             <div class="rewardRankingworkinfo_div_class">
                 <p class="rankingworkinfo_p_class">今日打赏榜</p>
 
-                <div class="rankingworkinfo_div_class">
+
+                <div class="rankingworkinfo_div_class" v-for="(rewardInfoVo,index) in rewardInfoVoList">
                     <div class="rankingworkinfo_divhr2_class">
 
                     </div>
                     <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「轻小说」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
-                    </div>
-                </div>
-                <div class="rankingworkinfo_div_class">
-                    <div class="rankingworkinfo_divhr2_class">
-
-                    </div>
-                    <div class="rankingworkinfo_onediv_class">
-                        <a class="rankingworkinfo_mainlabela_class">「军事」</a>
-                        <a class="rankingworkinfo_namea_class">三国演义之龙虎天下</a>
-                        <a class="rankingworkinfo_authornamea_class">张一二十三</a>
+                        <a class="rankingworkinfo_mainlabela_class">「{{index+1}}」</a>
+                        <a class="rankingworkinfo_namea_class">{{rewardInfoVo.work_name}}</a>
+                        <a class="rankingworkinfo_authornamea_class">{{rewardInfoVo.work_main_label}}</a>
                     </div>
                 </div>
 
@@ -1095,7 +739,6 @@
                             <div class="workother_rightdiv_class">
                                 <img class="user_me_img_class" src="../images/authorme-36.png">
                                 <a class="user_me_p_class" href="#" @click="clickUser_name(newWorkWholeInfoVoList[5].user_id)">{{newWorkWholeInfoVoList[5].user_name}}</a>
-
                                 <p class="workmianlabel_p_class">{{newWorkWholeInfoVoList[5].work_main_label}}</p>
 
                             </div>
@@ -1107,9 +750,6 @@
 
 
         </div>
-
-
-
 
     </div>
 

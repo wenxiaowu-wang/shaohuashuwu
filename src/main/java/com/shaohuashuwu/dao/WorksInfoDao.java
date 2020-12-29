@@ -1,6 +1,7 @@
 package com.shaohuashuwu.dao;
 
 
+import com.shaohuashuwu.domain.ChapterInfo;
 import com.shaohuashuwu.domain.UserinterestInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.PageInfo;
@@ -108,10 +109,17 @@ public interface WorksInfoDao {
             "values (#{work_name},#{work_cover},#{user_id},#{work_main_label},#{work_vice_label},#{work_serial_state},#{work_introduct},#{work_other_word},#{work_word_num},#{work_tip_num},#{work_subscribe_num},#{work_vote_num},#{work_create_time} )")
     public int insertworks_info(WorksInfo worksInfo);
 
+
     //修改作品信息
     //功能点：修改作品信息
     @Update("UPDATE works_info SET work_cover = #{work_cover},work_main_label = #{work_main_label},work_vice_label = #{work_vice_label},work_serial_state = #{work_serial_state},work_introduct = #{work_introduct},work_other_word = #{work_other_word} WHERE work_id = #{work_id}")
     public void updateworkInfoByWork_id(WorksInfo worksInfo);
+
+    //修改作品总字数
+    //功能点：上传章节
+    @Update("Update works_info SET work_word_num=work_word_num+#{work_word_num} where work_id = #{work_id}")
+    public int updateWork_word_numByWork_id(WorksInfo worksInfo);
+
 
 
     //通过作品完结类型获取作品信息
@@ -139,6 +147,83 @@ public interface WorksInfoDao {
              "</script>"
             })
     public List<WorksInfo> selectworkInfoBywork_main_label2(UserinterestInfo userInterestInfo);
+
+
+    /*
+    * 郝振威
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    * */
+
+
+    //根据作者ID获取所有对应的作品信息
+    @Select("select *from works_info where user_id = #{user_id}")
+    @Results(id = "worksInfo",value = {
+            @Result(id = true,column = "work_id",property = "work_id"),
+            @Result(column = "work_cover",property = "work_cover"),
+            @Result(column = "work_name",property = "work_name"),
+            @Result(column = "user_id",property = "user_id"),
+            @Result(column = "work_main_label",property = "work_main_label"),
+            @Result(column = "work_vice_label",property = "work_vice_label"),
+            @Result(column = "work_serial_state",property = "work_serial_state"),
+            @Result(column = "work_introduct",property = "work_introduct"),
+            @Result(column = "work_other_word",property = "work_other_word"),
+            @Result(column = "work_word_num",property = "work_word_num"),
+            @Result(column = "work_tip_num",property = "work_tip_num"),
+            @Result(column = "work_subscribe_num",property = "work_subscribe_num"),
+            @Result(column = "work_vote_num",property = "work_vote_num")
+    })
+    public List<WorksInfo> selectAllByUserId(int user_id);
+
+    //根据作品ID获取对应作者ID
+    @Select("select user_id from works_info where work_id = #{work_id}")
+    public int selectAuthorIdByWorkId(int work_id);
+
+    //根据作品ID获取作品名字
+    @Select("select work_name from works_info where work_id = #{work_id}")
+    public String selectWorkNameByWorkId(int work_id);
+
+    //根据作品ID更新投票数量
+    @Update("update works_info set work_vote_num = work_vote_num + (#{param2}) where work_id = #{param1}")
+    public int updateWorkVoteNumByWorkId(int work_id,int voteNum);
+
+    //根据用户ID获取用户加入书架的作品的作品名字
+    @Select("SELECT w1.* FROM bookshelf_info,works_info w1 WHERE bookshelf_info.work_id = w1.work_id AND bookshelf_info.user_id = #{user_id} ORDER BY collection_time DESC")
+    @ResultMap("worksInfo")
+    public List<WorksInfo> selectBookshelfWorkNameByWorkID(int user_id);
+
+
+    //根据用户ID获取用户加入书架的作品的作品名字
+    @Select("SELECT w1.* FROM reading_history_info,works_info w1 WHERE reading_history_info.work_id = w1.work_id AND reading_history_info.user_id = #{user_id} ORDER BY reading_time DESC")
+    @ResultMap("worksInfo")
+    public List<WorksInfo> selectReadingHistoryWorkNameByWorkID(int user_id);
+
+
+    //根据用户的ID获取该用户写过的作品ID、作品名字
+    @Select("select work_id,work_name from works_info where user_id = #{user_id}")
+    public List<WorksInfo> selectWorkIdNameByUserId(int user_id);
+
+
+
+
+/*
+*郝振威
+*
+* */
+
+
+    //根据章节ID获取作品名字
+    @Select("SELECT work_name FROM works_info WHERE work_id = (SELECT work_id FROM chapter_post_info WHERE chapter_id = #{param1})")
+    public String selectWorkNameByChapterId(int chapter_id);
+
+    //根据章节ID获取作品Id
+    @Select("SELECT work_id FROM chapter_post_info WHERE chapter_id = #{param1}")
+    public String selectWorkIdByChapterId(int chapter_id);
 
 }
 

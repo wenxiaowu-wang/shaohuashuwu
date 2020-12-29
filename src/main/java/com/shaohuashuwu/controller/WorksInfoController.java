@@ -6,6 +6,7 @@ import com.shaohuashuwu.domain.vo.PageInfo;
 import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -100,9 +101,7 @@ public class WorksInfoController {
     public WorksInfo getworkInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("work_id");
-
         int work_id=Integer.parseInt(String.valueOf(msg));
-        System.out.println("chan");
         return worksInfoService.getworkInfoByWork_id(work_id);
     }
 
@@ -237,6 +236,25 @@ public class WorksInfoController {
     @RequestMapping("/updateworkInfoByWork_id")
     public void updateworkInfoByWork_id(@RequestBody WorksInfo worksInfo) {
          worksInfoService.updateworkInfoByWork_id(worksInfo);
+    }
+
+
+     /*
+    * 郝振威
+    * */
+
+    //根据章节ID获取作品名字
+    @RequestMapping(path ="/getWorkNameByChapterId/{chapter_id}")
+    @ResponseBody
+    public String getWorkNameByChapterId(@PathVariable(value = "chapter_id")Integer chapter_id){
+        return worksInfoService.getWorkNameByChapterId(chapter_id);
+    }
+
+    //根据章节ID获取作品Id
+    @RequestMapping(path ="/getWorkIdByChapterId/{chapter_id}")
+    @ResponseBody
+    public String getWorkIdByChapterId(@PathVariable(value = "chapter_id")Integer chapter_id){
+        return worksInfoService.getWorkIdByChapterId(chapter_id);
     }
 
 }

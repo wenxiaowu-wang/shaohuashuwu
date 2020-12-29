@@ -3,10 +3,13 @@ package com.shaohuashuwu.service.impl;
 import com.shaohuashuwu.dao.*;
 import com.shaohuashuwu.domain.*;
 import com.shaohuashuwu.domain.vo.CatalogInfoVo;
+import com.shaohuashuwu.domain.vo.IsChapterHaveVo;
 import com.shaohuashuwu.service.ChapterInfoService;
 import com.shaohuashuwu.util.ThisCurrentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -24,10 +27,16 @@ public class ChapterInfoServiceImpl implements ChapterInfoService {
     @Autowired
     public ChapterPostInfoDao chapterPostInfoDao;
     @Autowired
+    public TransactionInfoDao transactionInfoDao;
+    @Autowired
     public ThisCurrentTime thisCurrentTime;
+    @Autowired
+    public WorksInfoDao worksInfoDao;
 
     ChapterPostInfo chapterPostInfo;
     ChapterPostInfo nullchapterPostInfo;
+    ChapterInfo needchapterInfo;
+    WorksInfo worksInfo;
 
 
     /**
@@ -48,8 +57,33 @@ public class ChapterInfoServiceImpl implements ChapterInfoService {
      * @return
      */
     @Override
-    public ChapterInfo getchapterInfoByChapter_id(int chapter_id) {
-        return chapterInfoDao.selectchapterInfoByChapter_id(chapter_id);
+    public ChapterInfo getchapterInfoByChapter_id(int chapter_id,int user_id) {
+
+
+
+        System.out.println("获取章章节信息--------==="+chapter_id+"用户id======="+user_id);
+        //获取章节信息
+        needchapterInfo = chapterInfoDao.selectchapterInfoByChapter_id(chapter_id);
+
+        IsChapterHaveVo isChapterHaveVo = new IsChapterHaveVo(chapter_id,user_id);
+        //判断小说是否是付费章节
+
+        int needmoney = chapterInfoDao.selectNeedMoneyBychapter_id(chapter_id);
+        //付费
+        if (needmoney == 1){
+            System.out.println("作品付费");
+            //判断用户是否订阅
+            int issubscribe = transactionInfoDao.selectsubscribeResultBychapterAnduser_id(isChapterHaveVo);
+
+            if (issubscribe == 0){
+                System.out.println("用户未付费");
+                needchapterInfo.setChapter_content(null);
+                needchapterInfo.setChapter_other_word(null);
+            }
+        }
+
+
+        return needchapterInfo;
     }
 
 
@@ -100,7 +134,38 @@ public class ChapterInfoServiceImpl implements ChapterInfoService {
         chapterPostInfo = new ChapterPostInfo(user_id,work_id,maxchapter_id);
         chapterPostInfoDao.insertchapter_post_info(chapterPostInfo);
 
+        //修改作品中作品总字数
+        worksInfo = new WorksInfo(work_id,null,null,null,null,null,null,null,null,chapterInfo.getChapter_word_num(),null,null,null,null);
+        int updateResult = worksInfoDao.updateWork_word_numByWork_id(worksInfo);
+
+
         return a;
     }
 
+
+
+    /*
+    * 郝振威
+    *
+    * */
+
+    //根据用户的ID，作品的ID 获取该用户未订阅章节的信息
+    @Override
+    public List<ChapterInfo> getChapterInfoByUserIdWorkId(int work_id, int user_id) {
+        return chapterInfoDao.selectChapterInfoByUserIdWorkId(work_id,user_id);
+    }
+
+
+    //根据用户的ID，作品的ID 获取该用户未订阅章节数量
+    @Override
+    public int getChapterCountByUserIdWorkId(int work_id) {
+        return chapterInfoDao.selectChapterCountByUserIdWorkId(work_id);
+    }
+
+
+    //根据用户的ID，作品的ID 获取该用户已订阅章节的信息
+    @Override
+    public List<ChapterInfo> getChapterInfoByUserIdWorkId2(int work_id, int user_id) {
+        return chapterInfoDao.selectChapterInfoByUserIdWorkId2(work_id,user_id);
+    }
 }

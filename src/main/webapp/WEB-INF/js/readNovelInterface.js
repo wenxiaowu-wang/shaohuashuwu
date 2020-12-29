@@ -83,6 +83,8 @@ new Vue({
             axios.post('http://localhost:8080/worksInfoController/getworkInfoByChapter_id')
                 .then(function (response) {
                     _this.worksInfo = response.data;
+
+                    _this.addToReadingHistory();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -144,6 +146,22 @@ new Vue({
                     console.log(error);
                 })
         },
+
+
+        //存入阅读历史
+        addToReadingHistory(){
+            console.log("存储阅读历史-------------")
+            axios.post("http://localhost:8080/readingHistoryInfoController/addToReadingHistory/" +
+                 this.worksInfo.work_id ).then(resp => {
+                let Result = resp.data;
+                console.log("数据同步存到数据库。"+Result);
+
+            }).catch(error => {
+                console.log("数据同步存到数据库失败。"+error);
+            });
+        },
+
+
 
 
         /*
@@ -259,6 +277,72 @@ new Vue({
             _this.getChapterInfo();
         },
 
+        //点击订阅按钮
+        clicksubscribeChapter(){
+            console.log("订阅点击")
+
+            //先获取用户的金豆书
+            axios.get("http://localhost:8080/userInfoController/getGoldBeanNum/" +
+                this.userInfo.user_id).then(resp => {
+                var object = JSON.stringify(resp.data);
+                let data = parseInt(object);
+
+                if (data >= 10) {
+                    let data2 = -10;
+                    let data3 = 10;
+                    this.$confirm('此操作将扣除您10金豆数您的金豆剩余：'+data+',是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        //订阅章节事务回滚处理！
+                        axios.get("http://localhost:8080/transactionInfoController/subscribeAChapterGUN/" +
+                            this.userInfo.user_id + "/" + data2 + "/" + this.chapterInfo.chapter_id + "/" + data3).then(resp => {
+                            if (resp.data === true) {
+                                this.$message({
+                                    type: 'success',
+                                    message: '订阅成功!'
+                                });
+                                //重定向本界面
+                                 window.location.assign("../pages/readNovelInterface.html");
+                            }
+                        }).catch(error => {
+                            console.log(error);
+                            alert("网络异常！");
+                        });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消订阅'
+                        });
+                    });
+                } else {
+                    this.$confirm('您的金豆不足是否去充值?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        alert("充值");
+                        //重定向到充值界面
+                        // window.location.assign("../pages/topUpsInterface.html");
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消充值'
+                        });
+                    });
+
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+
+        },
+
+        //点击更多订阅
+        clicksubscribeMoreChapter(){
+            window.location.assign("../pages/subscribeToNovelsInterface.html");
+        },
 
 
         /*

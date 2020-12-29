@@ -28,6 +28,7 @@ public class WorksInfo implements Serializable {
         this.work_id = work_id;
     }
 
+
     /*
     * 排行榜用到信息
     * */

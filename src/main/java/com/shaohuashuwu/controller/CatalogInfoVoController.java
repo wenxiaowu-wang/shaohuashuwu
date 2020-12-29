@@ -34,7 +34,6 @@ public class CatalogInfoVoController {
 
         System.out.println("获取目录信息---------------------------------------");
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
         Object work_id_o = session.getAttribute("work_id");
         Object user_id_o = session.getAttribute("user_id");
         int work_id=Integer.parseInt(String.valueOf(work_id_o));
@@ -76,11 +75,12 @@ public class CatalogInfoVoController {
     public List<CatalogInfoVo> getchaptercatalogBychapter_id(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
         Object chapter_id_o = session.getAttribute("chapter_id");
         Object user_id_o = session.getAttribute("user_id");
         int chapter_id=Integer.parseInt(String.valueOf(chapter_id_o));
         int user_id=Integer.parseInt(String.valueOf(user_id_o));
+
+        System.out.println("目录信息"+catalogInfoVoService.getchaptercatalogBychapter_id(user_id,chapter_id));
 
         return catalogInfoVoService.getchaptercatalogBychapter_id(user_id,chapter_id);
     }

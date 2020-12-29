@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阅读历史</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/bookShelf.css">
+    <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/basic.min.css"/>
+    <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/home.min.css"/>
+</head>
+<body>
+<div id="readingHistory">
+
+    <div class="bookshelf_top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips">{{topTips}}</div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+
+            <div class="top_data">
+                <br/>
+                {{user_name}}
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="hsub">
+            <div class="hsub_tab">
+                <ul>
+                    <li class=""><a style="cursor: pointer" @click="GoToBookshelf()">我的书架</a></li>
+                    <li class="spline"></li>
+                    <li class="readingHistory"><a href="" ><font color="black">最近阅读</font></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="hsub_r">
+                共浏览过书籍{{book_num}}本
+            </div>
+        </div>
+        <!-- 主箱体 -->
+        <div class="home-main">
+            <!-- 列表箱体 -->
+            <div class="home_innerwrap">
+                <div class="shelf_list_tit listType_a">
+                    <div class="catName">类别</div>
+                    <div class="bookName">书名</div>
+                    <div class="author">作者</div>
+                    <div class="upDateChapter">最新章节</div>
+                    <div class="bookStatus">状态</div>
+                    <div class="updateTime">更新时间</div>
+                    <div></div>
+                    <div class="ctrlBook">操作</div>
+                </div>
+
+                <template v-if=" book_num == 0 ">
+                    <div class="no-data"><img src="../images/no-book.png">
+                        <p>暂无浏览记录，快去阅读吧~</p></div>
+                </template>
+
+                <template v-else>
+                    <li class="shelf_bookLine listType_a" v-for="work in tableData">
+                        <div class="catName">{{work.work_main_label}}</div>
+                        <div class="bookName">{{work.work_name}}</div>
+                        <div class="author">{{work.user_name}}</div>
+                        <div class="upDateChapter">{{work.chapter_title}}</div>
+                        <div class="bookStatus">{{work.work_serial_state}}</div>
+                        <div class="updateTime">{{work.chapter_time}}</div>
+                        <div></div>
+                        <div class="ctrlBook"><a class="redbtn" @click="addBookshelf(work.work_id)">加入书架</a>
+                        </div>
+                    </li>
+                </template>
+            </div>
+        </div>
+        <button class="deleteAllRecord" style="cursor: pointer"  @click="deleteHistoryWorkByUserId()" >清空所有记录</button>
+
+    </div>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/readingHistory.js"></script>
+</body>
+</html>

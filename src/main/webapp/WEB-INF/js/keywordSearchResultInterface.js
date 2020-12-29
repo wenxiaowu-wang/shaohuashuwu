@@ -18,6 +18,9 @@ new Vue({
                 selected_main_label:' ',
                 selected_serial_state:' ',
             },
+            //为空时显示
+            worknull:0,
+
 
             /**
              * 上传数据
@@ -27,12 +30,24 @@ new Vue({
                 work_main_label:' ',
                 work_serial_state:' ',
             },
+            /*排行榜信息*/
+            rankingInputInfoVo: {
+                work_main_label: ' ',
+                getneednum: 10,
+                transaction_type:' ',
+                transaction_time:3,
+                time_type:3,
+            },
+
 
             /**
              * 相应数据*/
             //获取的作品数据
             worksWholeInfoVoList:[],
             workTotal:0,
+            //榜单数据
+            recommendInfoVoList:[],
+
 
 
 
@@ -56,34 +71,37 @@ new Vue({
             console.log("上传信息"+JSON.stringify(_this.worksInfoneed));
             axios.post('http://localhost:8080/workWholeInfoVoController/getWorkWholeInfoBySelectinput',_this.worksInfoneed)
                 .then(function (response) {
-                    _this.worksWholeInfoVoList = response.data;
-                    _this.workTotal=_this.worksWholeInfoVoList.length;
-                    console.log("======="+_this.worksWholeInfoVoList)
 
-                    for( var i = 0 ;i<_this.worksWholeInfoVoList.length;i++){
-                        /*将1或2转为连载或完结*/
-                        if( _this.worksWholeInfoVoList[i].work_serial_state == 1){
-                            _this.worksWholeInfoVoList[i].work_serial_state = "连载";
+                        _this.worksWholeInfoVoList = response.data;
+                        _this.workTotal=_this.worksWholeInfoVoList.length;
+                        console.log("开====="+_this.worksWholeInfoVoList)
 
+                        for( var i = 0 ;i<_this.worksWholeInfoVoList.length;i++){
+                            console.log("循环");
+                            _this.worknull = 1;
+                            /*将1或2转为连载或完结*/
+                            if( _this.worksWholeInfoVoList[i].work_serial_state == 1){
+                                _this.worksWholeInfoVoList[i].work_serial_state = "连载";
+                            }
+                            else if(_this.worksWholeInfoVoList[i].work_serial_state == 2){
+                                _this.worksWholeInfoVoList[i].work_serial_state = "完结";
+                            }
+
+                            /*推荐票大于10万就变为小数*/
+                            if(_this.worksWholeInfoVoList[i].work_vote_num>100000){
+                                var divisornum = _this.worksWholeInfoVoList[i].work_vote_num/10000;
+                                _this.worksWholeInfoVoList[i].work_vote_num = divisornum.toFixed(2);
+                                _this.worksWholeInfoVoList[i].work_vote_num = _this.worksWholeInfoVoList[i].work_vote_num + "万";
+                            }
+                            else {
+
+                            }
+
+                            /*时间戳转换*/
+                            _this.worksWholeInfoVoList[i].chapter_time = _this.timestampToTime(_this.worksWholeInfoVoList[i].chapter_time);
+                            console.log("----"+_this.worksWholeInfoVoList[i].chapter_time)
                         }
-                        else if(_this.worksWholeInfoVoList[i].work_serial_state == 2){
-                            _this.worksWholeInfoVoList[i].work_serial_state = "完结";
-                        }
 
-                        /*推荐票大于10万就变为小数*/
-                        if(_this.worksWholeInfoVoList[i].work_vote_num>100000){
-                            var divisornum = _this.worksWholeInfoVoList[i].work_vote_num/10000;
-                            _this.worksWholeInfoVoList[i].work_vote_num = divisornum.toFixed(2);
-                            _this.worksWholeInfoVoList[i].work_vote_num = _this.worksWholeInfoVoList[i].work_vote_num + "万";
-                        }
-                        else {
-
-                        }
-
-                        /*时间戳转换*/
-                        _this.worksWholeInfoVoList[i].chapter_time = _this.timestampToTime(_this.worksWholeInfoVoList[i].chapter_time);
-                        console.log("----"+_this.worksWholeInfoVoList[i].chapter_time)
-                    }
 
                 })
                 .catch(function (error){
@@ -167,6 +185,22 @@ new Vue({
                     alert("相应失败");
                 })
         },
+        //推荐榜
+        recommendListInfo(val){
+            console.log("推荐榜");
+            this.rankingInputInfoVo.transaction_type = 3;
+            var _this = this;
+            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
+                .then(function (response3) {
+                    _this.recommendInfoVoList = response3.data;
+                    console.log("排行信息")
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+
 
 
 
@@ -195,5 +229,6 @@ new Vue({
     created:function (){ //页面加载时查询所有
         this.startHtmlContent();
       this.startSearchWorkInfo();
+      this.recommendListInfo();
     }
 })

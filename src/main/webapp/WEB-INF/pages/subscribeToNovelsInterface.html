@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订阅章节</title>
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/subscriptionChapter.css">
+    <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/basic.min.css"/>
+    <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/order.min.css"/>
+
+</head>
+<body>
+
+<div id="subscriptionChapter">
+
+    <div class="container">
+        <div class="order_titbox">
+            <span class="vipbox">VIP</span> 章节订阅
+        </div>
+
+        <div class="quickbuy_box">
+
+            <div>
+                <p class="buyimg"></p>
+                <p>快速购买入口</p>
+            </div>
+
+            <ul class="quickbuy-chapter">
+
+                <h1>{{work_name}}</h1>
+
+                <li>付费阅读VIP章节，支持正版，支持作者！</li>
+            </ul>
+        </div>
+
+        <div class="order_pagebox" id="">
+            <div class="order_chapter_wrap">
+                <h2 class="order_tips">请选择您要购买的章节</h2>
+
+                <div class="order_list_tit">
+                    &nbsp;<div class="chapterName">VIP章节名称</div>
+                    <div class="chapterWn">字数</div>
+                    <div class="chapterPrice">价格(金豆)</div>
+                    <div class="orderStatus">订阅状态</div>
+                </div>
+
+
+                <div class="order_chapter_inner tome_box">
+
+                    <ul class="chapterSelect slide_tomeId_1" >
+
+                        <li v-for="item in chapterList2">
+                            <label>
+                                <el-checkbox disabled>●</el-checkbox>
+                                <div class="chapterName">{{item.chapter_title}}</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="chapterWn">{{item.chapter_word_num}}</div>
+                                <div class="chapterPrice">10</div>
+                                <div class="orderStatus">已订阅</div>
+                            </label>
+                        </li>
+
+                        <li v-for="(item,i) in chapterList">
+                            <label>
+                                <el-checkbox
+                                        :label="item.chapter_id"
+                                        :key="i"
+                                        v-model="checkedChapter"
+                                        @change="handleCheckedChapterChange"
+                                >●
+                                </el-checkbox>
+                                <div class="chapterName">{{item.chapter_title}}</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="chapterWn">{{item.chapter_word_num}}</div>
+                                <div class="chapterPrice">10</div>
+                                <div class="orderStatus">未订阅</div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="order_panel">
+        <div class="wrap">
+            <div class="fl">
+                <el-checkbox v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                <b>已选择</b>
+                <em id="oform_length">{{selectChapterCount}}章 共{{chapterTotalCount}}章</em>
+            </div>
+            <div class="fr">
+                <button id="orderButton" class="order_Btn" @click="subscribeAll">确认订阅</button>
+            </div>
+            <p class="oform_moneybox">
+                <span>当前剩余: <span class="oform_usermoney">{{gold_bean_num}}</span> 金豆</span>
+                <span class="oform_needbox"><b>订阅需要支付:</b> <em id="oform_money"> {{gold_bean_num_pay}} </em> 金豆</span>
+            </p>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/subscriptionChapter.js"></script>
+</body>
+</html>

@@ -15,7 +15,7 @@ public class UserInfo implements Serializable {
     private String user_name;           //用户昵称
     private String head_portrait;         //用户头像
     private String gender;              //用户性别
-    private Timestamp birthday;         //用户生日
+    private String birthday;         //用户生日
     private String area;                //用户所在地
     private String phone_number;        //用户手机号
     private String password;            //用户密码
@@ -32,7 +32,6 @@ public class UserInfo implements Serializable {
         //无参构造方法
         System.out.println("userinfo无参构造方法");
     }
-
     public UserInfo(Integer user_id, String user_name) {
         this.user_id = user_id;
         this.user_name = user_name;
@@ -60,6 +59,45 @@ public class UserInfo implements Serializable {
         this.gold_bean_num = gold_bean_num;
         this.gold_coin_num = gold_coin_num;
         this.ticket_num = ticket_num;
+    }
+
+
+
+
+
+/*
+* 郝振威
+*
+* */
+
+
+
+    public UserInfo(String phone_number, String password) {
+        this.phone_number = phone_number;
+        this.password = password;
+    }
+
+
+
+    public UserInfo(String phone_number, String password, String user_name, String head_portrait, String gender, String area, String birthday, int gold_bean_num, int gold_coin_num, int ticket_num) {
+        this.user_name = user_name;
+        this.gender = gender;
+        this.area = area;
+        this.phone_number = phone_number;
+        this.password = password;
+        this.head_portrait = head_portrait;
+        this.birthday = birthday;
+        this.gold_bean_num =gold_bean_num;
+        this.gold_coin_num = gold_coin_num;
+        this.ticket_num = ticket_num;
+    }
+
+    public UserInfo(int user_id, String user_name, String gender, String birthday, String area) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.gender = gender;
+        this.area = area;
+        this.birthday = birthday;
     }
 
     public Integer getUser_id() {
@@ -94,11 +132,11 @@ public class UserInfo implements Serializable {
         this.gender = gender;
     }
 
-    public Timestamp getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Timestamp birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

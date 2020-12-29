@@ -11,6 +11,12 @@ public class BookshelfInfo {
     public BookshelfInfo() {
     }
 
+    public BookshelfInfo(int user_id, int work_id, Timestamp collection_time) {
+        this.collection_time=collection_time;
+        this.user_id=user_id;
+        this.work_id=work_id;
+    }
+
     public Integer getUser_id() {
         return user_id;
     }

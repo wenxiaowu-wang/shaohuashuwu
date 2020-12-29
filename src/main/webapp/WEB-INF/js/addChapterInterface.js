@@ -42,7 +42,7 @@ new Vue({
         //    上传数据
             chapterInfo:{
                 chapter_title:'',
-                chapter_word_num:'',
+                chapter_word_num:0,
                 chapter_content:'',
                 chapter_other_word:'',
                 chapter_charge:'3',
@@ -118,9 +118,11 @@ new Vue({
             }
             if (this.chapter_contentNum <= 12000 && this.chapter_contentNum > 1000)
             {
+                this.chapterInfo.chapter_word_num = this.chapter_contentNum;
                 document.getElementById("chapter_content_Numid").style.color = "#38c438";
                 this.ischapter_content = 1;
             }
+
         },
         //统计给读者话字数
         getchapter_other_wordNum(){

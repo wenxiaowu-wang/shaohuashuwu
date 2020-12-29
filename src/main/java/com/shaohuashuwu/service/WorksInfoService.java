@@ -73,4 +73,34 @@ public interface WorksInfoService {
     public void updateworkInfoByWork_id(WorksInfo worksInfo);
 
 
+
+
+    /*
+    * 郝振威
+    *
+    *
+    *
+    *
+    * */
+
+
+    //根据作者ID获取所有对应的作品信息
+    public List<WorksInfo> getAllWorkInfoOfAuthorId(int user_id);
+
+    //根据用户ID获取用户加入书架的作品的作品名字
+    public List<WorksInfo> getBookshelfWorkNameByWorkID(int user_id);
+
+    //根据用户ID获取用户阅读历史的作品的作品名字
+    public List<WorksInfo> getReadingHistoryWorkNameByWorkID(int user_id);
+
+    //根据用户的ID获取该用户写过的作品ID、作品名字
+    public List<WorksInfo> getWorkIdNameByUserId(int user_id);
+
+    //根据章节ID获取作品名字
+    public String getWorkNameByChapterId(int chapter_id);
+
+    //根据章节ID获取作品Id
+    public String getWorkIdByChapterId(int chapter_id);
+
+
 }

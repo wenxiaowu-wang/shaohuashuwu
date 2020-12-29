@@ -23,7 +23,7 @@ public class JunitSessionController {
     public void addRankingTypeToSession(Integer rankingType,HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         session.setAttribute("rankingType", rankingType);
-        System.out.println("接收信息"+rankingType);
+
     }
 
     /**

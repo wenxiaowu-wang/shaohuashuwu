@@ -1,0 +1,75 @@
+body{
+    min-width: 1210px;
+}
+
+.container {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.vipbox {
+
+    background: #fc7403;
+    border-radius: 2px;
+    font-family: Arial-BoldMT;
+    font-size: 14px;
+    color: #fff;
+    padding: 1px 5px;
+}
+
+.order_titbox {
+    color: #e84848;
+    font-size: 18px;
+    color: #333;
+    font-weight: 700;
+}
+
+.quickbuy_box {
+    background: rgba(252,116,3,.03);
+    border: 1px solid rgba(252,116,3,.3);
+    border-radius: 2px;
+    height: 100px;
+    margin: 20px 0 10px;
+    user-select: none;
+}
+
+.quickbuy_box div:first-child {
+    background: #fc7403;
+    width: 100px;
+    height: 100px;
+}
+
+.quickbuy_box div {
+    float: left;
+}
+
+.quickbuy_box .buyimg {
+    background: url(../images/buy.png) no-repeat center;
+    height: 37px;
+    margin: 28px 0 10px;
+}
+
+.quickbuy_box p {
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+}
+
+.quickbuy-chapter>h1{
+    font-size: 24px;
+    margin-left:
+    45%;
+}
+
+.quickbuy_box .quickbuy-chapter li:last-child {
+    font-size: 14px;
+    color: #fc7403;
+    float: right;
+    margin-right: 0;
+}
+
+.order_Btn{
+    background: #d32f2f;
+    color: #fff;
+}

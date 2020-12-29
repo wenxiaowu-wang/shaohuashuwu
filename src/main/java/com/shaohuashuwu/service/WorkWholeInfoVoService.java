@@ -21,4 +21,26 @@ public interface WorkWholeInfoVoService {
     //通过用户id信息获取作品全部信息
     //功能点：个性推荐作品
     List<WorkWholeInfoVo> getworkWholeInfoVoByuser_id(int user_id) throws Exception;
+
+
+
+
+
+
+
+
+    /*
+     * 郝振威
+     *
+     * */
+    //根据用户id获取书架信息
+    public List<WorkWholeInfoVo> getWorkWholeInfoByuser_id(int user_id) throws Exception;
+
+    //根据用户id获取阅读历史表信息
+    public List<WorkWholeInfoVo> getWorkWholeInfoToHistoryByUser_id(int user_id) throws Exception;
+
+
+
+
+
 }

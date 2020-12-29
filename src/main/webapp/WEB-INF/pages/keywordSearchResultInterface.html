@@ -58,6 +58,9 @@
 <!--查询内容-->
     <div class="selectresult_class" id="selectresult_id">
 
+        <div class="mainLeft_class" >
+
+
         <!--标签选择-->
         <div class="vole_tips_class" >
             <p class="voletips_p_class" >已选</p>
@@ -71,12 +74,10 @@
             <el-button class="selected_button_class" type="danger"  size="mini" style="width: 60px" v-for="serialstate in serialstateList" @click="clickWork_sate(serialstate)">{{serialstate}}</el-button>
         </div>
 
-
-<!--显示获取的数量-->
+        <!--显示获取的数量-->
         <div class="selectworknum_class">
             <p class="selectworknum_p_class">查 询 到 {{workTotal}} 个 作 品</p>
         </div>
-
 
         <div class="selectworkInfo_class">
 
@@ -117,19 +118,24 @@
                 </div>
 
 
-
-
-
-
-
-
-
-
-
+                <div class="work_null_div_class" :style=" {'display':( worknull == 0 ? '':'none')}">
+                    <img class="worknull_img_div" src="../images/bokknull-200.png">
+                    <p class="worknull_p_div">您搜索的关键字没有发现搜索的作品~</p>
+                </div>
 
             </div>
 
+        </div>
+
+
         <div class="tuijian_class" id="tuijian-id">
+
+            <p class="rankingworkinfo_p_class">推荐榜</p>
+
+            <div class="rankingworkinfo_div_class" v-for="recommendInfoVo in recommendInfoVoList" >
+                <a class="rankingworkinfo_mainlabela_class">[{{recommendInfoVo.work_main_label}}]</a>
+                <a class="rankingworkinfo_work_name_class" href="#">{{recommendInfoVo.work_name}}</a>
+            </div>
         </div>
 
     </div>
@@ -145,7 +151,7 @@
         </div>
     </div>
 
-</div>
+    </div>
 </body>
 
 <script src="../js/vue.js"></script>

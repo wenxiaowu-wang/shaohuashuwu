@@ -1,8 +1,10 @@
 package com.shaohuashuwu.domain;
 
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ReadingHistoryInfo {
+public class ReadingHistoryInfo implements Serializable  {
 
 
     private Integer user_id;            //用户id
@@ -11,6 +13,15 @@ public class ReadingHistoryInfo {
 
     public ReadingHistoryInfo() {
     }
+
+    public ReadingHistoryInfo(int user_id, int work_id, Timestamp reading_time) {
+
+        this.reading_time = reading_time;
+        this.user_id = user_id;
+        this.work_id = work_id;
+
+    }
+
 
     public Integer getUser_id() {
         return user_id;
@@ -32,8 +43,8 @@ public class ReadingHistoryInfo {
         return reading_time;
     }
 
-    public void setReading_time(Timestamp reding_time) {
-        this.reading_time = reding_time;
+    public void setReading_time(Timestamp reading_time) {
+        this.reading_time = reading_time;
     }
 
     @Override

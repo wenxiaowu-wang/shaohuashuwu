@@ -82,7 +82,7 @@ new Vue( {
         /*个人中心*/
         //跳转，未修改
         gotoMysqelfHtml(){
-            window.location.assign("../pages/userMainInterface.html");
+            window.location.assign("../pages/myHomePage.html");
         },
         /*退出系统按钮*/
         //退出，未销毁session，未返回登录界面
@@ -131,8 +131,7 @@ new Vue( {
 
         /*加入书架*/
         gotoBookshelf(){
-            alert("查看书架按钮");
-            console.log("查看书架按钮")
+            window.location.assign("../pages/bookShelfInterface.html");
         },
 
 

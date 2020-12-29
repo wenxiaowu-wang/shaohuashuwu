@@ -27,42 +27,7 @@ public class RankingInfoController {
     @ResponseBody
     @RequestMapping(value = "/getRankingInfo")
     public List<RankingInfoVo> getRankingInfo(@RequestBody RankingInputInfoVo rankingInputInfoVo) {
-        System.out.println("进入啦啦啦啦啦啦");
-        System.out.println("选择类型：");
-        System.out.println("选择类型---"+rankingInputInfoVo.getTransaction_type());
-        System.out.println("日期类型===="+rankingInputInfoVo.getTime_type());
-        System.out.println("输入信息"+rankingInputInfoVo);
-//        System.out.println("输出数据"+rankingInfoVoService.getRankingInfo(rankingInputInfoVo));
-
         return rankingInfoVoService.getRankingInfo(rankingInputInfoVo);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    /****************以下未修改*/
-
-
-    /**
-     * 分页获取排行信息
-     * @param rankingInputInfoVo
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getRankingListInfo")
-    public List<RankingInfoVo> getRankingListInfo(@RequestBody RankingInputInfoVo rankingInputInfoVo) {
-        System.out.println("进入/rankingInfoController/getRankingListInfo");
-        return rankingInfoVoService.getRankingListInfo(rankingInputInfoVo);
-    }
-
-
 
 }

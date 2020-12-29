@@ -218,7 +218,7 @@
 
     height: 470px;
     width: 245px;
-    background: #f7f5f0;
+    background: #fcfcfa;
 
     float: left;
 }
@@ -255,19 +255,17 @@
     text-align: left;
 
     display: block;
-    width: 80px;
+    width: 35px;
     height: 25px;
-    color: #aaaaaa;
+    color: #444444;
+    font-size: 14px;
 
     float: left;
 }
 
-
-
-
 .rankingworkinfo_namea_class{
     display: block;
-    width: 115px;
+    width: 155px;
     height: 25px;
 
     /*超出本分强制不换行*/
@@ -297,9 +295,7 @@
     float: left;
 }
 
-.rankingworkinfo_mainlabela_class:hover {
-    color: #ff0000
-}
+
 .rankingworkinfo_namea_class:hover {
     color: #ff0000
 }
@@ -335,7 +331,7 @@
 
     height: 470px;
     width: 245px;
-    background: #f7f5f0;
+    background: #fcfcfa;
 
     float: left;
 }

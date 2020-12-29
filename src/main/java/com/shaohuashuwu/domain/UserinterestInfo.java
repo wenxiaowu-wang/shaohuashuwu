@@ -11,6 +11,13 @@ public class UserinterestInfo implements Serializable {
     public UserinterestInfo() {
     }
 
+    public UserinterestInfo(Integer user_interest_id, Integer user_id, String label_name, Integer select_num) {
+        this.user_interest_id = user_interest_id;
+        this.user_id = user_id;
+        this.label_name = label_name;
+        this.select_num = select_num;
+    }
+
     public Integer getUser_interest_id() {
         return user_interest_id;
     }

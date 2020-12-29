@@ -39,6 +39,14 @@ new Vue( {
                 //设置时间类型为当日推荐票
                 transaction_time:' ',
             },
+            /*排行榜信息*/
+            rankingInputInfoVo: {
+                work_main_label: ' ',
+                getneednum: 10,
+                transaction_type:' ',
+                transaction_time:3,
+                time_type:3,
+            },
 
 
 
@@ -61,14 +69,13 @@ new Vue( {
                 tiyunum:'',
                 qingxiaoshuonum:'',
             },
-            /*排行榜信息*/
-            //推荐榜
+
+
+
+            //榜单数据
             recommendInfoVoList:[],
-            //收藏榜
             collectionInfoVoList:[],
-            //订阅榜
             subscribeInfoVoList:[],
-            //打赏榜
             rewardInfoVoList:[],
 
             /*获取不同状态的作品信息*/
@@ -104,59 +111,120 @@ new Vue( {
                     alert("相应失败");
                 })
         },
-        /*获取推荐榜榜单作品信息*/
-        startrecommendInfoVoList(){
-            //设置推荐类型为3
-            this.rankingInputInfoVo.transaction_type = 3;
 
+
+
+        //收藏
+        collectionListInfo(val){
+
+            console.log("收藏榜");
+            this.rankingInputInfoVo.transaction_type = 4;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingListInfo',this.rankingInputInfoVo)
-                .then(function (response) {
-                    _this.recommendInfoVoList = response.data;
-                    console.log("推荐榜"+JSON.stringify(_this.recommendInfoVoList));
-                }.bind(this))
+
+            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+                .then(function (response4) {
+                    _this.collectionInfoVoList = response4.data;
+                    for (var i=0;i<_this.collectionInfoVoList.length;i++) {
+                        if(_this.collectionInfoVoList[i].work_serial_state == 2){
+                            _this.collectionInfoVoList[i].work_serial_state = "完结";
+                        }
+                        else if(_this.collectionInfoVoList[i].work_serial_state == 1){
+                            _this.collectionInfoVoList[i].work_serial_state = "连载";
+                        }
+                    }
+                    console.log("收藏榜------："+JSON.stringify(_this.collectionInfoVoList));
+
+                     _this.recommendListInfo(3);
+
+                })
                 .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+        //推荐榜
+        recommendListInfo(val){
+            console.log("推荐榜");
+            this.rankingInputInfoVo.transaction_type = 3;
+            var _this = this;
+            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
+                .then(function (response3) {
+                    _this.recommendInfoVoList = response3.data;
+                    for (var i=0;i<_this.recommendInfoVoList.length;i++) {
+                        if(_this.recommendInfoVoList[i].work_serial_state == 2){
+                            _this.recommendInfoVoList[i].work_serial_state = "完结";
+                        }
+                        else if(_this.recommendInfoVoList[i].work_serial_state == 1){
+                            _this.recommendInfoVoList[i].work_serial_state = "连载";
+                        }
+                    }
+
+                        _this.subscribeListInfo(2);
+
+
+                })
+                .catch(function (error) {
                     console.log(error);
                     alert("相应失败");
                 })
 
         },
-        /*获取收藏榜榜单作品信息*/
-        startcollectionInfoVoList(){
-
-        },
-        /*获取订阅榜榜单作品信息*/
-        startsubscribeInfoVoList(){
-            //设置订阅类型为3
+        //订阅
+        subscribeListInfo(val){
+            console.log("订阅榜");
             this.rankingInputInfoVo.transaction_type = 2;
-
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingListInfo',this.rankingInputInfoVo)
+            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.subscribeInfoVoList = response.data;
-                    console.log("订阅榜"+JSON.stringify(_this.subscribeInfoVoList));
+
+                    console.log("订阅榜------："+JSON.stringify(_this.subscribeInfoVoList));
+                    for (var i=0;i<_this.subscribeInfoVoList.length;i++){
+                        if(_this.subscribeInfoVoList[i].work_serial_state == 2){
+                            _this.subscribeInfoVoList[i].work_serial_state = "完结";
+                        }
+                        else if(_this.subscribeInfoVoList[i].work_serial_state == 1){
+                            _this.subscribeInfoVoList[i].work_serial_state = "连载";
+                        }
+
+                    }
+
+                        _this.rewardListInfo(1);
+
                 }.bind(this))
                 .catch(function (error){
                     console.log(error);
                     alert("相应失败");
                 })
         },
-        /*获取打赏榜榜单作品信息*/
-        startrewardInfoVoList(){
-            //设置打赏类型为1
+        //打赏
+        rewardListInfo(val){
+            console.log("打赏榜");
             this.rankingInputInfoVo.transaction_type = 1;
-
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingListInfo',this.rankingInputInfoVo)
+            console.log("----"+_this.rankingInputInfoVo);
+            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.rewardInfoVoList = response.data;
-                    console.log("打赏榜"+JSON.stringify(_this.rewardInfoVoList));
+                    for (var i=0;i<_this.rewardInfoVoList.length;i++) {
+                        if(_this.rewardInfoVoList[i].work_serial_state == 2){
+                            _this.rewardInfoVoList[i].work_serial_state = "完结";
+                        }
+                        else if(_this.rewardInfoVoList[i].work_serial_state == 1){
+                            _this.rewardInfoVoList[i].work_serial_state = "连载";
+                        }
+                    }
+                    console.log("打赏榜------："+JSON.stringify(_this.rewardInfoVoList));
                 }.bind(this))
                 .catch(function (error){
                     console.log(error);
                     alert("相应失败");
                 })
         },
+
+
+
+
 
         /*获取不同状态的作品信息*/
         startDifferentStateWork(){
@@ -238,6 +306,7 @@ new Vue( {
 
         // this.finddifvolenum();
         this.startDifferentStateWork();
+        this.collectionListInfo();
 
         // this.startrecommendInfoVoList();
         // this.startcollectionInfoVoList();

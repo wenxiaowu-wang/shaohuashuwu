@@ -1,0 +1,114 @@
+body{
+    min-width: 1210px;
+}
+/*最顶部导航栏*/
+.bookshelf_top{
+    width: 100%;
+    height: 72px;
+    background-color: #545c64;
+}
+.top_img{
+    width: 14%;
+    height: 65px;
+    /*border: 2px solid red;*/
+    background-image: url("../images/icon/shaohua-ps.png");
+    margin-left: 15px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center center;
+    float: left;
+}
+.top_content{
+    width: 73%;
+    height: 70px;
+    margin: 0px 5px;/*  上下为0px，左右自适应，自适应有默认居中的效果  */
+    text-align: left;
+    /*background-color: #545c64;*/
+    float: left;
+
+}
+.top_tips{
+    width: 15%;
+    height: 100%;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: "宋体";
+    float: left;
+}
+.top_menu{
+    width: 60%;/*  所占其父级元素的70% 即占top_contend宽度的70%*/
+    height: 100%;
+    padding-left: 10px;
+
+    float: left;
+
+}
+.top_data{
+    width: 15%;
+    height: 100%;
+    text-align: right;
+    padding-right: 15px;
+    font-size: 15px;
+    font-weight: normal;
+
+    float: right;
+}
+
+/*左侧栏*/
+
+
+/*书架部分*/
+
+.body{
+    margin-left: 10%;
+    width: 80%;/*  若为100%会充满全屏  */
+    height: 800px;/*  因为没有内容撑开，所以指定高度为px，如果有内容撑开高度，就不需要指定了*/
+
+    float: left;
+}
+
+.bookshelf {
+    font-weight: 1000;
+}
+
+.deleteBook {
+    cursor: pointer;
+    width: 70px;
+    height: 25px;
+    background: #d32f2f;
+    font-size: 10px;
+    color: #fff;
+    letter-spacing: 0;
+    position: absolute;
+    left: 3px;
+    top: 15px;
+    line-height: 25px;
+    text-align: center;
+}
+.readingHistory {
+    font-weight: 1000;
+}
+.deleteAllRecord {
+    margin-top: 1%;
+    margin-left: 75%;
+    background: #d32f2f;
+    border-radius: 2px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: 0;
+    position: absolute;
+
+}
+
+.order_Btn{
+    background: #d32f2f;
+    color: #fff;
+}
+
+
+
+
+

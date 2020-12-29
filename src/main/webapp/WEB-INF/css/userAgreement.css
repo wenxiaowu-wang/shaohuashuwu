@@ -1,0 +1,40 @@
+.top {
+    width: 1200px;
+    margin: 0 auto
+}
+
+.box-center {
+    width: 980px;
+    margin: 0 auto;
+}
+.pact_area {
+    border: 1.5px solid;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px #808080;
+    padding: 24px;
+    margin-bottom: 30px;
+    background-color: #F5F5F5;
+    color: #555;
+    overflow: hidden;
+}
+.deal-text {
+    padding-bottom: 0;
+}
+
+.bottom {
+    height: 200%;
+    text-align: center;
+    line-height: 24px
+}
+.address {
+    color: #A6A6A6;
+    margin-bottom: 8px;
+    font-family:"宋体","arial";
+    font-size: medium;
+    line-height: 8px
+}
+
+.beian{
+    font-family:"宋体","arial";
+    color: #A6A6A6;
+}

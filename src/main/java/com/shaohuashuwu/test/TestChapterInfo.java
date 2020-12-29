@@ -42,10 +42,10 @@ public class TestChapterInfo {
 //        System.out.println(chapterInfoService.selectchaptercatalog(1,34));
 //    }
 
-    @Test
-    public void tset1(){
-        System.out.println("----"+chapterInfoService.getchapterInfoByChapter_id(34));
-    }
+//    @Test
+//    public void tset1(){
+//        System.out.println("----"+chapterInfoService.getchapterInfoByChapter_id(34));
+//    }
 
 
 

@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 包:com.shaohuashuwu.dao
  * 作者:王洪斌
@@ -67,5 +69,24 @@ public interface ChapterInfoDao {
     @Select("UPDATE chapter_info SET chapter_state = 1 where chapter_id = #{chapter_id}")
     public void updateChapter_stateByChapter_id2 (int chapter_id);
 
+    //判断章节是否付费
+    //功能点：阅读小说
+    @Select("SELECT COUNT(*) FROM chapter_info WHERE chapter_id = #{chapter_id}  AND chapter_charge = 1")
+    public int selectNeedMoneyBychapter_id(int chapter_id);
+
+    /*
+    * 郝振威
+    * */
+    //根据用户的ID，作品的ID 获取该用户未订阅章节的信息
+    @Select("SELECT chapter_id,chapter_title,chapter_word_num FROM chapter_info WHERE chapter_charge = 1 AND chapter_id IN (SELECT chapter_id FROM chapter_post_info WHERE work_id = #{param1}) AND chapter_id NOT IN (SELECT recipient_id FROM transaction_info WHERE consumer_id = #{param2} and transaction_type = 2 )")
+    public List<ChapterInfo> selectChapterInfoByUserIdWorkId(int work_id, int user_id);
+
+    //根据用户的ID，作品的ID
+    @Select("SELECT count(*) FROM chapter_info WHERE chapter_charge = 1 AND chapter_id IN (SELECT chapter_id FROM chapter_post_info WHERE work_id = #{param1})")
+    public int selectChapterCountByUserIdWorkId(int work_id);
+
+    //根据用户的ID，作品的ID 获取该用户已订阅章节的信息
+    @Select("SELECT chapter_id,chapter_title,chapter_word_num FROM chapter_info WHERE chapter_charge = 1 AND chapter_id IN (SELECT chapter_id FROM chapter_post_info WHERE work_id = #{param1}) AND chapter_id IN (SELECT recipient_id FROM transaction_info WHERE consumer_id = #{param2} and transaction_type = 2)")
+    public List<ChapterInfo> selectChapterInfoByUserIdWorkId2(int work_id,int user_id);
 
 }

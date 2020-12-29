@@ -5,6 +5,7 @@ import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
 import com.shaohuashuwu.service.WorkWholeInfoVoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,9 @@ public class WorkWholeInfoVoController {
 
     @Autowired
     private WorkWholeInfoVoService workWholeInfoVoService;
+
+    private WorkWholeInfoVo workWholeInfoVo;
+    private List<WorkWholeInfoVo> workWholeInfoVoList;
 
     /**
      * 获取主页不同分类的作品信息
@@ -80,11 +84,48 @@ public class WorkWholeInfoVoController {
     public List<WorkWholeInfoVo> getworkWholeInfoVoByuser_id(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //获取用户id
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",0);
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
         return workWholeInfoVoService.getworkWholeInfoVoByuser_id(user_id);
     }
 
 
+
+
+    /*
+    * 郝振威
+    *
+    * */
+
+
+    /**
+     * 根据用户id获取书架里的信息
+     * @param user_id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getWorkWholeInfoByuser_id/{user_id}")
+    public List<WorkWholeInfoVo> getWorkWholeInfoByuser_id(@PathVariable(value = "user_id")Integer user_id) throws Exception {
+
+
+        workWholeInfoVoList = workWholeInfoVoService.getWorkWholeInfoByuser_id(user_id);
+//        System.out.println(workWholeInfoVoList);
+        return workWholeInfoVoList;
+    }
+
+
+    /**
+     * 根据用户id获取阅读历史的信息
+     * @param user_id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getWorkWholeInfoToHistoryByUser_id/{user_id}")
+    public List<WorkWholeInfoVo> getWorkWholeInfoToHistoryByUser_id(@PathVariable(value = "user_id")Integer user_id) throws Exception {
+
+
+        workWholeInfoVoList = workWholeInfoVoService.getWorkWholeInfoToHistoryByUser_id(user_id);
+//        System.out.println(workWholeInfoVoList);
+        return workWholeInfoVoList;
+    }
 }

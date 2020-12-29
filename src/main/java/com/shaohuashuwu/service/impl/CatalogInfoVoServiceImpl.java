@@ -31,6 +31,8 @@ public class CatalogInfoVoServiceImpl implements CatalogInfoVoService {
      */
     @Override
     public List<CatalogInfoVo> getchaptercatalogBywork_id(int user_id, int work_id) throws Exception{
+
+        System.out.println("用户---------"+user_id+"作品id："+work_id);
         WorksInfo worksInfo = new WorksInfo(work_id,null,user_id);
         return catalogInfoVoDao.selectchaptercatalogBywork_id(worksInfo);
     }

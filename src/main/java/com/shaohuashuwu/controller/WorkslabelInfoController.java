@@ -34,21 +34,19 @@ public class WorkslabelInfoController {
     public List<WorkslabelInfo> getWorkslabelInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("work_id");
-
         int work_id=Integer.parseInt(String.valueOf(msg));
-
-        System.out.println("获取用户自定义标签"+work_id);
-        System.out.println("自定义标签内容："+workslabelInfoService.getWorkslabelInfoByWork_id(work_id));
         return workslabelInfoService.getWorkslabelInfoByWork_id(work_id);
     }
 
+    /**
+     * 修改作品标签
+     * 功能点修改作品信息
+     * @param workslabelInfoList
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/updateWorkslabelInfoByWork_id")
-    public int updateWorkslabelInfoByWork_id(@RequestBody List<WorkslabelInfo> workslabelInfoList,HttpServletRequest request, HttpServletResponse response){
-        System.out.println("被调用了------------------------------------");
-
-        System.out.println("自定义标签信息"+workslabelInfoList);
-
+    public int updateWorkslabelInfoByWork_id(@RequestBody List<WorkslabelInfo> workslabelInfoList){
         return workslabelInfoService.updateWorkslabelInfoByWork_id(workslabelInfoList);
     }
 

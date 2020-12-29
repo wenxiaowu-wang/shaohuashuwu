@@ -9,12 +9,17 @@ new Vue({
             showbackgroundInfo:'',
             //类型描述信息变化
             typedescribeInfo:'',
+            //评论显示
+            dialogFormVisible: false,
+            dialogVisible: false,
 
 
 
             /*
             * 上传数据
             * */
+            textarea_reply:'',
+            textarea:'',
 
             /*
             * 获取数据
@@ -35,12 +40,38 @@ new Vue({
             otherWorkNum:'',
             //累计作品总字数
             otherWorkwork_word_num:'',
+            //作者自定义
+            workslabelInfoVoList:[],
+            //作者自定义数量
+            workslabelInfoVoNum:0,
+
+            /*
+            *上传数据
+             */
+
+            userinterestInfo:{
+
+                user_id:'',
+                label_name:'',
+                select_num:1,
+            },
+
+
+
+            /*
+            *郝振威
+            *
+            *
+            * */
+
+
+            commentChildData:[],
+            commentData:[],
+
+
+
 
             activeIndex: '1',
-            labelList: [
-                "hahah", "heheheh"
-            ],
-
             drawer: false,
         }
     },
@@ -69,6 +100,8 @@ new Vue({
             axios.post('http://localhost:8080/worksInfoController/getworkInfoByWork_id')
                 .then(function (response) {
                     _this.worksInfo = response.data;
+                    _this.userinterestInfo.label_name = _this.worksInfo.work_main_label;
+                    _this.adduserInterestInfo();
 
                     /*当字数和订阅数大于10000时，*/
                     if(_this.worksInfo.work_word_num >100000 ){
@@ -134,9 +167,6 @@ new Vue({
                 .catch(function (error) {
                     console.log(error);
                 })
-
-
-
         },
         /*获取目录信息*/
         getchaptercatalogInfo(){
@@ -166,6 +196,77 @@ new Vue({
                     console.log(error);
                 })
         },
+        /*获取作品兴趣界面*/
+        //获取作者自定义标签
+        getworkslabelInfo() {
+            var _this = this;
+            axios.post('http://localhost:8080/workslabelInfoController/getWorkslabelInfoByWork_id')
+                .then(function (respone) {
+                    _this.workslabelInfoVoList = respone.data;
+                    console.log("作品兴趣标签信息--"+JSON.stringify(_this.workslabelInfoVoList));
+
+                    _this.workslabelInfoVoNum = _this.workslabelInfoVoList.length;
+                })
+                .catch(function (error){
+                    alert("相应自定义标签失败----");
+                })
+        },
+
+        /*添加用户兴趣*/
+        adduserInterestInfo(){
+            var _this = this;
+            axios.post('http://localhost:8080/userInteresInfoController/updateUserInterestInfo',_this.userinterestInfo)
+                .then(function (respone) {
+
+                })
+                .catch(function (error){
+                    alert("添加用户兴趣失败----");
+                })
+
+        },
+
+
+
+
+
+
+        /*
+        * 初始化评论---------郝振威
+        *
+        *
+        *
+        *
+        * */
+        getComent(){
+
+            var _this = this;
+            axios.get("http://localhost:8080/commentInfoController/getCommentParentInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
+
+                console.log("1-----------------" + JSON.stringify(resp3.data));
+                _this.commentData = resp3.data;
+                console.log("1-1111111111111----------------" );
+                console.log("1-----------------" + JSON.stringify(_this.commentData));
+
+
+
+            }).catch(error => {
+                console.log("获取父级评论信息失败:" + error);
+            });
+
+            axios.get("http://localhost:8080/commentInfoController/getCommentChildInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
+
+                let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
+
+                console.log("2=================" + JSON.stringify(resp3.data));
+
+                _this.commentChildData = resp3.data;
+
+                console.log("2=================" + JSON.stringify(_this.commentChildData ));
+
+            }).catch(error => {
+                console.log("获取父级评论信息失败:" + error);
+            });
+        },
 
 
 
@@ -186,6 +287,40 @@ new Vue({
             this.gotoreadChapterInfo(chapter_id);
         },
 
+        //加入书架
+        addToBookshelf(){
+            console.log("上传信息======")
+            var user_id= this.userInfo.user_id;
+            var work_id = this.worksInfo.work_id;
+            console.log("上传信息"+user_id+"---"+work_id)
+            axios.post("http://localhost:8080/bookshelfInfoController/addToBookshelf/" +
+                user_id + "/" + work_id ).then(resp => {
+                let Result = resp.data;
+                console.log("数据同步存到数据库。"+Result);
+                if(Result==true){
+                    this.$message({
+                        type: 'success',
+                        message: '加入书架成功！'
+                    });
+                }else{
+                    this.$message({
+                        type: 'error',
+                        message: '小说已加入书架，无需重复添加!'
+                    });
+                }
+            }).catch(error => {
+                console.log("数据同步存到数据库失败。"+error);
+            });
+        },
+
+        //点击评论作品
+        commentbook(){
+
+            console.log("评论按钮1====")
+            this.dialogVisible = true;
+            console.log("评论按钮2----")
+
+        },
 
 
 
@@ -277,13 +412,6 @@ new Vue({
 
 
 
-
-
-
-
-
-
-
         /**
          * 无用
         * */
@@ -302,6 +430,9 @@ new Vue({
         this.getOtherWorkInfo();
         this.getnewChapterByword_id();
         this.getchaptercatalogInfo();
+        this.getworkslabelInfo();
+
+        this.getComent();
 
 
 

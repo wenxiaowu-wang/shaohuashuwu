@@ -218,8 +218,8 @@
                             </p>
                             <div :style=" {'display':( chapterInfo.chapter_content == null ? '':'none')}">
                                 <p>这是VIP章节 需要订阅后才能阅读</p>
-                                <el-button class="bottom_button_class" >全部订阅</el-button>
-                                <el-button class="bottom_button_class" type="danger"  @click="nextchapter()">订阅该章节</el-button>
+                                <el-button class="bottom_button_class" @click="clicksubscribeMoreChapter()">更多订阅</el-button>
+                                <el-button class="bottom_button_class" type="danger"  @click="clicksubscribeChapter()">订阅该章节</el-button>
                             </div>
                         </div>
 

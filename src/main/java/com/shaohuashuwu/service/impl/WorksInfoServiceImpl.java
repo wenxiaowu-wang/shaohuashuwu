@@ -269,4 +269,50 @@ public class WorksInfoServiceImpl implements WorksInfoService {
     }
 
 
+
+
+    /*
+    * 郝振威
+    *
+    *
+    *
+    *
+    * */
+
+    //根据作者ID获取所有对应的作品信息
+    @Override
+    public List<WorksInfo> getAllWorkInfoOfAuthorId(int user_id) {
+        return worksInfoDao.selectAllByUserId(user_id);
+    }
+
+    //根据用户ID获取用户加入书架的作品的作品名字
+    @Override
+    public List<WorksInfo> getBookshelfWorkNameByWorkID(int user_id) {
+        return worksInfoDao.selectBookshelfWorkNameByWorkID(user_id);
+    }
+
+    //根据用户ID获取用户阅读历史的作品的作品名字
+    @Override
+    public List<WorksInfo> getReadingHistoryWorkNameByWorkID(int user_id) {
+        return worksInfoDao.selectReadingHistoryWorkNameByWorkID(user_id);
+    }
+
+    @Override
+    public List<WorksInfo> getWorkIdNameByUserId(int user_id) {
+        return worksInfoDao.selectWorkIdNameByUserId(user_id);
+    }
+
+
+    //根据章节ID获取作品名字
+    @Override
+    public String getWorkNameByChapterId(int chapter_id) {
+        return worksInfoDao.selectWorkNameByChapterId(chapter_id);
+    }
+
+    @Override
+    public String getWorkIdByChapterId(int chapter_id) {
+        return worksInfoDao.selectWorkIdByChapterId(chapter_id);
+    }
+
+
 }

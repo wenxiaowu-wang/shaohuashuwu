@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户主界面</title>
+    <title>个性推荐</title>
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/userMainInterfaceFragment.css">
     <link rel="stylesheet" href="../css/personalityRecommendInterface.css">
@@ -55,13 +55,13 @@
     </div>
 
     <!--主要内容-->
-    <div class="personality_class" >
+    <div class="personality_class" id="personalityRecommend_id" >
         <div class="personality_title_class">
             <img class="title_img_class" src="../images/xiaolian-32.png">
             <p class="title_p_class">我们将根据内平时感兴趣的作品类型为您推荐作品</p>
         </div>
 
-        <div class="personality_left_class" id="personalityRecommend_id" >
+        <div class="personality_left_class"  >
 
             <!--每个作品信息-->
             <div class="responseWorksInfo_div_class" v-for="workWholeInfoVo in workWholeInfoVoList" >
@@ -103,7 +103,12 @@
         </div>
 
         <div class="personality_right_class">
+            <p class="personality_rightp_class">今日推荐</p>
 
+            <div class="personality_right_div_class" v-for="recommendInfoVo in recommendInfoVoList">
+                <p class="main_label_class">[{{recommendInfoVo.work_main_label}}]</p>
+                <a class="work_name_class" href="#" >{{recommendInfoVo.work_name}}</a>
+            </div>
 
 
         </div>

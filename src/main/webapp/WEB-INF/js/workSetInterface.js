@@ -206,8 +206,6 @@ new Vue({
             }
         },
 
-
-
         //表单作品介绍校验
         isworkintroduct(){
             var _this=this;

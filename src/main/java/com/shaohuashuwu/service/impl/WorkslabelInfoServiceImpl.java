@@ -14,6 +14,8 @@ public class WorkslabelInfoServiceImpl implements WorkslabelInfoService{
     @Autowired
     private WorkslabelInfoDao workslabelInfoDao;
 
+    private List<WorkslabelInfo> workslabelInfoList;
+
     /**
      * 依据作品id查询作者自定义标签
      * 功能点：修改作品信息
@@ -21,8 +23,9 @@ public class WorkslabelInfoServiceImpl implements WorkslabelInfoService{
      * @return
      */
     @Override
-    public List<WorkslabelInfo> getWorkslabelInfoByWork_id(int work_id) {
-        return workslabelInfoDao.selectWorkslabelInfoByWork_id(work_id);
+    public List<WorkslabelInfo> getWorkslabelInfoByWork_id(int work_id)  throws NullPointerException{
+        workslabelInfoList =workslabelInfoDao.selectWorkslabelInfoByWork_id(work_id);
+        return workslabelInfoList;
     }
 
 
@@ -47,7 +50,6 @@ public class WorkslabelInfoServiceImpl implements WorkslabelInfoService{
         else {
             System.out.println("获取的作品标签为空");
         }
-
 
         return 1;
     }
