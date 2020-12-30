@@ -99,4 +99,35 @@ public class TransactionInfo implements Serializable {
                 ", transaction_unit='" + transaction_unit + '\'' +
                 '}';
     }
+
+    //解析交易类型
+    public String analysisType(){
+        String type = "";
+        switch(this.getTransaction_type()){
+            case 0:type += "充值";break;
+            case 1:type += "打赏";break;
+            case 2:type += "订阅";break;
+            case 3:type += "投票";break;
+            case 4:type += "提现";break;
+            default:type += "未知";break;
+        }
+        return type;
+    }
+
+    //解析交易方式
+    public String analysisMode(){
+        String mode = "";
+        switch(this.getTransaction_mode()){
+            case 0:mode += "支付宝";break;
+            case 1:mode += "微信";break;
+            default:mode += "未知";break;
+        }
+        return mode;
+    }
+
+    //解析交易时间（Timestamp --> String ）
+    public String analysisTime(){
+        //TimeStamp转化为String类型(通过substirng去掉毫秒值)
+        return this.getTransaction_time().toString().substring(0, this.getTransaction_time().toString().indexOf("."));
+    }
 }

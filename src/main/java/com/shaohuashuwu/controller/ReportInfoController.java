@@ -4,15 +4,21 @@ import com.shaohuashuwu.service.ReportInfoService;
 import com.shaohuashuwu.service.ReportWholeInfoVoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
-@RequestMapping("/reportInfoController")
+@RequestMapping(path = "/reportInfoController")
+@SessionAttributes(value = {"user_name","user_id","work_id","work_name","chapter_id","chapter_title"},types = {String.class,Integer.class})
 public class ReportInfoController {
 
     @Autowired
@@ -48,5 +54,29 @@ public class ReportInfoController {
         return reportInfoService.updateReportInfoByReport_id(report_id,handle_state);
 
     }
+
+    /**
+     * 阿斌
+     */
+    @RequestMapping(path = "/reportDetectionChapter/{checkedList}")
+    @ResponseBody
+    public int reportDetectionChapter(ModelMap modelMap, @PathVariable(value = "checkedList") List<Integer> checkedList){
+        Integer user_id = (Integer)modelMap.get("user_id");
+        Integer chapter_id = (Integer)modelMap.get("chapter_id");
+        Integer work_id = (Integer)modelMap.get("work_id");
+
+        int reportResult = 0;
+        System.out.println("调用处理举报信息模块,checkedList内容如下：");
+        for (int i = 0;i<checkedList.size();i++){
+            System.out.println(checkedList.get(i));
+        }
+        return reportResult;
+    }
+
+    @RequestMapping(path = "/toReportingWorks")
+    public String toReportingWorks(){
+        return "reportingWorksInterface.html";
+    }
+
 
 }

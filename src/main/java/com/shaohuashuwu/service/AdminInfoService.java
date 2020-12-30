@@ -1,5 +1,6 @@
 package com.shaohuashuwu.service;
 
+import com.shaohuashuwu.domain.AdminInfo;
 
 /**
  * 包:com.shaohuashuwu.service
@@ -10,5 +11,17 @@ package com.shaohuashuwu.service;
  */
 public interface AdminInfoService {
 
+    //添加一个管理员信息
+    public boolean insertAdminInfo(AdminInfo adminInfo);
 
+    //删除一个管理员信息
+    public boolean deleteAdminInfo(String admin_id);
+
+    //判断是否是该管理员
+    public boolean isAdmainRight(String admin_id,String admin_password);
+
+    //更新管理员密码,该adminInfo为修改后的AdminInfo
+    public boolean updateAdminPassword(String admin_id,String admin_password);
+
+    AdminInfo getOneByName(String name);
 }

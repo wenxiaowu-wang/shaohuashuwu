@@ -4,10 +4,14 @@ import com.shaohuashuwu.dao.ReadingHistoryInfoDao;
 
 import com.shaohuashuwu.domain.ReadingHistoryInfo;
 import com.shaohuashuwu.service.ReadingHistoryInfoService;
+import com.shaohuashuwu.utils.StatisticalHelp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service("readingHistoryInfoService")
@@ -87,5 +91,44 @@ public class ReadingHistoryInfoServiceImpl implements ReadingHistoryInfoService 
     @Override
     public int getReadingHistoryCountByUserId(int user_id) {
         return readingHistoryInfoDao.selectReadingHistoryCountByUserId(user_id);
+    }
+
+    /**
+     * 阿斌
+     */
+    @Override
+    public Map<String, List<Map<String, Object>>> getReaderAgeDistributionByWorkId(List<String> type, int work_id) {
+        Map<String, List<Map<String,Object>>> theResult = new HashMap<String,List<Map<String,Object>>>();
+        List<Map<String,Object>> getDao_nan = readingHistoryInfoDao.selectReaderAgeDistributionByWorkIdAndGender(work_id,"男");
+        List<Map<String,Object>> getDao_nv = readingHistoryInfoDao.selectReaderAgeDistributionByWorkIdAndGender(work_id,"女");
+
+        //使用StatisticalHelp工具类进行数据解析以及补充
+        StatisticalHelp statisticalHelp = new StatisticalHelp();
+        getDao_nan = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nan);
+        getDao_nv = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nv);
+
+        theResult.put("男",getDao_nan);
+        theResult.put("女",getDao_nv);
+
+        return theResult;
+    }
+
+    //根据作品ID获取对应读者不同时间段的阅读分布情况
+    @Override
+    public Map<String, List<Map<String,Object>>> getReadingTimeDistributionByWorkId(List<String> type,int work_id) {
+
+        Map<String, List<Map<String,Object>>> theResult = new HashMap<String,List<Map<String,Object>>>();
+        List<Map<String,Object>> getDao_nan = readingHistoryInfoDao.selectReadingTimeDistributionByWorkIdAndGender(work_id,"男");
+        List<Map<String,Object>> getDao_nv = readingHistoryInfoDao.selectReadingTimeDistributionByWorkIdAndGender(work_id,"女");
+
+        //使用StatisticalHelp工具类进行数据解析以及补充
+        StatisticalHelp statisticalHelp = new StatisticalHelp();
+        getDao_nan = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nan);
+        getDao_nv = statisticalHelp.assemblyReadingDataDistribution(type,getDao_nv);
+
+        theResult.put("男",getDao_nan);
+        theResult.put("女",getDao_nv);
+
+        return theResult;
     }
 }

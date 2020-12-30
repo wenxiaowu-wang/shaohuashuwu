@@ -3,6 +3,7 @@ package com.shaohuashuwu.dao;
 import com.shaohuashuwu.domain.ChapterInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -89,4 +90,18 @@ public interface ChapterInfoDao {
     @Select("SELECT chapter_id,chapter_title,chapter_word_num FROM chapter_info WHERE chapter_charge = 1 AND chapter_id IN (SELECT chapter_id FROM chapter_post_info WHERE work_id = #{param1}) AND chapter_id IN (SELECT recipient_id FROM transaction_info WHERE consumer_id = #{param2} and transaction_type = 2)")
     public List<ChapterInfo> selectChapterInfoByUserIdWorkId2(int work_id,int user_id);
 
+    /**
+     * 阿斌
+     */
+    //根据章节ID获取章节内容
+    @Select("select chapter_content from chapter_info where chapter_id = #{chapter_id}")
+    public String selectChapterContentByChapterId(int chapter_id);
+
+    //更新对应章节ID的章节状态为0（下架）
+    @Update("update chapter_info set chapter_state = 0 where chapter_id = #{chapter_id}")
+    public int updateChapterStateByChapterId(int chapter_id);
+
+    //根据章节ID获取章节标题名字
+    @Select("select distinct chapter_title from chapter_info where chapter_id = #{param1}")
+    public String selectChapterTitleByChapterId(int chapter_id);
 }

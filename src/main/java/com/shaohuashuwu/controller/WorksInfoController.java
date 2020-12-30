@@ -6,17 +6,20 @@ import com.shaohuashuwu.domain.vo.PageInfo;
 import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
-@RequestMapping("/worksInfoController")
+@RequestMapping(path = "/worksInfoController")
+@SessionAttributes(value = {"user_name","user_id","work_id","work_name","chapter_id","chapter_title"},types = {String.class,Integer.class})
 public class WorksInfoController {
     @Autowired
     private WorksInfoService worksInfoService;
@@ -255,6 +258,43 @@ public class WorksInfoController {
     @ResponseBody
     public String getWorkIdByChapterId(@PathVariable(value = "chapter_id")Integer chapter_id){
         return worksInfoService.getWorkIdByChapterId(chapter_id);
+    }
+
+    /**
+     * 阿斌
+     */
+    @RequestMapping(path = "/getAllWorksNameByAuthorId")
+    @ResponseBody
+    public List<String> getAllWorkNameByAuthorId(ModelMap modelMap){
+        Integer authorId = (Integer)modelMap.get("user_id");
+        List<String> workNameList = new ArrayList<String>();
+        List<WorksInfo> worksInfoList = worksInfoService.getAllWorkInfoOfAuthorId(authorId);
+        for (WorksInfo worksInfo : worksInfoList) {
+            //注入workNameList中
+            //自动注入
+            workNameList.add(worksInfo.getWork_name());
+        }
+        return workNameList;
+    }
+
+    @RequestMapping(path = "/getAllWorksNameAndIdByAuthorId")
+    @ResponseBody
+    public List<Map<String,Object>> getAllWorksNameAndIdByAuthorId(ModelMap modelMap){
+        Integer authorId = (Integer)modelMap.get("user_id");
+        List<Map<String,Object>> theResult = new ArrayList<Map<String,Object>>();
+
+        List<WorksInfo> worksInfoList = worksInfoService.getAllWorkInfoOfAuthorId(authorId);
+        for (int i=0;i<worksInfoList.size();i++){
+            //注入workNameList中
+            //自动注入
+            Map<String,Object> map = new HashMap<String,Object>();
+            int work_id = worksInfoList.get(i).getWork_id();
+            map.put("work_id",work_id);
+            String work_name = worksInfoList.get(i).getWork_name();
+            map.put("work_name",work_name);
+            theResult.add(map);
+        }
+        return theResult;
     }
 
 }

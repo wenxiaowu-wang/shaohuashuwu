@@ -27,5 +27,14 @@ public interface ChapterPostInfoDao {
     @Select("SELECT MAX(chapter_id) FROM chapter_post_info WHERE work_id = #{work_id}")
     public int selectMaxchapter_idBywork_id(int work_id);
 
+    /**
+     * 阿斌
+     */
+    //根据接受者ID获取对应章节的对应作品名字
+    @Select("SELECT distinct works_info.work_name FROM works_info,chapter_post_info WHERE works_info.work_id = chapter_post_info.work_id AND chapter_post_info.chapter_id = #{param1}")
+    public String selectWorkNameByChapterId(int chapter_id);
 
+    //获取某作品的章节数
+    @Select("SELECT IFNULL(COUNT(DISTINCT chapter_id),0) AS chapter_num FROM chapter_post_info WHERE work_id = #{param1}")
+    public int selectChapterNumByWorkId(int work_id);
 }

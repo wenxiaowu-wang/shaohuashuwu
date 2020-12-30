@@ -1,6 +1,7 @@
 package com.shaohuashuwu.dao;
 
 import com.shaohuashuwu.domain.ReportInfo;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -27,5 +28,12 @@ public interface ReportInfoDao {
     @Select("select chapter_id from report_info where report_id = #{report_id}")
     public int selectChapter_idByReport_id(Integer report_id);
 
+    /**
+     * 阿斌
+     */
+    //插入一条举报信息
+    @Insert("insert into report_info(report_id,user_id,chapter_id,report_reason,report_time,report_remarks)" +
+            "values(#{report_id},#{user_id},#{chapter_id},#{report_reason},#{report_time},#{report_remarks})")
+    public int insertReportInfo(ReportInfo reportInfo);
 
 }

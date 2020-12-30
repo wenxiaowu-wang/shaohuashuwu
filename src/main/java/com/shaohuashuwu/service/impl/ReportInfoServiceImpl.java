@@ -64,4 +64,17 @@ public class ReportInfoServiceImpl implements ReportInfoService {
         }
         return 0;
     }
+
+    /**
+     * 阿斌
+     */
+    //保存一条举报信息
+    @Override
+    public boolean addReportInfo(ReportInfo reportInfo) {
+        boolean addResult = false;
+        if (reportInfoDao.insertReportInfo(reportInfo)!=(0)){
+            addResult = true;
+        }
+        return addResult;
+    }
 }

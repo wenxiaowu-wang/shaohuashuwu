@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/readingHistoryInfoController")
@@ -84,5 +87,34 @@ public class ReadingHistoryInfoController {
 
         return readingHistoryInfoService.getReadingHistoryCountByUserId(user_id);
 
+    }
+
+    /**
+     * 阿斌
+     */
+    @RequestMapping(path = "/getReaderAgeDistributionByWorkId/{work_id}")
+    @ResponseBody
+    public Map<String, List<Map<String,Object>>> getReaderAgeDistributionByWorkId(@PathVariable(value = "work_id")int work_id){
+        List<String> type = new ArrayList<String>();
+        type.add("10岁以下");
+        type.add("10~18岁");
+        type.add("18~25岁");
+        type.add("25~35岁");
+        type.add("35岁及以上");
+        return readingHistoryInfoService.getReaderAgeDistributionByWorkId(type,work_id);
+    }
+
+    @RequestMapping(path = "/getReadingTimeDistributionByWorkId/{work_id}")
+    @ResponseBody
+    public Map<String, List<Map<String,Object>>> getReadingTimeDistributionByWorkId(@PathVariable(value = "work_id")int work_id){
+        List<String> type = new ArrayList<String>();
+        for (int i =0;i<24;i++){
+            if (i<10){
+                type.add("0"+i);
+            }else{
+                type.add(i+"");
+            }
+        }
+        return readingHistoryInfoService.getReadingTimeDistributionByWorkId(type,work_id);
     }
 }

@@ -1,6 +1,8 @@
 package com.shaohuashuwu.service;
 
 
+import com.shaohuashuwu.domain.ReportInfo;
+
 /**
  * 包:com.shaohuashuwu.service
  * 作者:王洪斌
@@ -13,5 +15,12 @@ public interface ReportInfoService {
     //修改处理信息
     //功能点：处理作品信息修改处理信息，
     public int updateReportInfoByReport_id(Integer report_id,Integer handle_state);
+
+    /**
+     * 阿斌
+     */
+
+    //保存一条举报信息
+    public boolean addReportInfo(ReportInfo reportInfo);
 
 }

@@ -282,8 +282,7 @@ new Vue({
             console.log("订阅点击")
 
             //先获取用户的金豆书
-            axios.get("http://localhost:8080/userInfoController/getGoldBeanNum/" +
-                this.userInfo.user_id).then(resp => {
+            axios.get("http://localhost:8080/userInfoController/getGoldBeanNum").then(resp => {
                 var object = JSON.stringify(resp.data);
                 let data = parseInt(object);
 

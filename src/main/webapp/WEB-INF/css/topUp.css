@@ -1,0 +1,129 @@
+#dialogForm{
+    background-color: #8c939d;
+
+}
+
+.dialog_bg_all{
+    width: 100%;
+    height: 100%;
+    min-width: 1200px;
+    /*max-width: 1100px;*/
+    min-height: 710px;
+    border: red solid 1px;
+}
+.dialog_form{
+    /*border: red solid 1px;*/
+    min-width: 500px;
+    min-height: 260px;
+    max-width: 570px;
+    background-color: #fcf7f7;
+    border-radius: 10%;
+
+}
+
+.form_item{
+    border-radius: 20%;
+    border-bottom: #fcc1c1 solid 1px;
+    /*float: left;*/
+}
+.form_item_div{
+    min-width: 400px;
+    min-height: 50px;
+}
+.form_item_avatar{
+    /*display: inline-block;*/
+    width: 50px;
+    height: 50px;
+    text-align-all: center;
+    /*border: red solid 1px;*/
+    float: left;
+}
+#avatar{
+    max-width:40px;
+    max-height: 40px;
+    /*  <img>标签的样式  */
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.form_user_name{
+    height: auto;
+    font-weight: normal;
+    margin-left: 10px;
+    margin-top: 7px;
+    text-align: left;
+    color: black;
+    float: left;
+    /*border: red solid 1px;*/
+}
+.form_item_button{
+    /*border: red solid 1px;*/
+    margin-left: 2px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+.dialog_footer{
+    /*border: black solid 1px;*/
+}
+.dialog_footer_label{
+    margin-top: 14px;
+    float: left;
+}
+.dialog_footer label{
+    font-weight: bolder;
+    color: #6f7180;
+    font-size: 14px;
+}
+/* 收款码展示 */
+.dialog_receivables{
+    min-width: 1250px;
+    min-height: 700px;
+
+}
+.dialog_receivables_content{
+
+}
+.photo{
+    width: 330px;
+    height: 320px;
+    /*border: blue solid 1px;*/
+}
+.demonstration{
+    font-weight: lighter;
+    font-size: 10px;
+    color: #6f7180;
+    text-align: left;
+    float: left;
+    /*border: red solid 1px;*/
+}
+.photo_img{
+    margin-left: 10px;
+    float: left;
+}
+.photo_img img{
+    width: 300px;
+    height: 300px;
+    margin-left: 10px;
+}
+.checkPaymentInput{
+    /*border: blue solid 1px;*/
+    width: 95%;
+    /*margin-right: 40%;*/
+}
+.checkPaymentInput_tips{
+    margin-top: 15px;
+}
+.checkPaymentInput div{
+    width: auto;
+    float: left;
+    /*border: red solid 1px;*/
+}
+.dialog-footer{
+    width: 50%;
+    min-width: 140px;
+    height: 42px;
+    margin-left: 180px;
+    margin-top: 20px;
+    /*border: red solid 1px;*/
+
+}

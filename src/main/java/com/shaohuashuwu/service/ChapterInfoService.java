@@ -1,6 +1,7 @@
 package com.shaohuashuwu.service;
 
 import com.shaohuashuwu.domain.ChapterInfo;
+import com.shaohuashuwu.domain.NoticeInfo;
 
 import java.util.List;
 
@@ -39,5 +40,14 @@ public interface ChapterInfoService {
 
     //根据用户的ID，作品的ID 获取该用户已订阅章节的信息
     public List<ChapterInfo> getChapterInfoByUserIdWorkId2(int work_id,int user_id);
+
+    /**
+     * 阿斌
+     */
+    //智能判断举报是否成功
+    public int reportDetectionChapter(int chapter_id,int report_reason);
+
+    //下架对应章节并发送通知给对应作者
+    public boolean dealViolationChapterAndSendNotice(NoticeInfo noticeInfo, Integer chapter_id);
 
 }

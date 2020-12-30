@@ -107,13 +107,13 @@ new Vue({
             this.user_id = user_id;
             this.user_name = user_name;
             //获取用户金豆数量
-            axios.get("http://localhost:8080/userInfoController/getGoldBeanNum/" +
-                this.user_id).then(resp => {
+            axios.get("http://localhost:8080/userInfoController/getGoldBeanNum").then(resp => {
                 let object = JSON.stringify(resp.data);
                 this.gold_bean_num = parseInt(object);
 
             }).catch(error => {
                 console.log(error);
+                console.log("hello,interface");
             });
 
             //章节获取章节id

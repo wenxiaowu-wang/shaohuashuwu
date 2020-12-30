@@ -4,9 +4,12 @@ import com.shaohuashuwu.domain.UserInfo;
 import com.shaohuashuwu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +21,8 @@ import java.util.Map;
 import java.util.Random;
 
 @Controller
-@RequestMapping("/userInfoController")
+@RequestMapping(path = "/userInfoController")
+@SessionAttributes(value = {"user_id","user_name"},types = {Integer.class,String.class})
 public class UserInfoController {
 
     @Autowired
@@ -311,18 +315,86 @@ public class UserInfoController {
         return "myHomePage.html";
     }
 
+//    /**
+//     * 根据用户ID获取该用户的金豆数量
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @ResponseBody
+//    @RequestMapping(path = "/getGoldBeanNum/{id}")
+//    public int getGoldBeanNum(@PathVariable(value = "id") Integer id) {
+//        return userInfoService.getGoldBeanNumOfUser(id);
+//    }
+
+
+    /**
+     * 阿斌
+     */
     /**
      * 根据用户ID获取该用户的金豆数量
-     *
-     * @param id
+     * @param modelMap session域中的一块域的变量名
      * @return
      */
     @ResponseBody
-    @RequestMapping(path = "/getGoldBeanNum/{id}")
-    public int getGoldBeanNum(@PathVariable(value = "id") Integer id) {
-        return userInfoService.getGoldBeanNumOfUser(id);
+    @RequestMapping(path = "/getGoldBeanNum")
+    public int getGoldBeanNum(ModelMap modelMap){
+        Integer user_id = (Integer)modelMap.get("user_id");
+        return userInfoService.getGoldBeanNumOfUser(user_id);
     }
 
+    /**
+     * 根据用户ID获取该用户的剩余推荐票
+     * @param modelMap session域中的一块域的变量名
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(path = "/getTicketNum")
+    public int getTicketNum(ModelMap modelMap){
+        Integer user_id = (Integer)modelMap.get("user_id");
+        return userInfoService.getTicketNumOfUser(user_id);
+    }
+
+    @RequestMapping(path = "/isAlreadyBecameAuthor")
+    @ResponseBody
+    public Boolean isAlreadyBecameAuthor(ModelMap modelMap){
+        Integer user_id = (Integer)modelMap.get("user_id");
+        return userInfoService.isAlreadyBecameAuthor(user_id);
+    }
+
+    @RequestMapping(path = "/isOldDoublePassword/{oldPass}")
+    @ResponseBody
+    public Boolean isOldDoublePassword(ModelMap modelMap,@PathVariable(value = "oldPass")String oldPass) {
+        Integer user_id = (Integer)modelMap.get("user_id");
+        return userInfoService.isDoublePassword(user_id,oldPass);
+    }
+
+    @RequestMapping(path = "/addDoublePassword/{pass}")
+    @ResponseBody
+    public Boolean addDoublePassword(ModelMap modelMap,@PathVariable(value = "pass")String pass) {
+        Integer user_id = (Integer)modelMap.get("user_id");
+        return userInfoService.updateAuthorDoublePassword(user_id,pass);
+    }
+
+    @RequestMapping(path = "/updateDoublePassword/{oldPass}/{pass}")
+    @ResponseBody
+    public int updateDoublePassword(ModelMap modelMap,@PathVariable(value = "oldPass")String oldPass,@PathVariable(value = "pass")String pass) {
+        Integer user_id = (Integer)modelMap.get("user_id");
+        int theResult = 0;  //表示原密码错误
+        if (userInfoService.isDoublePassword(user_id,oldPass)){
+            if (userInfoService.updateAuthorDoublePassword(user_id,pass)){
+                theResult = 1;  //表示修改成功
+            }else{
+                theResult = 2;  //表示原密码正确，修改失败
+            }
+        }
+        return theResult;
+    }
+
+    @RequestMapping(path = "/toBecomeAnAuthor")
+    public String toBecomeAnAuthor(){
+        return "authorVerifyManageInterface.html";
+    }
 
 
 }
