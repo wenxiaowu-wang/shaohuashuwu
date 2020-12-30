@@ -51,7 +51,7 @@ new Vue({
         //初始化界面类型
         isRankingInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/junitSessionController/getRankingTypeInSession')
+            axios.post('/shaohuashuwu/junitSessionController/getRankingTypeInSession')
                 .then(function (response) {
                    _this.rankingType = response.data;
                    _this.rankingInputInfoVo.transaction_type = _this.rankingType;
@@ -83,7 +83,7 @@ new Vue({
 
             this.rankingInputInfoVo.transaction_type = val;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.rankingInfoVoList = response.data;
 
@@ -160,7 +160,7 @@ new Vue({
             }
             else {
                 var _this = this;
-                axios.post('http://localhost:8080/junitSessionController/addRankingTypeToSession?rankingType='+rankingType)
+                axios.post('/shaohuashuwu/junitSessionController/addRankingTypeToSession?rankingType='+rankingType)
                     .then(function (response) {
                         window.location.assign("../pages/sectionRankingInterface.html");
                     })

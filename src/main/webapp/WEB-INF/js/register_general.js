@@ -63,7 +63,7 @@ let register_vm = new Vue({
             }, 1000)
         },
         sendSms() {
-            axios.get('http://localhost:8080/smsCodeSession/sendSms/' +
+            axios.get('/shaohuashuwu/smsCodeSession/sendSms/' +
                 this.pojo.phone_number).then(response => {
                 console.log(response.data);
             }).catch(error => {
@@ -114,7 +114,7 @@ let register_vm = new Vue({
                 });
                 // return false;
             } else {
-                axios.get("http://localhost:8080/smsCodeSession/compareSms/" +
+                axios.get("/shaohuashuwu/smsCodeSession/compareSms/" +
                     this.smsCode + "/" + this.pojo.phone_number).then(resp => {
 
                     let registerResult = resp.data;
@@ -126,7 +126,7 @@ let register_vm = new Vue({
                         });
                         // return false;
                     } else {
-                        axios.get('http://localhost:8080/userInfoController/userRegister_general/' +
+                        axios.get('/shaohuashuwu/userInfoController/userRegister_general/' +
                             this.pojo.phone_number + '/' + this.pojo.password + '/' + this.smsCode).then(response => {
 
                             let loginResult = response.data;

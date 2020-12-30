@@ -84,7 +84,7 @@ new Vue({
         /*获取用户信息*/
         getUserInfo(){
             var _this = this;
-            axios.get('http://localhost:8080/userInfoController/getUserLoginInfo')
+            axios.get('/shaohuashuwu/userInfoController/getUserLoginInfo')
                 .then(function (response){
                     _this.userInfo = response.data;
                     console.log("用户信息--："+JSON.stringify(_this.userInfo));
@@ -97,7 +97,7 @@ new Vue({
         getworksInfoList(){
             var _this = this;
             //获取作品信息
-            axios.post('http://localhost:8080/worksInfoController/getworkInfoByWork_id')
+            axios.post('/shaohuashuwu/worksInfoController/getworkInfoByWork_id')
                 .then(function (response) {
                     _this.worksInfo = response.data;
                     _this.userinterestInfo.label_name = _this.worksInfo.work_main_label;
@@ -130,7 +130,7 @@ new Vue({
         getAuthorInfo(){
             var _this = this;
             //获取作者信息
-            axios.post('http://localhost:8080/userInfoController/getUserInfoByWork_id')
+            axios.post('/shaohuashuwu/userInfoController/getUserInfoByWork_id')
                 .then(function (response) {
                     _this.authorInfo = response.data;
                     console.log("作者信息--："+JSON.stringify(_this.authorInfo));
@@ -143,7 +143,7 @@ new Vue({
         getOtherWorkInfo(){
             var _this = this;
             //获取作者其他作品信息
-            axios.post('http://localhost:8080/worksInfoController/getOtherWorkInfoByWork_id')
+            axios.post('/shaohuashuwu/worksInfoController/getOtherWorkInfoByWork_id')
                 .then(function (response) {
                     _this.authorOtherWorksInfoList = response.data;
                     /*获取作品数量*/
@@ -172,7 +172,7 @@ new Vue({
         getchaptercatalogInfo(){
             var _this = this;
             //传入作品id，获取目录
-            axios.post('http://localhost:8080/catalogInfoVoController/getchaptercatalogBywork_id')
+            axios.post('/shaohuashuwu/catalogInfoVoController/getchaptercatalogBywork_id')
                 .then(function (response) {
                     _this.catalogInfoVoList = response.data;
                     console.log("作品目录信息--："+JSON.stringify(_this.catalogInfoVoList));
@@ -187,7 +187,7 @@ new Vue({
         getnewChapterByword_id(){
             var _this = this;
             //获取最新章节信息
-            axios.post('http://localhost:8080/chapterInfoController/getnewChapterInfoByword_id')
+            axios.post('/shaohuashuwu/chapterInfoController/getnewChapterInfoByword_id')
                 .then(function (response) {
                     _this.newChapterInfoVo = response.data;
                     console.log("最新章节信息--："+JSON.stringify(_this.newChapterInfoVo));
@@ -200,7 +200,7 @@ new Vue({
         //获取作者自定义标签
         getworkslabelInfo() {
             var _this = this;
-            axios.post('http://localhost:8080/workslabelInfoController/getWorkslabelInfoByWork_id')
+            axios.post('/shaohuashuwu/workslabelInfoController/getWorkslabelInfoByWork_id')
                 .then(function (respone) {
                     _this.workslabelInfoVoList = respone.data;
                     console.log("作品兴趣标签信息--"+JSON.stringify(_this.workslabelInfoVoList));
@@ -215,7 +215,7 @@ new Vue({
         /*添加用户兴趣*/
         adduserInterestInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/userInteresInfoController/updateUserInterestInfo',_this.userinterestInfo)
+            axios.post('/shaohuashuwu/userInteresInfoController/updateUserInterestInfo',_this.userinterestInfo)
                 .then(function (respone) {
 
                 })
@@ -240,7 +240,7 @@ new Vue({
         getComent(){
 
             var _this = this;
-            axios.get("http://localhost:8080/commentInfoController/getCommentParentInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
+            axios.get("/shaohuashuwu/commentInfoController/getCommentParentInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
 
                 console.log("1-----------------" + JSON.stringify(resp3.data));
                 _this.commentData = resp3.data;
@@ -253,7 +253,7 @@ new Vue({
                 console.log("获取父级评论信息失败:" + error);
             });
 
-            axios.get("http://localhost:8080/commentInfoController/getCommentChildInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
+            axios.get("/shaohuashuwu/commentInfoController/getCommentChildInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
 
                 let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
 
@@ -293,7 +293,7 @@ new Vue({
             var user_id= this.userInfo.user_id;
             var work_id = this.worksInfo.work_id;
             console.log("上传信息"+user_id+"---"+work_id)
-            axios.post("http://localhost:8080/bookshelfInfoController/addToBookshelf/" +
+            axios.post("/shaohuashuwu/bookshelfInfoController/addToBookshelf/" +
                 user_id + "/" + work_id ).then(resp => {
                 let Result = resp.data;
                 console.log("数据同步存到数据库。"+Result);
@@ -335,7 +335,7 @@ new Vue({
         gotoreadChapterInfo(chapter_id){
 
             /*跳转进入章节*/
-            axios.post('http://localhost:8080/chapterInfoController/saveChapter_idSession?chapter_id=' + chapter_id)
+            axios.post('/shaohuashuwu/chapterInfoController/saveChapter_idSession?chapter_id=' + chapter_id)
                 .then(function (response) {
                     window.location.assign("../pages/readNovelInterface.html");
                 })

@@ -173,7 +173,7 @@ new Vue({
             }
             else{
                 /*异步判断作品是否存在*/
-                axios.post('http://localhost:8080/worksInfoController/isworkname',_this.worksInfo)
+                axios.post('/shaohuashuwu/worksInfoController/isworkname',_this.worksInfo)
                     .then(function (response){
                         _this.iswork_name=response.data;
                         //作品存在和不存在时的处理
@@ -244,7 +244,7 @@ new Vue({
         //点击提交按钮
         submitForm(formName) {
             var _this= this;
-            axios.post('http://localhost:8080/worksInfoController/addworkInfo',this.worksInfo)
+            axios.post('/shaohuashuwu/worksInfoController/addworkInfo',this.worksInfo)
                 .then(function (response) {
                     if(response.data == 0){
                         alert("对不起，创建作品："+_this.worksInfo.work_name+" -失败")

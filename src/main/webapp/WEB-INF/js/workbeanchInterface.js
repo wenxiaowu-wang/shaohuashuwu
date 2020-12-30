@@ -7,13 +7,18 @@ new Vue({
         }
     },
     methods:{
+
+        //跳转到稿酬收入界面
+        gotoRemunerationInterface(){
+            window.location.assign("../pages/remunerationInterface.html");
+        },
         /*
         * 获取数据
         * */
         //作者信息
         getAuthorInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/authorInfoController/getAuthorInfoVo')
+            axios.post('/shaohuashuwu/authorInfoController/getAuthorInfoVo')
                 .then(function (response){
                     _this.authorInfo = response.data;
 
@@ -27,7 +32,7 @@ new Vue({
         //作品信息
         getWorksInfoListInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/getWorksInfoByUser_id')
+            axios.post('/shaohuashuwu/worksInfoController/getWorksInfoByUser_id')
                 .then(function (response){
                     _this.worksInfoList = response.data;
                     console.log("作品信息"+JSON.stringify(_this.worksInfoList));

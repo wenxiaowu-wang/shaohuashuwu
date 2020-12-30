@@ -30,7 +30,7 @@ new Vue({
         getRecommmend(){
             console.log("推荐信息")
             var _this = this;
-            axios.post('http://localhost:8080/workWholeInfoVoController/getworkWholeInfoVoByuser_id')
+            axios.post('/shaohuashuwu/workWholeInfoVoController/getworkWholeInfoVoByuser_id')
                 .then(function (response) {
                     _this.workWholeInfoVoList = response.data;
 
@@ -58,7 +58,7 @@ new Vue({
             console.log("推荐榜");
             this.rankingInputInfoVo.transaction_type = 3;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
                 .then(function (response3) {
                     _this.recommendInfoVoList = response3.data;
                     console.log("排行信息")

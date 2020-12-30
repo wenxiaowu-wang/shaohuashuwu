@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/adminLogin.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+
+</head>
+<body>
+
+
+
+
+<div id="adminLogin">
+    <el-form id="adminLogin_form" :label-position="labelPosition" label-width="80px" :model="formLabel">
+        <el-form-item class="inputTips" label="账号:">
+            <el-input id="iName" v-model="formLabel.admin_id" placeholder="请输入内容"></el-input>
+        </el-form-item>
+        <el-form-item class="inputTips" label="密码:" >
+            <el-input id="iPassword" placeholder="请输入密码" v-model="formLabel.admin_password" show-password></el-input>
+        </el-form-item>
+        <el-form-item class="inputTips" label="操作:" >
+<!--            <el-button @click="asyncLogin">同步登录</el-button>-->
+            <el-button @click="adminLogin">登录</el-button>
+<!--            <el-button @click="forwoardWithData">带着数据跳转测试</el-button>-->
+<!--            <el-button @click="testChuanZhi">传值测试</el-button>-->
+        </el-form-item>
+    </el-form>
+
+
+</div>
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/adminLogin.js"></script>
+</html>

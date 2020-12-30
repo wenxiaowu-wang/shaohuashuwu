@@ -1,0 +1,79 @@
+.el_dialog{
+    /*border: 2px solid red;*/
+    width: auto;
+    min-width: 1300px;
+    height: auto;
+    min-height: 700px;
+}
+.dialog_content{
+    margin: 2px auto;
+    height: auto;
+    width: 500px;
+    /*border: 1px solid red;*/
+}
+.dialog_content_header{
+    /*border: 1px solid blue;*/
+    width: 75%;
+    text-align: left;
+}
+.dialog_content_header_title{
+    font-weight: bolder;
+    font-size: 15px;
+
+}
+.dialog_content_header_content{
+    font-weight: normal;
+    padding-left: 15px;
+}
+.dialog_content_header_content label{
+    font-weight: normal;
+    background-color: #cfe4ff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.dialog_content_hr{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgb(207, 228, 255), 0 0 6px rgba(0, 0, 0, .04)
+}
+.dialog_content_center{
+    /*border: 1px solid green;*/
+    width: 99%;
+}
+.center_title{
+    margin-top: 2px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+.center_checkbox_group{
+    border: 1px solid #403e3e;
+    width: 90%;
+    height: 80%;
+    /*margin: 5px auto;*/
+    margin-left: 6px;
+    padding: 3px 3px;
+    border-radius: 5%;
+    box-shadow: 5px 5px 5px #cfe4ff;
+    /*透明*/
+    background-color: rgba(255, 255, 255,0.9);
+}
+.three_checkbox_1{
+    margin-left: 2px;
+    /*border: 1px solid red;*/
+}
+.three_checkbox_2{
+    margin-left: 2px;
+}
+.three_checkbox_3{
+    margin-left: 2px;
+}
+.dialog_content_footer{
+    width: 75%;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 6px;
+    font-weight: lighter;
+    font-size: 14px;
+}

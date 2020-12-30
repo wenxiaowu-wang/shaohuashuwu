@@ -15,7 +15,7 @@ new Vue({
         /*获取作品信息*/
         getWorksInfoListInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/getWorksInfoByUser_id')
+            axios.post('/shaohuashuwu/worksInfoController/getWorksInfoByUser_id')
                 .then(function (response){
                     _this.worksInfoList = response.data;
                     console.log("作品信息"+JSON.stringify(_this.worksInfoList));
@@ -40,7 +40,7 @@ new Vue({
             var _this= this;
             console.log("作品id");
             console.log("作品id"+work_id);
-            axios.get('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+            axios.get('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response){
                     window.location.assign("../pages/mangagementWorksInterface.html");
                 }.bind(this))
@@ -53,7 +53,7 @@ new Vue({
             var _this= this;
             console.log("作品id");
             console.log("作品id"+work_id);
-            axios.get('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+            axios.get('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response){
                     window.location.assign("../pages/addChapterInterface.html");
                 }.bind(this))
@@ -67,7 +67,7 @@ new Vue({
             var _this= this;
             console.log("作品id");
             console.log("作品id"+work_id);
-            axios.get('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+            axios.get('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response){
                     window.location.assign("../pages/workSetInterface.html");
                 }.bind(this))

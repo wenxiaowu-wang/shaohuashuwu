@@ -1,0 +1,54 @@
+.dialog_all{
+    min-width: 1200px;
+    min-height: 700px;
+}
+.workName{
+    /*  打赏目标作品的名字  */
+    color: #171616;
+    background-color: #bddaf8;
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 16px;
+}
+.chapter_name{
+    color: #262525;
+    background-color: #c7e0fc;
+    font-weight: lighter;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px 5px;
+}
+.group_button{
+
+    /*border: #002aff solid 1px;*/
+}
+.radio_button{
+    text-align: left;
+    width: 112px;
+    margin: 2px auto;
+    border-left: #aeb0c7 solid 1px;
+    border-radius: 3px;
+}
+#balanceTicket{
+    /*  剩余推荐票数量  */
+    color: #121212;
+}
+.thisRewardNum{
+    /*  本次打赏数量  */
+    color: #3a8ee6;
+}
+.tips_div{
+    width: auto;
+    font-weight: normal;
+    font-size: 12px;
+    color: #4e0505;
+    background-color: #faf6f6;
+    border-radius: 4px;
+
+}
+.tips{
+    /*  余额提示  */
+    font-size: 13px;
+    color: #ff3300;
+}

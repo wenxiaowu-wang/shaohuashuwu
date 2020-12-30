@@ -3,6 +3,7 @@ package com.shaohuashuwu.controller;
 import com.shaohuashuwu.service.AdminInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ public class AdminInfoController {
     @RequestMapping("/getadmin_id")
     public String getadmin_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        session.setAttribute("admin_id","admin1111");
+
         Object msg = session.getAttribute("admin_id");
         String admin_id=String.valueOf(msg);
 
@@ -57,13 +58,16 @@ public class AdminInfoController {
 
     @RequestMapping(path = "/adminLogin//{admin_id}/{admin_password}")
     @ResponseBody
-    public Boolean adminLogin(@PathVariable(value = "admin_id")String admin_id, @PathVariable(value = "admin_password")String admin_password){
+    public Boolean adminLogin(Model model, @PathVariable(value = "admin_id")String admin_id, @PathVariable(value = "admin_password")String admin_password){
         //POJO对象
         // @RequestParam(value = "admin_id",required = true)String admin_id,
         // @RequestParam(value = "admin_password",required = true)String admin_password){
 
         boolean adminLoginResult = false;
         adminLoginResult = adminInfoService.isAdmainRight(admin_id,admin_password);
+        if (adminLoginResult){
+            model.addAttribute("admin_id",admin_id);
+        }
         return adminLoginResult;
     }
 

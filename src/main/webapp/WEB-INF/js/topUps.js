@@ -1,7 +1,7 @@
 let topUpDialogForm_vm = new Vue({
     el:"#dialogForm",
     data:{
-        dialogFormVisible: true,
+        dialogFormVisible: false,
         alipayVisible: false,
         weChatVisible: false,
         paymentCheck: "",
@@ -60,7 +60,7 @@ let topUpDialogForm_vm = new Vue({
         topUpsCommit(){
             let method = parseInt(this.form.method);//将表单数据中的支付方式数据类型由string转为number
             alert("alert "+JSON.stringify(this.form.name)+"["+this.form.userId+"]");
-            axios.post("/shaohuashuwu_war_exploded/transactionInfoController/topUpsGoldBean/"
+            axios.post("/shaohuashuwu/transactionInfoController/topUpsGoldBean/"
                 +method+"/"
                 +this.form.money
             ).then(response => {
@@ -98,7 +98,7 @@ let topUpDialogForm_vm = new Vue({
         // alert("进入购买金豆页面"+"["+userid+"] ["+username+"]");
         // }
         //获取当前用户的名字以及ID（后端模拟session域取值）
-        axios.get("/shaohuashuwu_war_exploded/userSession/getUser").then(response =>{
+        axios.get("/shaohuashuwu/userSession/getUser").then(response =>{
             console.log("ok"+JSON.stringify(response.data));
             let info = response.data;
             console.log("ok2"+JSON.stringify(info["user_id"]));

@@ -102,7 +102,7 @@ new Vue( {
         /*获取每个分类作品数量*/
         finddifvolenum(){
             var _this = this;
-            axios.get('http://localhost:8080/worksInfoController/getdifvolenum')
+            axios.get('/shaohuashuwu/worksInfoController/getdifvolenum')
                 .then(function (response){
                     _this.difvolenumInfo = response.data;//相应分类作品数量
             })
@@ -121,7 +121,7 @@ new Vue( {
             this.rankingInputInfoVo.transaction_type = 4;
             var _this = this;
 
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response4) {
                     _this.collectionInfoVoList = response4.data;
                     for (var i=0;i<_this.collectionInfoVoList.length;i++) {
@@ -147,7 +147,7 @@ new Vue( {
             console.log("推荐榜");
             this.rankingInputInfoVo.transaction_type = 3;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
                 .then(function (response3) {
                     _this.recommendInfoVoList = response3.data;
                     for (var i=0;i<_this.recommendInfoVoList.length;i++) {
@@ -174,7 +174,7 @@ new Vue( {
             console.log("订阅榜");
             this.rankingInputInfoVo.transaction_type = 2;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.subscribeInfoVoList = response.data;
 
@@ -203,7 +203,7 @@ new Vue( {
             this.rankingInputInfoVo.transaction_type = 1;
             var _this = this;
             console.log("----"+_this.rankingInputInfoVo);
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.rewardInfoVoList = response.data;
                     for (var i=0;i<_this.rewardInfoVoList.length;i++) {
@@ -242,7 +242,7 @@ new Vue( {
         /*获取提供状态下的作品信息*/
         getdifferentStateWorkInfo(differentStateWork){
             var _this = this;
-            axios.get('http://localhost:8080/workWholeInfoVoController/getdifferentStateWork?differentStateWork='+differentStateWork)
+            axios.get('/shaohuashuwu/workWholeInfoVoController/getdifferentStateWork?differentStateWork='+differentStateWork)
                 .then(function (response){
 
                     if(differentStateWork == 1){
@@ -277,7 +277,7 @@ new Vue( {
         clickWork_name(work_id){
             console.log("作品id："+work_id);
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+            axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response) {
                     window.location.assign("../pages/novelDetailsInterface.html");
                 })
@@ -290,7 +290,7 @@ new Vue( {
         clickUser_name(author_id){
             console.log("作者id："+author_id);
             var _this = this;
-            axios.post('http://localhost:8080/userInfoController/addAuthor_idSession?author_id='+author_id)
+            axios.post('/shaohuashuwu/userInfoController/addAuthor_idSession?author_id='+author_id)
                 .then(function (response) {
                     window.location.assign("../pages/authorInfoInterface.html");
                 })

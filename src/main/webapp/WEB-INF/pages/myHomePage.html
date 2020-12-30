@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/myHomePage.css">
     <link rel="stylesheet" href="../css/wTest.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
 </head>
 <body>
 
@@ -14,7 +15,7 @@
     <div class="top">
         <div class="top_img"></div>
         <div class="top_content">
-            <div class="top_tips">{{topTips}}</div>
+            <div class="top_tips"><el-button type="text" icon="el-icon-back" @click="backHomePage">{{topTips}}</el-button></div>
             <div class="top_menu">
                 <el-menu
                         :default-active="activeIndex"
@@ -54,6 +55,8 @@
 
                     <label>{{user_name2}}<br/>&nbsp;&nbsp;&nbsp;<span>互相关注：666 </span>&nbsp;&nbsp;
                         <span>关注：777 </span>&nbsp;&nbsp;<span>粉丝：888 </span>&nbsp;&nbsp;</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <el-button type="text" @click="toMyConcerned">查看详情</el-button>
                 </div>
             </div>
         </div>

@@ -25,7 +25,26 @@ new Vue({
 
     },
     methods: {
-
+        //跳转到首页
+        backHomePage(){
+            window.location.assign("../pages/userMainInterface.html");
+        },
+        handleSelect(key, keyPath) {
+            console.log("当前导航在:(key,keyPath)"+key, keyPath);
+            switch (key){
+                case "1":window.location.assign("../pages/myHomePage.html");break;
+                case "2":{
+                    this.$message({
+                        type:'info',
+                        message:'您已经在【我的书架】界面，不必跳转。'
+                    });
+                    break;
+                }
+                case "3":window.location.assign("../pages/messageCenterInterface.html");break;
+                case "4":window.location.assign("../pages/personalAccountInterface.html");break;
+                default:break;
+            }
+        },
         /*时间戳类型转换*/
         timestampToTime(timestamp) {
             var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -83,7 +102,7 @@ new Vue({
                     type: 'warning'
                 }).then(() => {
 
-                    axios.post("http://localhost:8080/bookshelfInfoController/deleteBookshelfWorkByWorkId/" +
+                    axios.post("/shaohuashuwu/bookshelfInfoController/deleteBookshelfWorkByWorkId/" +
                         id).then(response => {
                         let result = response.data;
                         console.log(response);
@@ -124,7 +143,7 @@ new Vue({
     mounted() {
         //钩子函数，在加载页面后，渲染数据前执行
         //获取本用户的ID和name
-        axios.get("http://localhost:8080/userSession/getPersonalData").then(response => {
+        axios.get("/shaohuashuwu/userSession/getPersonalData").then(response => {
 
             let info = response.data;
             let user_id = info["user_id"];
@@ -132,7 +151,7 @@ new Vue({
             this.user_id = user_id;
             this.user_name = user_name;
 
-            axios.get("http://localhost:8080/bookshelfInfoController/selectBookshelfInfoByUserId/"
+            axios.get("/shaohuashuwu/bookshelfInfoController/selectBookshelfInfoByUserId/"
                 + this.user_id).then(response => {
                 let result = response.data;
 
@@ -145,7 +164,7 @@ new Vue({
 
                     this.book_num = result;
 
-                    axios.get("http://localhost:8080/workWholeInfoVoController/getWorkWholeInfoByuser_id/"
+                    axios.get("/shaohuashuwu/workWholeInfoVoController/getWorkWholeInfoByuser_id/"
                         + this.user_id ).then(response => {
 
                         let objectData = eval(JSON.stringify(response.data));//将字符串转化为数组对象

@@ -13,7 +13,7 @@ new Vue({
     methods: {
         getadminisrtratorInfo(){
             var _this = this;
-            axios.get('http://localhost:8080/adminInfoController/getadmin_id')
+            axios.get('/shaohuashuwu/adminInfoController/getadmin_id')
                 .then(function (response){
                     _this.administrator = response.data;
                 })

@@ -74,7 +74,7 @@ new Vue({
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(() => {
-                        axios.post("http://localhost:8080/transactionInfoController/subscribeChapterGUN/"+"/"+this.user_id+"/"+this.checkedChapter).then(resp => {
+                        axios.post("/shaohuashuwu/transactionInfoController/subscribeChapterGUN/"+"/"+this.user_id+"/"+this.checkedChapter).then(resp => {
                             if (resp.data){
                                 alert("订阅成功！");
                                 window.location.assign("../pages/subscribeToNovelsInterface.html");
@@ -100,14 +100,14 @@ new Vue({
     created() {
 
         //获取用户的userid username
-        axios.get("http://localhost:8080/userSession/getPersonalData").then(response => {
+        axios.get("/shaohuashuwu/userSession/getPersonalData").then(response => {
             let info = response.data;
             let user_id = info["user_id"];
             let user_name = info["user_name"];
             this.user_id = user_id;
             this.user_name = user_name;
             //获取用户金豆数量
-            axios.get("http://localhost:8080/userInfoController/getGoldBeanNum").then(resp => {
+            axios.get("/shaohuashuwu/userInfoController/getGoldBeanNum").then(resp => {
                 let object = JSON.stringify(resp.data);
                 this.gold_bean_num = parseInt(object);
 
@@ -117,11 +117,11 @@ new Vue({
             });
 
             //章节获取章节id
-            axios.get("http://localhost:8080/chapterInfoController/getChapterId").then(response => {
+            axios.get("/shaohuashuwu/chapterInfoController/getChapterId").then(response => {
                 let info = response.data;
                 let chapter_id = info["chapter_id"];
 
-                axios.get("http://localhost:8080/worksInfoController/getWorkNameByChapterId/" +
+                axios.get("/shaohuashuwu/worksInfoController/getWorkNameByChapterId/" +
                     chapter_id).then(response => {
                     this.work_name = response.data;
                 }).catch(error => {
@@ -129,11 +129,11 @@ new Vue({
                 });
 
                 //获取作品ID
-                axios.get("http://localhost:8080/worksInfoController/getWorkIdByChapterId/" +
+                axios.get("/shaohuashuwu/worksInfoController/getWorkIdByChapterId/" +
                     chapter_id).then(response => {
                     let work_id = response.data;
                     //获取作品未订阅的作品
-                    axios.get("http://localhost:8080/chapterInfoController/getChapterInfoByUserIdWorkId/" +
+                    axios.get("/shaohuashuwu/chapterInfoController/getChapterInfoByUserIdWorkId/" +
                         work_id + "/" + user_id).then(resp3 => {
                         let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
                         let commentData = [];
@@ -150,7 +150,7 @@ new Vue({
                         console.log("获取章节e信息失败:" + error);
                     });
                     //获取付费的作品数量
-                    axios.get("http://localhost:8080/chapterInfoController/getChapterCountByUserIdWorkId/" +
+                    axios.get("/shaohuashuwu/chapterInfoController/getChapterCountByUserIdWorkId/" +
                         work_id ).then(resp3 => {
                         let object = JSON.stringify(resp3.data);
                         this.chapterTotalCount = parseInt(object);
@@ -158,7 +158,7 @@ new Vue({
                     });
 
                     //获取作品已订阅的作品
-                    axios.get("http://localhost:8080/chapterInfoController/getChapterInfoByUserIdWorkId2/" +
+                    axios.get("/shaohuashuwu/chapterInfoController/getChapterInfoByUserIdWorkId2/" +
                         work_id + "/" + user_id).then(resp3 => {
                         let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
                         let commentData = [];

@@ -13,7 +13,7 @@ new Vue({
         /*获取举报信息*/
         getReportWholeInfoVo(){
             var _this = this;
-            axios.post('http://localhost:8080/reportWholeInfoVoController/getreportWholeInfoVoByreport_id')
+            axios.post('/shaohuashuwu/reportWholeInfoVoController/getreportWholeInfoVoByreport_id')
                 .then(function (response){
                     _this.reportWholeInfoVo = response.data;
                     _this.reportWholeInfoVo.report_time = _this.timestampToTime(_this.reportWholeInfoVo.report_time);
@@ -31,7 +31,7 @@ new Vue({
         updateReportInfoByReport_id(val){
             var handle_state =val;
             var _this = this;
-            axios.post('http://localhost:8080/reportInfoController/updateReportInfoByReport_id?handle_state='+handle_state)
+            axios.post('/shaohuashuwu/reportInfoController/updateReportInfoByReport_id?handle_state='+handle_state)
                 .then(function (response){
                     if(handle_state == 4){
                         window.location.assign("../pages/changeTheProcessingResultInterface.html");

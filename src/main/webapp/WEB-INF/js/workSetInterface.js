@@ -258,7 +258,7 @@ new Vue({
         /*获取作品信息*/
         selectworkByid() {
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/getworkInfoByWork_id')
+            axios.post('/shaohuashuwu/worksInfoController/getworkInfoByWork_id')
                 .then(function (respone) {
                     _this.worksInfo = respone.data;
                     _this.worksInfoVo = _this.worksInfo;
@@ -282,7 +282,7 @@ new Vue({
         getworkslabelInfo() {
 
             var _this = this;
-            axios.post('http://localhost:8080/workslabelInfoController/getWorkslabelInfoByWork_id')
+            axios.post('/shaohuashuwu/workslabelInfoController/getWorkslabelInfoByWork_id')
                 .then(function (respone) {
                     _this.workslabelInfoVo = respone.data;
                     for(var j=0;j<_this.workslabelInfoVo.length;j++){
@@ -317,7 +317,7 @@ new Vue({
             let fd = new FormData();
             fd.append('file',file);//传文件
             var _this = this;
-            axios.post('http://localhost:8080/uploadCotroller/oss',fd)
+            axios.post('/shaohuashuwu/uploadCotroller/oss',fd)
                 .then(function (response) {
                     _this.imageUrl= response.data;
                     _this.worksInfoVo.work_cover = response.data;
@@ -348,7 +348,7 @@ new Vue({
             }
             var _this = this;
             //修改信息
-            axios.post('http://localhost:8080/worksInfoController/updateworkInfoByWork_id',_this.worksInfo)
+            axios.post('/shaohuashuwu/worksInfoController/updateworkInfoByWork_id',_this.worksInfo)
                 .then(function (response) {
                     _this.selectworkByid();
                 })
@@ -366,7 +366,7 @@ new Vue({
             }
 
             //修改自定义标签信息
-            axios.post('http://localhost:8080/workslabelInfoController/updateWorkslabelInfoByWork_id',_this.workslabelInfo)
+            axios.post('/shaohuashuwu/workslabelInfoController/updateWorkslabelInfoByWork_id',_this.workslabelInfo)
                 .then(function (response) {
                     _this.getworkslabelInfo();
                 })

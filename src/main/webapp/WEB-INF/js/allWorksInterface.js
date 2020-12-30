@@ -373,7 +373,7 @@ new Vue( {
         //点击作品时按钮
         gotoDetail(work_id){
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+            axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response) {
                     window.location.assign("../pages/novelDetailsInterface.html");
                 })
@@ -408,7 +408,7 @@ new Vue( {
          * */
         getworksInfoList(){
             var _this=this;
-            axios.post('http://localhost:8080/worksInfoController/getworksneed',_this.worksInfoneed)
+            axios.post('/shaohuashuwu/worksInfoController/getworksneed',_this.worksInfoneed)
                 .then(function (respone){
                     _this.worksInfoList = respone.data;//相应数据给worksInfoList
 
@@ -442,7 +442,7 @@ new Vue( {
          * */
         gettotalNum(){
             var _this=this;
-            axios.post('http://localhost:8080/worksInfoController/getworkstotal',_this.worksInfoneed)
+            axios.post('/shaohuashuwu/worksInfoController/getworkstotal',_this.worksInfoneed)
                 .then(function (respone){
                     _this.total = respone.data;
                 })

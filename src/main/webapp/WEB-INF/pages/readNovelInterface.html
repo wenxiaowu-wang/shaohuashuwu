@@ -6,6 +6,13 @@
 
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/readNovelInterface.css">
+
+    <link rel="stylesheet" href="../css/rewardWorks.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+    <link rel="stylesheet" href="../css/voteWorks.css">
+    <link rel="stylesheet" href="../css/reportingWorks.css">
+
+
 </head>
 <body id="htmlbody_id">
 
@@ -159,15 +166,16 @@
                     </el-dialog>
 
                     <div class="hrdiv_class"></div>
-                    <div class="list_div_class" @click="testjiaodian()">
+                    <div class="list_div_class" id="report_button" >
                         <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
                         <img class="el_button_img_my" src="../images/shujia-16.png">
-                        <p class="el_button_p_my" > 书架</p>
+                        <p class="el_button_p_my" > 举报</p>
                         </el-button>
                     </div>
 
                     <div class="hrdiv_class"></div>
-                    <div class="list_div_class" @click="testjiaodian()">
+<!--                    <div class="list_div_class" @click="rewardWorksDialog = true">-->
+                    <div class="list_div_class" id="reward_button" >
                         <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
                         <img class="el_button_img_my" src="../images/shujia-16.png">
                         <p class="el_button_p_my" > 打赏</p>
@@ -175,7 +183,7 @@
                     </div>
 
                     <div class="hrdiv_class"></div>
-                    <div class="list_div_class" @click="testjiaodian()">
+                    <div class="list_div_class" id="vote_button">
                         <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
                         <img class="el_button_img_my" src="../images/shujia-16.png">
                         <p class="el_button_p_my" > 投票</p>
@@ -245,12 +253,191 @@
         </div>
     </div>
 
+<!--    打赏模块  -->
+    <div id="dialogForm_reward">
+        <el-dialog title="打赏作品" :visible.sync="dialogFormVisible" width="40%" class="dialog_all">
+            <el-form :model="form">
+                <el-form-item label="作品名：" :label-width="formLabelWidth">
+                    <label><span class="workName">{{form.workName}}</span></label>
+                </el-form-item>
+                <el-form-item label="章节名：" :label-width="formLabelWidth">
+                    <label><span class="chapter_name">{{form.chapterTitle}}</span></label>
+                </el-form-item>
+                <el-form-item label="打赏数量：" :label-width="formLabelWidth">
+                    <el-radio-group  v-model="form.beanNum" @change="changeCoin" class="group_button">
+                        <el-radio-button label=50 class="radio_button">50金豆</el-radio-button>
+                        <el-radio-button label=100 class="radio_button">100金豆</el-radio-button>
+                        <el-radio-button label=200 class="radio_button">200金豆</el-radio-button>
+                        <el-radio-button label=300 class="radio_button">300金豆</el-radio-button>
+                        <el-radio-button label=500 class="radio_button">500金豆</el-radio-button>
+                        <el-radio-button label=1000 class="radio_button">1,000金豆</el-radio-button>
+                        <el-radio-button label=2000 class="radio_button">2,000金豆</el-radio-button>
+                        <el-radio-button label=5000 class="radio_button">5,000金豆</el-radio-button>
+                        <el-radio-button label=10000 class="radio_button">10,000金豆</el-radio-button>
+
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="账户余额：" :label-width="formLabelWidth">
+                    <label><span id="balanceBean">{{form.balanceBean}}</span> 金豆</label>
+                    <label ><span class="tips">&nbsp;&nbsp;{{balanceTips}}</span></label>
+
+                </el-form-item>
+                <el-form-item label="本次打赏：" :label-width="formLabelWidth">
+                    <label><span class="thisRewardNum"> {{form.beanNum}}</span> 金豆 = <span class="thisRewardNum">{{form.goldCoin}}</span> 金币</label>
+                </el-form-item>
+            </el-form>
+
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="rewardWorks">确 定</el-button>
+            </div>
+
+        </el-dialog>
+
+
+    </div>
+
+<!--    投票模块 -->
+    <div id="dialogForm_vote">
+        <el-dialog title="投推荐票" :visible.sync="dialogFormVisible" width="40%" class="dialog_all">
+            <el-form :model="form">
+                <el-form-item label="作品名：" :label-width="formLabelWidth">
+                    <label><span class="workName">{{form.workName}}</span></label>
+                </el-form-item>
+                <el-form-item label="章节名：" :label-width="formLabelWidth">
+                    <label><span class="chapter_name">{{form.chapterTitle}}</span></label>
+                </el-form-item>
+                <el-form-item label="投票数量：" :label-width="formLabelWidth">
+                    <el-radio-group  v-model="form.voteNum" @change="changeVote" class="group_button">
+                        <el-radio-button label=1 class="radio_button" border size="mini">1 推荐票</el-radio-button>
+                        <el-radio-button label=2 class="radio_button" border size="mini">2 推荐票</el-radio-button>
+                        <el-radio-button label=3 class="radio_button" border size="mini">3 推荐票</el-radio-button>
+                        <el-radio-button label=4 class="radio_button" border size="mini">4 推荐票</el-radio-button>
+                        <el-radio-button label=5 class="radio_button" border size="mini">5 推荐票</el-radio-button>
+                        <el-radio-button label=6 class="radio_button" border size="mini">6 推荐票</el-radio-button>
+                        <el-radio-button label=7 class="radio_button" border size="mini">7 推荐票</el-radio-button>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="注意：" :label-width="formLabelWidth">
+                    <div class="tips_div">
+                        <label>{{voteTipsFont}}</label>
+                    </div>
+                </el-form-item>
+                <el-form-item label="剩余推荐票：" :label-width="formLabelWidth">
+                    <label><span id="balanceTicket">{{form.balanceTicket}}</span>&nbsp;张推荐票</label>
+                    <label ><span class="tips">&nbsp;&nbsp;{{balanceTips}}</span></label>
+
+                </el-form-item>
+            </el-form>
+
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="voteWorks">确 定</el-button>
+            </div>
+
+        </el-dialog>
+    </div>
+
+<!--    举报作品  -->
+    <div id="reportingWorks">
+        <el-dialog title="举报作品" :visible.sync="dialogFormVisible" width="40%" class="el_dialog">
+            <div class="dialog_content">
+                <div class="dialog_content_header">
+                    <div class="dialog_content_header_title">
+                        <label>举报对象:</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="dialog_content_header_content">
+                        <label>举报作品：</label>&nbsp;&nbsp;{{workName}}<br/><br/>
+                        <label>举报章节：</label>&nbsp;&nbsp;{{chapterTitle}}<br/>
+                    </div>
+                </div>
+                <div class="dialog_content_hr"><hr></div>
+                <div class="dialog_content_center">
+                    <div class="center_title">
+                        <label>举报原因</label>&nbsp;&nbsp;
+                        <el-button type="text" @click="toReportAnnouncement">？</el-button>
+                    </div>
+                    <div class="center_checkbox_group">
+                        <el-checkbox-group
+                                v-model="checkedList"
+                                :min="1"
+                                :max="3">
+                            <div class="three_checkbox_1">
+                                <el-checkbox label=1 :border="true">政治敏感</el-checkbox>
+                                <el-checkbox label=2 :border="true">淫秽色情</el-checkbox>
+                                <el-checkbox label=3 :border="true">欺诈广告</el-checkbox>
+                            </div>
+                            <div class="three_checkbox_2">
+                                <el-checkbox label=4 :border="true">暴力血腥</el-checkbox>
+                                <el-checkbox label=5 :border="true">低俗恶趣</el-checkbox>
+                                <el-checkbox label=6 :border="true">侵权抄袭</el-checkbox>
+                            </div>
+                            <div class="three_checkbox_3">
+                                <el-checkbox label=7 :border="true">不实谣言</el-checkbox>
+                                <el-checkbox label=8 :border="true">宣传赌博</el-checkbox>
+                                <el-checkbox label=9 :border="true">人身攻击</el-checkbox>
+                            </div>
+                        </el-checkbox-group>
+                    </div>
+                </div>
+                <div class="dialog_content_footer">
+                    <label>选择举报原因不得少于一个，以及不得多于三个</label>
+                </div>
+
+            </div>
+
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="reportingWorks">确 定</el-button>
+            </div>
+
+        </el-dialog>
+
+
+    </div>
+
 </body>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
 <script src="../js/readNovelInterface.js"></script>
+<script src="../js/rewardWorks.js"></script>
+<script src="../js/voteWorks.js"></script>
+<script src="../js/reportingWorks.js"></script>
 
+<script>
+    document.getElementById("reward_button").addEventListener("click", displayReward);
+    document.getElementById("vote_button").addEventListener("click", displayVote);
+    document.getElementById("report_button").addEventListener("click", displayReport);
 
+    //打赏对话框
+    function displayReward() {
+        rewardInterface_vm.form.workId = readNovelInterface_vm.worksInfo.work_id;
+        rewardInterface_vm.form.chapterId = readNovelInterface_vm.chapterInfo.chapter_id;
+        rewardInterface_vm.form.workName = readNovelInterface_vm.worksInfo.work_name;
+        rewardInterface_vm.form.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
+        rewardInterface_vm.dialogFormVisible = true;
+    }
+    //投票对话框
+    function displayVote() {
+        voteWorksInterface_vm.form.workId = readNovelInterface_vm.worksInfo.work_id;
+        voteWorksInterface_vm.form.chapterId = readNovelInterface_vm.chapterInfo.chapter_id;
+        voteWorksInterface_vm.form.workName = readNovelInterface_vm.worksInfo.work_name;
+        voteWorksInterface_vm.form.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
+        voteWorksInterface_vm.dialogFormVisible = true;
+    }
+
+    //举报对话框
+    function displayReport() {
+        reportingWorksInterface_vm.workId = readNovelInterface_vm.worksInfo.work_id;
+        reportingWorksInterface_vm.chapterId = readNovelInterface_vm.chapterInfo.chapter_id;
+        reportingWorksInterface_vm.workName = readNovelInterface_vm.worksInfo.work_name;
+        reportingWorksInterface_vm.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
+        reportingWorksInterface_vm.dialogFormVisible = true;
+    }
+
+</script>
 
 </html>

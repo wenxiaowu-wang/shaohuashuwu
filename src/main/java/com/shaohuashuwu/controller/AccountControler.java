@@ -139,7 +139,7 @@ public class AccountControler {
 
 
         System.out.println("zzzzzzzzzzzzz--------");
-        return "handlingReportInfoInterface.html";
+        return "adminLoginInterface.html";
     }
 
     @RequestMapping("/jubao")

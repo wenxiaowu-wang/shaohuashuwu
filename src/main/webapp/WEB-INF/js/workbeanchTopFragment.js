@@ -14,7 +14,7 @@ new Vue({
         //获取作者信息
         getAuthorInfo(){
             var _this = this;
-            axios.post('http://localhost:8080/authorInfoController/getAuthorInfoVo')
+            axios.post('/shaohuashuwu/authorInfoController/getAuthorInfoVo')
                 .then(function (response){
                     _this.authorInfo = response.data;
                 })
@@ -25,7 +25,7 @@ new Vue({
         //获取作品数量
         getWorksNum(){
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/getWorksNumByUser_id')
+            axios.post('/shaohuashuwu/worksInfoController/getWorksNumByUser_id')
                 .then(function (response){
                     _this.worksNum = response.data;
                 })

@@ -42,7 +42,7 @@ new Vue({
             this.rankingInputInfoVo.transaction_type = 4;
             var _this = this;
 
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response4) {
                     _this.collectionInfoVoList = response4.data;
                     for (var i=0;i<_this.collectionInfoVoList.length;i++) {
@@ -75,7 +75,7 @@ new Vue({
             console.log("推荐榜");
             this.rankingInputInfoVo.transaction_type = 3;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
                 .then(function (response3) {
                     _this.recommendInfoVoList = response3.data;
                     for (var i=0;i<_this.recommendInfoVoList.length;i++) {
@@ -110,7 +110,7 @@ new Vue({
             console.log("订阅榜");
             this.rankingInputInfoVo.transaction_type = 2;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.subscribeInfoVoList = response.data;
 
@@ -146,7 +146,7 @@ new Vue({
             this.rankingInputInfoVo.transaction_type = 1;
             var _this = this;
             console.log("----"+_this.rankingInputInfoVo);
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo',this.rankingInputInfoVo)
                 .then(function (response) {
                     _this.rewardInfoVoList = response.data;
                     for (var i=0;i<_this.rewardInfoVoList.length;i++) {
@@ -246,7 +246,7 @@ new Vue({
             }
             else {
                 var _this = this;
-                axios.post('http://localhost:8080/junitSessionController/addRankingTypeToSession?rankingType='+rankingType)
+                axios.post('/shaohuashuwu/junitSessionController/addRankingTypeToSession?rankingType='+rankingType)
                     .then(function (response) {
                         window.location.assign("../pages/sectionRankingInterface.html");
                     })

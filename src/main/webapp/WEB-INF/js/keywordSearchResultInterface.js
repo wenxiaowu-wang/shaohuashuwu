@@ -69,7 +69,7 @@ new Vue({
         startSearchWorkInfo() {
             var _this = this;
             console.log("上传信息"+JSON.stringify(_this.worksInfoneed));
-            axios.post('http://localhost:8080/workWholeInfoVoController/getWorkWholeInfoBySelectinput',_this.worksInfoneed)
+            axios.post('/shaohuashuwu/workWholeInfoVoController/getWorkWholeInfoBySelectinput',_this.worksInfoneed)
                 .then(function (response) {
 
                         _this.worksWholeInfoVoList = response.data;
@@ -163,7 +163,7 @@ new Vue({
         //点击作品时按钮
         gotoDetail(work_id){
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/addWork_idSession?work_id='+work_id)
+            axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response) {
                     window.location.assign("../pages/novelDetailsInterface.html");
                 })
@@ -176,7 +176,7 @@ new Vue({
         clickUser_name(author_id){
             console.log("作者id："+author_id);
             var _this = this;
-            axios.post('http://localhost:8080/userInfoController/addAuthor_idSession?author_id='+author_id)
+            axios.post('/shaohuashuwu/userInfoController/addAuthor_idSession?author_id='+author_id)
                 .then(function (response) {
                     window.location.assign("../pages/authorInfoInterface.html");
                 })
@@ -190,7 +190,7 @@ new Vue({
             console.log("推荐榜");
             this.rankingInputInfoVo.transaction_type = 3;
             var _this = this;
-            axios.post('http://localhost:8080/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
+            axios.post('/shaohuashuwu/rankingInfoController/getRankingInfo', this.rankingInputInfoVo)
                 .then(function (response3) {
                     _this.recommendInfoVoList = response3.data;
                     console.log("排行信息")

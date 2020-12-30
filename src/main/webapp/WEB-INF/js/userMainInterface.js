@@ -27,7 +27,7 @@ new Vue( {
         /*获取用户信息*/
         startUserInfo(){
             var _this = this;
-            axios.get('http://localhost:8080/userInfoController/getUserLoginInfo')
+            axios.get('/shaohuashuwu/userInfoController/getUserLoginInfo')
                 .then(function (response){
                     _this.userInfo = response.data;
                 })
@@ -39,7 +39,7 @@ new Vue( {
         /*获取注册人数*/
         startUserNum(){
             var _this = this;
-            axios.get('http://localhost:8080/userInfoController/getUserNum')
+            axios.get('/shaohuashuwu/userInfoController/getUserNum')
                 .then(function (response){
                     _this.userNum = response.data;
                     console.log("网站人数"+_this.userNum);
@@ -77,7 +77,7 @@ new Vue( {
         /*作者专区*/
         //跳转，未修改
         gotoAuthorPrefecture(){
-            window.location.assign("../pages/userMainInterface.html");
+            window.location.assign("../pages/authorVerifyManageInterface.html");
         },
         /*个人中心*/
         //跳转，未修改
@@ -118,7 +118,7 @@ new Vue( {
                 var _this = this;
                 console.log(_this.select_input);
 
-                axios.post('http://localhost:8080/worksInfoController/addSelectInfotoSession',_this.work_info)
+                axios.post('/shaohuashuwu/worksInfoController/addSelectInfotoSession',_this.work_info)
                     .then(function (response){
                         window.location.assign("../pages/keywordSearchResultInterface.html");
                     }.bind(this))

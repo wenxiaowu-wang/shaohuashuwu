@@ -30,7 +30,6 @@ public class AuthorInfoController {
     @RequestMapping("/getAuthorInfoVo")
     public AuthorInfoVo getAuthorInfoVo( HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
         return authorInfoVoService.getAuthorInfoVo(user_id);

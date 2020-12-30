@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作品数据统计</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
+    <link rel="stylesheet" href="../css/workDataStatistics.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+
+</head>
+<body>
+<div >
+    <!--顶部标题栏-->
+    <div class="authorMainTop_div_class" id="authorMainTop_div_id">
+        <div class="authorMainTopCenter_div_class">
+            <div class="shaohualogo_div_class">
+                <img  class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
+            </div>
+            <div class="authorMainTopUserInfo_div_class">
+<!--                <p class="authorMainTopUserInfo_p_class">欢迎进入作者平台！</p>-->
+                <p class="authorMainTopUserInfo_p_class"></p>
+            </div>
+            <div class="authorMainTopButton_div_class">
+                <el-tooltip class="item" effect="dark" content="返回读者平台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div3_class">
+                <img   class="authorMainTop_button_class" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="authorMainTop_hidediv_class" id="authorMainTop_hidediv_id">
+                    <a class="authorMainTop_adiv1_class">用户名：{{authorInfo.user_name}}</a>
+                    <a class="authorMainTop_adiv1_class">作品数量：{{worksNum}}</a>
+                    <a class="authorMainTop_adiv1_class">可提现金币：{{authorInfo.gold_coin_num}}</a>
+                    <div style="width:170px;border:1px solid #cccccc;"></div>
+                    <a class="authorMainTop_adiv2_class" id="signOut_id" href="//www.runoob.com">退出</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--左部标题栏和主题内容-->
+    <div class="authorMain_class" >
+        <div class="authorMainLeft_div_class">
+            <ul class="authorMainLeft_ul_class">
+                <li  id="worksBean"  class="authorMainLeft_li_class"   >
+                    <img src="../images/authorworks-36.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id">工作台</a></li>
+                </li>
+
+                <li id="worksMangagement" class="authorMainLeft_li_class" >
+                    <img src="../images/authormangagmentNew-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="worksMangagementp_id">作品管理</a></li>
+                </li>
+                <li id="workDataStatistics" class="authorMainLeft_li_class" >
+                    <img src="../images/authordata-32.png" class="authorMainLeft_img_class"  >
+                    <a href="../pages/workDataStatisticsInterface.html" class="authorMainLeft_a_class" id="workeDatap-id">数据中心</a></li>
+
+                </li>
+                <li id="remuneration"  class="authorMainLeft_li_class" >
+                    <img src="../images/authorremunration-32.png" class="authorMainLeft_img_class" >
+                    <a href="../pages/remunerationInterface.html" class="authorMainLeft_a_class" id="renmunerationp-id">稿酬收入</a></li>
+
+                </li>
+                <li id="interactionManagement"  class="authorMainLeft_li_class">
+                    <img src="../images/authorinteraction-32.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="interactionManagementp-id">互动管理</a></li>
+                </li>
+            </ul>
+        </div>
+
+<!--    主要内容-->
+    <div id="workDataStatistics_div">
+        <div class="content_title">
+            <p id = "remuneration-p-id">数据统计</p>
+            <hr id="remuneration-hr-id">
+        </div>
+        <div class="content_body">
+            <el-tabs type="border-card">
+                <el-tab-pane label="订阅统计">
+                    <div class="tab_pane">
+                        <div class="tab_pane_header">
+                            <div class="pane_header_tips">
+                                <label>选择作品：</label>
+                            </div>
+                            <div class="pane_header_selector">
+                                <el-select v-model="select.value_1" placeholder="请选择作品">
+                                    <el-option
+                                            v-for="item in work_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="pane_header_button">
+                                <el-button type="primary" plain @click="selectWork_1">查看</el-button>
+                            </div>
+                        </div>
+                        <div class="pane_header_hr">
+                            <hr>
+                        </div>
+                        <div class="figure_all">
+                            <div class="subscription_statistics">
+                                <div class="subscription_all">
+                                    <span>总订阅：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>{{this.subscription_data.all}}</label></span>
+                                </div>
+                                <div class="subscription_one">
+                                    <div class="subscription_one_tips">
+                                        昨日新增订阅量
+                                    </div>
+                                    <div class="subscription_one_value">
+                                        {{this.subscription_data.yesterday}}
+                                    </div>
+                                </div>
+                                <div class="subscription_one">
+                                    <div class="subscription_one_tips">
+                                        章节平均订阅量
+                                    </div>
+                                    <div class="subscription_one_value">
+                                        {{this.subscription_data.average}}
+                                    </div>
+                                </div>
+                                <div class="subscription_one">
+                                    <div class="subscription_one_tips">
+                                        章节最高订阅量
+                                    </div>
+                                    <div class="subscription_one_value">
+                                        {{this.subscription_data.most}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="figure_subscription" style="width: 750px;height: 380px">
+                                <!--图形空间-->
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="读者群体画像">
+                    <div class="tab_pane">
+                        <div class="tab_pane_header">
+                            <div class="pane_header_tips">
+                                <label>选择作品：</label>
+                            </div>
+                            <div class="pane_header_selector">
+                                <el-select v-model="select.value_2" placeholder="请选择作品">
+                                    <el-option
+                                            v-for="item in work_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="pane_header_button">
+                                <el-button type="primary" plain @click="selectWork_2">查看</el-button>
+                            </div>
+                        </div>
+                        <div class="pane_header_hr">
+                            <hr>
+                        </div>
+                        <div class="figure_all">
+                            <div class="figure_header">
+                                <div class="figure_all_tips">
+                                    <label>读者性别年龄比例分布</label>
+                                </div>
+                            </div>
+                            <div class="figure_content">
+                                <!--图形空间-->
+                                <div id="figure_reader_male" style="width: 400px;height: 420px">
+
+                                </div>
+                                <div id="figure_reader_female" style="width: 400px;height: 420px">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="读者行为偏好">
+                    <div class="tab_pane">
+                        <div class="tab_pane_header">
+                            <div class="pane_header_tips">
+                                <label>选择作品：</label>
+                            </div>
+                            <div class="pane_header_selector">
+                                <el-select v-model="select.value_3" placeholder="请选择作品">
+                                    <el-option
+                                            v-for="item in work_options"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="pane_header_button">
+                                <el-button type="primary" plain @click="selectWork_3">查看</el-button>
+                            </div>
+                        </div>
+                        <div class="pane_header_hr">
+                            <hr>
+                        </div>
+                        <div class="figure_all">
+                            <div class="figure_header">
+                                <div class="figure_all_tips">
+                                    <label>读者行为统计分析</label>
+                                </div>
+                            </div>
+                            <div class="figure_content">
+                                <!--图形空间-->
+                                <div id="figure_behavior_time" style="width: 400px;height: 420px">
+
+                                </div>
+                                <div id="figure_behavior_like" style="width: 400px;height: 420px">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+        <div class="content_bottom">
+            <label>
+                该数据由【韶华书屋】平台统计获得，同时感谢echarts的开源使用！
+            </label>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+</body>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+
+<script src="../js/workDataStatistics.js"></script>
+
+
+
+</html>

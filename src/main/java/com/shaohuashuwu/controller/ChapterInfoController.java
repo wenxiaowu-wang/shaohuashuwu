@@ -87,7 +87,7 @@ public class ChapterInfoController {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("work_id");
         int work_id=Integer.parseInt(String.valueOf(msg));
-        session.setAttribute("user_id",1);
+
         Object user_id_o = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(user_id_o));
         int num = chapterInfoService.addchapter_info(chapterInfo,work_id,user_id);

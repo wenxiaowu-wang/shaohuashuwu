@@ -30,7 +30,7 @@ new Vue({
         /*获取举报信息*/
         getReportWholeInfoVoList(){
             var _this = this;
-            axios.post('http://localhost:8080/reportWholeInfoVoController/getreportWholeInfoVoList',_this.adminSelectInfoVo)
+            axios.post('/shaohuashuwu/reportWholeInfoVoController/getreportWholeInfoVoList',_this.adminSelectInfoVo)
                 .then(function (response){
                     _this.reportWholeInfoVoList = response.data;
                     for(var i=0;i<_this.reportWholeInfoVoList.length;i++){
@@ -44,7 +44,7 @@ new Vue({
         /*获取举报信息数量*/
         getReportWholeInfoTotal(){
             var _this = this;
-            axios.post('http://localhost:8080/reportWholeInfoVoController/getreportWholeInfoVoTotal')
+            axios.post('/shaohuashuwu/reportWholeInfoVoController/getreportWholeInfoVoTotal')
                 .then(function (response){
                     _this.total = response.data;
                 }.bind(this))
@@ -63,7 +63,7 @@ new Vue({
 
             var _this = this;
             var report_id = val;
-            axios.post('http://localhost:8080/reportInfoController/addReport_idtoSession?report_id='+report_id)
+            axios.post('/shaohuashuwu/reportInfoController/addReport_idtoSession?report_id='+report_id)
                 .then(function (response){
                     window.location.assign("../pages/handleWorksInterface.html");
                 }.bind(this))

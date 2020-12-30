@@ -53,7 +53,7 @@ new Vue({
                 });
                 return;
             } else {
-                axios.get('http://localhost:8080/userInfoController/userLogin/' +
+                axios.get('/shaohuashuwu/userInfoController/userLogin/' +
                     this.userInfo.phone_number + '/' + this.userInfo.password).then(response => {
 
                     let loginResult = response.data;
@@ -66,7 +66,7 @@ new Vue({
                     } else {
                         //将手机号  密码 code等传入session
                         this.smsCode = '0';
-                        axios.get("http://localhost:8080/userSession/saveUserPhoneNumber/" +
+                        axios.get("/shaohuashuwu/userSession/saveUserPhoneNumber/" +
                             this.userInfo.phone_number+"/"+ this.userInfo.password +"/"+ this.smsCode ).then(res => {
                         }).catch(error => {
                             console.log(error);
@@ -74,7 +74,7 @@ new Vue({
                         });
 
                        // 获取用户数据
-                        axios.get('http://localhost:8080/userInfoController/getUserIdNameAndHeaderByPhone/' +
+                        axios.get('/shaohuashuwu/userInfoController/getUserIdNameAndHeaderByPhone/' +
                             this.userInfo.phone_number).then(response => {
                             let user_id1 = response.data["user_id"];
                             let user_name1 = response.data["user_name"];
@@ -83,7 +83,7 @@ new Vue({
                             let birthday1 = response.data["birthday"];
                             let area1 = response.data["area"];
                             //保存到userSession
-                            axios.post("http://localhost:8080/userSession/savePersonalData/" +
+                            axios.post("/shaohuashuwu/userSession/savePersonalData/" +
                                 user_id1 + "/" + user_name1 + "/" + head_portrait1+"/"+ gender1 + "/" + birthday1 + "/" + area1).then(resp => {
                                 console.log("用户数据同步到session中。");
                                 //alert("用户数据同步到session中")
@@ -105,7 +105,7 @@ new Vue({
         },
         sendSms() {
 
-                axios.get('http://localhost:8080/smsCodeSession/loginSendSms/' +
+                axios.get('/shaohuashuwu/smsCodeSession/loginSendSms/' +
                     this.phone_number).then(response => {
                     console.log(response.data);
                 }).catch(error => {
@@ -136,7 +136,7 @@ new Vue({
                 });
                 return;
             } else {
-                axios.get('http://localhost:8080/smsCodeSession/compareSms/' +
+                axios.get('/shaohuashuwu/smsCodeSession/compareSms/' +
                     this.smsCode + "/" + this.phone_number).then(response => {
 
                     let compareResult = response.data;
@@ -150,7 +150,7 @@ new Vue({
                         return false;
                     } else {
 
-                        axios.get('http://localhost:8080/userInfoController/userLogin2/' +
+                        axios.get('/shaohuashuwu/userInfoController/userLogin2/' +
                             this.phone_number).then(response => {
                             let loginResult = response.data;
                             console.log(typeof (loginResult));
@@ -161,7 +161,7 @@ new Vue({
                                 });
                             } else {
                                 this.password = '0';
-                                axios.get("http://localhost:8080/userSession/saveUserPhoneNumber/" +
+                                axios.get("/shaohuashuwu/userSession/saveUserPhoneNumber/" +
                                     this.phone_number+"/"+ this.password +"/"+ this.smsCode ).then(res => {
                                 }).catch(error => {
                                     console.log(error);
@@ -169,7 +169,7 @@ new Vue({
                                 });
 
                                 // 获取用户数据
-                                axios.get('http://localhost:8080/userInfoController/getUserIdNameAndHeaderByPhone/' +
+                                axios.get('/shaohuashuwu/userInfoController/getUserIdNameAndHeaderByPhone/' +
                                     this.phone_number).then(response => {
                                     let user_id1 = response.data["user_id"];
                                     let user_name1 = response.data["user_name"];
@@ -179,7 +179,7 @@ new Vue({
                                     let area1 = response.data["area"];
                                     //保存到userSession
 
-                                    axios.post("http://localhost:8080/userSession/savePersonalData/" +
+                                    axios.post("/shaohuashuwu/userSession/savePersonalData/" +
                                         user_id1 + "/" + user_name1 + "/" + head_portrait1+"/"+ gender1 + "/" + birthday1 + "/" + area1).then(resp => {
                                         console.log("用户数据同步到session中。");
 

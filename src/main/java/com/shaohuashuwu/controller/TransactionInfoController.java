@@ -5,6 +5,7 @@ import com.shaohuashuwu.domain.vo.TransactionInfoVo;
 import com.shaohuashuwu.service.TransactionInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -126,6 +127,16 @@ public class TransactionInfoController {
         map.put("user_id",user_id);
         map.put("user_name",user_name);
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/postIntoSession/{work_id}/{chapter_id}")
+    public String postIntoSession(Model model,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "chapter_id")Integer chapter_id){
+        //跳转时模拟已经登录，将用户的账号以及用户名信息放进session域中
+        //通过此代码块从session中获取
+        model.addAttribute("work_id",work_id);
+        model.addAttribute("chapter_id",chapter_id);
+        return "work_id and chapter_id success";
     }
 
     /**

@@ -57,7 +57,7 @@ new Vue({
         getWorksInfoList(){
             var _this = this;
             console.log("作品信息");
-            axios.post('http://localhost:8080/worksInfoController/getworkInfoByWork_id')
+            axios.post('/shaohuashuwu/worksInfoController/getworkInfoByWork_id')
                 .then(function (response){
                     _this.worksInfo = response.data;
                     console.log("作品信息"+JSON.stringify(_this.worksInfo));
@@ -70,7 +70,7 @@ new Vue({
         getcatalogInfo(){
             var _this = this;
             //传入作品id，获取目录
-            axios.post('http://localhost:8080/catalogInfoVoController/getchaptercatalogBywork_id2')
+            axios.post('/shaohuashuwu/catalogInfoVoController/getchaptercatalogBywork_id2')
                 .then(function (response) {
                     _this.catalogInfoVoList = response.data;
                     console.log("作品目录信息--："+JSON.stringify(_this.catalogInfoVoList));
@@ -161,7 +161,7 @@ new Vue({
         //点击保存按钮
         savechapter(){
             var _this = this;
-            axios.post('http://localhost:8080/chapterInfoController/addchapter_info',_this.chapterInfo)
+            axios.post('/shaohuashuwu/chapterInfoController/addchapter_info',_this.chapterInfo)
                 .then(function (respone) {
                     console.log(respone.data);
                     if(respone.data != 0){

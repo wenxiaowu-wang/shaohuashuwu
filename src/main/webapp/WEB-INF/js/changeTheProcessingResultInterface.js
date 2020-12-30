@@ -41,7 +41,7 @@ new Vue({
             console.log("信息：("+JSON.stringify(this.adminSelectInfoVo.work_name)+")");
 
             var _this = this;
-            axios.post('http://localhost:8080/reportWholeInfoVoController/gethandleResultList',_this.adminSelectInfoVo)
+            axios.post('/shaohuashuwu/reportWholeInfoVoController/gethandleResultList',_this.adminSelectInfoVo)
                 .then(function (response){
                     _this.handleResultList = response.data;
                     for(var i=0;i<_this.handleResultList.length;i++){
@@ -58,7 +58,7 @@ new Vue({
         /*获取处理结果数量*/
         gethandleResultTotal(){
             var _this = this;
-            axios.post('http://localhost:8080/reportWholeInfoVoController/gethandleResultListTotal',_this.adminSelectInfoVo)
+            axios.post('/shaohuashuwu/reportWholeInfoVoController/gethandleResultListTotal',_this.adminSelectInfoVo)
                 .then(function (response){
                     _this.total = response.data;
 
@@ -79,7 +79,7 @@ new Vue({
 
             var _this = this;
             var report_id = val;
-            axios.post('http://localhost:8080/reportInfoController/addReport_idtoSession?report_id='+report_id)
+            axios.post('/shaohuashuwu/reportInfoController/addReport_idtoSession?report_id='+report_id)
                 .then(function (response){
                     window.location.assign("../pages/changeTheProcessingInterface.html");
                 }.bind(this))

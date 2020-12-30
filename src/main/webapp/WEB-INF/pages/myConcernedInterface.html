@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的关注</title>
+    <link rel="stylesheet" href="../css/userModel.css">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/myConcerned.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+</head>
+<body>
+<div id="myConcerned">
+    <div class="top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips"><el-button type="text" icon="el-icon-back" @click="backHomePage">{{topTips}}</el-button></div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+            <div class="top_data">
+                <br/>
+                {{user_name}}<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+    <div class="left_private_letter">
+        <el-drawer
+                title="我是标题"
+                :visible.sync="drawer"
+                direction="ltr"
+                size="30%"
+                :with-header="false"
+                :before-close="handleClose" class="left_drawer">
+            <div class="letter_body">
+                <div class="letter_send_to">
+                    <div class="send_to_user_portrait">
+                        <img :src="'../images/avatar/'+privateLetter.headPortrait+'.jpg'">
+                    </div>
+                    <div class="send_to_user_name">
+                        {{privateLetter.sendToName}}
+                    </div>
+                </div>
+                <div class="letter_title">
+                    <div class="letter_tips">
+                        信件标题：
+                    </div>
+                    <div class="letter_title_word">
+                        <el-input
+                                type="text"
+                                placeholder="请输入标题"
+                                v-model="privateLetter.title"
+                                maxlength="20"
+                                minlength="1"
+                                show-word-limit
+                        >
+                        </el-input>
+                    </div>
+                </div>
+                <div class="letter_content">
+                    <div class="letter_tips">
+                        信件内容：
+                    </div>
+                    <div class="letter_content_word">
+                        <el-input
+                                type="textarea"
+                                placeholder="请输入内容"
+                                v-model="privateLetter.content"
+                                maxlength="100"
+                                minlength="10"
+                                :autosize="{ minRows: 8, maxRows: 10}"
+                                show-word-limit
+                        >
+                        </el-input>
+                    </div>
+                </div>
+                <div class="letter_send_by">
+                    <div class="send_by_user_name">
+                        {{user_name}}
+                    </div>
+                    <div class="send_by_user_portrait">
+                        <img :src="'../images/avatar/'+user_avatar+'.jpg'">
+                    </div>
+                </div>
+                <div class="letter_send">
+                    <el-button type="info" icon="el-icon-message" size="small" @click="sendLetter()">发送</el-button>
+                </div>
+            </div>
+        </el-drawer>
+    </div>
+    <div class="body_left">
+        <!--
+        <p>查看关注信息</p>
+        <p>编辑个人资料</p>
+        <p>更改账户信息</p>
+        <p></p>
+        <p>关注信息</p>-->
+
+
+        <div class="body_left_carousel">
+            <el-carousel :interval="4000" type="card" height="200px">
+                <el-carousel-item v-for="item in 6" :key="item">
+                    <h3 class="medium">{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
+    </div>
+    <div class="body">
+        <div class="body_header">
+            <div class="body_img">
+                <div class="body_img_img">
+                    <img id="avatar" :src="imageURL_header+user_avatar+imageURL_suffix">
+                </div>
+                <div class="body_img_content">
+
+                    <label>{{user_name}}<br/>&nbsp;&nbsp;&nbsp;<span>互相关注： </span>{{totals.total1}}&nbsp;&nbsp;
+                        <span>关注： </span>{{totals.total2}}&nbsp;&nbsp;<span>粉丝： </span>{{totals.total3}}&nbsp;&nbsp;</label>
+                </div>
+            </div>
+        </div>
+        <div class="body_center">
+            <el-tabs type="border-card">
+                <el-tab-pane label="互相关注">
+                    <div class="users" v-for="(user,index) in displayData.eachAttentionData">
+                        <div class="users_avatar">
+                            <!-- <img :src="'../images/avatar/'+user.head_portrait+'.jpg'">-->
+                            <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                        </div>
+                        <div class="users_content">
+                            <div class="users_name">
+                                {{user.user_name}}
+                            </div>
+                            <div class="users_works_all">
+                                <el-popover
+                                        placement="left-start"
+                                        title="【作品】:"
+                                        width="400"
+                                        trigger="hover"
+                                        :content="user.works_name"
+                                        popper-class="el_popover">
+                                    <el-button size="small" type="text" slot="reference">
+                                        <div class="users_works">
+                                            作品：{{user.works_name}}
+                                        </div>
+                                    </el-button>
+                                </el-popover>
+                            </div>
+                        </div>
+
+                        <div class="users_operate">
+                            <div class="operate_button">
+                                <el-button type="primary" round size="medium" plain @click="chat(user.user_id,user.user_name,user.head_portrait)">私信</el-button>
+                            </div>
+                            <div class="operate_button">
+                                <el-button type="primary" round size="medium" plain @click="accessUser(user.user_id)">访问</el-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="noDataTips" :style="'display:'+displayDivs.displayDiv1+';'">
+<!--                        <p>hello world</p>-->
+                    </div>
+                    <div class="users_pagination">
+                        <!--
+                            size-change:pageSize 改变时会触发,参数：每页条数
+                            current-change:currentPage 改变时会触发
+                            current-page.sync:当前页数，支持 .sync 修饰符
+                            page-size:每页显示条目个数，支持 .sync 修饰符
+                            layout:组件布局，子组件名用逗号分隔 String：'prev, pager, next, jumper, ->, total'
+                            total:总条目数
+                        -->
+                        <el-pagination
+                                @size-change="handleSizeChange"
+                                @current-change="handleCurrentChange_each"
+                                :current-page.sync="currentPage"
+                                :page-size="pageSize"
+                                layout="prev, pager, next, jumper"
+                                :total="totals.total1">
+                        </el-pagination>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="我的关注">
+                    <div class="users" v-for="(user,index) in displayData.attentionData">
+                        <div class="users_avatar">
+<!--                            <img :src="'../images/avatar/'+user.head_portrait+'.jpg'">-->
+                            <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                        </div>
+                        <div class="users_content">
+                            <div class="users_name">
+                                {{user.user_name}}
+                            </div>
+                            <div class="users_works_all">
+                                <el-popover
+                                        placement="left-start"
+                                        title="【作品】:"
+                                        width="95%"
+                                        trigger="hover"
+                                        :content="user.works_name">
+                                    <el-button size="small" type="text" slot="reference">
+                                        <div class="users_works">
+                                            作品：{{user.works_name}}
+                                        </div>
+                                    </el-button>
+                                </el-popover>
+                            </div>
+                        </div>
+                        <div class="users_operate">
+                            <div class="operate_button">
+                                <el-button type="primary" round size="medium" plain @click="cancelAttention(user.user_id,user.user_name,index)">取关</el-button>
+                            </div>
+                            <div class="operate_button">
+                                <el-button type="primary" round size="medium" plain @click="accessUser(user.user_id)">访问</el-button>
+                            </div>
+<!--                            <el-popconfirm-->
+<!--                                    :title="'是否取消关注[ '+user.username+' ]?'"-->
+<!--                                    :onConfirm="cancelAttention(user.user_id,user.user_name,index)"-->
+<!--                            >-->
+<!--                                <el-button slot="reference">取关</el-button>-->
+<!--                            </el-popconfirm>-->
+                        </div>
+                    </div>
+                    <div class="noDataTips" :style="'display:'+displayDivs.displayDiv2+';'"></div>
+                    <div class="users_pagination">
+                        <!--
+                            size-change:pageSize 改变时会触发,参数：每页条数
+                            current-change:currentPage 改变时会触发
+                            current-page.sync:当前页数，支持 .sync 修饰符
+                            page-size:每页显示条目个数，支持 .sync 修饰符
+                            layout:组件布局，子组件名用逗号分隔 String：'prev, pager, next, jumper, ->, total'
+                            total:总条目数
+                        -->
+                        <el-pagination
+                                @size-change="handleSizeChange"
+                                @current-change="handleCurrentChange_attention"
+                                :current-page.sync="currentPage"
+                                :page-size="pageSize"
+                                layout="prev, pager, next, jumper"
+                                :total="totals.total2">
+                        </el-pagination>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="我的粉丝">
+                    <div class="users" v-for="user in displayData.fansData">
+                        <div class="users_avatar">
+                            <!-- <img :src="'../images/avatar/'+user.head_portrait+'.jpg'">-->
+                            <img :src="imageURL_header+user.head_portrait+imageURL_suffix">
+                        </div>
+                        <div class="users_content">
+                            <div class="users_name">
+                                {{user.user_name}}
+                            </div>
+                            <div class="users_works_all">
+                                <el-popover
+                                        placement="left-start"
+                                        title="【作品】:"
+                                        width="400"
+                                        trigger="hover"
+                                        :content="user.works_name">
+                                    <el-button size="small" type="text" slot="reference">
+                                        <div class="users_works">
+                                            作品：{{user.works_name}}
+                                        </div>
+                                    </el-button>
+                                </el-popover>
+                            </div>
+                        </div>
+                        <div class="users_operate">
+                            <div class="operate_button">
+                                <el-button type="primary" round size="medium" plain @click="addAttention(user)">添加关注</el-button>
+                            </div>
+                            <div class="operate_button">
+                                <el-button type="primary" round size="medium" plain @click="accessUser(user.user_id)">&nbsp;访&nbsp;&nbsp;问&nbsp;</el-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="noDataTips" :style="'display:'+displayDivs.displayDiv3+';'"></div>
+                    <div class="users_pagination">
+                        <!--
+                            size-change:pageSize 改变时会触发,参数：每页条数
+                            current-change:currentPage 改变时会触发
+                            current-page.sync:当前页数，支持 .sync 修饰符
+                            page-size:每页显示条目个数，支持 .sync 修饰符
+                            layout:组件布局，子组件名用逗号分隔 String：'prev, pager, next, jumper, ->, total'
+                            total:总条目数
+                        -->
+                        <el-pagination
+                                @size-change="handleSizeChange"
+                                @current-change="handleCurrentChange_fans"
+                                :current-page.sync="currentPage"
+                                :page-size="pageSize"
+                                layout="prev, pager, next, jumper"
+                                :total="totals.total3">
+                        </el-pagination>
+                    </div>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+        <div class="body_content">
+
+        </div>
+
+    </div>
+    <div class="footing">
+        <div class="address">地址:山东省烟台市莱山区山东工商学院软件2017级 邮编：264003 电话：123-123-1234 传真：123-1234567</div>
+        <div class="beian">鲁ICP备08001421号鲁公网安备110108007702 人工客服QQ：1404661805</div>
+    </div>
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/myConcerned.js"></script>
+
+</body>
+</html>

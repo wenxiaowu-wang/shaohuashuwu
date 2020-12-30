@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现金币</title>
+
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/workbeanchFragment.css">
+    <link rel="stylesheet" href="../css/withdrawGoldCoin.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+
+</head>
+<body>
+<div >
+
+    <!--顶部标题栏-->
+    <div class="authorMainTop_div_class" id="authorMainTop_div_id">
+
+        <div class="authorMainTopCenter_div_class">
+            <div class="shaohualogo_div_class">
+                <img  class="shaohualogo_img_class" src="../images/SHAOHUALOGO.png">
+            </div>
+            <div class="authorMainTopUserInfo_div_class">
+                <p class="authorMainTopUserInfo_p_class">欢迎进入作者平台！</p>
+            </div>
+            <div class="authorMainTopButton_div_class">
+                <el-tooltip class="item" effect="dark" content="返回读者平台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div2_class">
+                <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
+
+                    <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
+
+                </el-tooltip>
+            </div>
+            <div class="authorMainTopButton_div3_class">
+
+                <img   class="authorMainTop_button_class" src="../images/authorme-36.png" type="button" id="workeme-img">
+                <div class="authorMainTop_hidediv_class" id="authorMainTop_hidediv_id">
+                    <a class="authorMainTop_adiv1_class">用户名：{{authorInfo.user_name}}</a>
+                    <a class="authorMainTop_adiv1_class">作品数量：{{worksNum}}</a>
+                    <a class="authorMainTop_adiv1_class">可提现金币：{{authorInfo.gold_coin_num}}</a>
+                    <div style="width:170px;border:1px solid #cccccc;"></div>
+                    <a class="authorMainTop_adiv2_class" id="signOut_id" href="//www.runoob.com">退出</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--左部标题栏和主题内容-->
+    <div class="authorMain_class" >
+        <div class="authorMainLeft_div_class">
+            <ul class="authorMainLeft_ul_class">
+                <li  id="worksBean"  class="authorMainLeft_li_class"   >
+                    <img src="../images/authorworks-36.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id">工作台</a></li>
+                </li>
+
+                <li id="worksMangagement" class="authorMainLeft_li_class" >
+                    <img src="../images/authormangagmentNew-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="worksMangagementp_id">作品管理</a></li>
+                </li>
+                <li id="workDataStatistics" class="authorMainLeft_li_class" >
+                    <img src="../images/authordata-32.png" class="authorMainLeft_img_class"  >
+                    <a href="#" class="authorMainLeft_a_class" id="workeDatap-id">数据中心</a></li>
+
+                </li>
+                <li id="remuneration"  class="authorMainLeft_li_class" >
+                    <img src="../images/authorremunration-32.png" class="authorMainLeft_img_class" >
+                    <a href="../pages/remunerationInterface.html" class="authorMainLeft_a_class" id="renmunerationp-id">稿酬收入</a></li>
+                </li>
+                <li id="interactionManagement"  class="authorMainLeft_li_class">
+                    <img src="../images/authorinteraction-32.png" class="authorMainLeft_img_class" >
+                    <a href="#" class="authorMainLeft_a_class" id="interactionManagementp-id">互动管理</a></li>
+                </li>
+            </ul>
+        </div>
+
+<!--    主要内容-->
+    <div id="withdrawGoldCoin_div">
+        <div class="content_title">
+            <p id = "remuneration-p-id">提现稿酬</p>
+            <hr id="remuneration-hr-id">
+        </div>
+        <div class="content_body">
+            <div class="body_header">
+                <div class="header_prefix">
+                    <label>{{tip1}}</label>
+                </div>
+                <div class="header_display">
+                    <label>{{header.goldCoin_total_income}}</label>
+                </div>
+                <div class="header_suffix">
+                    <label>{{tip2}}</label>
+                </div>
+                <div class="header_prefix">
+                    <label>{{tip3}}</label>
+                </div>
+                <div class="header_display">
+                    <label>{{header.goldCoin_already_withdraw}}</label>
+                </div>
+                <div class="header_suffix">
+                    <label>{{tip2}}</label>
+                </div>
+                <div class="header_prefix">
+                    <label>{{tip4}}</label>
+                </div>
+                <div class="header_display">
+                    <label>{{header.goldCoin_able_withdraw}}</label>
+                </div>
+                <div class="header_suffix">
+                    <label>{{tip2}}</label>
+                </div>
+                <div class="header_operate">
+                    <el-button type="primary" size="mini" @click="toWithdraw">提现</el-button>
+                </div>
+            </div>
+            <div class="body_selector">
+                <div class="selector_tip">
+                    <label>提现金币数：</label>
+                </div>
+                <div class="selector_select">
+                    <el-select
+                            v-model="select_value"
+                            filterable
+                            allow-create
+                            default-first-option
+                            placeholder="请选择提现金币数">
+                        <el-option
+                                v-for="item in withdraw_options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="selector_tip2">
+                    <span>
+                        = &nbsp;
+                        <label>{{select_value/10}}</label>
+                        &nbsp;元(￥)
+                    </span>
+                </div>
+                <div class="selector_button">
+                    <el-button type="primary" size="mini" @click="determineAmount">确认金额</el-button>
+                </div>
+                <div class="dialog_form_withdraw">
+                    <el-dialog title="提现选择" :visible.sync="dialogFormVisible" width="30%">
+                        <el-form :model="withdrawForm">
+                            <el-form-item label="提现目标账号" :label-width="formLabelWidth">
+                                <el-input v-model="withdrawForm.third_party_number" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="第三方" :label-width="formLabelWidth">
+                                <el-select v-model="withdrawForm.third_party_name" placeholder="请选择提现平台">
+                                    <el-option label="支付宝" value=0></el-option>
+                                    <el-option label="微信" value=1"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button @click="dialogFormVisible = false">取 消</el-button>
+                            <el-button type="primary" @click="commitWithdrawForm">确 定</el-button>
+                        </div>
+                    </el-dialog>
+                </div>
+            </div>
+            <div class="body_center">
+                <div class="center_top">
+                    <div class="center_tip">
+                        <label>提现记录</label>
+                    </div>
+                    <div class="withdraw_tip">
+                        该提现为假提现，并未真正提现，未调用第三方接口，该平台为学习使用。
+                    </div>
+                    <div class="center_statistics">
+                        <span>
+                            总计：
+                            <label>{{statistics}}</label>
+                            元（￥）
+                        </span>
+                    </div>
+                </div>
+                <div class="center_table">
+                    <el-table
+                            :data="tableData_display"
+                            style="width: 98%"
+                            height="450"
+                            border
+                            stripe
+                            :default-sort = "{prop: 'withdraw_time', order: 'descending'}"
+                    >
+                        <el-table-column
+                                prop="withdraw_id"
+                                label="交易单号"
+                                align="center"
+                                sortable
+                                width="auto"
+                                min-width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="third_party_number"
+                                label="第三方账号"
+                                align="center"
+                                sortable
+                                width="auto"
+                                min-width="200">
+                        </el-table-column>
+                        <el-table-column
+                                prop="third_party_name"
+                                label="第三方"
+                                align="center"
+                                sortable
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="withdraw_quantity"
+                                label="金额(元￥)"
+                                align="left"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="withdraw_time"
+                                label="提现时间"
+                                align="center"
+                                sortable
+                                width="180">
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+
+<script src="../js/withdrawGoldCoin.js"></script>
+
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人账户</title>
+    <link rel="stylesheet" href="../css/userModel.css">
+    <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/personalAccount.css">
+    <link rel="stylesheet" href="../css/topUp.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
+</head>
+<body>
+
+<div id="personalAccount">
+    <div class="top">
+        <div class="top_img"></div>
+        <div class="top_content">
+            <div class="top_tips"><el-button type="text" icon="el-icon-back" @click="backHomePage">{{topTips}}</el-button></div>
+            <div class="top_menu">
+                <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                    <el-menu-item index="1"><i class="el-icon-location-outline"></i>我的首页</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-reading"></i>我的书架</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-message"></i>消息中心</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-wallet"></i>个人账户</el-menu-item>
+                </el-menu>
+            </div>
+            <div class="top_data">
+                <br/>
+                {{user_name}}<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<el-button type="text">退出</el-button>
+            </div>
+        </div>
+    </div>
+    <div class="body_left">
+
+    </div>
+    <div class="body">
+        <div class="body_header">
+            <div class="body_img">
+                <div class="body_img_img">
+                    <img id="avatar" :src="'../images/avatar/'+user_avatar+imageURL_suffix">
+                </div>
+                <div class="body_img_content">
+
+                    <div class="body_img_content_userName">
+                        {{user_name}}
+                    </div>
+                    <div class="body_img_content_userName">
+
+                    </div>
+                    <div class="body_img_content_goldBean">
+                        <label>金豆数量:{{goldBeanNum}}</label>
+                        &nbsp;&nbsp;&nbsp;
+                        <el-button type="text" icon="el-icon-shopping-cart-1" id="topUps_button">充值</el-button>
+                    </div>
+                    <div class="body_img_content_ticket">
+                        <label>推荐票数:{{ticketNum}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="body_text">-->
+<!--            <label>交易记录</label>-->
+<!--            <span>交易记录可能存在延时，请以实际货币数量统计为准</span>-->
+<!--        </div>-->
+        <div class="body_center">
+            <el-tabs type="border-card">
+                <el-tab-pane label="充值记录">
+                    <div class="body_center_table">
+                        <el-table
+                                :data="topUpData"
+                                stripe
+                                style="width: 100%"
+                                height="470"
+                                :default-sort = "{prop: 'transaction_time', order: 'descending'}"
+                        >
+                            <el-table-column
+                                    fixed
+                                    prop="recipient_name"
+                                    label="接收者"
+                                    align="center"
+                                    width="140">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_time"
+                                    label="交易时间"
+                                    align="center"
+                                    sortable
+                                    width="170">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_mode"
+                                    label="交易方式"
+                                    align="center"
+                                    sortable
+                                    width="100">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_quantity"
+                                    label="交易数量"
+                                    align="center"
+                                    sortable
+                                    width="120">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_unit"
+                                    label="交易单位"
+                                    align="center"
+                                    width="120">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="transaction_type"
+                                    label="交易类型"
+                                    align="center"
+                                    width="100">
+                            </el-table-column>
+                        </el-table>
+<!--                        <div class="noDataTips" v-if="topUpData.length == 0">-->
+<!--                            &lt;!&ndash;                        <p>数据为空提示</p>&ndash;&gt;-->
+<!--                        </div>-->
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="打赏记录">
+                    <div class="body_center_search">
+                        <el-input
+                                v-model="search_reward"
+                                size="mini"
+                                placeholder="输入接受者关键字搜索" />
+                    </div>
+                    <div class="body_center_tip">
+
+                    </div>
+                    <el-table
+                            :data="rewardData.filter(data => !search_reward || data.recipient_name.toLowerCase().includes(search_reward.toLowerCase()))"
+                        stripe
+                        style="width: 100%"
+                        height="470"
+                        :default-sort = "{prop: 'transaction_time', order: 'descending'}">
+                        <el-table-column
+                                fixed
+                                prop="transaction_time"
+                                label="交易时间"
+                                align="center"
+                                sortable
+                                width="170">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                label="交易数量"
+                                align="center"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_unit"
+                                label="交易单位"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_type"
+                                label="交易类型"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="recipient_name"
+                                label="  接收者"
+                                align="left"
+                                header-align="center"
+                                width="300">
+                        </el-table-column>
+<!--                        <div class="noDataTips" v-if="rewardData.length == 0">-->
+<!--                            &lt;!&ndash;                        <p>数据为空提示</p>&ndash;&gt;-->
+<!--                        </div>-->
+                    </el-table>
+                </el-tab-pane>
+                <el-tab-pane label="订阅记录">
+                    <div class="body_center_search">
+                        <el-input
+                                v-model="search_subscription"
+                                size="mini"
+                                placeholder="输入接受者关键字搜索" />
+                    </div>
+                    <div class="body_center_tip">
+
+                    </div>
+                    <el-table
+                            :data="subscriptionData.filter(data => !search_subscription || data.recipient_name.toLowerCase().includes(search_subscription.toLowerCase()))"
+                            stripe
+                            style="width: 100%"
+                            height="470"
+                            :default-sort = "{prop: 'transaction_time', order: 'descending'}">
+                        <el-table-column
+                                fixed
+                                prop="transaction_time"
+                                label="交易时间"
+                                align="center"
+                                sortable
+                                width="170">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                label="交易数量"
+                                align="center"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_unit"
+                                label="交易单位"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_type"
+                                label="交易类型"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="recipient_name"
+                                label="  接收者"
+                                align="left"
+                                header-align="center"
+                                width="300">
+                        </el-table-column>
+<!--                        <div class="noDataTips" v-if="subscriptionData.length == 0">-->
+<!--                            &lt;!&ndash;                        <p>数据为空提示</p>&ndash;&gt;-->
+<!--                        </div>-->
+                    </el-table>
+                </el-tab-pane>
+                <el-tab-pane label="投票记录">
+                    <div class="body_center_search">
+                        <el-input
+                                v-model="search_voteTicket"
+                                size="mini"
+                                placeholder="输入接受者关键字搜索" />
+                    </div>
+                    <div class="body_center_tip">
+
+                    </div>
+                    <el-table
+                            :data="voteTicketData.filter(data => !search_voteTicket || data.recipient_name.toLowerCase().includes(search_voteTicket.toLowerCase()))"
+                            stripe
+                            style="width: 100%"
+                            height="470"
+                            :default-sort = "{prop: 'transaction_time', order: 'descending'}">
+                        <el-table-column
+                                fixed
+                                prop="transaction_time"
+                                label="交易时间"
+                                align="center"
+                                sortable
+                                width="170">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_quantity"
+                                label="交易数量"
+                                align="center"
+                                sortable
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_unit"
+                                label="交易单位"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="transaction_type"
+                                label="交易类型"
+                                align="center"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="recipient_name"
+                                label="  接收者"
+                                align="left"
+                                header-align="center"
+                                width="300">
+                        </el-table-column>
+<!--                        <div class="noDataTips" v-if="voteTicketData.length == 0">-->
+<!--                            &lt;!&ndash;                        <p>数据为空提示</p>&ndash;&gt;-->
+<!--                        </div>-->
+                    </el-table>
+                </el-tab-pane>
+            </el-tabs>
+            <div class="body_bottom">
+                <label>交易记录</label>
+                <span>交易记录可能存在延时，请以实际货币数量统计为准（适度消费）</span>
+            </div>
+        </div>
+        <div class="body_content">
+
+        </div>
+
+    </div>
+    <div class="footing">
+        <div class="address">地址:山东省烟台市莱山区山东工商学院软件2017级 邮编：264003 电话：123-123-1234 传真：123-1234567</div>
+        <div class="beian">鲁ICP备08001421号鲁公网安备110108007702 人工客服QQ：1404661805</div>
+    </div>
+</div>
+
+<!--  充值模块  -->
+<div id="dialogForm">
+    <el-dialog title="金豆充值￥" :visible.sync="dialogFormVisible" width="45%" class="dialog_bg_all">
+        <el-form :model="form" class="dialog_form">
+            <el-form-item label="账号：" :label-width="formLabelWidth" class="form_item">
+
+                <div class="form_item_div">
+                    <div class="form_item_avatar">
+                        <img :src="avatarURL" id="avatar_topUps"/>
+                    </div>
+                    <label class="form_user_name">{{form.name}}</label>
+                </div>
+            </el-form-item>
+            <el-form-item label="支付方式：" :label-width="formLabelWidth">
+                <el-radio-group  v-model="form.method">
+                    <!--                    autofocus="true"-->
+                    <el-radio-button label="0" class="form_item_button">支付宝</el-radio-button>
+                    <el-radio-button label="1" class="form_item_button">微信</el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="充值金额：" :label-width="formLabelWidth">
+                <el-radio-group  v-model="form.money">
+                    <!--                    autofocus="true"-->
+                    <el-radio-button label=10 class="form_item_button">￥10（1000金豆）</el-radio-button>
+                    <el-radio-button label=20 class="form_item_button">￥20（2000金豆）</el-radio-button>
+                    <el-radio-button label=30 class="form_item_button">￥30（3000金豆）</el-radio-button>
+                    <el-radio-button label=50 class="form_item_button">￥50（5000金豆）</el-radio-button>
+                    <el-radio-button label=100 class="form_item_button">￥100（10,000金豆）</el-radio-button>
+                </el-radio-group>
+
+            </el-form-item>
+        </el-form>
+
+        <div slot="footer" class="dialog_footer">
+            <div class="dialog_footer_label">
+                <label>理性消费 *最终解释权归【韶华书屋】平台所有</label>
+            </div>
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="topUpsCheck">确 定</el-button>
+        </div>
+
+    </el-dialog>
+
+    <!--  支付宝收款码  -->
+    <el-dialog title="支付宝收款码" :visible.sync="alipayVisible" width="375px" class="dialog_receivables">
+        <div class="dialog_receivables_content">
+            <div class="photo">
+                <div class="demonstration">支付宝扫一扫付款</div>
+                <div class="photo_img">
+                    <img :src="alipayImg" />
+                </div>
+            </div>
+            <div class="checkPaymentInput">
+                <div class="checkPaymentInput_tips">接收验证码：</div>
+                <div>
+                    <el-input v-model="paymentCheck" placeholder="请输入付款接收码"></el-input>
+                </div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="alipayVisible = false">取 消</el-button>
+                <el-button type="primary" @click="paymentCommit">确 定</el-button>
+            </div>
+        </div>
+
+    </el-dialog>
+    <!--  微信收款码  -->
+    <el-dialog title="微信收款码" :visible.sync="weChatVisible" width="375px" class="dialog_receivables">
+        <div class="dialog_receivables_content">
+            <div class="photo">
+                <div class="demonstration">微信扫一扫付款</div>
+                <div class="photo_img">
+                    <img :src="weChatImg" />
+                </div>
+            </div>
+            <div class="checkPaymentInput">
+                <div class="checkPaymentInput_tips">接收验证码：</div>
+                <div>
+                    <el-input v-model="paymentCheck" placeholder="请输入付款接收码"></el-input>
+                </div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="weChatVisible = false">取 消</el-button>
+                <el-button type="primary" @click="paymentCommit">确 定</el-button>
+            </div>
+        </div>
+
+    </el-dialog>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/elementui.js"></script>
+<script src="../js/axios.js"></script>
+<script src="../js/personalAccount.js"></script>
+<script src="../js/topUps.js"></script>
+
+<script>
+    document.getElementById("topUps_button").addEventListener("click", displayTopUps);
+
+    //充值对话框
+    function displayTopUps() {
+        topUpDialogForm_vm.dialogFormVisible = true;
+    }
+</script>
+</body>
+</html>

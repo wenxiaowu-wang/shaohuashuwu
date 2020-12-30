@@ -1,0 +1,189 @@
+.body_header{
+    background-color: #ffffff;
+    width: auto;
+    height: auto;
+}
+.body_img{
+    width: 100%;
+    height: 170px;
+    margin: 0px auto;/*  设置上下外边距为0px，左右自动，默认居中*/
+
+    background-image: url("../images/bg_card.png");
+    background-position: left top;
+    background-repeat: repeat-x;
+    /*border: 2px solid red;*/
+    box-shadow: 2px 2px 1px #685224;
+}
+.body_img_img{
+    width: 115px;
+    min-width: 105px;
+    min-width: 10%;
+    height: auto;
+    min-height: 40%;
+    text-align: center;
+    border-bottom:  2px solid #dce1ff;
+    margin-top: 50px;
+    margin-left: 15px;
+    float: left;
+}
+#avatar{
+    /*  <img>标签的样式  */
+    border-radius: 50%;
+}
+.body_img_content{
+    /*background-color: #e6e6e6;*/
+    width: 70%;
+    height: 48%;
+    /*border: 1px solid #00ff00;*/
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 70px;
+    margin-left: 35px;
+    float: left;
+
+}
+.body_img_content_userName{
+    width: 25%;
+    height: auto;
+    font-size: 18px;
+    font-weight: bolder;
+    text-align: center;
+    /*border: 1px solid blue;*/
+    margin-top: 5px;
+    color: #d7cfcf;
+}
+.body_img_content_goldBean{
+    width: 50%;
+    height: 50%;
+    /*border: 1px solid red;*/
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-top: 10px;
+    float: left;
+}
+.body_img_content_ticket{
+    width: 35%;
+    height: 35%;
+    /*border: 1px solid blue;*/
+    text-align: center;
+    margin-top: 17px;
+    float: left;
+}
+.body_img_content label{
+    margin-left: 20px;
+    color: #3e0b0b;
+    font-weight: normal;
+    margin-bottom: 5px;
+    float: top;
+}
+.body_center{
+    margin: 10px auto;
+    width: 100%;
+    height: auto;
+    max-height: 90%;
+    /* 待更新
+    background-image: url("../images/bg_center.jpg");
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-position-x: right;
+    */
+}
+.body_center_search{
+    width: 40%;
+    float: left;
+    /*border: 1px solid red;*/
+}
+.body_center_table{
+    margin: 2px 2px;
+}
+.operate_header{
+    width: 100%;
+    min-width: 500px;
+    height: 25px;
+    text-align: right;
+    padding: 5px;
+    float: top;
+    /*border: 1px solid red;*/
+
+}
+.op_span2{
+    margin-right: 15px;
+    float: right;
+}
+.op_span1{
+    margin-right: 15px;
+    float: right;
+}
+.message{
+    /*  如果没有理解错的话应该是每一个user的div  */
+    width: 100%;
+    height: 100px;
+    /*border: 2px solid red;*/
+    margin: 2px auto;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    float: top;
+}
+.tip_img{
+    width: 3%;
+    height: auto;
+    margin: 2px;
+    text-align: center;
+    float: left;
+}
+.message_content{
+    width: 65%;
+    height: 80%;
+    padding: 10px;
+    /*border: 2px solid blue;*/
+    float: left;
+}
+
+.message_operate{
+    width: 10%;
+    height: auto;
+    padding: 5px;
+    text-align: center;
+    /*border: 2px solid black;*/
+    font-size: small;
+    margin-right: 15px;
+    margin-top: 30px;
+    float: right;
+}
+.noDataTips{
+    width: 80%;
+    height: 200px;
+    /*border: 2px solid red;*/
+    background-image: url("../images/noDataTips.jpg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    text-align: center;
+    margin: 5px auto;
+}
+.message_pagination{
+    width: 90%;
+    height: 34px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    /*border: 1px solid red;*/
+    float: top;
+}
+/*上面的很多没有用到*/
+.body_bottom{
+    margin: 2px 2px;
+    width: 95%;
+    height: 30px;
+    float: left;
+    text-align: left;
+}
+.body_bottom label{
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #6f7180;
+}
+.body_bottom span{
+    font-weight: lighter;
+    margin-left: 5px;
+}

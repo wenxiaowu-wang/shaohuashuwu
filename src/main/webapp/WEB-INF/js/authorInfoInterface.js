@@ -16,7 +16,7 @@ new Vue({
         getAuthorInfoByUserclick(){
             console.log("获取作者信息")
             var _this = this;
-            axios.post('http://localhost:8080/authorInfoController/getAuthorInfoByUserclick')
+            axios.post('/shaohuashuwu/authorInfoController/getAuthorInfoByUserclick')
                 .then(function (response){
 
                     _this.authorInfo = response.data;
@@ -31,7 +31,7 @@ new Vue({
         getworkWholeInfoVoByauthor_id(){
             var _this = this;
             console.log("获取作者作品信息");
-            axios.post('http://localhost:8080/workWholeInfoVoController/getworkWholeInfoVoByauthor_id')
+            axios.post('/shaohuashuwu/workWholeInfoVoController/getworkWholeInfoVoByauthor_id')
                 .then(function (response) {
                     _this.worksWholeInfoVoList = response.data;
                     _this.workTotal=_this.worksWholeInfoVoList.length;
@@ -82,6 +82,48 @@ new Vue({
             m = date.getMinutes() + ':';
             s = date.getSeconds();
             return Y+M+D+h+m+s;
+        },
+
+        //关注作者
+        addAttention(){
+            //关注作者(交给后端判断是否已经关注了该作者或用户)
+            axios.post("/shaohuashuwu/userSession/saveSelectedUserId/"+this.authorInfo.user_id).then(response =>{
+                this.addAttentionAxios();
+            }).catch(error =>{
+                this.$message({
+                    type:'error',
+                    message:'网络或其他原因，系统错误！'
+                });
+            });
+
+        },
+        addAttentionAxios(){
+            axios.post("/shaohuashuwu/attentionInfoController/payAttentionToUser").then(response =>{
+                let object = JSON.stringify(response.data);
+                let result = parseInt(object);
+                if (result === 0){
+                    this.$message({
+                        type:'error',
+                        message:'系统异常，关注失败'
+                    });
+                }else if(result === 1){
+                    this.$message({
+                        type:'success',
+                        message:'关注成功，会为您持续更新该作者的动态'
+                    });
+                }else if (result === 2){
+                    this.$message({
+                        type:'warning',
+                        message:'您已经关注了该用户，请勿重复关注'
+                    });
+                }
+            }).catch(error =>{
+                this.$message({
+                    type:'error',
+                    message:'系统异常，关注请求发送失败'
+                });
+                console.log("系统异常，滚珠请求发送失败");
+            });
         },
 
     },

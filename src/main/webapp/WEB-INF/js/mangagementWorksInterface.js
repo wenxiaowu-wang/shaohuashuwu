@@ -27,7 +27,7 @@ new Vue({
         /*根据作品id，获取作品信息*/
         selectworkByid() {
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/getworkInfoByWork_id')
+            axios.post('/shaohuashuwu/worksInfoController/getworkInfoByWork_id')
                 .then(function (respone) {
                      _this.worksInfo = respone.data;
                      _this.showwork_serial_state();
@@ -92,7 +92,7 @@ new Vue({
             //修改上传信息
             this.worksInfo.work_serial_state = this.workstate;
             var _this = this;
-            axios.post('http://localhost:8080/worksInfoController/updateWorkSerialStateByid',_this.worksInfo)
+            axios.post('/shaohuashuwu/worksInfoController/updateWorkSerialStateByid',_this.worksInfo)
                 .then(function (respone) {
                     //改变界面显示效果
                     _this.selectworkByid();

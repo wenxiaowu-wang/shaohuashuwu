@@ -39,7 +39,7 @@ new Vue({
         //加入书架
         addBookshelf(work_id) {
 
-            axios.post("http://localhost:8080/bookshelfInfoController/addToBookshelf/" +
+            axios.post("/shaohuashuwu/bookshelfInfoController/addToBookshelf/" +
                 this.user_id + "/" + work_id ).then(resp => {
                 let Result = resp.data;
                 console.log("数据同步存到数据库。"+Result);
@@ -68,7 +68,7 @@ new Vue({
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                axios.post("http://localhost:8080/readingHistoryInfoController/deleteHistoryWorkByUserId/" +
+                axios.post("/shaohuashuwu/readingHistoryInfoController/deleteHistoryWorkByUserId/" +
                     this.user_id).then(response => {
                     let result = response.data;
                     console.log(response);
@@ -98,7 +98,7 @@ new Vue({
     },
     mounted() {
 
-        axios.get("http://localhost:8080/userSession/getPersonalData").then(response => {
+        axios.get("/shaohuashuwu/userSession/getPersonalData").then(response => {
 
             let info = response.data;
             let user_id = info["user_id"];
@@ -106,7 +106,7 @@ new Vue({
             this.user_id = user_id;
             this.user_name = user_name;
 
-            axios.get("http://localhost:8080/readingHistoryInfoController/getReadingHistoryCountByUserId/"
+            axios.get("/shaohuashuwu/readingHistoryInfoController/getReadingHistoryCountByUserId/"
                 + user_id).then(response => {
 
                 let result = response.data;
@@ -119,7 +119,7 @@ new Vue({
 
                     this.book_num = result;
 
-                    axios.get("http://localhost:8080/workWholeInfoVoController/getWorkWholeInfoToHistoryByUser_id/"
+                    axios.get("/shaohuashuwu/workWholeInfoVoController/getWorkWholeInfoToHistoryByUser_id/"
                         + user_id).then(response => {
 
                         let objectData = eval(JSON.stringify(response.data));//将字符串转化为数组对象

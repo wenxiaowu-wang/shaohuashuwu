@@ -6,7 +6,7 @@ new Vue({
 
         attentionNum: 666,
         fans: 99354,
-        topTips: "个人中心",
+        topTips: "返回首页",
         activeIndex: '1',
         imageURL_header: "../images/avatar/",
         imageURL_suffix: ".jpg",
@@ -1195,7 +1195,27 @@ new Vue({
         handleChange(value) {
             console.log(value);
         },
-
+        //跳转到首页
+        backHomePage(){
+            window.location.assign("../pages/userMainInterface.html");
+        },
+        handleSelect(key, keyPath) {
+            console.log("当前导航在:(key,keyPath)"+key, keyPath);
+            switch (key){
+                // case "1":console.log("当前所在URL："+window.location.href);break;
+                case "1":{
+                    this.$message({
+                        type:'info',
+                        message:'您已经在【我的首页】，不必跳转。'
+                    });
+                    break;
+                }
+                case "2":window.location.assign("../pages/bookShelfInterface.html");break;
+                case "3":window.location.assign("../pages/messageCenterInterface.html");break;
+                case "4":window.location.assign("../pages/personalAccountInterface.html");break;
+                default:break;
+            }
+        },
         updatePersonData() {
             if (this.user_name === "") {
                 this.$message({
@@ -1217,7 +1237,7 @@ new Vue({
                 return false;
             } else {
                 console.log("信息：----"+this.user_name+this.user_id)
-                axios.post("http://localhost:8080/userInfoController/isUserNameHaveByUsername/" +
+                axios.post("/shaohuashuwu/userInfoController/isUserNameHaveByUsername/" +
                     this.user_name+"/"+this.user_id ).then(resp2 => {
                     let Result2 = resp2.data;
                         if(Result2){
@@ -1226,7 +1246,7 @@ new Vue({
                                 message: '该用户名已存在！'
                             });
                         }else{
-                            axios.get("http://localhost:8080/userInfoController/updateUserDataByID/" +
+                            axios.get("/shaohuashuwu/userInfoController/updateUserDataByID/" +
                                 this.user_id + "/" + this.user_name+"/" + this.gender+"/" + this.dateValue+"/" + this.value).then(res => {
                                 let updateResult = res.data;
                                 if (updateResult === false) {
@@ -1236,7 +1256,7 @@ new Vue({
                                     });
                                 } else {
 
-                                    axios.post("http://localhost:8080/userSession/savePersonalData/" +
+                                    axios.post("/shaohuashuwu/userSession/savePersonalData/" +
                                         this.user_id + "/" + this.user_name + "/" + this.user_avatar+"/"+ this.gender + "/" + this.dateValue + "/" + this.value).then(resp => {
                                         console.log("用户数据同步到session中。");
                                     }).catch(error => {
@@ -1302,7 +1322,7 @@ new Vue({
                     });
                     return false;
                 } else {
-                    axios.get("http://localhost:8080/userInfoController/modifyPassword/" +
+                    axios.get("/shaohuashuwu/userInfoController/modifyPassword/" +
                         this.phone_number + "/" + this.newPwd).then(res => {
                         let updateResult = res.data;
                         if (updateResult === false) {
@@ -1327,7 +1347,7 @@ new Vue({
                 return false;
             } else {//说明用手机验证码登录
 
-                axios.get("http://localhost:8080/userInfoController/modifyPassword/" +
+                axios.get("/shaohuashuwu/userInfoController/modifyPassword/" +
                     this.phone_number + "/" + this.newPwd).then(res => {
                     let updateResult = res.data;
                     if (updateResult === false) {
@@ -1349,12 +1369,15 @@ new Vue({
                     });
                 })
             }
+        },
+        toMyConcerned(){
+            window.location.assign("../pages/myConcernedInterface.html");
         }
     },
     mounted() {
 
         //修改密码用到的session
-        axios.get("http://localhost:8080/userSession/getPhoneNumber").then(response => {
+        axios.get("/shaohuashuwu/userSession/getPhoneNumber").then(response => {
             let info = response.data;
             console.log("手机号信息");
             console.log("手机号信息"+JSON.stringify(response.data));
@@ -1373,7 +1396,7 @@ new Vue({
         });
 
         //修改资料用到的session
-        axios.get("http://localhost:8080/userSession/getPersonalData").then(response => {
+        axios.get("/shaohuashuwu/userSession/getPersonalData").then(response => {
 
             console.log("获取到的信息---------");
             console.log("获取到的信息"+JSON.stringify(response.data));

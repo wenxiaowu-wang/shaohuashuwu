@@ -154,7 +154,7 @@ public class WorksInfoController {
     @RequestMapping("/getWorksNumByUser_id")
     public int getWorksNumByUser_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
+
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
 
@@ -172,7 +172,7 @@ public class WorksInfoController {
     @RequestMapping("/getWorksInfoByUser_id")
     public List<WorksInfo> getWorksInfoByUser_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
+
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
 
@@ -206,7 +206,7 @@ public class WorksInfoController {
     @RequestMapping("/addworkInfo")
     public int addworkInfo(@RequestBody WorksInfo worksInfo,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        session.setAttribute("user_id",1);
+
         Object msg = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(msg));
 

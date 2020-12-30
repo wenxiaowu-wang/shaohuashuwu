@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/basic.min.css"/>
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/home.min.css"/>
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/order.min.css"/>
+    <link rel="stylesheet" href="../css/theme-chalk.css">
 
 </head>
 <body>
@@ -17,7 +18,7 @@
     <div class="bookshelf_top">
         <div class="top_img"></div>
         <div class="top_content">
-            <div class="top_tips">{{topTips}}</div>
+            <div class="top_tips"><el-button type="text" icon="el-icon-back" @click="backHomePage">返回首页</el-button></div>
             <div class="top_menu">
                 <el-menu
                         :default-active="activeIndex"
