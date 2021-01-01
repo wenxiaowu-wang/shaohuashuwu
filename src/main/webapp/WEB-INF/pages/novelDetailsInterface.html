@@ -85,8 +85,8 @@
                         <div class="div_line_class">
                             <el-button class="workinfo1_div_button_class" type="danger" plain @click="gotoreadNovelInterface()">开始阅读</el-button>
                             <el-button plain @click="addToBookshelf()">添加书架</el-button>
-                            <el-button plain>投推荐票</el-button>
-                            <el-button plain @click="commentbook()">书籍评论</el-button>
+<!--                            <el-button plain>投推荐票</el-button>-->
+                            <el-button plain id="book_comment_button">书籍评论</el-button>
 
 
                             <el-dialog class="dialog_work"
@@ -351,10 +351,136 @@
         </div>
     </div>
 
+    <!--  书籍评论模块  -->
+    <div  id="bookShelf">
+        <el-dialog class="dialog_work" title="书籍评论" :visible.sync="dialogFormVisible">
+
+            <div>
+                <div class="comment_input">
+                    <el-input
+                            type="textarea"
+                            :autosize="{ minRows: 2, maxRows: 4}"
+                            placeholder="请输入评论内容"
+                            v-model="textarea">
+                    </el-input>
+                </div>
+                <div class="comment_input">
+                    <button class="comment_btn" @click="submit_comment">发表评论</button>
+                </div>
+            </div>
+
+            <div class="comment-parent" v-for="comment in commentData">
+                <div class="comment-parent_info">
+                    <div class="comment-parent_head">
+                        <el-avatar :size="50"
+                                   :src="imageURL_header+comment.head_portrait+imageURL_suffix"></el-avatar>
+                    </div>
+                    <div class="comment-parent_info3">
+                        <span class="username">{{comment.user_name}}</span><br/>
+                        <span class="comment-time">发表时间:{{comment.comment_time}}</span>
+                        <button class="reply_comment_btn" @click="changeDisplayReply(comment.comment_id)">
+                            {{comment.reply_comment_btn}}
+                        </button>
+
+                        <button class="reply_comment_btn_2" @click="changeDisplayReply2(comment.comment_id)">
+                            {{comment.reply_comment_btn2}}
+                        </button>
+                    </div>
+                </div>
+                <div class="comment_content">
+                    {{comment.comment_content}}
+                </div>
+
+
+                <div :style="'display: '+ comment.displayReply">
+                    <div class="reply_comment_input">
+                        <el-input
+                                type="textarea"
+                                :autosize="{ minRows: 2, maxRows: 4}"
+                                placeholder="请输入回复内容"
+                                v-model="textarea_reply">
+                        </el-input>
+                    </div>
+                    <div class="comment_input">
+                        <button class="comment_btn2" @click="submit_commentReply(comment.comment_id)">回复评论
+                        </button>
+                    </div>
+                </div>
+
+                <template v-if=" comment.reply_comment_btn2 === '收起' ">
+                    <div class="comment-child" v-for="commentChild in commentChildData">
+
+                        <template v-if=" comment.comment_id == commentChild.comment_pid ">
+
+                            <div class="comment-child_info">
+                                <div class="comment-child_head">
+                                    <el-avatar :size="50"
+                                               :src="imageURL_header+commentChild.head_portrait+imageURL_suffix"></el-avatar>
+                                </div>
+                                <div class="comment-child_info3">
+                                    <span class="username_child">{{commentChild.user_name}} 回复 {{comment.user_name}}</span><br/>
+                                    <span class="comment-time">发表时间:{{commentChild.comment_time}}</span>
+
+                                    <button class="reply_comment_btn"
+                                            @click="changeDisplayReplyChild(commentChild.comment_id)">
+                                        {{commentChild.reply_comment_btn}}
+                                    </button>
+
+                                </div>
+
+                                <div class="comment-child_content">
+                                    {{commentChild.comment_content}}
+                                </div>
+
+                            </div>
+
+                            <div :style="'display:'+ commentChild.displayReply">
+                                <div class="reply_comment_input-child">
+                                    <el-input
+                                            type="textarea"
+                                            :autosize="{ minRows: 2, maxRows: 4}"
+                                            placeholder="请输入回复内容"
+                                            v-model="textarea_reply_child">
+                                    </el-input>
+                                </div>
+                                <div class="comment_input">
+                                    <button class="comment_btn2"
+                                            @click="submit_commentReplyChild(comment.comment_id)">回复评论
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                        </template>
+                    </div>
+                </template>
+                <hr/>
+            </div>
+
+        </el-dialog>
+    </div>
 </body>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
+
+<script src="../js/index.js"></script>
+
 <script src="../js/novelDetailsInterface.js"></script>
+<script src="../js/bookPinglun.js"></script>
+
+<script>
+    document.getElementById("book_comment_button").addEventListener("click", displayBookComment);
+
+    //打赏对话框
+    function displayBookComment() {
+        bookComment_vm.work_id = novelDetailsInterface_vm.worksInfo.work_id;
+        // bookComment_vm.form.chapterId = readNovelInterface_vm.chapterInfo.chapter_id;
+        // bookComment_vm.form.workName = readNovelInterface_vm.worksInfo.work_name;
+        // bookComment_vm.form.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
+        bookComment_vm.getInterfaceData();
+        bookComment_vm.dialogFormVisible = true;
+    }
+
+</script>
 
 </html>

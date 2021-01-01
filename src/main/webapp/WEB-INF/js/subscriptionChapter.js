@@ -3,14 +3,30 @@ new Vue({
     data: {
 
         work_name: '',
-
         user_id: '',
         user_name: '',
         gold_bean_num: '',//账户剩余金豆数
-        gold_bean_num_pay: '0',//需要付的金豆数
-        selectChapterCount: '0',
-        chapterTotalCount: '0',
-        chapterList2: [],
+        gold_bean_num_pay: '',//需要付的金豆数
+        selectChapterCount: '',
+        chapterTotalCount: '',
+        chapterList2: [
+            {
+                chapter_id: 0,
+                chapter_title: "",
+                chapter_word_num: '',
+            },
+        ],
+
+        chapterList: [
+            {
+                chapter_id: 0,
+                chapter_title: "",
+                chapter_word_num: '',
+            }
+        ],
+        checkAll: false,
+        checkedChapter:[],//绑定默认选中的数组
+        canClick: false,
 
 
     },
@@ -18,26 +34,33 @@ new Vue({
 
         handleCheckAllChange(val) {//val的值是一个布尔值，点中全选为false，取消全选为true
             this.checkedChapter = [];//如果点击全选，先将原来选中的章节清除，然后再遍历，不然会出现重复结果
+
             this.chapterList.forEach(item => {//当全选被选中的时候，循环遍历源数据，把数据的每一项加入到默认选中的数组去
                 this.checkedChapter.push(item.chapter_id)
             })
+
             this.checkedChapter = val ? this.checkedChapter : [];
+
             if(val === true){
+
                 this.selectChapterCount = this.chapterList.length;
                 this.gold_bean_num_pay = this.chapterList.length * 10;
             }else{
                 this.selectChapterCount = 0;
                 this.gold_bean_num_pay = 0;
             }
-
         },
+
         handleCheckedChapterChange() {
 
             if (this.checkedChapter.length === this.chapterList.length) {//如果选中值的长度和源数据的长度一样，返回true，就表示你已经选中了全部checkbox，那么就把true赋值给this.checkAll
-                this.checkAll = true;
+                this.checkAll = true
+
                 this.selectChapterCount = this.chapterList.length;
                 this.gold_bean_num_pay = this.chapterList.length * 10;
+
             } else {
+
                 this.checkAll = false
                 this.selectChapterCount = this.checkedChapter.length;
                 this.gold_bean_num_pay = this.checkedChapter.length * 10;
@@ -79,6 +102,10 @@ new Vue({
                                 alert("订阅成功！");
                                 window.location.assign("../pages/subscribeToNovelsInterface.html");
                             }else{
+                                this.$message({
+                                    type: 'error',
+                                    message: '网络异常，请重试！'
+                                });
                                 console.log("false");
                             }
                         }).catch(error => {
@@ -107,17 +134,17 @@ new Vue({
             this.user_id = user_id;
             this.user_name = user_name;
             //获取用户金豆数量
-            axios.get("/shaohuashuwu/userInfoController/getGoldBeanNum").then(resp => {
+            axios.get("/shaohuashuwu/userInfoController/getGoldBeanNum/" +
+                this.user_id).then(resp => {
                 let object = JSON.stringify(resp.data);
                 this.gold_bean_num = parseInt(object);
 
             }).catch(error => {
                 console.log(error);
-                console.log("hello,interface");
             });
 
             //章节获取章节id
-            axios.get("/shaohuashuwu/chapterInfoController/getChapterId").then(response => {
+            axios.get("/shaohuashuwu/userSession/getChapterId").then(response => {
                 let info = response.data;
                 let chapter_id = info["chapter_id"];
 
@@ -180,9 +207,6 @@ new Vue({
             }).catch(error => {
                 console.log("获取信息失败！" + error);
             });
-
-
-
         }).catch(error => {
             console.log("获取信息失败！" + error);
         });

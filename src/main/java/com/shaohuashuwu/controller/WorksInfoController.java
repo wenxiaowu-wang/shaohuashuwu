@@ -24,6 +24,15 @@ public class WorksInfoController {
     @Autowired
     private WorksInfoService worksInfoService;
 
+    @RequestMapping(path = "/getWorkIdNameByUserId/{user_id}")
+    @ResponseBody
+    public List<WorksInfo> getWorkIdNameByUserId(@PathVariable(value = "user_id")Integer user_id){
+        List<WorksInfo> worksInfo = worksInfoService.getWorkIdNameByUserId(user_id);
+        return worksInfo;
+    }
+
+    
+
     /**
      * 将关键字搜索信息存入session，跳转后获取搜索的session
      * @param worksInfo

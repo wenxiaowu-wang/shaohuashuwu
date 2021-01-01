@@ -1,11 +1,12 @@
-new Vue({
+let myHomePage_vm = new Vue({
     el: "#myHomePage",
     data: {
 
         introduction: "大家好，我系大雄的小伙伴，机器猫哆啦A梦，请多多关照！",
 
-        attentionNum: 666,
-        fans: 99354,
+        eachAttentionNum:0,
+        attentionNum: 0,
+        fans: 0,
         topTips: "返回首页",
         activeIndex: '1',
         imageURL_header: "../images/avatar/",
@@ -1379,7 +1380,6 @@ new Vue({
         //修改密码用到的session
         axios.get("/shaohuashuwu/userSession/getPhoneNumber").then(response => {
             let info = response.data;
-            console.log("手机号信息");
             console.log("手机号信息"+JSON.stringify(response.data));
             let phone_number_ = info["phone_number"];
             let password = info["password"];
@@ -1387,10 +1387,6 @@ new Vue({
             this.phone_number = phone_number_;
             this.comparePwd = password;
             this.compareCode = code;
-            this.$message({
-                type: 'success',
-                message: '登录成功！'
-            });
         }).catch(error => {
             console.log("获取信息失败！" + error);
         });
@@ -1398,7 +1394,6 @@ new Vue({
         //修改资料用到的session
         axios.get("/shaohuashuwu/userSession/getPersonalData").then(response => {
 
-            console.log("获取到的信息---------");
             console.log("获取到的信息"+JSON.stringify(response.data));
             let info = response.data;
             let user_id = info["user_id"];
@@ -1415,18 +1410,38 @@ new Vue({
             this.gender = gender;
             this.dateValue = birthday;
             this.value = area;
-
-
-            this.$message({
-                type: 'success',
-                message: '获取信息成功！'
-            });
         }).catch(error => {
             console.log("获取信息失败！" + error);
             this.$message({
                 type: 'error',
                 message: '获取信息失败！'
             });
+        });
+
+        //获取关注人数、粉丝人数和互相关注的人数
+        //获取与该用户相互关注的用户信息
+        axios.get("/shaohuashuwu/attentionInfoController/" +
+            "getEachAttentionUserInfo").then(resp =>{
+            let objectData = eval(JSON.stringify(resp.data));//将字符串转化为数组对象
+            this.eachAttentionNum = objectData.length;
+        }).catch(error =>{
+            console.log("获取与该用户互相关注信息失败:"+error);
+        });
+        //获取该用户关注的用户信息
+        axios.get("/shaohuashuwu/attentionInfoController/" +
+            "getAttentionAuthorInfo").then(resp2 =>{
+            let objectData = eval(JSON.stringify(resp2.data));//将字符串转化为数组对象
+            this.attentionNum = objectData.length;
+        }).catch(error =>{
+            console.log("获取关注信息失败:"+error);
+        });
+        //获取关注该用户的用户信息，即粉丝信息
+        axios.get("/shaohuashuwu/attentionInfoController/" +
+            "getFansInfo").then(resp3 =>{
+            let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
+            this.fans = objectData.length;//************************************
+        }).catch(error =>{
+            console.log("获取粉丝关注信息失败:"+error);
         });
     }
 });

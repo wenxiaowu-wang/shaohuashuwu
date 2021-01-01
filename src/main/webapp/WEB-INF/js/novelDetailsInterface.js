@@ -1,4 +1,4 @@
-new Vue({
+let novelDetailsInterface_vm = new Vue({
     el: '#novelDetailsInterface_id',
     data() {
         return {
