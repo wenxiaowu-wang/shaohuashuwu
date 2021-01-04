@@ -1,13 +1,11 @@
 package com.shaohuashuwu.service.impl;
 
-import com.shaohuashuwu.dao.ChapterPostInfoDao;
 import com.shaohuashuwu.dao.UserInterestInfoDao;
 import com.shaohuashuwu.dao.WorkWholeInfoVoDao;
 import com.shaohuashuwu.dao.WorksInfoDao;
 import com.shaohuashuwu.domain.UserinterestInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
-import com.shaohuashuwu.service.UserInfoService;
 import com.shaohuashuwu.service.WorkWholeInfoVoService;
 import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;

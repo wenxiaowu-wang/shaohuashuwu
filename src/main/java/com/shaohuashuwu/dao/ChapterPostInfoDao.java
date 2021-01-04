@@ -1,8 +1,6 @@
 package com.shaohuashuwu.dao;
 
 import com.shaohuashuwu.domain.ChapterPostInfo;
-import com.shaohuashuwu.domain.UserInfo;
-import com.shaohuashuwu.domain.WorksInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;

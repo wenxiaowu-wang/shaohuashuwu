@@ -21,7 +21,6 @@ public class WorkWholeInfoVoController {
     @Autowired
     private WorkWholeInfoVoService workWholeInfoVoService;
 
-    private WorkWholeInfoVo workWholeInfoVo;
     private List<WorkWholeInfoVo> workWholeInfoVoList;
 
     /**

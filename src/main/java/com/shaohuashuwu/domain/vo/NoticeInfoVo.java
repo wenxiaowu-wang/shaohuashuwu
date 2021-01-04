@@ -1,12 +1,6 @@
 package com.shaohuashuwu.domain.vo;
 
-/**
- * 包:com.shaohuashuwu.domain.vo
- * 作者:王洪斌
- * 日期:2020/11/1
- * 项目:shaohuashuwu
- * 描述:
- */
+
 public class NoticeInfoVo {
     //消息信息值对象，包含内容如下
     private Integer notice_id;              //通知信息ID

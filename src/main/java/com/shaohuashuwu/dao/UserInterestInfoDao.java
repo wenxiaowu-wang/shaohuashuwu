@@ -1,7 +1,7 @@
 package com.shaohuashuwu.dao;
 
 import com.shaohuashuwu.domain.UserinterestInfo;
-import com.shaohuashuwu.domain.WorkslabelInfo;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

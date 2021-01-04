@@ -1,6 +1,6 @@
 package com.shaohuashuwu.controller;
 
-import com.shaohuashuwu.domain.ChapterInfo;
+
 import com.shaohuashuwu.domain.vo.CatalogInfoVo;
 import com.shaohuashuwu.service.CatalogInfoVoService;
 import org.springframework.beans.factory.annotation.Autowired;

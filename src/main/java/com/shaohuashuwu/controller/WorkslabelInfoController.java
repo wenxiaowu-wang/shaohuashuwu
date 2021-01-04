@@ -1,8 +1,6 @@
 package com.shaohuashuwu.controller;
 
-import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.WorkslabelInfo;
-import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
 import com.shaohuashuwu.service.WorkslabelInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

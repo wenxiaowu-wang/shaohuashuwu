@@ -84,11 +84,6 @@ new Vue({
 
 
 
-
-
-
-
-
         /*
         * 界面数据变化
         * */
@@ -165,16 +160,15 @@ new Vue({
                 .then(function (respone) {
                     console.log(respone.data);
                     if(respone.data != 0){
-                        alert("添加成功")
+                        alert("添加章节成功~~")
                     }
                     else {
-                        alert("添加失败")
+                        alert("章节信息违规添加失败，请您检查您的作品！！！")
                     }
                     _this.getcatalogInfo();
                 })
                 .catch(function (error){
                     console.log(error);
-
                 })
 
 

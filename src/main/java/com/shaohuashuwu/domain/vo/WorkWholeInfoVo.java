@@ -39,20 +39,6 @@ public class WorkWholeInfoVo extends WorksInfo implements Serializable {
         this.chapter_time = chapter_time;
     }
 
-    /**
-     * 设置相应书籍信息，作品信息，用户信息，最新章节
-     * */
-
-
-
-//    public WorkWholeInfoVo(Integer work_id, String work_cover, String work_name, Integer user_id, String work_main_label, Integer work_serial_state, String work_introduct, Integer work_vote_num, String user_name, Integer chapter_id, String chapter_title, String chapter_time) {
-//        super( work_id, work_cover, work_name, user_id, work_main_label, work_serial_state,work_introduct,work_vote_num);
-//        this.user_name = user_name;
-//        this.chapter_id = chapter_id;
-//        this.chapter_title = chapter_title;
-//        this.chapter_time = chapter_time;
-//    }
-
 
 
     public String getUser_name() {
@@ -86,13 +72,7 @@ public class WorkWholeInfoVo extends WorksInfo implements Serializable {
     public void setChapter_time(Timestamp chapter_time) {
         this.chapter_time = chapter_time;
     }
-    //    public String getChapter_time() {
-//        return chapter_time;
-//    }
-//
-//    public void setChapter_time(String chapter_time) {
-//        this.chapter_time = chapter_time;
-//    }
+
 
     @Override
     public String toString() {

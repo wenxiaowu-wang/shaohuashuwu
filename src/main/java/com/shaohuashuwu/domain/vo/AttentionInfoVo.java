@@ -9,7 +9,7 @@ package com.shaohuashuwu.domain.vo;
  */
 public class AttentionInfoVo {
 
-    private int user_id;            //用户ID
+    private Integer user_id;            //用户ID
     private String user_name;       //用户名
     private String head_portrait;   //用户头像
     //在加上用户的几个作品最多三个

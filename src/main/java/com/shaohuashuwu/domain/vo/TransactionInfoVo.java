@@ -1,12 +1,5 @@
 package com.shaohuashuwu.domain.vo;
 
-/**
- * 包:com.shaohuashuwu.domain.vo
- * 作者:王洪斌
- * 日期:2020/11/3
- * 项目:shaohuashuwu
- * 描述: 用于方便读取交易记录的展示
- */
 public class TransactionInfoVo {
     private Integer transaction_id;         //交易ID
     private Integer consumer_id;            //消费者

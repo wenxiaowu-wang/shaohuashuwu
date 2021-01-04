@@ -16,8 +16,6 @@ public class RankingInfoController {
     @Autowired
     private RankingInfoVoService rankingInfoVoService;
 
-    private RankingInfoVo rankingInfoVo;
-
     /**
      * 获取排行信息
      * 功能点：获取排行信息

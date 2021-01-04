@@ -3,9 +3,7 @@ package com.shaohuashuwu.service.impl;
 
 import com.shaohuashuwu.dao.UserInterestInfoDao;
 import com.shaohuashuwu.domain.UserinterestInfo;
-import com.shaohuashuwu.service.UserInfoService;
 import com.shaohuashuwu.service.UserInterestInfoService;
-import com.shaohuashuwu.service.UserandWorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,6 @@
 package com.shaohuashuwu.service.impl;
 
 import com.shaohuashuwu.dao.CommentInfoDao;
-
-import com.shaohuashuwu.domain.ChapterInfo;
 import com.shaohuashuwu.domain.CommentInfo;
 import com.shaohuashuwu.domain.vo.ChapterCommentInfo;
 import com.shaohuashuwu.domain.vo.CommentInfoChildVo;

@@ -1,9 +1,6 @@
 package com.shaohuashuwu.service;
 
-
-import com.shaohuashuwu.dao.UserInterestInfoDao;
 import com.shaohuashuwu.domain.UserinterestInfo;
-import com.shaohuashuwu.domain.vo.PageInfo;
 
 /**
  * 包:com.shaohuashuwu.service

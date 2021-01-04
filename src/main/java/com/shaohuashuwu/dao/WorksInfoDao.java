@@ -1,7 +1,7 @@
 package com.shaohuashuwu.dao;
 
 
-import com.shaohuashuwu.domain.ChapterInfo;
+
 import com.shaohuashuwu.domain.UserinterestInfo;
 import com.shaohuashuwu.domain.WorksInfo;
 import com.shaohuashuwu.domain.vo.PageInfo;

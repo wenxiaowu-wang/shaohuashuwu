@@ -1,7 +1,6 @@
 package com.shaohuashuwu.dao;
 
 import com.shaohuashuwu.domain.WorkslabelInfo;
-import com.shaohuashuwu.domain.vo.WorkWholeInfoVo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

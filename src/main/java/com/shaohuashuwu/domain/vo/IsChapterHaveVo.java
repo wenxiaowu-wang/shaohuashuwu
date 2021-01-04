@@ -1,7 +1,5 @@
 package com.shaohuashuwu.domain.vo;
 
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 public class IsChapterHaveVo {
 
     private Integer  chapter_id;
