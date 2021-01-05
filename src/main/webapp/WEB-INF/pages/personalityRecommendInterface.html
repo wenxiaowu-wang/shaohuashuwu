@@ -11,43 +11,43 @@
 <div >
 
 
-<!--    顶部导航信息-->
+    <!--    顶部导航信息-->
     <div id="usertop_all_div_id">
         <!--顶部导航栏-->
         <div class="userMainTop_class">
             <ul class="user_navigation_bar">
                 <li class="workclassification_class" id="user_main_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >首      页</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoUserMainIterface()" >首      页</el-button>
                 </li>
                 <li class="workclassification_class" id="allwork_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >全 部 作 品</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoAllWorksInterface()">全 部 作 品</el-button>
                 </li>
                 <li class="workclassification_class" id="paihang_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >排      行</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoNovelRankingInterface()">排      行</el-button>
                 </li>
                 <li class="workclassification_class" id="tuijian_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >推      荐</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoPersonalityRecommendInterface()">推      荐</el-button>
                 </li>
                 <li class="workclassification_class" id="chengweizuozhe_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >成 为 作 者</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoAuthorPrefecture()">作 者 专 区</el-button>
                 </li>
                 <li class="workclassification_class" id="gerenzhongxin_li">
-                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" >个 人 中 心</el-button>
+                    <el-button class="el-button-my" type="danger"  size="small"  style="width: 184px" @click="gotoMysqelfHtml()">个 人 中 心</el-button>
                 </li>
             </ul>
         </div>
         <!--顶部导航栏，用户信息获取-->
         <div class="dierhang">
             <div class="userInfo-class">
-                <a class="userInfo-p-class" id="username-p-id" href="http://www.w3school.com.cn">您好，昵称 </a>
-                <a class="userInfo-p-class" id="userout-p-id" href="http://www.w3school.com.cn">退出</a>
-                <a class="userInfo-p-class" id="haveuser-p-id" href="http://www.w3school.com.cn">网站注册人数5人</a>
+                <a class="userInfo-p-class" id="username-p-id" href="#" @click="gotoMysqelfHtml()">您好，{{userInfo.user_name}} </a>
+                <el-button type="text" class="userInfo-p-class" id="userout-p-id" href="#" @click="signOut()">退出</el-button>
+                <a class="userInfo-p-class" id="haveuser-p-id" >网站注册人数{{userNum}}人</a>
             </div>
             <!--logo，搜索，书架-->
             <img class="imglogo" src="../images/SHAOHUALOGO.png">
             <el-input class="el-select-my" v-model="select_input" placeholder="请输入内容"  size="small" style="width: 300px" style="height: 30px"></el-input>
-            <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectbyinfo()">搜索</el-button>
-            <el-button class="el-shujia-my"  type="info" plain size="small" @click="selectbyinfo()">
+            <el-button class="el-selectbutton-my" type="danger" size="small" icon="el-icon-search" @click="selectworkInfobyinfo()">搜索</el-button>
+            <el-button class="el-shujia-my"  type="info" plain size="small" @click="gotoBookshelf()">
                 <img src="../images/shujia-16.png">
                 <p>书架</p>
             </el-button>
@@ -68,15 +68,15 @@
 
 
                 <div class="responseWorkcover_div_class">
-                    <a href="#">
+                    <a href="#" @click="clickWork_name(workWholeInfoVo.work_id)">
                         <img class="responseWorkcover_img_class" :src="workWholeInfoVo.work_cover" >
                     </a>
                 </div>
                 <div class="responseotherWork_div_class">
-                    <a class="work_name_a_class" href="#">{{workWholeInfoVo.work_name}}</a>
+                    <a class="work_name_a_class" href="#" @click="clickWork_name(workWholeInfoVo.work_id)">{{workWholeInfoVo.work_name}}</a>
                     <div class="work_hang2_div_class">
                         <img class="rankingme_img_class" src="../images/authorme-36.png">
-                        <a class="username_a_class" href="#" >{{workWholeInfoVo.user_name}}</a>
+                        <a class="username_a_class" href="#" @click="clickUser_name(workWholeInfoVo.user_id)">{{workWholeInfoVo.user_name}}</a>
                         <p class="otherworkInfo_hang2_info">{{workWholeInfoVo.work_main_label}} &nbsp; | &nbsp; {{workWholeInfoVo.work_serial_state}}</p>
                     </div>
                     <p class="workintroduct_p_class">
@@ -84,7 +84,7 @@
                     </p>
                     <div class="work_hang4_div_class">
                         <a class="newchapter_b_class" >最新章节：</a>
-                        <a class="newchapter_a_class" href="#">{{workWholeInfoVo.chapter_title}}</a>
+                        <a class="newchapter_a_class" href="#" @click="gotoreadChapterInfo(workWholeInfoVo.chapter_id)">{{workWholeInfoVo.chapter_title}}</a>
                         <a class="newchapter_time_a_class">更新时间： {{workWholeInfoVo.chapter_time}}</a>
                     </div>
 
@@ -93,8 +93,8 @@
                     <a class="num_a_class">{{workWholeInfoVo.work_vote_num}} </a>
                     <a class="num_a2_class">推荐票</a>
 
-                    <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                    <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
+                    <el-button class="addto_button_class" type="danger" plain size="small" @click="addToBookshelf(workWholeInfoVo.work_id)">加入书架</el-button>
+                    <el-button class="seeDt_button_class"  plain size="small" @click="clickWork_name(workWholeInfoVo.work_id)">查看详情</el-button>
 
                 </div>
                 <div class="divhr_class"></div>
@@ -107,7 +107,7 @@
 
             <div class="personality_right_div_class" v-for="recommendInfoVo in recommendInfoVoList">
                 <p class="main_label_class">[{{recommendInfoVo.work_main_label}}]</p>
-                <a class="work_name_class" href="#" >{{recommendInfoVo.work_name}}</a>
+                <a class="work_name_class" href="#" @click="clickWork_name(recommendInfoVo.work_id)">{{recommendInfoVo.work_name}}</a>
             </div>
 
 

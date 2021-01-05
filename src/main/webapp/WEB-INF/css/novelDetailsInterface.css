@@ -8,7 +8,7 @@
 
     height: 28px;
     width: 100%;
-    background: #3e3d43;
+    background: #909399;
 }
 
 .detailstopNavigation_ul_class{
@@ -18,18 +18,27 @@
 
     width: 1160px;
     max-height: 28px;
-    background: #3e3d43;
+    background: #909399;
     list-style-type: none;
 }
 
 .detailstopNavigation_button_class{
     margin-left: 0px;
 
-    background: #3e3d43;
-    border-color: #3e3d43;
+
 
     float: left;
 }
+
+
+
+
+
+
+
+
+
+
 
 #user_name_id{
     margin-left: 200px;
@@ -187,7 +196,8 @@
 }
 
 .workinfo1_div_button_class{
-    margin-left: 15px;
+    position: relative;
+    left: 15px;
 }
 
 
@@ -261,12 +271,19 @@
     top:15px;
     left: 15px;
 
-    color: #424242;
+    color: #5e9de5;
     display: block;
     width: 80%;
     font-size: 15px;
+    /*去掉链接下划线*/
+    text-decoration:none;
+
 
     float: left;
+}
+
+.newchapter1_info:hover{
+    color: #ff0000;
 }
 
 .chapter_div_info{

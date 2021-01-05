@@ -181,15 +181,18 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
      */
     @Override
     public List<WorkWholeInfoVo> getworkWholeInfoVoByauthor_id(int author_id) {
-
+        workWholeInfoVoList = new ArrayList<WorkWholeInfoVo>();
         //通过用户id
         worksInfoList = worksInfoService.getWorksInfoByUser_id(author_id);
+        System.out.println("作品信息"+worksInfoList);
         for(int i = 0; i < worksInfoList.size() ; i++){
             workWholeInfoVo = workWholeInfoVoDao.selectWorkWholeInfoVobywork_name(worksInfoList.get(i));
             if (workWholeInfoVo == null){
+                System.out.println("作品信息--------------"+worksInfoList.get(i));
                 System.out.println("该书籍未发布章节");
             }
             else {
+                System.out.println("作品信息++++++++++++++++++"+worksInfoList.get(i));
                     workWholeInfoVoList.add(workWholeInfoVo);
             }
         }
@@ -216,6 +219,7 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
         }
         else {
             for(int i = 0; i < worksInfoList.size() ; i++){
+                System.out.println("作品---------------"+worksInfoList.get(i));
                 workWholeInfoVo = workWholeInfoVoDao.selectWorkWholeInfoVobywork_name(worksInfoList.get(i));
                 if(workWholeInfoVo == null){
 

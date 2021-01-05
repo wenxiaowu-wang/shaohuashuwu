@@ -90,7 +90,7 @@
                         </a>
                     </div>
                     <div class="responseotherWork_div_class">
-                        <a class="work_name_a_class" href="#">{{worksWholeInfoVo.work_name}}</a>
+                        <a class="work_name_a_class" href="#" @click="gotoDetail(worksWholeInfoVo.work_id)">{{worksWholeInfoVo.work_name}}</a>
                         <div class="work_hang2_div_class">
                             <img class="rankingme_img_class" src="../images/authorme-36.png">
                             <a class="username_a_class" href="#" @click="clickUser_name(worksWholeInfoVo.user_id)">{{worksWholeInfoVo.user_name}}</a>
@@ -101,7 +101,7 @@
                         </p>
                         <div class="work_hang4_div_class">
                             <a class="newchapter_b_class" >最新章节：</a>
-                            <a class="newchapter_a_class" href="#">{{worksWholeInfoVo.chapter_title}}</a>
+                            <a class="newchapter_a_class" href="#" @click="gotoreadChapterInfo(worksWholeInfoVo.chapter_id)">{{worksWholeInfoVo.chapter_title}}</a>
                             <a class="newchapter_time_a_class">更新时间： {{worksWholeInfoVo.chapter_time}}</a>
                         </div>
 
@@ -110,7 +110,7 @@
                         <a class="num_a_class">{{worksWholeInfoVo.work_vote_num}} </a>
                         <a class="num_a2_class">推荐票</a>
 
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
+                        <el-button class="addto_button_class" type="danger" plain size="small" @click="addToBookshelf(worksWholeInfoVo.work_id)">加入书架</el-button>
                         <el-button class="seeDt_button_class"  plain size="small" @click="gotoDetail(worksWholeInfoVo.work_id)">查看详情</el-button>
 
                     </div>
@@ -133,8 +133,8 @@
             <p class="rankingworkinfo_p_class">推荐榜</p>
 
             <div class="rankingworkinfo_div_class" v-for="recommendInfoVo in recommendInfoVoList" >
-                <a class="rankingworkinfo_mainlabela_class">[{{recommendInfoVo.work_main_label}}]</a>
-                <a class="rankingworkinfo_work_name_class" href="#">{{recommendInfoVo.work_name}}</a>
+                <a class="rankingworkinfo_mainlabela_class" >[{{recommendInfoVo.work_main_label}}]</a>
+                <a class="rankingworkinfo_work_name_class" href="#" @click="gotoDetail(recommendInfoVo.work_id)">{{recommendInfoVo.work_name}}</a>
             </div>
         </div>
 

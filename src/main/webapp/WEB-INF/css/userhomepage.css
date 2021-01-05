@@ -169,12 +169,7 @@
     margin-left: 60px;
 }
 
-#frind_link_id_7{
-    color: #ff0000;
-}
-#frind_link_id_8{
-    color: #ff0000;
-}
+
 
 #frind_link_id_7:hover {
     color: #0088ff
@@ -273,6 +268,9 @@
     /*超出部分隐藏*/
     overflow: hidden;
     text-overflow: ellipsis;
+    /*去掉链接下划线*/
+    text-decoration:none;
+    color: #444444;
 
 
     float: left;

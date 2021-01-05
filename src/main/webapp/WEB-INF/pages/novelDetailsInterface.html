@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/novelDetailsInterface.css">
     <link rel="stylesheet" href="../css/comment.css">
     <link rel="stylesheet" href="../css/theme-chalk.css">
+
 </head>
 <body>
     <div id="novelDetailsInterface_id">
@@ -14,34 +15,34 @@
             <ul class="detailstopNavigation_ul_class">
                 <li class="detailstopNavigation-li-class">
 
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >首页</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info" size="mini" @click="gotoUserMainIterface()"  >首页</el-button>
 
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >玄幻</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini"  @click="gotoAllWorksInterface()" >玄幻</el-button>
                 </li>
 
                 <li>
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >都市</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini"  @click="gotoAllWorksInterface()" >都市</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >仙侠</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini" @click="gotoAllWorksInterface()"  >仙侠</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >奇幻</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini" @click="gotoAllWorksInterface()"  >奇幻</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >武侠</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini"  @click="gotoAllWorksInterface()" >武侠</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation_button_class" type="danger"  size="mini"   >排行</el-button>
+                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini" @click="gotoAllWorksInterface()"  >排行</el-button>
                 </li>
                 
                 <li>
-                    <el-button class="detailstopNavigation_button_class" id="user_name_id" type="danger"  size="mini"  style="width: 200px"  >书友~{{userInfo.user_name}}，您好</el-button>
+                    <el-button class="detailstopNavigation_button_class" id="user_name_id" type="info"  size="mini"  style="width: 200px"  @click="gotoMysqelfHtml()" >书友~{{userInfo.user_name}}，您好</el-button>
                 </li>
                 <li>
-                    <el-button class="detailstopNavigation_button_class" id="shujia_id" type="danger"  size="mini"  style="width: 100px"  >
+                    <el-button class="detailstopNavigation_button_class" id="shujia_id" type="info"  size="mini"  style="width: 100px"  @click="gotoBookshelf()" >
                         <img class="shaohualogo" src="../images/xiaoshuo-32.png" >
                         <p class="work_name_p_class">书架</p>
                     </el-button>
@@ -66,7 +67,7 @@
                     <div class="workInfo_right_class">
                         <div class="one_line_class">
                         <h1 class="work_name_h_class">{{worksInfo.work_name}}</h1>
-                        <a class="user_name_p_class" href="#">{{authorInfo.user_name}}   &nbsp 著</a>
+                        <a class="user_name_p_class" href="#" @click="clickUser_name(authorInfo.user_id)">{{authorInfo.user_name}}   &nbsp 著</a>
                         </div>
                         <div class="div_line_class">
                             <el-tag  class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_main_label}}</el-tag>
@@ -84,9 +85,9 @@
                         </div>
                         <div class="div_line_class">
                             <el-button class="workinfo1_div_button_class" type="danger" plain @click="gotoreadNovelInterface()">开始阅读</el-button>
-                            <el-button plain @click="addToBookshelf()">添加书架</el-button>
+                            <el-button class="workinfo1_div_button_class" plain @click="addToBookshelf()">添加书架</el-button>
 <!--                            <el-button plain>投推荐票</el-button>-->
-                            <el-button plain id="book_comment_button">书籍评论</el-button>
+                            <el-button class="workinfo1_div_button_class" plain id="book_comment_button">书籍评论</el-button>
 
 
                             <el-dialog class="dialog_work"
@@ -221,8 +222,9 @@
                             <div id="work_info_hid_class">
                                 <div class="workinfo2_leftdiv1_class">
                                             <a class="work_introduct_class" >
-
                                                 {{worksInfo.work_introduct}}</a>
+                                    <a class="work_introduct_class" >
+                                        {{worksInfo.work_other_word}}</a>
                                     <div class="hr_class"></div>
 
                                     <a class="label_custom_class" :style=" {'display':( workslabelInfoVoNum == 0 ? 'none':'')}">作者自定义标签</a>
@@ -255,7 +257,7 @@
                     <!--右侧作者信息-->
                     <div class="workinfo2_rightdiv_class">
                         <div class="head_portrait_div_class">
-                            <img class="head_portrait_class" :src="authorInfo.head_portrait">
+                            <img class="head_portrait_class" :src="'../images/avatar/'+authorInfo.head_portrait+'.jpg'">
                         </div>
 
                         <div class="user_name_div_class">
@@ -302,7 +304,7 @@
                         <div class="userwork_info_class">
                             <div class="morework_class">
                                 <p class="other_work_class">其他作品</p>
-                                <a class="more_work_class" href="#">更多></a>
+                                <a class="more_work_class" href="#" @click="clickUser_name(authorInfo.user_id)">更多></a>
                             </div>
                             <!--更多作品-->
                             <div class="moreworklunbo_class">
@@ -319,7 +321,7 @@
                                         </div>
 
                                         <div class="otherButton_div_class">
-                                            <el-button class="other_button_class" type="danger" round >查看详情</el-button>
+                                            <el-button class="other_button_class" type="danger" round @click="clickWork_name(authorOtherWorksInfo.work_id)" >查看详情</el-button>
                                         </div>
 
                                     </el-carousel-item>

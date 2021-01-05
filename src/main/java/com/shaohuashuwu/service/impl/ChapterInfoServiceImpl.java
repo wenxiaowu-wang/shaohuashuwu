@@ -127,6 +127,7 @@ public class ChapterInfoServiceImpl implements ChapterInfoService {
             //设置上一章节id
             chapterInfo.setChapter_pid(chapter_pid_max);
             chapterInfo.setChapter_time(thisCurrentTime.currentTime());
+            chapterInfo.setChapter_state(1);
             //添加章节信息
             int a = chapterInfoDao.insertchapter_info(chapterInfo);
 

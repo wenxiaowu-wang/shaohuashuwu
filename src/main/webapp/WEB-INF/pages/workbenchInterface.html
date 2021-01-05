@@ -26,21 +26,21 @@
         <div class="authorMainTopButton_div_class">
             <el-tooltip class="item" effect="dark" content="返回读者平台" placement="top-start">
 
-                <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="writerGradehelp()">
+                <img class="authorMainTop_button_class"  src="../images/backtoUserSide.png" @click="gotoUserMainIterface()">
 
             </el-tooltip>
         </div>
         <div class="authorMainTopButton_div2_class">
             <el-tooltip class="item" effect="dark" content="工作台" placement="top-start">
 
-                <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="writerGradehelp()">
+                <img class="authorMainTop_button_class"  src="../images/authorworks-32.png" @click="gotoworBeanch()">
 
             </el-tooltip>
         </div>
         <div class="authorMainTopButton_div2_class">
             <el-tooltip class="item" effect="dark" content="帮助" placement="top-start">
 
-                <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="writerGradehelp()">
+                <img class="authorMainTop_button_class"  src="../images/authorhelp-32.png" @click="gotohelp()">
 
             </el-tooltip>
         </div>
@@ -62,19 +62,19 @@
 
 <!--左部标题栏和主题内容-->
 <div class="authorMain_class" >
+Left
 
-
-    <div class="authorMainLeft_div_class">
+    <div class="authorMainLeft_div_class" id="worksBeanchLeft_id">
 
         <ul class="authorMainLeft_ul_class">
             <li  id="worksBean"  class="authorMainLeft_li_class"   >
                 <img src="../images/authorworks-36.png" class="authorMainLeft_img_class" >
-                <a href="#" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id">工作台</a></li>
+                <a href="../pages/workbenchInterface.html" class="authorMainLeft_a_class" id="authorMainLeft_worksBeanp_id" >工作台</a></li>
             </li>
 
             <li id="worksMangagement" class="authorMainLeft_li_class" >
                 <img src="../images/authormangagmentNew-32.png" class="authorMainLeft_img_class"  >
-                <a href="#" class="authorMainLeft_a_class" id="worksMangagementp_id">作品管理</a></li>
+                <a href="../pages/worksMangagementInterface.html" class="authorMainLeft_a_class" id="worksMangagementp_id" >作品管理</a></li>
             </li>
             <li id="workDataStatistics" class="authorMainLeft_li_class" >
                 <img src="../images/authordata-32.png" class="authorMainLeft_img_class"  >
@@ -102,7 +102,7 @@
             <div class="top_div_class">
                 <p id = "myselfInfo_p_id">个人中心</p>
                 <img class="img_class" src="../images/authorme-36.png">
-                <a id = "addworkInfo_id" href="#">新建作品</a>
+                <a id = "addworkInfo_id" href="#" @click="gotonewlyCreatedWorks()">新建作品</a>
             </div>
 
             <div class="divhr_class"></div>
@@ -178,6 +178,7 @@
 <script src="../js/axios.js"></script>
 <script src="../js/workbeanchInterface.js"></script>
 <script src="../js/workbeanchTopFragment.js"></script>
+<script src="../js/worksBeanchLeft_id.js"></script>
 
 
 </html>

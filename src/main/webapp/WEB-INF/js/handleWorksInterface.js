@@ -17,6 +17,35 @@ new Vue({
                 .then(function (response){
                     _this.reportWholeInfoVo = response.data;
                     _this.reportWholeInfoVo.report_time = _this.timestampToTime(_this.reportWholeInfoVo.report_time);
+
+
+                    if(_this.reportWholeInfoVo.report_reason == 1){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 2){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 3){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 4){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 5){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 6){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 7){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 8){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }if(_this.reportWholeInfoVo.report_reason == 9){
+                        _this.reportWholeInfoVo.report_reason = "政治敏感"
+                    }
+
+                    if(_this.reportWholeInfoVo.handle_state == 2){
+                        _this.reportWholeInfoVo.handle_state = "章节可阅读"
+                    }
+                    if(_this.reportWholeInfoVo.handle_state == 3){
+                        _this.reportWholeInfoVo.handle_state = "章节下架"
+                    }
+
                     console.log("----"+JSON.stringify(_this.reportWholeInfoVo));
 
                 }.bind(this))

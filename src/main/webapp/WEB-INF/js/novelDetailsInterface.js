@@ -230,43 +230,6 @@ let novelDetailsInterface_vm = new Vue({
 
 
 
-        /*
-        * 初始化评论---------郝振威
-        *
-        *
-        *
-        *
-        * */
-        getComent(){
-
-            var _this = this;
-            axios.get("/shaohuashuwu/commentInfoController/getCommentParentInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
-
-                console.log("1-----------------" + JSON.stringify(resp3.data));
-                _this.commentData = resp3.data;
-                console.log("1-1111111111111----------------" );
-                console.log("1-----------------" + JSON.stringify(_this.commentData));
-
-
-
-            }).catch(error => {
-                console.log("获取父级评论信息失败:" + error);
-            });
-
-            axios.get("/shaohuashuwu/commentInfoController/getCommentChildInfoByWorkId/" + this.worksInfo.work_id).then(resp3 => {
-
-                let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
-
-                console.log("2=================" + JSON.stringify(resp3.data));
-
-                _this.commentChildData = resp3.data;
-
-                console.log("2=================" + JSON.stringify(_this.commentChildData ));
-
-            }).catch(error => {
-                console.log("获取父级评论信息失败:" + error);
-            });
-        },
 
 
 
@@ -313,16 +276,51 @@ let novelDetailsInterface_vm = new Vue({
             });
         },
 
-        //点击评论作品
-        commentbook(){
-
-            console.log("评论按钮1====")
-            this.dialogVisible = true;
-            console.log("评论按钮2----")
-
+        /*点击首页*/
+        gotoUserMainIterface(){
+            window.location.assign("../pages/userMainInterface.html");
+        },
+        /*全部作品*/
+        gotoAllWorksInterface(){
+            window.location.assign("../pages/allWorksInterface.html");
+        },
+        /*加入书架*/
+        gotoBookshelf(){
+            window.location.assign("../pages/bookShelfInterface.html");
+        },
+        /*个人中心*/
+        gotoMysqelfHtml(){
+            window.location.assign("../pages/myHomePage.html");
         },
 
 
+        //点击用户名字
+        clickUser_name(author_id){
+            console.log("作者id："+author_id);
+            var _this = this;
+            axios.post('/shaohuashuwu/userInfoController/addAuthor_idSession?author_id='+author_id)
+                .then(function (response) {
+                    window.location.assign("../pages/authorInfoInterface.html");
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+
+        //点击书籍名称
+        clickWork_name(work_id){
+            console.log("作品id："+work_id);
+            var _this = this;
+            axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
+                .then(function (response) {
+                    window.location.assign("../pages/novelDetailsInterface.html");
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
 
 
 
@@ -432,7 +430,6 @@ let novelDetailsInterface_vm = new Vue({
         this.getchaptercatalogInfo();
         this.getworkslabelInfo();
 
-        this.getComent();
 
 
 

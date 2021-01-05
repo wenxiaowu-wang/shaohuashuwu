@@ -48,6 +48,8 @@ new Vue({
             //榜单数据
             recommendInfoVoList:[],
 
+            //用户信息
+            userInfo:[],
 
 
 
@@ -200,6 +202,45 @@ new Vue({
                     alert("相应失败");
                 })
         },
+        //点击加入书架
+        //加入书架
+        addToBookshelf(selectwork_id){
+            console.log("上传信息======")
+            var user_id= this.userInfo.user_id;
+            var work_id = selectwork_id;
+            console.log("上传信息"+user_id+"---"+work_id)
+            axios.post("/shaohuashuwu/bookshelfInfoController/addToBookshelf/" +
+                user_id + "/" + work_id ).then(resp => {
+                let Result = resp.data;
+                console.log("数据同步存到数据库。"+Result);
+                if(Result==true){
+                    this.$message({
+                        type: 'success',
+                        message: '加入书架成功！'
+                    });
+                }else{
+                    this.$message({
+                        type: 'error',
+                        message: '小说已加入书架，无需重复添加!'
+                    });
+                }
+            }).catch(error => {
+                console.log("数据同步存到数据库失败。"+error);
+            });
+        },
+        /*跳转进入选定章节*/
+        gotoreadChapterInfo(chapter_id){
+
+            /*跳转进入章节*/
+            axios.post('/shaohuashuwu/chapterInfoController/saveChapter_idSession?chapter_id=' + chapter_id)
+                .then(function (response) {
+                    window.location.assign("../pages/readNovelInterface.html");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
 
 
 
@@ -223,12 +264,24 @@ new Vue({
             return Y+M+D+h+m+s;
         },
 
+        startUserInfo(){
+            var _this = this;
+            axios.get('/shaohuashuwu/userInfoController/getUserLoginInfo')
+                .then(function (response){
+                    _this.userInfo = response.data;
+                })
+                .catch(function (error){
+                    alert("相应失败");
+                })
+        },
+
 
 
     },
     created:function (){ //页面加载时查询所有
         this.startHtmlContent();
-      this.startSearchWorkInfo();
-      this.recommendListInfo();
+        this.startSearchWorkInfo();
+        this.recommendListInfo();
+        this.startUserInfo();
     }
 })

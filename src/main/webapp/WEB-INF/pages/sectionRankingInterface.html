@@ -112,13 +112,13 @@
                 <div class="rankingWorksInfo_div1_class">
                     <div class="rankingWorkcover_div_class">
 
-                        <img class="rankingWorkcover_img_class" :src="rankingInfoVo.work_cover">
+                        <img class="rankingWorkcover_img_class" :src="rankingInfoVo.work_cover" href="#" @click="clickWork_name(rankingInfoVo.work_id)">
                         <p class="rankingWorkcover_p_class" :style="{'background':( index == 1 ? '#aaaaaa':'#ff0000')}">
                             {{index+1}}
                         </p>
                     </div>
                     <div class="rankingotherWork_div_class">
-                        <a class="work_name_a_class" href="#">{{rankingInfoVo.work_name}}</a>
+                        <a class="work_name_a_class" href="#" @click="clickWork_name(rankingInfoVo.work_id)">{{rankingInfoVo.work_name}}</a>
                         <div class="work_hang2_div_class">
 
 
@@ -134,8 +134,8 @@
                         <a class="num_a_class">{{rankingInfoVo.sumnum}} </a>
                         <a class="num_a2_class">{{numName}}</a>
 
-                        <el-button class="addto_button_class" type="danger" plain size="small">加入书架</el-button>
-                        <el-button class="seeDt_button_class"  plain size="small">查看详情</el-button>
+                        <el-button class="addto_button_class" type="danger" plain size="small" @click="addToBookshelf(rankingInfoVo.work_id)">加入书架</el-button>
+                        <el-button class="seeDt_button_class"  plain size="small" href="#" @click="clickWork_name(rankingInfoVo.work_id)">查看详情</el-button>
 
                     </div>
 

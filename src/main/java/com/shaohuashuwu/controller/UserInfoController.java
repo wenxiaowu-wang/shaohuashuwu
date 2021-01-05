@@ -37,8 +37,11 @@ public class UserInfoController {
      */
     @RequestMapping("/addAuthor_idSession")
     public void addAuthor_idSession(Integer author_id, HttpServletRequest request, HttpServletResponse response)  {
+
+        System.out.println("作者信息"+author_id);
         HttpSession session = request.getSession();
         session.setAttribute("author_id",author_id);
+
     }
 
 
@@ -84,7 +87,7 @@ public class UserInfoController {
     public UserInfo getUserInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
 
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
         return userInfoService.getUserInfoByWork_id(work_id);
     }

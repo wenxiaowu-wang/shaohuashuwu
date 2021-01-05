@@ -126,12 +126,12 @@
                             <div class="no1_div_class">
                                 <p class="no1_p_class">NO 1</p>
                             </div>
-                            <a class="no1_work_name_class" href="#">{{collectionInfoVoList[0].work_name}}</a>
-                            <a class="no1_work_num_class" href="#">{{collectionInfoVoList[0].sumnum}} 收藏</a>
-                            <a class="no1_work_state_class" href="#">{{collectionInfoVoList[0].work_main_label}} {{collectionInfoVoList[0].work_serial_state}}</a>
+                            <a class="no1_work_name_class" href="#"  @click="clickWork_name(collectionInfoVoList[0].work_id)">{{collectionInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_num_class"  >{{collectionInfoVoList[0].sumnum}} 收藏</a>
+                            <a class="no1_work_state_class"  >{{collectionInfoVoList[0].work_main_label}} {{collectionInfoVoList[0].work_serial_state}}</a>
                         </div>
                         <div class="workinfo_right_div_class">
-                            <img class="workinfo_right_img_class" :src="collectionInfoVoList[0].work_cover">
+                            <img class="workinfo_right_img_class" :src="collectionInfoVoList[0].work_cover" href="#" @click="clickWork_name(collectionInfoVo.work_id)">
                         </div>
                     </div>
 <!--                    &lt;!&ndash;                    第一之下&ndash;&gt;-->
@@ -140,7 +140,7 @@
 
                         <div class="otherranking_work_div_class">
                             <p class="other_work_pnum_class">{{index+1}}</p>
-                            <a class="other_work_name_p_class" href="#">{{collectionInfoVo.work_name}}</a>
+                            <a class="other_work_name_p_class" href="#" @click="clickWork_name(collectionInfoVo.work_id)">{{collectionInfoVo.work_name}}</a>
                             <p class="resultnum_class">{{collectionInfoVo.sumnum}}</p>
 
                         </div>
@@ -170,7 +170,7 @@
                             <div class="no1_div_class">
                                 <p class="no1_p_class">NO 1</p>
                             </div>
-                            <a class="no1_work_name_class" href="#">{{recommendInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_name_class" href="#" @click="clickWork_name(recommendInfoVoList[0].work_id)">{{recommendInfoVoList[0].work_name}}</a>
                             <a class="no1_work_num_class" href="#">{{recommendInfoVoList[0].sumnum}} 推荐票</a>
                             <a class="no1_work_state_class" href="#">{{recommendInfoVoList[0].work_main_label}} {{recommendInfoVoList[0].work_serial_state}}</a>
                         </div>
@@ -184,7 +184,7 @@
 
                         <div class="otherranking_work_div_class">
                             <p class="other_work_pnum_class">{{index+1}}</p>
-                            <a class="other_work_name_p_class" href="#">{{recommendInfoVo.work_name}}</a>
+                            <a class="other_work_name_p_class" href="#" @click="clickWork_name(recommendInfoVo.work_id)">{{recommendInfoVo.work_name}}</a>
                             <p class="resultnum_class">{{recommendInfoVo.sumnum}}</p>
 
                         </div>
@@ -218,7 +218,7 @@
                             <div class="no1_div_class">
                                 <p class="no1_p_class">NO 1</p>
                             </div>
-                            <a class="no1_work_name_class" href="#">{{subscribeInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_name_class" href="#" @click="clickWork_name(subscribeInfoVoList[0].work_id)">{{subscribeInfoVoList[0].work_name}}</a>
                             <a class="no1_work_num_class" href="#">{{subscribeInfoVoList[0].sumnum}} 次订阅</a>
                             <a class="no1_work_state_class" href="#">{{subscribeInfoVoList[0].work_main_label}} {{subscribeInfoVoList[0].work_serial_state}}</a>
                         </div>
@@ -232,7 +232,7 @@
 
                         <div class="otherranking_work_div_class">
                             <p class="other_work_pnum_class">{{index+1}}</p>
-                            <a class="other_work_name_p_class" href="#">{{subscribeInfoVo.work_name}}</a>
+                            <a class="other_work_name_p_class" href="#" @click="clickWork_name(subscribeInfoVo.work_id)">{{subscribeInfoVo.work_name}}</a>
                             <p class="resultnum_class">{{subscribeInfoVo.sumnum}}</p>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
                             <div class="no1_div_class">
                                 <p class="no1_p_class">NO 1</p>
                             </div>
-                            <a class="no1_work_name_class" href="#">{{rewardInfoVoList[0].work_name}}</a>
+                            <a class="no1_work_name_class" href="#" @click="clickWork_name(rewardInfoVoList[0].work_id)">{{rewardInfoVoList[0].work_name}}</a>
                             <a class="no1_work_num_class" href="#">{{rewardInfoVoList[0].sumnum}} 金豆</a>
                             <a class="no1_work_state_class" href="#">{{rewardInfoVoList[0].work_main_label}} {{rewardInfoVoList[0].work_serial_state}}</a>
                         </div>
@@ -276,7 +276,7 @@
 
                         <div class="otherranking_work_div_class" >
                             <p class="other_work_pnum_class">{{index+1}}</p>
-                            <a class="other_work_name_p_class" href="#">{{rewardInfoVo.work_name}}</a>
+                            <a class="other_work_name_p_class" href="#" @click="clickWork_name(rewardInfoVo.work_id)">{{rewardInfoVo.work_name}}</a>
                             <p class="resultnum_class">{{rewardInfoVo.sumnum}}</p>
 
                         </div>

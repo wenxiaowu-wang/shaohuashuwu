@@ -35,7 +35,6 @@ new Vue({
                 .then(function (response) {
                     _this.worksWholeInfoVoList = response.data;
                     _this.workTotal=_this.worksWholeInfoVoList.length;
-                    console.log("======="+JSON.stringify(_this.worksWholeInfoVoList));
 
                     for( var i = 0 ;i<_this.worksWholeInfoVoList.length;i++){
                         /*将1或2转为连载或完结*/
@@ -59,7 +58,7 @@ new Vue({
 
                         /*时间戳转换*/
                         _this.worksWholeInfoVoList[i].chapter_time = _this.timestampToTime(_this.worksWholeInfoVoList[i].chapter_time);
-                        console.log("----"+_this.worksWholeInfoVoList[i].chapter_time)
+
                     }
 
                 })

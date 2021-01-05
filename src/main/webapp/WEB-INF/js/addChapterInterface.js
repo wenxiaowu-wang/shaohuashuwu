@@ -161,6 +161,8 @@ new Vue({
                     console.log(respone.data);
                     if(respone.data != 0){
                         alert("添加章节成功~~")
+
+                        _this.getcatalogInfo();
                     }
                     else {
                         alert("章节信息违规添加失败，请您检查您的作品！！！")

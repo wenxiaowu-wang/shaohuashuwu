@@ -34,6 +34,19 @@ new Vue({
                 })
         },
 
+        //返回首页
+        gotoUserMainIterface(){
+            window.location.assign("../pages/userMainInterface.html");
+        },
+        //工作台
+        gotoworBeanch(){
+            window.location.assign("../pages/workbenchInterface.html");
+        },
+        //帮助
+        gotohelp(){
+
+        },
+
     },
     created:function (){
         this.getAuthorInfo();

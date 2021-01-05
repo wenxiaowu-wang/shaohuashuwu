@@ -257,6 +257,20 @@ new Vue({
             }
         },
 
+        //点击书籍名称
+        clickWork_name(work_id){
+            console.log("作品id："+work_id);
+            var _this = this;
+            axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
+                .then(function (response) {
+                    window.location.assign("../pages/novelDetailsInterface.html");
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+
 
     /*
     * 工具类

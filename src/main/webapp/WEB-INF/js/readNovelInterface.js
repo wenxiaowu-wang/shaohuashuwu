@@ -42,6 +42,7 @@ let readNovelInterface_vm = new Vue({
             },
 
 
+            arr:[],
 
         }
     },
@@ -87,6 +88,7 @@ let readNovelInterface_vm = new Vue({
                 .then(function (response) {
                     _this.worksInfo = response.data;
 
+
                     _this.addToReadingHistory();
                 })
                 .catch(function (error) {
@@ -128,6 +130,11 @@ let readNovelInterface_vm = new Vue({
             axios.post('/shaohuashuwu/chapterInfoController/getChapterInfoByChapter_id')
                 .then(function (response) {
                     _this.chapterInfo = response.data;
+
+
+                    _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/。/g, "。<br/>"+"&nbsp;"+"&nbsp;")
+                    _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/”/g, "“<br/>"+"&nbsp;"+"&nbsp;")
+                   
                 })
                 .catch(function (error){
                     console.log(error);
@@ -428,9 +435,30 @@ let readNovelInterface_vm = new Vue({
             }
         },
 
+
+
+        gotoUserMainIterface(){
+            window.location.assign("../pages/userMainInterface.html");
+        },
+        /*全部作品*/
+        gotoAllWorksInterface(){
+            window.location.assign("../pages/allWorksInterface.html");
+        },
+        //个人中心
+        gotoMysqelfHtml(){
+            window.location.assign("../pages/myHomePage.html");
+        },
+        /*加入书架*/
+        gotoBookshelf(){
+            window.location.assign("../pages/bookShelfInterface.html");
+        },
+        /*加入书架*/
+        gotoReadingHistory(){
+            window.location.assign("../pages/bookShelfInterface.html");
+        },
+
     },
     created:function (){ //页面加载时查询所有
-
         this.startreadNovelhtml();
     }
 })

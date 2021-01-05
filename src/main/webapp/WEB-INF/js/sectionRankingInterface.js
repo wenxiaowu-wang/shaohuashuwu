@@ -15,6 +15,8 @@ new Vue({
             rankingName:'',
             //数量名
             numName:'',
+            //用户
+            userInfo:[],
 
 
 
@@ -171,6 +173,49 @@ new Vue({
             }
         },
 
+        //点击书籍名称
+        clickWork_name(work_id){
+            console.log("作品id："+work_id);
+            var _this = this;
+            axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
+                .then(function (response) {
+                    window.location.assign("../pages/novelDetailsInterface.html");
+                })
+                .catch(function (error){
+                    console.log(error);
+                    alert("相应失败");
+                })
+        },
+
+        //点击加入书架
+        //加入书架
+        addToBookshelf(selectwork_id){
+            console.log("上传信息======")
+            var user_id= this.userInfo.user_id;
+            var work_id = selectwork_id;
+            console.log("上传信息"+user_id+"---"+work_id)
+            axios.post("/shaohuashuwu/bookshelfInfoController/addToBookshelf/" +
+                user_id + "/" + work_id ).then(resp => {
+                let Result = resp.data;
+                console.log("数据同步存到数据库。"+Result);
+                if(Result==true){
+                    this.$message({
+                        type: 'success',
+                        message: '加入书架成功！'
+                    });
+                }else{
+                    this.$message({
+                        type: 'error',
+                        message: '小说已加入书架，无需重复添加!'
+                    });
+                }
+            }).catch(error => {
+                console.log("数据同步存到数据库失败。"+error);
+            });
+        },
+
+
+
 
 
         /*
@@ -182,6 +227,18 @@ new Vue({
             this.nowtime = time;
         },
 
+        startUserInfo(){
+            var _this = this;
+            axios.get('/shaohuashuwu/userInfoController/getUserLoginInfo')
+                .then(function (response){
+                    _this.userInfo = response.data;
+                })
+                .catch(function (error){
+                    alert("相应失败");
+                })
+        },
+
+
     },
     created:function (){ //页面加载时查询所有
 
@@ -189,5 +246,7 @@ new Vue({
         this.isRankingInfo();
 
         this.getnowtime();
+
+        this.startUserInfo();
     }
 })

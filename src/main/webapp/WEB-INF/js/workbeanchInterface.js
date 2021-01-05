@@ -8,9 +8,10 @@ new Vue({
     },
     methods:{
 
-        //跳转到稿酬收入界面
-        gotoRemunerationInterface(){
-            window.location.assign("../pages/remunerationInterface.html");
+
+        //点击新建作品按钮
+        gotonewlyCreatedWorks(){
+            window.location.assign("../pages/newlyCreatedWorksInterface.html");
         },
         /*
         * 获取数据
@@ -42,6 +43,8 @@ new Vue({
 
                 })
         },
+
+
 
 
 

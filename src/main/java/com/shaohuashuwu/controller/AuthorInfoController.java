@@ -48,6 +48,8 @@ public class AuthorInfoController {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("author_id");
         int author_id=Integer.parseInt(String.valueOf(msg));
+        System.out.println("相应作者-----------------------------------"+author_id);
+        System.out.println("相应作者==================================="+authorInfoVoService.getAuthorInfoVo(author_id));
         return authorInfoVoService.getAuthorInfoVo(author_id);
     }
 }

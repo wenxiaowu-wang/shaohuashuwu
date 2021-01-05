@@ -27,7 +27,7 @@ let adminLoginInterface_vm = new Vue({
                     if (theResult) {
                         //登录成功，进行的操作:在当前界面跳进入管理员主界面；
                         //跳转界面
-                        window.location.assign("../pages/handleWorksInterface.html");
+                        window.location.assign("../pages/handlingReportInfoInterface.html");
                     } else {
                         this.$message({
                             type: 'error',

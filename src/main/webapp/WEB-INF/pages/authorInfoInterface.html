@@ -60,7 +60,7 @@
         <div class="authorInfoandwork_div_class" id="authorInfoandwork_div_id">
             <div class="authorInfo_div_class">
                 <div class="authorInfo_leftdiv_class">
-                    <img class="user_headportrait_class" :src="authorInfo.head_portrait">
+                    <img class="user_headportrait_class" :src="'../images/avatar/'+authorInfo.head_portrait+'.jpg'">
 
                 </div>
                 <div class="authorInfo_rightdiv_class">
@@ -68,8 +68,8 @@
                         <p class="authorInfo_rightdiv1p_class">{{authorInfo.user_name}}</p>
                     </div>
                     <div class="authorInfo_rightdiv2_class">
-                        <p class="authorInfo_rightdiv2p_class">关注：1231</p>
-                        <p class="authorInfo_rightdiv2p2_class">粉丝：{{authorInfo.attention_num}}</p>
+                        <p class="authorInfo_rightdiv2p_class" >关注：{{authorInfo.attention_num}}</p>
+                        <p class="authorInfo_rightdiv2p2_class">推荐票数：{{authorInfo.ticket_num}}</p>
                     </div>
                     <div  class="authorInfo_rightdiv2right_class">
                         <el-button  class="follow_button_class" type="danger" round size="small" style="width: 80px" @click="addAttention">关注作者</el-button>

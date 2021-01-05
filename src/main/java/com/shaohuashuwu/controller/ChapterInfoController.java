@@ -35,7 +35,7 @@ public class ChapterInfoController {
     @RequestMapping(value = "/getnewChapterInfoByword_id")
     public ChapterInfo getnewChapterInfoByword_id(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
         return chapterInfoService.getnewChapterInfoByword_id(work_id);
     }
@@ -85,7 +85,7 @@ public class ChapterInfoController {
     public int addchapter_info(@RequestBody ChapterInfo chapterInfo, HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
 
         Object user_id_o = session.getAttribute("user_id");

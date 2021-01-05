@@ -68,6 +68,7 @@ public class WorkWholeInfoVoController {
         HttpSession session = request.getSession();
         Object msg = session.getAttribute("author_id");
         int author_id=Integer.parseInt(String.valueOf(msg));
+        System.out.println("作品信息之作者id：======================"+author_id);
         return workWholeInfoVoService.getworkWholeInfoVoByauthor_id(author_id);
     }
 

@@ -132,7 +132,7 @@ new Vue( {
                             _this.collectionInfoVoList[i].work_serial_state = "连载";
                         }
                     }
-                    console.log("收藏榜------："+JSON.stringify(_this.collectionInfoVoList));
+
 
                      _this.recommendListInfo(3);
 
@@ -214,7 +214,7 @@ new Vue( {
                             _this.rewardInfoVoList[i].work_serial_state = "连载";
                         }
                     }
-                    console.log("打赏榜------："+JSON.stringify(_this.rewardInfoVoList));
+
                 }.bind(this))
                 .catch(function (error){
                     console.log(error);
@@ -280,6 +280,8 @@ new Vue( {
             axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
                 .then(function (response) {
                     window.location.assign("../pages/novelDetailsInterface.html");
+
+
                 })
                 .catch(function (error){
                     console.log(error);
@@ -304,7 +306,7 @@ new Vue( {
     },
     created:function (){ //页面加载时查询所有
 
-        // this.finddifvolenum();
+        this.finddifvolenum();
         this.startDifferentStateWork();
         this.collectionListInfo();
 

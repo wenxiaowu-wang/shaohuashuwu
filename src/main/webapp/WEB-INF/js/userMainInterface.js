@@ -80,7 +80,7 @@ new Vue( {
             window.location.assign("../pages/authorVerifyManageInterface.html");
         },
         /*个人中心*/
-        //跳转，未修改
+
         gotoMysqelfHtml(){
             window.location.assign("../pages/myHomePage.html");
         },

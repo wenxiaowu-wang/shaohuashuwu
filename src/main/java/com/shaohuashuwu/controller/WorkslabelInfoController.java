@@ -31,7 +31,7 @@ public class WorkslabelInfoController {
     @RequestMapping("/getWorkslabelInfoByWork_id")
     public List<WorkslabelInfo> getWorkslabelInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
         return workslabelInfoService.getWorkslabelInfoByWork_id(work_id);
     }

@@ -73,7 +73,8 @@ public class WorksInfoController {
     public void addWork_idSession(Integer work_id, HttpServletRequest request, HttpServletResponse response)  {
         System.out.println("作品id"+work_id);
         HttpSession session = request.getSession();
-        session.setAttribute("work_id",work_id);
+
+        session.setAttribute("work_id1",work_id);
     }
 
 
@@ -112,7 +113,7 @@ public class WorksInfoController {
     @RequestMapping("/getworkInfoByWork_id")
     public WorksInfo getworkInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
         return worksInfoService.getworkInfoByWork_id(work_id);
     }
@@ -129,7 +130,7 @@ public class WorksInfoController {
     @RequestMapping("/getOtherWorkInfoByWork_id")
     public List<WorksInfo> getOtherWorkInfoByWork_id(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
         return worksInfoService.getOtherWorkInfoByWork_id(work_id);
     }

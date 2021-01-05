@@ -24,31 +24,31 @@
             <div class="novelDetails_top_div2_class" >
 
                 <el-menu class="novelDetails_top_el_menu_class" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="1">首页</el-menu-item>
+                    <el-menu-item index="1" @click="gotoUserMainIterface()">首页</el-menu-item>
 
-                    <el-menu-item index="2">阅读历史</el-menu-item>
+                    <el-menu-item index="2" @click="gotoReadingHistory()">阅读历史</el-menu-item>
                     <el-submenu index="3">
                         <template slot="title">快速导航</template>
-                        <el-menu-item index="2-1">玄幻</el-menu-item>
-                        <el-menu-item index="2-2">奇幻</el-menu-item>
-                        <el-menu-item index="2-3">武侠</el-menu-item>
-                        <el-menu-item index="2-4">仙侠</el-menu-item>
-                        <el-menu-item index="2-5">都市</el-menu-item>
-                        <el-menu-item index="2-6">历史</el-menu-item>
-                        <el-menu-item index="2-7">军事</el-menu-item>
-                        <el-menu-item index="2-8">悬疑</el-menu-item>
-                        <el-menu-item index="2-9">科幻</el-menu-item>
-                        <el-menu-item index="2-10">游戏</el-menu-item>
-                        <el-menu-item index="2-11">体育</el-menu-item>
-                        <el-menu-item index="2-12">现实</el-menu-item>
-                        <el-menu-item index="2-13">轻小说</el-menu-item>
+                        <el-menu-item index="2-1" @click="gotoAllWorksInterface()">玄幻</el-menu-item>
+                        <el-menu-item index="2-2" @click="gotoAllWorksInterface()">奇幻</el-menu-item>
+                        <el-menu-item index="2-3" @click="gotoAllWorksInterface()">武侠</el-menu-item>
+                        <el-menu-item index="2-4" @click="gotoAllWorksInterface()">仙侠</el-menu-item>
+                        <el-menu-item index="2-5" @click="gotoAllWorksInterface()">都市</el-menu-item>
+                        <el-menu-item index="2-6" @click="gotoAllWorksInterface()" >历史</el-menu-item>
+                        <el-menu-item index="2-7" @click="gotoAllWorksInterface()">军事</el-menu-item>
+                        <el-menu-item index="2-8" @click="gotoAllWorksInterface()">悬疑</el-menu-item>
+                        <el-menu-item index="2-9" @click="gotoAllWorksInterface()">科幻</el-menu-item>
+                        <el-menu-item index="2-10" @click="gotoAllWorksInterface()">游戏</el-menu-item>
+                        <el-menu-item index="2-11" @click="gotoAllWorksInterface()">体育</el-menu-item>
+                        <el-menu-item index="2-12" @click="gotoAllWorksInterface()">现实</el-menu-item>
+                        <el-menu-item index="2-13" @click="gotoAllWorksInterface()">轻小说</el-menu-item>
                     </el-submenu>
 
-                    <el-menu-item class="userInfo_class" index="3" >书友{{userInfo.user_name}}，您好</el-menu-item>
+                    <el-menu-item class="userInfo_class" index="3" @click="gotoMysqelfHtml()">书友{{userInfo.user_name}}，您好</el-menu-item>
                     <el-menu-item index="4">
                         <div class="shujia_class">
                             <img class="shujia_img_class" src="../images/xiaoshuo-32.png" >
-                            <p class="shaohualogo_p_class">书架</p>
+                            <p class="shaohualogo_p_class" @click="gotoBookshelf()">书架</p>
                         </div>
 
                     </el-menu-item>
@@ -61,9 +61,9 @@
                 <div class="chapter_list_div_class">
                     <div class="list_div_class" @click="openchapterCatalogbutton()" tabindex = "0" @focus="readSettingbutton_focus()" >
 
-                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
+                        <el-button class="el_button_list" type="info" plain   style="height: 70px;width: 70px">
 
-                            <img class="el_button_img_my" src="../images/shujia-16.png">
+                            <img class="el_button_img_my" src="../images/mulu-200.png">
                             <p class="el_button_p_my" > 目录</p>
 
                         </el-button>
@@ -94,8 +94,8 @@
                     <div class="hrdiv_class"></div>
 
                     <div class="list_div_class" id="htmlsetting" @click="openreadSettingbutton()" tabindex = "0" @focus="readSettingbutton_focus()">
-                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
-                            <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                            <img class="el_button_img_my" src="../images/shezhi-200.png">
                             <p class="el_button_p_my" > 设置</p>
                         </el-button>
                     </div>
@@ -169,8 +169,8 @@
 
                     <div class="hrdiv_class"></div>
                     <div class="list_div_class" id="report_button" >
-                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
-                        <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/jubao-200.png">
                         <p class="el_button_p_my" > 举报</p>
                         </el-button>
                     </div>
@@ -178,20 +178,21 @@
                     <div class="hrdiv_class"></div>
 <!--                    <div class="list_div_class" @click="rewardWorksDialog = true">-->
                     <div class="list_div_class" id="reward_button" >
-                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
-                        <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/dashnag-200.png">
                         <p class="el_button_p_my" > 打赏</p>
                         </el-button>
                     </div>
 
                     <div class="hrdiv_class"></div>
                     <div class="list_div_class" id="vote_button">
-                        <el-button class="el_button_list" type="danger" style="height: 70px;width: 70px">
-                        <img class="el_button_img_my" src="../images/shujia-16.png">
+                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/toupiao-200.png">
                         <p class="el_button_p_my" > 投票</p>
                         </el-button>
                     </div>
                     <div class="hrdiv_class"></div>
+
                 </div>
 
                 <!--右侧小说内容-->
@@ -221,10 +222,20 @@
 
                         </div>
                         <div class="hrdiv_class2"></div>
-                        <!--小说内容-->
+ <!--小说内容
+
+
+
+
+
+
+
+ -->
                         <div class="chapter_content_div_class">
-                            <p class="chapter_content_p_class" id="chapter_content_p_id">
-                                {{chapterInfo.chapter_content}}
+                            <p class="chapter_content_p_class" id="chapter_content_p_id" v-html="chapterInfo.chapter_content">
+                                12-4444444444444444444444--<br>
+                                23234<br>
+
                             </p>
                             <div :style=" {'display':( chapterInfo.chapter_content == null ? '':'none')}">
                                 <p>这是VIP章节 需要订阅后才能阅读</p>
@@ -530,6 +541,7 @@
 <script src="../js/pagemessage.js"></script>
 
 <script>
+
     document.getElementById("reward_button").addEventListener("click", displayReward);
     document.getElementById("vote_button").addEventListener("click", displayVote);
     document.getElementById("report_button").addEventListener("click", displayReport);

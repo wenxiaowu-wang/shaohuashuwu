@@ -27,7 +27,7 @@ public class UploadController {
     public String ossUpload(@RequestParam("file")MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
-        Object msg = session.getAttribute("work_id");
+        Object msg = session.getAttribute("work_id1");
         int work_id=Integer.parseInt(String.valueOf(msg));
         String work_id_name =  Integer.toString(work_id);
         String bucketName = "shaohuashuwu";
