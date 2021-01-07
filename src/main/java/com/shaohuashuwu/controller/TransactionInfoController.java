@@ -240,9 +240,12 @@ public class TransactionInfoController {
     //提现金币
     @RequestMapping(path = "/withdrawGoldCoin/{quantity}/{mode}/{third_party_number}")
     @ResponseBody
-    public TransactionInfo withdrawGoldCoin(ModelMap modelMap,@PathVariable(value = "quantity")Integer quantity,
+    public TransactionInfo withdrawGoldCoin(Model model,ModelMap modelMap,@PathVariable(value = "quantity")Integer quantity,
                                             @PathVariable(value = "mode")Integer mode,@PathVariable(value = "third_party_number")String third_party_number){
         Integer author_id = (Integer)modelMap.get("user_id");
+        Integer already_withdraw = (Integer)modelMap.get("goldCoin_already_withdraw");
+        int num = already_withdraw + quantity*10;
+        model.addAttribute("goldCoin_already_withdraw",num);
         TransactionInfo transactionInfo = new TransactionInfo();
         //调用transactionService的添加一条记录（其中包含对该用户的金币数减少）
         //封装数据，调用transactionInfoService
@@ -307,17 +310,7 @@ public class TransactionInfoController {
     @ResponseBody
     public List<TransactionInfoVo> getAllWithdrawInfo(ModelMap modelMap){
         Integer author_id = (Integer)modelMap.get("user_id");
-        List<TransactionInfoVo> getResult = new ArrayList<TransactionInfoVo>();
-        List<TransactionInfoVo> getService = transactionInfoService.getTransactionOfWithdraw(author_id);
-        //筛选出来提现信息
-        if (getService.size() != 0){
-            for (int i=0;i<getService.size();i++){
-                if (getService.get(i).getTransaction_type().equals("提现")){
-                    getResult.add(getService.get(i));
-                }
-            }
-        }
-        return getResult;
+        return transactionInfoService.getTransactionOfWithdraw(author_id);
     }
 
     @RequestMapping(path = "/toRemunerationInterface")

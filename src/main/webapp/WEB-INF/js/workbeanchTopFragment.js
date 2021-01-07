@@ -3,7 +3,7 @@ new Vue({
     el: '#authorMainTop_div_id',
     data() {
         return {
-            authorInfo:[],
+            authorInfo: {},
             worksNum:'',
         }
     },

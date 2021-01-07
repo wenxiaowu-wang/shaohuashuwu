@@ -123,6 +123,19 @@ let personalAccountInterface_vm = new Vue({
                 transaction_unit:"张推荐票"     //交易单位
             }
         ],
+        //轮播图图片名字（图片格式为png）
+        carouselFigures:[
+            {
+                figureUrl:"贺词3",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词2",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词1",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            }
+        ],
         //the data end
     },
     methods:{

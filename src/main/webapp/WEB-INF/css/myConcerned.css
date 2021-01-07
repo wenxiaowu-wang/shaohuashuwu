@@ -124,7 +124,7 @@
 .body_left_carousel{
     width: 100%;
     height: auto;
-
+    border: red;
 }
 .el-carousel__item h3 {
     color: #475669;

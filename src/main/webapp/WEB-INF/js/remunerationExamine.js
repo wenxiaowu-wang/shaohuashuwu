@@ -64,7 +64,7 @@ let remunerationInterface_vm = new Vue({
             transaction_type:"打赏"
         }],
         tableData_all:[],   //总收入数据（包含提现）
-        withdrawData:[]     //提现数据
+        withdrawData:[],     //提现数据
     },
     methods:{
         toWithdraw(){
@@ -124,6 +124,16 @@ let remunerationInterface_vm = new Vue({
             //返回与选择对应显示数组 params(num,str)
             let selectData = [];
             let this_ = this;
+            if(selectWork.length === 0){
+                this.select_value1 = [0];
+                //选中全部的作品
+                this_.tableData_all.forEach(function (value, index, array) {
+                    if (value.transaction_type === selectType){
+                        selectData.push(value);
+                    }
+                });
+                return selectData;
+            }
             for (let i=0;i<selectWork.length;i++){
                 let selectWorkValue = selectWork[i];
                 if (selectWorkValue === 0){
@@ -202,7 +212,7 @@ let remunerationInterface_vm = new Vue({
             objectData.forEach(function (value,index,array) {
                 let one_value = {
                     value:index+1,
-                    label:value
+                    label:"《"+value+"》"
                 };
                 this_.work_options.push(one_value);
             });

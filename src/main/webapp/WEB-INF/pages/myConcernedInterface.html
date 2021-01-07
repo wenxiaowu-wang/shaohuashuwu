@@ -101,18 +101,12 @@
         </el-drawer>
     </div>
     <div class="body_left">
-        <!--
-        <p>查看关注信息</p>
-        <p>编辑个人资料</p>
-        <p>更改账户信息</p>
-        <p></p>
-        <p>关注信息</p>-->
-
-
         <div class="body_left_carousel">
-            <el-carousel :interval="4000" type="card" height="200px">
-                <el-carousel-item v-for="item in 6" :key="item">
-                    <h3 class="medium">{{ item }}</h3>
+<!--            <el-carousel :interval="4000" type="card" height="200px">-->
+            <el-carousel indicator-position="outside" height="700px" :interval="4000">
+                <el-carousel-item v-for="item in carouselFigures">
+<!--                    <h3 class="medium">{{ item }}</h3>-->
+                    <a :href="item.hyperlink" target="_blank"><img :src="'../images/carousel/'+item.figureUrl+'.png'"/></a>
                 </el-carousel-item>
             </el-carousel>
         </div>

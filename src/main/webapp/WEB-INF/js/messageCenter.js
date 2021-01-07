@@ -171,7 +171,19 @@ let messageCenterInterface_vm = new Vue({
             }
             ]
         },
-
+        //轮播图图片名字（图片格式为png）
+        carouselFigures:[
+            {
+                figureUrl:"贺词2",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词1",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词3",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            }
+        ],
 
     },
     methods:{

@@ -150,14 +150,27 @@ let withdrawGoldCoinInterface_vm = new Vue({
             let oneData = {
                 withdraw_id: objectData.transaction_id,
                 third_party_number: this.withdrawForm.third_party_number,
-                third_party_name: this.withdrawForm.third_party_name,
+                third_party_name: this.withdrawForm.third_party_name === 0?"支付宝":"微信",
                 withdraw_quantity:objectData.transaction_quantity,
-                withdraw_time:objectData.transaction_time,
+                withdraw_time:this.getNow(),
                 withdraw_type:"提现"
             };
-            this.tableData_all = this.tableData_all.push(oneData);
+            this.header.goldCoin_able_withdraw -= objectData.transaction_quantity;
+            this.header.goldCoin_already_withdraw += objectData.transaction_quantity;
+            this.tableData_all.push(oneData);
             this.tableData_display = this.tableData_all;
             console.log("表单以及统计更新完毕。");
+        },
+        getNow(){
+            //获取当前时间字符串yyyy-MM-dd HH:mm:ss
+            let today = new Date();
+            let month = today.getMonth() + 1;
+            month = month < 10 ? '0'+month : month;
+            let day = today.getDate() < 10 ? '0'+today.getDate() : today.getDate();
+            let hours = today.getHours() < 10 ? '0'+today.getHours() : today.getHours();
+            let mins = today.getMinutes() < 10 ? '0'+today.getMinutes() : today.getMinutes();
+            let secs = today.getSeconds() < 10 ? '0'+today.getSeconds() : today.getSeconds();
+            return today.getFullYear() + '-' + month + '-' + day + " " + hours + ":" + mins + ":" + secs;
         },
     },
     mounted(){
@@ -172,12 +185,33 @@ let withdrawGoldCoinInterface_vm = new Vue({
             this.user_id = userId;
             this.user_name = userName;
             console.log("用户数据装配成功");
+            //根据用户的ID获取该作者的作品数据
+            axios.get("/shaohuashuwu/transactionSession/getTransactionGoldCoin").then(response =>{
+                //获取transactionSession中的总收入以及已提现金豆数
+                this.header.goldCoin_total_income = response.data["goldCoin_total_income"];
+                this.header.goldCoin_already_withdraw = response.data["goldCoin_already_withdraw"];
+                this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
+
+                /*
+                *根据用户的ID统计的该作者的总收入（金币数）以及总提现数（金币数）已经发送到transactionSession中了【封装到map集合中】
+                * 注意：总收入以及已提现金币数在从transactionSession中获取即可
+                */
+                console.log("装配统计金币数成功。");
+            }).catch(error =>{
+                this.$confirm('网络或其它原因，获取界面信息失败！', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //执行操作
+                    this.header.goldCoin_able_withdraw = 0;     //获取信息失败额处理
+                }).catch(() => {
+                    //执行操作
+                    this.header.goldCoin_able_withdraw = 0;     //获取信息失败额处理
+                });
+                console.log("装配统计金币数失败。");
+            });
         }).catch(error =>{
-            dialog = true;
-            this.header.goldCoin_able_withdraw = 0;     //获取信息失败额处理
-            console.log("装配用户数据失败！");
-        });
-        if (!dialog){
             this.$confirm('网络或其它原因，获取界面信息失败！', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -189,23 +223,7 @@ let withdrawGoldCoinInterface_vm = new Vue({
                 //执行操作
                 this.header.goldCoin_able_withdraw = 0;     //获取信息失败额处理
             });
-        }
-        //根据用户的ID获取该作者的作品数据
-        axios.get("/shaohuashuwu/transactionSession/getTransactionGoldCoin").then(response =>{
-            //获取transactionSession中的总收入以及已提现金豆数
-            this.header.goldCoin_total_income = response.data["goldCoin_total_income"];
-            this.header.goldCoin_already_withdraw = response.data["goldCoin_already_withdraw"];
-            this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
-
-            /*
-            *根据用户的ID统计的该作者的总收入（金币数）以及总提现数（金币数）已经发送到transactionSession中了【封装到map集合中】
-            * 注意：总收入以及已提现金币数在从transactionSession中获取即可
-            */
-            console.log("装配统计金币数成功。");
-        }).catch(error =>{
-            dialog = true;
-            this.header.goldCoin_able_withdraw = 0;     //获取信息失败额处理
-            console.log("装配统计金币数失败。");
+            console.log("装配用户数据失败！");
         });
         //根据用户的ID获取接受者为该作者作品的提现记录信息
         axios.get("/shaohuashuwu/transactionInfoController/getAllWithdrawInfo").then(response =>{
@@ -218,7 +236,7 @@ let withdrawGoldCoinInterface_vm = new Vue({
             objectData.forEach(function (value,index,array) {
                 let one_data = {
                     withdraw_id: value.transaction_id,
-                    third_party_number: value.recipient_name_other,
+                    third_party_number: value.recipient_name,
                     third_party_name: value.transaction_mode,
                     withdraw_quantity:value.transaction_quantity,
                     withdraw_time:value.transaction_time,

@@ -100,6 +100,22 @@ let attentionInterface_vm = new Vue({
             sendToId:0
         },
 
+        // carouselFigures:["001","002","003","004",
+        //     "005","006","007","008",
+        //     "011","012","010","009",
+        // ],//轮播图图片名字（图片格式为png）
+        carouselFigures:[
+            {
+                figureUrl:"贺词1",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词2",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词3",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            }
+        ],//轮播图图片名字（图片格式为png）
 
     },
     methods:{
@@ -237,7 +253,25 @@ let attentionInterface_vm = new Vue({
         },
         accessUser(id){
             //访问对象资料
-            window.open("http://www.baidu.com");
+            //传入对象用户ID
+            axios.post('/shaohuashuwu/userInfoController/addAuthor_idSession?author_id='+id)
+            .then(function (response) {
+                window.open("../pages/authorInfoInterface.html");
+            }).catch(function (error){
+                console.log(error);
+                this.$confirm('网络或其它原因，访问失败！', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //执行操作
+
+                }).catch(() => {
+                    //执行操作
+
+                });
+            });
+            // window.open("http://www.baidu.com");
         },
         addAttention(user){
             //先提交选中的用户到session

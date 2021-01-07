@@ -118,6 +118,6 @@ public interface TransactionInfoDao {
     public int selectOneDaySubscriptionNumByWorkID(int work_id,String one_day);
 
     //1.04根据作品ID获取章节最高订阅量
-    @Select("SELECT MAX(T.chapter_subscription_num) AS chapter_max_subscription_num FROM (SELECT IFNULL(SUM(transaction_quantity),0) AS chapter_subscription_num, chapter_id FROM subscription_view WHERE work_id = #{param1} GROUP BY chapter_id) AS T")
+    @Select("SELECT IFNULL(MAX(T.chapter_subscription_num),0) AS chapter_max_subscription_num FROM (SELECT IFNULL(SUM(transaction_quantity),0) AS chapter_subscription_num, chapter_id FROM subscription_view WHERE work_id = #{param1} GROUP BY chapter_id) AS T")
     public int selectChapterMaxSubscriptionNumByWorkId(int work_id);
 }

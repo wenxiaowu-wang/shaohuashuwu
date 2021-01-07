@@ -32,6 +32,20 @@ let authorVerifyManageInterface_vm = new Vue({
         },      //输入框右边的检查结果显示（图片）
         passwordTips:"必须包含大小写字母和数字的组合，不能使用特殊字符，长度在 8-10 之间",
         assignUrl:"../pages/workbenchInterface.html",
+
+        //轮播图图片名字（图片格式为png）
+        carouselFigures:[
+            {
+                figureUrl:"贺词3",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词2",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词1",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            }
+        ],
     },
     methods:{
         //跳转到首页

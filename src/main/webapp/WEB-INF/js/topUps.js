@@ -22,7 +22,16 @@ let topUpDialogForm_vm = new Vue({
             //校验提交信息
             let method = parseInt(this.form.method);//将表单数据中的支付方式数据类型由string转为number
             if(this.form.money<10 || this.form.name==="" || method>2){
-                alert("提交信息错误");
+                this.$confirm('提交信息错误', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //执行操作
+
+                }).catch(() => {
+                    //执行操作
+                });
             }else{
                 if (method=== 0){
                     this.$message({
@@ -59,7 +68,6 @@ let topUpDialogForm_vm = new Vue({
         },
         topUpsCommit(){
             let method = parseInt(this.form.method);//将表单数据中的支付方式数据类型由string转为number
-            alert("alert "+JSON.stringify(this.form.name)+"["+this.form.userId+"]");
             axios.post("/shaohuashuwu/transactionInfoController/topUpsGoldBean/"
                 +method+"/"
                 +this.form.money
@@ -99,17 +107,11 @@ let topUpDialogForm_vm = new Vue({
         // }
         //获取当前用户的名字以及ID（后端模拟session域取值）
         axios.get("/shaohuashuwu/userSession/getUser").then(response =>{
-            console.log("ok"+JSON.stringify(response.data));
             let info = response.data;
-            console.log("ok2"+JSON.stringify(info["user_id"]));
-            console.log("ok3"+JSON.stringify(info["user_name"]));
-
             let user_id = JSON.stringify(info["user_id"]);
             user_id = parseInt(user_id);
-            let user_name = info["user_name"];
-            this.form.name = user_name;
+            this.form.name = info["user_name"];
             this.form.userId = user_id;
-            alert("id = ["+user_id+"] name = ["+user_name+"]");
 
         }).catch(error =>{
             console.log(error);
