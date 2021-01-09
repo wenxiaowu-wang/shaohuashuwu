@@ -6,7 +6,6 @@
     <link rel="icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/myHomePage.css">
-<!--    <link rel="stylesheet" href="../css/wTest.css">-->
     <link rel="stylesheet" href="../css/theme-chalk.css">
 </head>
 <body>
@@ -15,7 +14,9 @@
     <div class="top">
         <div class="top_img"></div>
         <div class="top_content">
-            <div class="top_tips"><el-button type="text" icon="el-icon-back" @click="backHomePage">{{topTips}}</el-button></div>
+            <div class="top_tips">
+                <el-button type="text" icon="el-icon-back" @click="backHomePage">{{topTips}}</el-button>
+            </div>
             <div class="top_menu">
                 <el-menu
                         :default-active="activeIndex"
@@ -34,14 +35,22 @@
 
             <div class="top_data">
                 <br/>
-                {{user_name}}
+                {{user_name2}}
                 &nbsp;<el-button type="text">退出</el-button>
             </div>
         </div>
     </div>
 
     <div class="body_left">
-
+        <div class="body_left_carousel">
+            <!--            <el-carousel :interval="4000" type="card" height="200px">-->
+            <el-carousel indicator-position="outside" height="700px" :interval="4000">
+                <el-carousel-item v-for="item in carouselFigures">
+                    <!--                    <h3 class="medium">{{ item }}</h3>-->
+                    <a :href="item.hyperlink" target="_blank"><img :src="'../images/carousel/'+item.figureUrl+'.png'"/></a>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
     </div>
 
     <div class="body">
@@ -52,7 +61,6 @@
                     <img id="avatar" :src="imageURL_header+user_avatar+imageURL_suffix">
                 </div>
                 <div class="body_img_content">
-
                     <label>{{user_name2}}<br/>&nbsp;&nbsp;&nbsp;<span>互相关注：{{eachAttentionNum}} </span>&nbsp;&nbsp;
                         <span>关注：{{attentionNum}}</span>&nbsp;&nbsp;<span>粉丝：{{fans}} </span>&nbsp;&nbsp;</label>
                     &nbsp;&nbsp;&nbsp;
@@ -96,18 +104,16 @@
                         </div>
                         <div class="form">
                             <span class="label">地区：</span>
-
-<!--                            <input class="Nickname" v-model="area">-->
                             <el-cascader
-                                    ref = "cascaderAddr"
+                                    ref="cascaderAddr"
                                     v-model="value"
                                     :options="CityInfo"
-                                    placeholder ="请选择地区"
+                                    placeholder="请选择地区"
                                     @change="handleChange"></el-cascader>
 
                         </div>
                         <div>
-                            <button class="modifyPassword-btn" @click="updatePersonData">保存修改</button>
+                            <button class="modifyPassword-btn" @click="updatePersonData()">保存修改</button>
                         </div>
                     </div>
                 </el-tab-pane>
@@ -143,12 +149,16 @@
         </div>
     </div>
 </div>
+    <div class="footing">
+        <div class="address">地址:山东省烟台市莱山区山东工商学院软件2017级 邮编：264003 电话：123-123-1234 传真：123-1234567</div>
+        <div class="beian">鲁ICP备08001421号鲁公网安备110108007702 人工客服QQ：1404661805</div>
+    </div>
 </div>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
+<script src="../js/index.js"></script>
 <script src="../js/axios.js"></script>
 <script src="../js/myHomePage.js"></script>
-
 
 
 </body>

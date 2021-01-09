@@ -73,14 +73,12 @@ let register_vm = new Vue({
         save() {
 
             let regPhoto = /^0?(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$/;
-            let pPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            let pPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
             if (this.pojo.phone_number === "") {
-
                 this.$message({
                     type: 'error',
                     message: '请输入手机号码'
                 });
-                console.log(6666666666666666666);
                 return;
             } else if (!regPhoto.test(this.pojo.phone_number)) {
                 this.$message({
@@ -93,7 +91,11 @@ let register_vm = new Vue({
                     type: 'error',
                     message: '请输入验证码！'
                 });
-                // return false;
+            } else if (this.pojo.password === '') {
+                this.$message({
+                    type: 'error',
+                    message: '请设置登录密码！'
+                });
             } else if (!pPattern.test(this.pojo.password)) {
                 this.$message({
                     type: 'error',
@@ -137,11 +139,14 @@ let register_vm = new Vue({
                                     message: '用户已存在，注册失败！'
                                 });
                             } else {
-                                //window.location.assign("../pages/Success.html");
                                 this.$message({
                                     type: 'success',
                                     message: '注册成功。'
                                 });
+                                this.pojo.phone_number="";
+                                this.smsCode="";
+                                this.password="";
+                                this.pojo.password="";
                             }
                         }).catch(error => {
                             console.log(error);
@@ -155,5 +160,8 @@ let register_vm = new Vue({
 
             }
         },
+        goToLogin() {
+            window.location.assign("../pages/UserLogin.html");
+        }
     }
 });

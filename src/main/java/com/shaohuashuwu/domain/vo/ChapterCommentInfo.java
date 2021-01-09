@@ -15,12 +15,13 @@ public class ChapterCommentInfo  implements Serializable {
     private Integer chapter_id;             //评论所在章节ID
     private Integer work_id;                //评论所在作品ID
 
-    public ChapterCommentInfo(Integer user_id,Timestamp comment_time,String comment_content,Integer chapter_id,Integer comment_pid) {
+    public ChapterCommentInfo(Integer user_id,Timestamp comment_time,String comment_content,Integer chapter_id,Integer comment_pid,Integer comment_aid) {
         this.user_id = user_id;
         this.comment_time = comment_time;
         this.comment_content = comment_content;
         this.chapter_id = chapter_id;
         this.comment_pid = comment_pid;
+        this.comment_aid = comment_aid;
     }
 
 

@@ -2,8 +2,9 @@ let bookComment_vm = new Vue({
     el: "#bookShelf",
     data: {
 
-        work_id:0,
-
+        user_id: '',
+        work_id: '',
+        user_name: '',
         textarea: '',//评论
         textarea_reply: '',//回复评论
         textarea_reply_child: '',//回复评论2
@@ -24,18 +25,7 @@ let bookComment_vm = new Vue({
             reply_comment_btn: '回复',//回复按钮
             reply_comment_btn2: '展开',
 
-        }, {
-            user_id: '3',
-            user_name: 'fu测试3',
-            head_portrait: '003',//用户头像
-            comment_time: '2020-12-13',
-            comment_content: '测试评论内容',
-            comment_id: '3',
-            displayReply: 'none',
-            reply_comment_btn: '回复',//回复按钮
-            reply_comment_btn2: '展开',
-
-        },],
+        }],
 
 
         commentChildData: [{
@@ -46,21 +36,12 @@ let bookComment_vm = new Vue({
             comment_content: '测试评论内容',
             comment_id: '4',
             comment_pid: '1',
+            comment_aid: '1',
+            parent_name: '',
             displayReply: 'none',
             reply_comment_btn: '回复',//回复按钮
 
-        }, {
-            user_id: '5',
-            user_name: 'zi测试5',
-            head_portrait: '002',//用户头像
-            comment_time: '2020-12-13',
-            comment_content: '测试评论内容',
-            comment_id: '5',
-            comment_pid: '3',
-            displayReply: 'none',
-            reply_comment_btn: '回复',//回复按钮
-
-        },],
+        }],
 
     },
     methods: {
@@ -119,16 +100,20 @@ let bookComment_vm = new Vue({
                 });
             } else {
                 axios.post("/shaohuashuwu/commentInfoController/addCommentInfo/"
-                    + this.user_id + "/" + this.textarea + "/" + this.work_id + "/" + 2).then(response => {
+                    + this.user_id + "/" + this.textarea + "/" + this.work_id + "/" + 2 + "/" + 0).then(response => {
                     let result = response.data;
                     console.log(response);
                     if (result === true) {
                         this.$message({
                             type: 'success',
-                            message: '评论成功！'
+                            message: '回复评论成功！'
                         });
                     }
                 }).catch(error => {
+                    this.$message({
+                        type: 'error',
+                        message: '网络异常！'
+                    });
                     console.log(error);
                 });
 
@@ -136,80 +121,60 @@ let bookComment_vm = new Vue({
             }
         },
 
-        //回复父级评论  传进来的id  是父级评论的id
+        //回复父级评论  传进来的id  是第一级父级评论的id
         submit_commentReply(id) {
-            if (this.textarea_reply === "") {
+            if (this.textarea_reply === '') {
                 this.$message({
                     type: 'error',
                     message: '请输入回复内容！'
                 });
             } else {
-
-                let this_ = this;
-                this.commentData.forEach(function (value, index, array) {
-                    if (id === value.comment_id) {
-
-                        axios.post("/shaohuashuwu/commentInfoController/addCommentInfo/"
-                            + this_.user_id + "/" + this_.textarea_reply + "/" + this_.work_id + "/" + value.comment_id).then(response => {
-                            let result = response.data;
-                            //
-                            // console.log(response);
-
-                            if (result === true) {
-                                alert("回复成功！");
-                                this.$message({
-                                    type: 'success',
-                                    message: '回复评论成功！'
-                                });
-                            }
-
-                        }).catch(error => {
-                            console.log(error);
+                axios.post("/shaohuashuwu/commentInfoController/addCommentInfo/"
+                    + this.user_id + "/" + this.textarea_reply + "/" + this.work_id + "/" + id + "/" + id).then(response => {
+                    let result = response.data;
+                    if (result === true) {
+                        this.$message({
+                            type: 'success',
+                            message: '回复评论成功！'
                         });
-
                     }
+                }).catch(error => {
+                    this.$message({
+                        type: 'error',
+                        message: '网络异常！'
+                    });
+                    console.log(error);
                 });
+
                 this.textarea_reply = '';
             }
         },
 
-        //回复次级评论  传进来的id  是次级评论的id
-        submit_commentReplyChild(id) {
+        //回复次级评论  传进来的id  是次级评论的id  aid 是总父亲的id
+        submit_commentReplyChild(id, aid) {
 
-            if (this.textarea_reply_child === "") {
+            if (this.textarea_reply_child === '') {
                 this.$message({
                     type: 'error',
                     message: '请输入回复内容！'
                 });
             } else {
-
-                let this_ = this;
-
-                this.commentChildData.forEach(function (value, index, array) {
-
-
-                    if (id === value.comment_pid) {
-
-                        axios.post("/shaohuashuwu/commentInfoController/addCommentInfo/"
-                            + this_.user_id + "/" + this_.textarea_reply_child + "/" + this_.work_id + "/" + value.comment_id).then(response => {
-                            let result = response.data;
-                            //
-                            // console.log(response);
-
-                            if (result === true) {
-                                alert("回复成功！");
-                                this.$message({
-                                    type: 'success',
-                                    message: '回复评论成功！'
-                                });
-                            }
-
-
-                        }).catch(error => {
-                            console.log(error);
+                axios.post("/shaohuashuwu/commentInfoController/addCommentInfo/"
+                    + this.user_id + "/" + this.textarea_reply_child + "/" + this.work_id + "/" + id + "/" + aid).then(response => {
+                    let result = response.data;
+                    if (result === true) {
+                        this.$message({
+                            type: 'success',
+                            message: '回复评论成功！'
                         });
-
                     }
+
+                }).catch(error => {
+                    this.$message({
+                        type: 'error',
+                        message: '网络异常！'
+                    });
+                    console.log(error);
                 });
 
                 this.textarea_reply_child = '';
@@ -217,9 +182,12 @@ let bookComment_vm = new Vue({
             }
         },
 
-        getInterfaceData(){
+        getInterfaceData(work_id) {
+            this.work_id = work_id;
+            //获取书籍父评论
             axios.get("/shaohuashuwu/commentInfoController/" +
-                "getCommentParentInfoByWorkId/" + this.work_id).then(resp3 => {
+                "getCommentParentInfoByWorkId/" + work_id).then(resp3 => {
+
 
                 let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
 
@@ -245,8 +213,9 @@ let bookComment_vm = new Vue({
                 console.log("获取父级评论信息失败:" + error);
             });
 
+            //获取书籍子评论
             axios.get("/shaohuashuwu/commentInfoController/" +
-                "getCommentChildInfoByWorkId/" + this.work_id).then(resp3 => {
+                "getCommentChildInfoByWorkId/" + work_id).then(resp3 => {
 
                 let objectData = eval(JSON.stringify(resp3.data));//将字符串转化为数组对象
 
@@ -262,6 +231,8 @@ let bookComment_vm = new Vue({
                         comment_content: value["comment_content"],
                         comment_id: value["comment_id"],
                         comment_pid: value["comment_pid"],
+                        parent_name: value["parent_name"],
+                        comment_aid: value["comment_aid"],
                         displayReply: 'none',
                         reply_comment_btn: '回复',//回复按钮
                     };
@@ -280,8 +251,16 @@ let bookComment_vm = new Vue({
     mounted() {
         //钩子函数，在加载页面后，渲染数据前执行
 
-
-
+        //获取本用户的ID和name
+        axios.get("/shaohuashuwu/userSession/getPersonalData").then(response => {
+            let info = response.data;
+            let user_id = info["user_id"];
+            let user_name = info["user_name"];
+            this.user_id = user_id;
+            this.user_name = user_name;
+        }).catch(error => {
+            console.log("获取信息失败！" + error);
+        });
 
 
     },

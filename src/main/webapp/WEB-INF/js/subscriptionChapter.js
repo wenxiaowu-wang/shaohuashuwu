@@ -134,8 +134,7 @@ new Vue({
             this.user_id = user_id;
             this.user_name = user_name;
             //获取用户金豆数量
-            axios.get("/shaohuashuwu/userInfoController/getGoldBeanNum/" +
-                this.user_id).then(resp => {
+            axios.get("/shaohuashuwu/userInfoController/getGoldBeanNum").then(resp => {
                 let object = JSON.stringify(resp.data);
                 this.gold_bean_num = parseInt(object);
 
@@ -143,8 +142,8 @@ new Vue({
                 console.log(error);
             });
 
-            //章节获取章节id
-            axios.get("/shaohuashuwu/userSession/getChapterId").then(response => {
+            //获取章节id
+            axios.get("/shaohuashuwu/chapterSession/getChapter").then(response => {
                 let info = response.data;
                 let chapter_id = info["chapter_id"];
 

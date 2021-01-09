@@ -2,7 +2,7 @@ let myHomePage_vm = new Vue({
     el: "#myHomePage",
     data: {
 
-        introduction: "大家好，我系大雄的小伙伴，机器猫哆啦A梦，请多多关照！",
+        introduction: "这家伙很懒，什么都没有留下！",
 
         eachAttentionNum:0,
         attentionNum: 0,
@@ -33,7 +33,7 @@ let myHomePage_vm = new Vue({
 
         //城市选择
 
-        value: [1,1],
+        value: [],
 
         CityInfo: [
             {
@@ -1189,12 +1189,24 @@ let myHomePage_vm = new Vue({
             }
         ],
 
+        carouselFigures:[
+            {
+                figureUrl:"贺词1",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词2",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            },{
+                figureUrl:"贺词3",
+                hyperlink:"https://baijiahao.baidu.com/s?id=1687656758816139053&wfr=spider&for=pc",
+            }
+        ],//轮播图图片名字（图片格式为png）
     },
 
     methods: {
 
-        handleChange(value) {
-            console.log(value);
+        handleChange() {
+            console.log();
         },
         //跳转到首页
         backHomePage(){
@@ -1237,7 +1249,6 @@ let myHomePage_vm = new Vue({
                 });
                 return false;
             } else {
-                console.log("信息：----"+this.user_name+this.user_id)
                 axios.post("/shaohuashuwu/userInfoController/isUserNameHaveByUsername/" +
                     this.user_name+"/"+this.user_id ).then(resp2 => {
                     let Result2 = resp2.data;
@@ -1283,7 +1294,7 @@ let myHomePage_vm = new Vue({
             }
         },
         updatePwd() {
-            let pPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            let pPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
             if (this.oldPwd === "") {
                 this.$message({
                     type: 'error',
@@ -1409,7 +1420,14 @@ let myHomePage_vm = new Vue({
             this.user_avatar = head_portrait;
             this.gender = gender;
             this.dateValue = birthday;
-            this.value = area;
+
+            let num = area.indexOf(",");
+            let leftArea = parseInt(area.substring(0,num));
+            let rightArea = parseInt(area.substr(num+1));
+            this.value = [leftArea,rightArea];
+
+
+
         }).catch(error => {
             console.log("获取信息失败！" + error);
             this.$message({

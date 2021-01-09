@@ -134,7 +134,7 @@ let readNovelInterface_vm = new Vue({
 
                     _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/。/g, "。<br/>"+"&nbsp;"+"&nbsp;")
                     _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/”/g, "“<br/>"+"&nbsp;"+"&nbsp;")
-                   
+
                 })
                 .catch(function (error){
                     console.log(error);

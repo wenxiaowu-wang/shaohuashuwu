@@ -168,11 +168,11 @@ public class UserInfoController {
         System.out.println("账号：" + phone_number + "、密码：" + password + "、网页输入的验证码：" + smsCode);
         Boolean theResult = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //获得年月日
-        SimpleDateFormat formatter2 = new SimpleDateFormat("MMddHHmmss"); //获得年月日
+        SimpleDateFormat formatter2 = new SimpleDateFormat("mmss"); //获得年月日
         Random random = new Random();
-        int one_code = random.nextInt(9999);
-        if (one_code < 1000) {//位数处理
-            one_code = one_code + 1000;
+        int one_code = random.nextInt(999);
+        if (one_code < 100) {//位数处理
+            one_code = one_code + 100;
         }
         String code = String.valueOf(one_code);
 
@@ -189,10 +189,10 @@ public class UserInfoController {
         Date currentTime = new Date();
         String birthday = formatter.format(currentTime);
         String name2 = formatter2.format(currentTime);
-        String user_name = "韶华用户"+code+name2;
+        String user_name = "用户"+code+name2;
         String head_portrait = headCode2;
         String gender = "男";
-        String area = "北京市";
+        String area = "1,1";
         int gold_bean_num =0;
         int gold_coin_num =0;
         int ticket_num =0;

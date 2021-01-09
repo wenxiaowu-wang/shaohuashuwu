@@ -9,8 +9,12 @@ public class CommentInfoChildVo  implements Serializable {
     private String head_portrait;   //用户头像
     private String comment_time;     //评论时间
     private String comment_content;     //评论内容
-    private Integer comment_id;            //评论ID
+    private Integer comment_id;          //评论ID
     private Integer comment_pid;       //上一条评论id
+    private Integer comment_aid;          //总父亲评论ID
+    private String parent_name;       //父评论用户名
+
+
 
     public  CommentInfoChildVo(){
 
@@ -72,6 +76,22 @@ public class CommentInfoChildVo  implements Serializable {
         this.comment_pid = comment_pid;
     }
 
+    public String getParent_name() {
+        return parent_name;
+    }
+
+    public void setParent_name(String parent_name) {
+        this.parent_name = parent_name;
+    }
+
+    public Integer getComment_aid() {
+        return comment_aid;
+    }
+
+    public void setComment_aid(Integer comment_aid) {
+        this.comment_aid = comment_aid;
+    }
+
     @Override
     public String toString() {
         return "CommentInfoChildVo{" +
@@ -82,6 +102,8 @@ public class CommentInfoChildVo  implements Serializable {
                 ", comment_content='" + comment_content + '\'' +
                 ", comment_id=" + comment_id +
                 ", comment_pid=" + comment_pid +
+                ", comment_aid=" + comment_aid +
+                ", parent_name='" + parent_name + '\'' +
                 '}';
     }
 }

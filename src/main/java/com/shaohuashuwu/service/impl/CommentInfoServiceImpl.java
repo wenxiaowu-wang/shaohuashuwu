@@ -24,12 +24,12 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 
 
 
-    //父级评论 评论图书 增加一条评论 书籍
+    //评论图书 增加一条评论 书籍
     @Override
-    public Boolean addCommentInfo(int user_id, Timestamp comment_time, String comment_content, int work_id, int comment_pid) {
+    public Boolean addCommentInfo(int user_id, Timestamp comment_time, String comment_content, int work_id, int comment_pid,int comment_aid) {
 
         boolean addResult = false;
-        commentInfo = new CommentInfo(user_id, comment_time, comment_content, work_id, comment_pid);
+        commentInfo = new CommentInfo(user_id, comment_time, comment_content, work_id, comment_pid,comment_aid);
 
         int i = 0;
         i = commentInfoDao.insertCommentInfo(commentInfo);
@@ -41,13 +41,13 @@ public class CommentInfoServiceImpl implements CommentInfoService {
         return addResult;
     }
 
-    //父级评论 评论章节 增加一条评论 章节
+    //评论章节 增加一条评论 章节
     @Override
-    public Boolean addChapterCommentInfo(int user_id, Timestamp comment_time, String comment_content, int chapter_id, int comment_pid) {
+    public Boolean addChapterCommentInfo(int user_id, Timestamp comment_time, String comment_content, int chapter_id, int comment_pid,int comment_aid) {
 
         boolean addResult = false;
 
-        chapterCommentInfo = new ChapterCommentInfo(user_id, comment_time, comment_content, chapter_id, comment_pid);
+        chapterCommentInfo = new ChapterCommentInfo(user_id, comment_time, comment_content, chapter_id, comment_pid, comment_aid);
 
         if (commentInfoDao.insertChapterCommentInfo(chapterCommentInfo) != 0) {
             addResult = true;

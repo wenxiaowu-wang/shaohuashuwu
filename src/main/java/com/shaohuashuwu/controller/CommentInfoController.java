@@ -58,15 +58,14 @@ public class CommentInfoController {
 
     //存书籍评论
     @ResponseBody
-    @RequestMapping(path = "/addCommentInfo/{user_id}/{comment_content}/{work_id}/{id}")
-    public Boolean addCommentInfo(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "comment_content")String comment_content,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "id")Integer id){
+    @RequestMapping(path = "/addCommentInfo/{user_id}/{comment_content}/{work_id}/{id}/{aid}")
+    public Boolean addCommentInfo(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "comment_content")String comment_content,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "id")Integer id,@PathVariable(value = "aid")Integer aid){
 
         boolean addResult = false;
 
         Timestamp timestamp=new Timestamp(new Date().getTime());
 
-        addResult = commentInfoService.addCommentInfo(user_id,timestamp,comment_content,work_id,id);
-
+        addResult = commentInfoService.addCommentInfo(user_id,timestamp,comment_content,work_id,id,aid);
         return addResult;
     }
 
@@ -74,14 +73,14 @@ public class CommentInfoController {
 
     //存章节评论
     @ResponseBody
-    @RequestMapping(path = "/addChapterCommentInfo/{user_id}/{comment_content}/{chapter_id}/{id}")
-    public Boolean addChapterCommentInfo(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "comment_content")String comment_content,@PathVariable(value = "chapter_id")Integer chapter_id,@PathVariable(value = "id")Integer id){
+    @RequestMapping(path = "/addChapterCommentInfo/{user_id}/{comment_content}/{chapter_id}/{id}/{aid}")
+    public Boolean addChapterCommentInfo(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "comment_content")String comment_content,@PathVariable(value = "chapter_id")Integer chapter_id,@PathVariable(value = "id")Integer id,@PathVariable(value = "aid")Integer aid){
 
         boolean addResult = false;
 
         Timestamp timestamp=new Timestamp(new Date().getTime());
 
-        addResult = commentInfoService.addChapterCommentInfo(user_id,timestamp,comment_content,chapter_id,id);
+        addResult = commentInfoService.addChapterCommentInfo(user_id,timestamp,comment_content,chapter_id,id,aid);
 
         return addResult;
     }

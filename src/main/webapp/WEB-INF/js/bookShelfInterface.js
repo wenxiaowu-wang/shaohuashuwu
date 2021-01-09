@@ -5,10 +5,7 @@ new Vue({
         book_num: '1',
         user_id: '0',
         user_name: '123',//用户昵称
-
-
         activeIndex: '2',
-
         tableData: [{
             work_name: '斗罗大陆',
             work_main_label: '玄幻',
@@ -103,14 +100,10 @@ new Vue({
                 }).then(() => {
 
                     axios.post("/shaohuashuwu/bookshelfInfoController/deleteBookshelfWorkByWorkId/" +
-                        id).then(response => {
+                        this.checkedChapter + "/" +this.user_id).then(response => {
                         let result = response.data;
                         console.log(response);
-                        if (result == true) {
-                            this.$message({
-                                type: 'success',
-                                message: '移除书架成功'
-                            });
+                        if (result === true) {
                             window.location.assign("../pages/bookShelfInterface.html");
                         }
                     }).catch(error => {
@@ -134,6 +127,7 @@ new Vue({
             console.log("阅读历史")
             window.location.assign("../pages/readingHistoryInterface.html");
         },
+
         goToInterface(work_id){
 
         }

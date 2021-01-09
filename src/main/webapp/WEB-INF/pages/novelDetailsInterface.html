@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>作品详情</title>
+    <link rel="icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/novelDetailsInterface.css">
     <link rel="stylesheet" href="../css/comment.css">
@@ -10,367 +11,290 @@
 
 </head>
 <body>
-    <div id="novelDetailsInterface_id">
-        <div class="detailstopNavigation_div_class">
-            <ul class="detailstopNavigation_ul_class">
-                <li class="detailstopNavigation-li-class">
+<div id="novelDetailsInterface_id">
+    <div class="detailstopNavigation_div_class">
+        <ul class="detailstopNavigation_ul_class">
+            <li class="detailstopNavigation-li-class">
 
-                    <el-button class="detailstopNavigation_button_class" type="info" size="mini" @click="gotoUserMainIterface()"  >首页</el-button>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoUserMainIterface()">首页
+                </el-button>
 
-                </li>
-                <li>
-                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini"  @click="gotoAllWorksInterface()" >玄幻</el-button>
-                </li>
+            </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoAllWorksInterface()">玄幻
+                </el-button>
+            </li>
 
-                <li>
-                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini"  @click="gotoAllWorksInterface()" >都市</el-button>
-                </li>
-                <li>
-                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini" @click="gotoAllWorksInterface()"  >仙侠</el-button>
-                </li>
-                <li>
-                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini" @click="gotoAllWorksInterface()"  >奇幻</el-button>
-                </li>
-                <li>
-                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini"  @click="gotoAllWorksInterface()" >武侠</el-button>
-                </li>
-                <li>
-                    <el-button class="detailstopNavigation_button_class" type="info"  size="mini" @click="gotoAllWorksInterface()"  >排行</el-button>
-                </li>
-                
-                <li>
-                    <el-button class="detailstopNavigation_button_class" id="user_name_id" type="info"  size="mini"  style="width: 200px"  @click="gotoMysqelfHtml()" >书友~{{userInfo.user_name}}，您好</el-button>
-                </li>
-                <li>
-                    <el-button class="detailstopNavigation_button_class" id="shujia_id" type="info"  size="mini"  style="width: 100px"  @click="gotoBookshelf()" >
-                        <img class="shaohualogo" src="../images/xiaoshuo-32.png" >
-                        <p class="work_name_p_class">书架</p>
-                    </el-button>
-                </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoAllWorksInterface()">都市
+                </el-button>
+            </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoAllWorksInterface()">仙侠
+                </el-button>
+            </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoAllWorksInterface()">奇幻
+                </el-button>
+            </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoAllWorksInterface()">武侠
+                </el-button>
+            </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" type="info" size="mini"
+                           @click="gotoAllWorksInterface()">排行
+                </el-button>
+            </li>
 
-            </ul>
+            <li>
+                <el-button class="detailstopNavigation_button_class" id="user_name_id" type="info" size="mini"
+                           style="width: 200px" @click="gotoMysqelfHtml()">书友~{{userInfo.user_name}}，您好
+                </el-button>
+            </li>
+            <li>
+                <el-button class="detailstopNavigation_button_class" id="shujia_id" type="info" size="mini"
+                           style="width: 100px" @click="gotoBookshelf()">
+                    <img class="shaohualogo" src="../images/xiaoshuo-32.png">
+                    <p class="work_name_p_class">书架</p>
+                </el-button>
+            </li>
 
-        </div>
-        <!--显示横幅内容-->
-        <div class="banner_div_class"> 
+        </ul>
+
+    </div>
+    <!--显示横幅内容-->
+    <div class="banner_div_class">
         <img class="banner_img_class" :src="showbackgroundInfo">
-        </div>
-        <!--主要内容-->
-        <div class="mainInfo_div_class">
-            <div class="mainInfo_div2_class">
+    </div>
+    <!--主要内容-->
+    <div class="mainInfo_div_class">
+        <div class="mainInfo_div2_class">
 
-                <!--模块1，书籍信息不动模块-->
-                <div class="workinfo1_div_class">
-                    <div class="work_cover_div_class">
+            <!--模块1，书籍信息不动模块-->
+            <div class="workinfo1_div_class">
+                <div class="work_cover_div_class">
                     <img class="work_cover_class" :src="worksInfo.work_cover">
-                    </div>
-                    <div class="workInfo_right_class">
-                        <div class="one_line_class">
+                </div>
+                <div class="workInfo_right_class">
+                    <div class="one_line_class">
                         <h1 class="work_name_h_class">{{worksInfo.work_name}}</h1>
-                        <a class="user_name_p_class" href="#" @click="clickUser_name(authorInfo.user_id)">{{authorInfo.user_name}}   &nbsp 著</a>
-                        </div>
-                        <div class="div_line_class">
-                            <el-tag  class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_main_label}}</el-tag>
-                            <el-tag  class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_vice_label}}</el-tag>
-                            <el-tag  class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_serial_state}}</el-tag>
-                        </div>
-                        <div class="div_line_class">
-                            <h class="label_h_class">{{typedescribeInfo}}</h>
+                        <a class="user_name_p_class" href="#" @click="clickUser_name(authorInfo.user_id)">{{authorInfo.user_name}}
+                            &nbsp 著</a>
+                    </div>
+                    <div class="div_line_class">
+                        <el-tag class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_main_label}}
+                        </el-tag>
+                        <el-tag class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_vice_label}}
+                        </el-tag>
+                        <el-tag class="line_el_tag_class" type="danger" effect="plain">{{worksInfo.work_serial_state}}
+                        </el-tag>
+                    </div>
+                    <div class="div_line_class">
+                        <h class="label_h_class">{{typedescribeInfo}}</h>
 
-                        </div>
-                        <div class="div_line_class">
-                            <h class="num_label_p_class">{{worksInfo.work_word_num}} 字</h>
-                            <h class="num_label_p_class">|</h>
-                            <h class="num_label_p_class">{{worksInfo.work_vote_num}} 推荐</h>
-                        </div>
-                        <div class="div_line_class">
-                            <el-button class="workinfo1_div_button_class" type="danger" plain @click="gotoreadNovelInterface()">开始阅读</el-button>
-                            <el-button class="workinfo1_div_button_class" plain @click="addToBookshelf()">添加书架</el-button>
-<!--                            <el-button plain>投推荐票</el-button>-->
-                            <el-button class="workinfo1_div_button_class" plain id="book_comment_button">书籍评论</el-button>
+                    </div>
+                    <div class="div_line_class">
+                        <h class="num_label_p_class">{{worksInfo.work_word_num}} 字</h>
+                        <h class="num_label_p_class">|</h>
+                        <h class="num_label_p_class">{{worksInfo.work_vote_num}} 推荐</h>
+                    </div>
+                    <div class="div_line_class">
+                        <el-button class="workinfo1_div_button_class" type="danger" plain
+                                   @click="gotoreadNovelInterface()">开始阅读
+                        </el-button>
+                        <el-button class="workinfo1_div_button_class" plain @click="addToBookshelf()">添加书架</el-button>
+                        <!--                            <el-button plain>投推荐票</el-button>-->
+                        <el-button class="workinfo1_div_button_class" plain id="book_comment_button">书籍评论</el-button>
 
+                    </div>
+                </div>
+            </div>
 
-                            <el-dialog class="dialog_work"
-                                       title="书籍评论---"
-                                       :visible.sync="dialogVisible"
-                                       :before-close="handleClose">
+            <!--第二部分-->
+            <div class="workinfo2_div_class">
+                <div class="workinfo2_leftdiv_class">
 
-                                <div>
-                                    <div class="comment_input">
-                                        <el-input
-                                                id="Remark_information"
-                                                name="Remark_information"
-                                                type="textarea"
-                                                :autosize="{ minRows: 2, maxRows: 4}"
-                                                placeholder="请输入评论内容"
-                                                v-model="textarea">
-                                        </el-input>
+                    <el-menu
+                            :default-active="activeIndex"
+                            class="el-menu-demo"
+                            mode="horizontal"
+                            @select="handleSelect"
+                            active-text-color="#ff4d4d">
+                        <el-menu-item class="navMenu_class" index="1">作品信息</el-menu-item>
+
+                    </el-menu>
+                    <div id="work_info_hid_class">
+                        <div class="workinfo2_leftdiv1_class">
+                            <a class="work_introduct_class">
+                                {{worksInfo.work_introduct}}</a>
+                            <a class="work_introduct_class">
+                                {{worksInfo.work_other_word}}</a>
+                            <div class="hr_class"></div>
+
+                            <a class="label_custom_class" :style=" {'display':( workslabelInfoVoNum == 0 ? 'none':'')}">作者自定义标签</a>
+                            <el-tag class="label_custominfo_class" type="danger" effect="plain"
+                                    v-for="workslabelInfoVo in workslabelInfoVoList">
+                                {{workslabelInfoVo.labelname}}
+                            </el-tag>
+                            <div class="hr_class"></div>
+
+                            <div class="newchapter_div_info">
+                                <a class="newchapter_info">最新章节</a>
+                                <a class="newchapter1_info" href="#"
+                                   @click="gotoneedchapter(newChapterInfoVo.chapter_id)">{{newChapterInfoVo.chapter_title}}</a>
+                            </div>
+                            <div class="hr_class"></div>
+                            <div class="chapter_div_info">
+                                <a class="thischapter_info">本书目录</a>
+                                <div class="chpterCatalog_div1_class" v-for="catalogInfoVo in catalogInfoVoList">
+                                    <div class="chapterCataloginfo_div_class">
+                                        <a class="chapterCataloginfo_a_class" href="#"
+                                           @click="gotoneedchapter(catalogInfoVo.chapter_id)">{{catalogInfoVo.chapter_title}}</a>
                                     </div>
-                                    <div class="comment_input">
-
-                                        <button class="comment_btn" @click="submit_comment">发表评论</button>
+                                    <div class="chapter_charge_div_class" id="chapter_charge_needdiv_id">
+                                        <img class="chapter_charge_img_class"
+                                             :style=" {'visibility':( catalogInfoVo.chapter_charge==1 ? '':'hidden')}"
+                                             :src="catalogInfoVo.subscribe ?'../images/kaisuo-32.png':'../images/suo-32.png'">
                                     </div>
+
                                 </div>
 
-                                <div class="comment-parent" v-for="comment in commentData">
-                                    <div class="comment-parent_info">
-                                        <div class="comment-parent_head">
-                                            <el-avatar :size="50"
-                                                       :src="imageURL_header+comment.head_portrait+imageURL_suffix"></el-avatar>
-                                        </div>
-                                        <div class="comment-parent_info3">
-                                            <span class="username">{{comment.user_name}}</span><br/>
-                                            <span class="comment-time">发表时间:{{comment.comment_time}}</span>
-                                            <button class="reply_comment_btn" @click="changeDisplayReply(comment.comment_id)">
-                                                {{comment.reply_comment_btn}}
-                                            </button>
-
-                                            <button class="reply_comment_btn_2" @click="changeDisplayReply2(comment.comment_id)">
-                                                {{comment.reply_comment_btn2}}
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="comment_content">
-                                        {{comment.comment_content}}
-                                    </div>
-
-
-                                    <div :style="'display: '+ comment.displayReply">
-                                        <div class="reply_comment_input">
-                                            <el-input
-                                                    type="textarea"
-                                                    :autosize="{ minRows: 2, maxRows: 4}"
-                                                    placeholder="请输入回复内容"
-                                                    v-model="textarea_reply">
-                                            </el-input>
-                                        </div>
-                                        <div class="comment_input">
-                                            <button class="comment_btn2" @click="submit_commentReply(comment.comment_id)">回复评论
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <template v-if=" comment.reply_comment_btn2 === '收起' ">
-                                        <div class="comment-child" v-for="commentChild in commentChildData">
-
-                                            <template v-if=" comment.comment_id == commentChild.comment_pid ">
-
-                                                <div class="comment-child_info">
-                                                    <div class="comment-child_head">
-                                                        <el-avatar :size="50"
-                                                                   :src="imageURL_header+commentChild.head_portrait+imageURL_suffix"></el-avatar>
-                                                    </div>
-                                                    <div class="comment-child_info3">
-                                                        <span class="username_child">{{commentChild.user_name}} 回复 {{comment.user_name}}</span><br/>
-                                                        <span class="comment-time">发表时间:{{commentChild.comment_time}}</span>
-
-                                                        <button class="reply_comment_btn"
-                                                                @click="changeDisplayReplyChild(commentChild.comment_id)">
-                                                            {{commentChild.reply_comment_btn}}
-                                                        </button>
-
-                                                    </div>
-
-                                                    <div class="comment-child_content">
-                                                        {{commentChild.comment_content}}
-                                                    </div>
-
-                                                </div>
-
-                                                <div :style="'display:'+ commentChild.displayReply">
-                                                    <div class="reply_comment_input-child">
-                                                        <el-input
-                                                                type="textarea"
-                                                                :autosize="{ minRows: 2, maxRows: 4}"
-                                                                placeholder="请输入回复内容"
-                                                                v-model="textarea_reply_child">
-                                                        </el-input>
-                                                    </div>
-                                                    <div class="comment_input">
-                                                        <button class="comment_btn2"
-                                                                @click="submit_commentReplyChild(comment.comment_id)">回复评论
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                            </template>
-                                        </div>
-                                    </template>
-                                    <hr/>
-                                </div>
-
-                            </el-dialog>
-
-
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!--第二部分-->
-                <div class="workinfo2_div_class">
-                    <div class="workinfo2_leftdiv_class">
-
-                        <el-menu
-                                :default-active="activeIndex"
-                                class="el-menu-demo"
-                                mode="horizontal"
-                                @select="handleSelect"
-                                active-text-color="#ff4d4d">
-                            <el-menu-item class="navMenu_class" index="1">作品信息</el-menu-item>
-
-                        </el-menu>
-                            <div id="work_info_hid_class">
-                                <div class="workinfo2_leftdiv1_class">
-                                            <a class="work_introduct_class" >
-                                                {{worksInfo.work_introduct}}</a>
-                                    <a class="work_introduct_class" >
-                                        {{worksInfo.work_other_word}}</a>
-                                    <div class="hr_class"></div>
-
-                                    <a class="label_custom_class" :style=" {'display':( workslabelInfoVoNum == 0 ? 'none':'')}">作者自定义标签</a>
-                                    <el-tag  class="label_custominfo_class" type="danger" effect="plain" v-for="workslabelInfoVo in workslabelInfoVoList">
-                                        {{workslabelInfoVo.labelname}}</el-tag>
-                                    <div class="hr_class"></div>
-
-                                    <div class="newchapter_div_info">
-                                        <a class="newchapter_info">最新章节</a>
-                                        <a class="newchapter1_info" href="#" @click="gotoneedchapter(newChapterInfoVo.chapter_id)" >{{newChapterInfoVo.chapter_title}}</a>
-                                    </div>
-                                    <div class="hr_class"></div>
-                                    <div class="chapter_div_info">
-                                        <a class="thischapter_info">本书目录</a>
-                                        <div class="chpterCatalog_div1_class" v-for="catalogInfoVo in catalogInfoVoList">
-                                            <div class="chapterCataloginfo_div_class">
-                                                <a class="chapterCataloginfo_a_class" href="#" @click="gotoneedchapter(catalogInfoVo.chapter_id)">{{catalogInfoVo.chapter_title}}</a>
-                                            </div>
-                                            <div class="chapter_charge_div_class" id="chapter_charge_needdiv_id">
-                                                <img class="chapter_charge_img_class"  :style=" {'visibility':( catalogInfoVo.chapter_charge==1 ? '':'hidden')}"     :src="catalogInfoVo.subscribe ?'../images/kaisuo-32.png':'../images/suo-32.png'" >
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                <!--右侧作者信息-->
+                <div class="workinfo2_rightdiv_class">
+                    <div class="head_portrait_div_class">
+                        <img class="head_portrait_class" :src="'../images/avatar/'+authorInfo.head_portrait+'.jpg'">
                     </div>
 
-                    <!--右侧作者信息-->
-                    <div class="workinfo2_rightdiv_class">
-                        <div class="head_portrait_div_class">
-                            <img class="head_portrait_class" :src="'../images/avatar/'+authorInfo.head_portrait+'.jpg'">
+                    <div class="user_name_div_class">
+                        <a class="user_name_class">{{authorInfo.user_name}}</a>
+                    </div>
+
+                    <div class="workinfo2_hr_class"></div>
+
+                    <div class="user_info_class">
+                        <div class="user1_info_class">
+                            <div class="user1_info1_class">
+                                <div class="user1_info2_class">
+
+                                    <img class="user1_info1_img_class" src="../images/shujinum-32.png">
+                                </div>
+                            </div>
+                            <div class="user1_info1_class">
+                                <div class="user1_info3_class">
+
+                                    <img class="user1_info1_img_class" src="../images/leijizishu-128.png">
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="user_name_div_class">
-                            <a class="user_name_class" >{{authorInfo.user_name}}</a>
+                        <div class="user2_info_class">
+                            <div class="user2_info2_class">
+                                <p class="user2_info1_p_class">作品数量</p>
+                            </div>
+                            <div class="user2_info2_class">
+                                <p class="user2_info1_p_class">累计字数</p>
+                            </div>
                         </div>
+                        <div class="user2_info_class">
+                            <div class="user2_info2_class">
+                                <p class="user2_info2_p_class">{{otherWorkNum}}</p>
+                            </div>
+                            <div class="user2_info2_class">
+                                <p class="user2_info2_p_class">{{otherWorkwork_word_num}}字</p>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="workinfo2_hr_class"></div>
-
-                        <div class="user_info_class">
-                            <div class="user1_info_class">
-                                <div class="user1_info1_class">
-                                    <div class="user1_info2_class">
-
-                                        <img class="user1_info1_img_class" src="../images/shujinum-32.png">
+                    <div class="workinfo2_hr_class"></div>
+                    <!--其他作品-->
+                    <div class="userwork_info_class">
+                        <div class="morework_class">
+                            <p class="other_work_class">其他作品</p>
+                            <a class="more_work_class" href="#" @click="clickUser_name(authorInfo.user_id)">更多></a>
+                        </div>
+                        <!--更多作品-->
+                        <div class="moreworklunbo_class">
+                            <el-carousel class="carousel_class" :interval="2000" height="300px"
+                                         indicator-position="none">
+                                <el-carousel-item v-for="authorOtherWorksInfo in authorOtherWorksInfoList"
+                                                  :key="authorOtherWorksInfo">
+                                    <div class="otherwork_cover_div_class">
+                                        <img class="otherwork_cover_class" :src="authorOtherWorksInfo.work_cover" alt="">
                                     </div>
-                                </div>
-                                <div class="user1_info1_class">
-                                    <div class="user1_info3_class">
-
-                                        <img class="user1_info1_img_class" src="../images/leijizishu-128.png">
+                                    <div class="othername_div_class">
+                                        <p class="othername_p_class">{{authorOtherWorksInfo.work_name}}</p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="user2_info_class">
-                                <div class="user2_info2_class">
-                                    <p class="user2_info1_p_class">作品数量</p>
-                                </div>
-                                <div class="user2_info2_class">
-                                    <p class="user2_info1_p_class">累计字数</p>
-                                </div>
-                            </div>
-                            <div class="user2_info_class">
-                                <div class="user2_info2_class">
-                                    <p class="user2_info2_p_class">{{otherWorkNum}}</p>
-                                </div>
-                                <div class="user2_info2_class">
-                                    <p class="user2_info2_p_class">{{otherWorkwork_word_num}}字</p>
-                                </div>
-                            </div>
-                        </div>
+                                    <div class="otherint_div_class">
+                                        <p class="otherint_p_class">{{authorOtherWorksInfo.work_introduct}}</p>
+                                    </div>
 
-                        <div class="workinfo2_hr_class"></div>
-                        <!--其他作品-->
-                        <div class="userwork_info_class">
-                            <div class="morework_class">
-                                <p class="other_work_class">其他作品</p>
-                                <a class="more_work_class" href="#" @click="clickUser_name(authorInfo.user_id)">更多></a>
-                            </div>
-                            <!--更多作品-->
-                            <div class="moreworklunbo_class">
-                                <el-carousel class="carousel_class" :interval="2000"  height="300px" indicator-position="none">
-                                    <el-carousel-item v-for="authorOtherWorksInfo in authorOtherWorksInfoList" :key="authorOtherWorksInfo">
-                                        <div class="otherwork_cover_div_class">
-                                            <img class="otherwork_cover_class" :src="authorOtherWorksInfo.work_cover">
-                                        </div>
-                                        <div class="othername_div_class">
-                                            <p class="othername_p_class">{{authorOtherWorksInfo.work_name}}</p>
-                                        </div>
-                                        <div class="otherint_div_class">
-                                            <p class="otherint_p_class">{{authorOtherWorksInfo.work_introduct}}</p>
-                                        </div>
+                                    <div class="otherButton_div_class">
+                                        <el-button class="other_button_class" type="danger" round
+                                                   @click="clickWork_name(authorOtherWorksInfo.work_id)">查看详情
+                                        </el-button>
+                                    </div>
 
-                                        <div class="otherButton_div_class">
-                                            <el-button class="other_button_class" type="danger" round @click="clickWork_name(authorOtherWorksInfo.work_id)" >查看详情</el-button>
-                                        </div>
-
-                                    </el-carousel-item>
-                                </el-carousel>
-                            </div>
-
+                                </el-carousel-item>
+                            </el-carousel>
                         </div>
 
                     </div>
 
-                    <div class="workinfo_rightbo_class">
+                </div>
 
-
-                    </div>
-
-
-
+                <div class="workinfo_rightbo_class">
 
 
                 </div>
 
 
             </div>
-        </div>
-
-        <div class="bottom_div_class"  >
 
 
         </div>
     </div>
 
-    <!--  书籍评论模块  -->
-    <div  id="bookShelf">
-        <el-dialog class="dialog_work" title="书籍评论" :visible.sync="dialogFormVisible">
+    <div class="bottom_div_class">
 
-            <div>
-                <div class="comment_input">
-                    <el-input
-                            type="textarea"
-                            :autosize="{ minRows: 2, maxRows: 4}"
-                            placeholder="请输入评论内容"
-                            v-model="textarea">
-                    </el-input>
-                </div>
-                <div class="comment_input">
-                    <button class="comment_btn" @click="submit_comment">发表评论</button>
-                </div>
+
+    </div>
+</div>
+
+<!--  书籍评论模块  -->
+<div id="bookShelf">
+    <el-dialog class="dialog_work" title="书籍评论" :visible.sync="dialogFormVisible">
+
+        <div>
+            <div class="comment_input">
+                <el-input
+                        type="textarea"
+                        :autosize="{ minRows: 2, maxRows: 4}"
+                        placeholder="请输入评论内容"
+                        v-model="textarea"
+                        maxlength="200"
+                        show-word-limit>
+                </el-input>
             </div>
+            <div class="comment_input">
+                <button class="comment_btn" @click="submit_comment">发表评论</button>
+            </div>
+        </div>
 
+        <template v-if=" commentData.length === 0 ">
+            <p>本书籍暂无评论，赶快留下你的足迹吧~</p>
+        </template>
+        <template v-else>
             <div class="comment-parent" v-for="comment in commentData">
                 <div class="comment-parent_info">
                     <div class="comment-parent_head">
@@ -400,7 +324,9 @@
                                 type="textarea"
                                 :autosize="{ minRows: 2, maxRows: 4}"
                                 placeholder="请输入回复内容"
-                                v-model="textarea_reply">
+                                v-model="textarea_reply"
+                                maxlength="200"
+                                show-word-limit>
                         </el-input>
                     </div>
                     <div class="comment_input">
@@ -412,7 +338,7 @@
                 <template v-if=" comment.reply_comment_btn2 === '收起' ">
                     <div class="comment-child" v-for="commentChild in commentChildData">
 
-                        <template v-if=" comment.comment_id == commentChild.comment_pid ">
+                        <template v-if=" comment.comment_id == commentChild.comment_aid ">
 
                             <div class="comment-child_info">
                                 <div class="comment-child_head">
@@ -420,7 +346,7 @@
                                                :src="imageURL_header+commentChild.head_portrait+imageURL_suffix"></el-avatar>
                                 </div>
                                 <div class="comment-child_info3">
-                                    <span class="username_child">{{commentChild.user_name}} 回复 {{comment.user_name}}</span><br/>
+                                    <span class="username_child">{{commentChild.user_name}} 回复 {{commentChild.parent_name}}</span><br/>
                                     <span class="comment-time">发表时间:{{commentChild.comment_time}}</span>
 
                                     <button class="reply_comment_btn"
@@ -442,12 +368,14 @@
                                             type="textarea"
                                             :autosize="{ minRows: 2, maxRows: 4}"
                                             placeholder="请输入回复内容"
-                                            v-model="textarea_reply_child">
+                                            v-model="textarea_reply_child"
+                                            maxlength="200"
+                                            show-word-limit>
                                     </el-input>
                                 </div>
                                 <div class="comment_input">
                                     <button class="comment_btn2"
-                                            @click="submit_commentReplyChild(comment.comment_id)">回复评论
+                                            @click="submit_commentReplyChild(commentChild.comment_id,comment.comment_id)">回复评论
                                     </button>
                                 </div>
                             </div>
@@ -457,29 +385,24 @@
                 </template>
                 <hr/>
             </div>
-
-        </el-dialog>
-    </div>
+        </template>
+    </el-dialog>
+</div>
 </body>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
-
 <script src="../js/index.js"></script>
-
-<script src="../js/novelDetailsInterface.js"></script>
 <script src="../js/bookPinglun.js"></script>
+<script src="../js/novelDetailsInterface.js"></script>
+
 
 <script>
     document.getElementById("book_comment_button").addEventListener("click", displayBookComment);
 
     //打赏对话框
     function displayBookComment() {
-        bookComment_vm.work_id = novelDetailsInterface_vm.worksInfo.work_id;
-        // bookComment_vm.form.chapterId = readNovelInterface_vm.chapterInfo.chapter_id;
-        // bookComment_vm.form.workName = readNovelInterface_vm.worksInfo.work_name;
-        // bookComment_vm.form.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
-        bookComment_vm.getInterfaceData();
+        bookComment_vm.getInterfaceData(novelDetailsInterface_vm.worksInfo.work_id);
         bookComment_vm.dialogFormVisible = true;
     }
 

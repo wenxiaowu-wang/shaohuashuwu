@@ -59,4 +59,10 @@
   <!--    <url-pattern>*.images</url-pattern>-->
   <!--  </servlet-mapping>-->
 
+  <!--配置欢迎页面即可-->
+<!--  <welcome-file-list>-->
+<!--    <welcome-file></welcome-file>-->
+<!--  </welcome-file-list>-->
+
+
 </web-app>

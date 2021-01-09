@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/home.min.css"/>
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/order.min.css"/>
     <link rel="stylesheet" href="../css/theme-chalk.css">
-
 </head>
 <body>
 <div id="bookShelfInterface">
@@ -82,7 +81,6 @@
                     <li class="shelf_bookLine listType_a" v-for="work in tableData">
                         <div class="catName"><el-checkbox
                                 :label="work.work_id"
-                                :key="i"
                                 v-model="checkedChapter"
                                 @change="handleCheckedChapterChange"
                         >●
@@ -119,6 +117,7 @@
 
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
+<script src="../js/index.js"></script>
 <script src="../js/axios.js"></script>
 <script src="../js/bookShelfInterface.js"></script>
 </body>

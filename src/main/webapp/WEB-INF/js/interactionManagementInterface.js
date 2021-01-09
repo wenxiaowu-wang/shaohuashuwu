@@ -64,8 +64,8 @@ new Vue({
         deleteRow(index, rows) {
             rows.splice(index, 1);
         },
-        selectWork(id) {
 
+        selectWork(id) {
             axios.get("/shaohuashuwu/commentInfoController/" +
                 "getCommentParentInfoByWorkId/" + id).then(resp3 => {
 
@@ -81,6 +81,7 @@ new Vue({
                         comment_time: value["comment_time"],
                         comment_content: value["comment_content"],
                         comment_id: value["comment_id"],
+
                     };
                     commentData.push(list);
                 });
@@ -136,7 +137,7 @@ new Vue({
             } else {
 
                 axios.post("/shaohuashuwu/commentInfoController/addCommentInfo/"
-                    + this.user_id + "/" + this.textarea + "/" + this.passWorkID + "/" + this.passID).then(response => {
+                    + this.user_id + "/" + this.textarea + "/" + this.passWorkID + "/" + this.passID+ "/" + this.passID).then(response => {
                     let result = response.data;
                     if (result === true) {
                         this.$message({

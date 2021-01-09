@@ -17,10 +17,10 @@
 </head>
 <body >
 
-<div id="app">
+<div id="app" >
     <div class="wrap pass_header">
         <div class="pass_logo">
-            <a href="#"><img src="../images/SHAOHUALOGO.png" /></a>
+            <a href="#"><img src="../images/SHAOHUALOGO.png"/></a>
         </div>
         <div class="pass_link">
             没有账号 <a href="#" @click="gotoRegistration()" >点击注册</a>
@@ -46,7 +46,7 @@
                                               show-password></el-input>
                                 </div>
                                 <div class="Warning">
-                                    <span>登录即代表同意</span><a href="userAgreement.html" >《用户服务协议》</a><span>和</span><a href="privacyPolicy.html" >《隐私政策》</a>
+                                    登录即代表同意<span @click="goToXieYi"><font color="blue">《用户服务协议》</font></span>和<span @click="goToYinSi"><font color="blue">《隐私政策》</font></span>
                                 </div>
                                 <el-row>
                                     <el-button class="loginBtn1" type="primary" round @click="normalLogin()" size="small">登录</el-button>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="Warning">
-                                <span>登录即代表同意</span><a href="userAgreement.html" >《用户服务协议》</a><span>和</span><a href="privacyPolicy.html" >《隐私政策》</a>
+                                登录即代表同意<span @click="goToXieYi"><font color="blue">《用户服务协议》</font></span>和<span @click="goToYinSi"><font color="blue">《隐私政策》</font></span>
                             </div>
                             <el-row class="loginBtn1">
                                 <el-button type="primary" round @click="codeLogin" size="small">登录</el-button>
@@ -93,9 +93,7 @@
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
 <script src="../js/axios.js"></script>
-
 <script src="../js/index.js"></script>
-
 <script src="../js/userLogin.js"></script>
 <script type="text/javascript">
     let wait = 60;

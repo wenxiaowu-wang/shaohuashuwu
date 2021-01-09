@@ -207,8 +207,16 @@ new Vue({
         },
 
         gotoRegistration(){
-            console.log("注册------------")
+
             window.location.assign("../pages/usersRegistrationInterface.html");
+        },
+        goToYinSi(){
+
+            window.location.assign("../pages/privacyPolicy.html");
+        },
+        goToXieYi(){
+
+            window.location.assign("../pages/userAgreement.html");
         }
 
     }

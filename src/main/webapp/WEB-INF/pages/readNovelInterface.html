@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>阅读小说</title>
-
+    <link rel="icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/readNovelInterface.css">
-
     <link rel="stylesheet" href="../css/rewardWorks.css">
     <link rel="stylesheet" href="../css/theme-chalk.css">
     <link rel="stylesheet" href="../css/voteWorks.css">
@@ -18,425 +17,453 @@
 </head>
 <body id="htmlbody_id">
 
-    <div id="readNovel_id">
-        <div class="novelDetails_top_div_class" >
+<div id="readNovel_id">
+    <div class="novelDetails_top_div_class">
 
-            <div class="novelDetails_top_div2_class" >
+        <div class="novelDetails_top_div2_class">
 
-                <el-menu class="novelDetails_top_el_menu_class" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="1" @click="gotoUserMainIterface()">首页</el-menu-item>
+            <el-menu class="novelDetails_top_el_menu_class" :default-active="activeIndex" class="el-menu-demo"
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" @click="gotoUserMainIterface()">首页</el-menu-item>
 
-                    <el-menu-item index="2" @click="gotoReadingHistory()">阅读历史</el-menu-item>
-                    <el-submenu index="3">
-                        <template slot="title">快速导航</template>
-                        <el-menu-item index="2-1" @click="gotoAllWorksInterface()">玄幻</el-menu-item>
-                        <el-menu-item index="2-2" @click="gotoAllWorksInterface()">奇幻</el-menu-item>
-                        <el-menu-item index="2-3" @click="gotoAllWorksInterface()">武侠</el-menu-item>
-                        <el-menu-item index="2-4" @click="gotoAllWorksInterface()">仙侠</el-menu-item>
-                        <el-menu-item index="2-5" @click="gotoAllWorksInterface()">都市</el-menu-item>
-                        <el-menu-item index="2-6" @click="gotoAllWorksInterface()" >历史</el-menu-item>
-                        <el-menu-item index="2-7" @click="gotoAllWorksInterface()">军事</el-menu-item>
-                        <el-menu-item index="2-8" @click="gotoAllWorksInterface()">悬疑</el-menu-item>
-                        <el-menu-item index="2-9" @click="gotoAllWorksInterface()">科幻</el-menu-item>
-                        <el-menu-item index="2-10" @click="gotoAllWorksInterface()">游戏</el-menu-item>
-                        <el-menu-item index="2-11" @click="gotoAllWorksInterface()">体育</el-menu-item>
-                        <el-menu-item index="2-12" @click="gotoAllWorksInterface()">现实</el-menu-item>
-                        <el-menu-item index="2-13" @click="gotoAllWorksInterface()">轻小说</el-menu-item>
-                    </el-submenu>
+                <el-menu-item index="2" @click="gotoReadingHistory()">阅读历史</el-menu-item>
+                <el-submenu index="3">
+                    <template slot="title">快速导航</template>
+                    <el-menu-item index="2-1" @click="gotoAllWorksInterface()">玄幻</el-menu-item>
+                    <el-menu-item index="2-2" @click="gotoAllWorksInterface()">奇幻</el-menu-item>
+                    <el-menu-item index="2-3" @click="gotoAllWorksInterface()">武侠</el-menu-item>
+                    <el-menu-item index="2-4" @click="gotoAllWorksInterface()">仙侠</el-menu-item>
+                    <el-menu-item index="2-5" @click="gotoAllWorksInterface()">都市</el-menu-item>
+                    <el-menu-item index="2-6" @click="gotoAllWorksInterface()">历史</el-menu-item>
+                    <el-menu-item index="2-7" @click="gotoAllWorksInterface()">军事</el-menu-item>
+                    <el-menu-item index="2-8" @click="gotoAllWorksInterface()">悬疑</el-menu-item>
+                    <el-menu-item index="2-9" @click="gotoAllWorksInterface()">科幻</el-menu-item>
+                    <el-menu-item index="2-10" @click="gotoAllWorksInterface()">游戏</el-menu-item>
+                    <el-menu-item index="2-11" @click="gotoAllWorksInterface()">体育</el-menu-item>
+                    <el-menu-item index="2-12" @click="gotoAllWorksInterface()">现实</el-menu-item>
+                    <el-menu-item index="2-13" @click="gotoAllWorksInterface()">轻小说</el-menu-item>
+                </el-submenu>
 
-                    <el-menu-item class="userInfo_class" index="3" @click="gotoMysqelfHtml()">书友{{userInfo.user_name}}，您好</el-menu-item>
-                    <el-menu-item index="4">
-                        <div class="shujia_class">
-                            <img class="shujia_img_class" src="../images/xiaoshuo-32.png" >
-                            <p class="shaohualogo_p_class" @click="gotoBookshelf()">书架</p>
-                        </div>
-
-                    </el-menu-item>
-                </el-menu>
-            </div>
-
-            <!--主题内容-->
-            <div class="chapter_info_div_class">
-                <!--左侧选项框-->
-                <div class="chapter_list_div_class">
-                    <div class="list_div_class" @click="openchapterCatalogbutton()" tabindex = "0" @focus="readSettingbutton_focus()" >
-
-                        <el-button class="el_button_list" type="info" plain   style="height: 70px;width: 70px">
-
-                            <img class="el_button_img_my" src="../images/mulu-200.png">
-                            <p class="el_button_p_my" > 目录</p>
-
-                        </el-button>
+                <el-menu-item class="userInfo_class" index="3" @click="gotoMysqelfHtml()">书友{{userInfo.user_name}}，您好
+                </el-menu-item>
+                <el-menu-item index="4">
+                    <div class="shujia_class">
+                        <img class="shujia_img_class" src="../images/xiaoshuo-32.png">
+                        <p class="shaohualogo_p_class" @click="gotoBookshelf()">书架</p>
                     </div>
-                    <!--章节弹框中内容-->
-                    <el-dialog
-                            title="目录"
-                            :visible.sync="drawer"
-                            width="650px">
 
-                        <div class="tip_div_class">请选择要看的章节</div>
+                </el-menu-item>
+            </el-menu>
+        </div>
 
-                        <div class="chpterCatalog_dialog_div_class">
-                            <div class="chpterCatalog_div1_class" v-for="catalogInfoVo in catalogInfoVoList">
-                                <div class="chapterCataloginfo_div_class">
-                                    <a class="chapterCataloginfo_a_class" href="#" @click="clickchatpter_name(catalogInfoVo.chapter_id)">{{catalogInfoVo.chapter_title}}</a>
-                                </div>
-                                <div class="chapter_charge_div_class" id="chapter_charge_needdiv_id">
-                                    <img class="chapter_charge_img_class"  :style=" {'visibility':( catalogInfoVo.chapter_charge==1 ? '':'hidden')}"     :src="catalogInfoVo.subscribe ?'../images/kaisuo-32.png':'../images/suo-32.png'" >
-                                </div>
+        <!--主题内容-->
+        <div class="chapter_info_div_class">
+            <!--左侧选项框-->
+            <div class="chapter_list_div_class">
+                <div class="list_div_class" @click="openchapterCatalogbutton()" tabindex="0"
+                     @focus="readSettingbutton_focus()">
+
+                    <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+
+                        <img class="el_button_img_my" src="../images/mulu-200.png">
+                        <p class="el_button_p_my"> 目录</p>
+
+                    </el-button>
+                </div>
+                <!--章节弹框中内容-->
+                <el-dialog
+                        title="目录"
+                        :visible.sync="drawer"
+                        width="650px">
+
+                    <div class="tip_div_class">请选择要看的章节</div>
+
+                    <div class="chpterCatalog_dialog_div_class">
+                        <div class="chpterCatalog_div1_class" v-for="catalogInfoVo in catalogInfoVoList">
+                            <div class="chapterCataloginfo_div_class">
+                                <a class="chapterCataloginfo_a_class" href="#"
+                                   @click="clickchatpter_name(catalogInfoVo.chapter_id)">{{catalogInfoVo.chapter_title}}</a>
                             </div>
-
-                        </div>
-
-                    </el-dialog>
-
-
-                    <div class="hrdiv_class"></div>
-
-                    <div class="list_div_class" id="htmlsetting" @click="openreadSettingbutton()" tabindex = "0" @focus="readSettingbutton_focus()">
-                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
-                            <img class="el_button_img_my" src="../images/shezhi-200.png">
-                            <p class="el_button_p_my" > 设置</p>
-                        </el-button>
-                    </div>
-                    <!--设置弹框内容-->
-                    <el-dialog
-                            title="设置"
-                            :visible.sync="dialogVisible"
-                            width="650px"
-                            :before-close="handleClose">
-                        <div class="tip_div_class">如果保存，下次阅读将自动设置！不保存，下次阅读，将使用之前的保存数据!</div>
-                        <div class="setting_theme_div_class">
-                            <p class="setting_p_class">阅读主题</p>
-                            <button class="setting_theme_button_class" id="setting_theme_button_1" @click="settingThemeclick(1)">
-                                <p id="setting_theme_p_1">√</p>
-                            </button>
-                            <button class="setting_theme_button_class" id="setting_theme_button_2" @click="settingThemeclick(2)" >
-                                <p id="setting_theme_p_2">√</p>
-                            </button>
-                            <button class="setting_theme_button_class" id="setting_theme_button_3" @click="settingThemeclick(3)">
-                                <p id="setting_theme_p_3">√</p>
-                            </button>
-                            <button class="setting_theme_button_class" id="setting_theme_button_4" @click="settingThemeclick(4)">
-                                <p id="setting_theme_p_4">√</p>
-                            </button>
-                            <button class="setting_theme_button_class" id="setting_theme_button_5" @click="settingThemeclick(5)">
-                                <p id="setting_theme_p_5">√</p>
-                            </button>
-                            <button class="setting_theme_button_class" id="setting_theme_button_6" @click="settingThemeclick(6)">
-                                <p id="setting_theme_p_6">√</p>
-                            </button>
-                            <button class="setting_theme_button_class" id="setting_theme_button_7" @click="settingThemeclick(7)">
-                                <p id="setting_theme_p_7">√</p>
-                            </button>
-                        </div>
-
-                        <div class="setting_font_type_div_class">
-                            <p class="setting_p_class">正文字体</p>
-                            <button style="height: 50px;width: 100px" class="setting_font_type_button_class" id="setting_font_type_button_1" @click="settingFont(1)">
-                                雅黑
-                            </button>
-                            <button style="height: 50px;width: 100px" class="setting_font_type_button_class" id="setting_font_type_button_2" @click="settingFont(2)">
-                                宋体
-                            </button>
-                            <button style="height: 50px;width: 100px" class="setting_font_type_button_class" id="setting_font_type_button_3" @click="settingFont(3)">
-                                楷书
-                            </button>
-                        </div>
-
-                        <div class="setting_font_size_div_class">
-                            <p class="setting_p_class">字体大小</p>
-                            <div class="setting_font_size_div2_class">
-
-                                <button class="setting_font_size_button_class" id="setting_font_size+_button" @click="settingFontSize(1)">
-                                    A-
-                                </button>
-                                <p class="setting_fenge_class">|</p>
-                                <button class="setting_font_size_button_class" id="setting_font_size_button">
-                                    {{settingInfo.setting_font_size}}
-                                </button>
-                                <p class="setting_fenge_class">|</p>
-                                <button class="setting_font_size_button_class" id="setting_font_size-_button" @click="settingFontSize(2)">
-                                    A+
-                                </button>
+                            <div class="chapter_charge_div_class" id="chapter_charge_needdiv_id">
+                                <img class="chapter_charge_img_class"
+                                     :style=" {'visibility':( catalogInfoVo.chapter_charge==1 ? '':'hidden')}"
+                                     :src="catalogInfoVo.subscribe ?'../images/kaisuo-32.png':'../images/suo-32.png'">
                             </div>
                         </div>
 
-                        <el-button @click="notsaveSettingInfo()">取 消</el-button>
-                        <el-button type="primary" @click="saveSettingInfo()">保 存</el-button>
-                        </span>
-                    </el-dialog>
+                    </div>
 
-                    <div class="hrdiv_class"></div>
-                    <div class="list_div_class" id="report_button" >
-                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                </el-dialog>
+
+
+                <div class="hrdiv_class"></div>
+
+                <div class="list_div_class" id="htmlsetting" @click="openreadSettingbutton()" tabindex="0"
+                     @focus="readSettingbutton_focus()">
+                    <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                        <img class="el_button_img_my" src="../images/shezhi-200.png">
+                        <p class="el_button_p_my"> 设置</p>
+                    </el-button>
+                </div>
+                <!--设置弹框内容-->
+                <el-dialog
+                        title="设置"
+                        :visible.sync="dialogVisible"
+                        width="650px"
+                        :before-close="handleClose">
+                    <div class="tip_div_class">如果保存，下次阅读将自动设置！不保存，下次阅读，将使用之前的保存数据!</div>
+                    <div class="setting_theme_div_class">
+                        <p class="setting_p_class">阅读主题</p>
+                        <button class="setting_theme_button_class" id="setting_theme_button_1"
+                                @click="settingThemeclick(1)">
+                            <p id="setting_theme_p_1">√</p>
+                        </button>
+                        <button class="setting_theme_button_class" id="setting_theme_button_2"
+                                @click="settingThemeclick(2)">
+                            <p id="setting_theme_p_2">√</p>
+                        </button>
+                        <button class="setting_theme_button_class" id="setting_theme_button_3"
+                                @click="settingThemeclick(3)">
+                            <p id="setting_theme_p_3">√</p>
+                        </button>
+                        <button class="setting_theme_button_class" id="setting_theme_button_4"
+                                @click="settingThemeclick(4)">
+                            <p id="setting_theme_p_4">√</p>
+                        </button>
+                        <button class="setting_theme_button_class" id="setting_theme_button_5"
+                                @click="settingThemeclick(5)">
+                            <p id="setting_theme_p_5">√</p>
+                        </button>
+                        <button class="setting_theme_button_class" id="setting_theme_button_6"
+                                @click="settingThemeclick(6)">
+                            <p id="setting_theme_p_6">√</p>
+                        </button>
+                        <button class="setting_theme_button_class" id="setting_theme_button_7"
+                                @click="settingThemeclick(7)">
+                            <p id="setting_theme_p_7">√</p>
+                        </button>
+                    </div>
+
+                    <div class="setting_font_type_div_class">
+                        <p class="setting_p_class">正文字体</p>
+                        <button style="height: 50px;width: 100px" class="setting_font_type_button_class"
+                                id="setting_font_type_button_1" @click="settingFont(1)">
+                            雅黑
+                        </button>
+                        <button style="height: 50px;width: 100px" class="setting_font_type_button_class"
+                                id="setting_font_type_button_2" @click="settingFont(2)">
+                            宋体
+                        </button>
+                        <button style="height: 50px;width: 100px" class="setting_font_type_button_class"
+                                id="setting_font_type_button_3" @click="settingFont(3)">
+                            楷书
+                        </button>
+                    </div>
+
+                    <div class="setting_font_size_div_class">
+                        <p class="setting_p_class">字体大小</p>
+                        <div class="setting_font_size_div2_class">
+
+                            <button class="setting_font_size_button_class" id="setting_font_size+_button"
+                                    @click="settingFontSize(1)">
+                                A-
+                            </button>
+                            <p class="setting_fenge_class">|</p>
+                            <button class="setting_font_size_button_class" id="setting_font_size_button">
+                                {{settingInfo.setting_font_size}}
+                            </button>
+                            <p class="setting_fenge_class">|</p>
+                            <button class="setting_font_size_button_class" id="setting_font_size-_button"
+                                    @click="settingFontSize(2)">
+                                A+
+                            </button>
+                        </div>
+                    </div>
+
+                    <el-button @click="notsaveSettingInfo()">取 消</el-button>
+                    <el-button type="primary" @click="saveSettingInfo()">保 存</el-button>
+                    </span>
+                </el-dialog>
+
+                <div class="hrdiv_class"></div>
+                <div class="list_div_class" id="report_button">
+                    <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
                         <img class="el_button_img_my" src="../images/jubao-200.png">
-                        <p class="el_button_p_my" > 举报</p>
-                        </el-button>
-                    </div>
+                        <p class="el_button_p_my"> 举报</p>
+                    </el-button>
+                </div>
 
-                    <div class="hrdiv_class"></div>
-<!--                    <div class="list_div_class" @click="rewardWorksDialog = true">-->
-                    <div class="list_div_class" id="reward_button" >
-                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                <div class="hrdiv_class"></div>
+                <!--                    <div class="list_div_class" @click="rewardWorksDialog = true">-->
+                <div class="list_div_class" id="reward_button">
+                    <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
                         <img class="el_button_img_my" src="../images/dashnag-200.png">
-                        <p class="el_button_p_my" > 打赏</p>
-                        </el-button>
-                    </div>
+                        <p class="el_button_p_my"> 打赏</p>
+                    </el-button>
+                </div>
 
-                    <div class="hrdiv_class"></div>
-                    <div class="list_div_class" id="vote_button">
-                        <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
+                <div class="hrdiv_class"></div>
+                <div class="list_div_class" id="vote_button">
+                    <el-button class="el_button_list" type="info" plain style="height: 70px;width: 70px">
                         <img class="el_button_img_my" src="../images/toupiao-200.png">
-                        <p class="el_button_p_my" > 投票</p>
-                        </el-button>
-                    </div>
-                    <div class="hrdiv_class"></div>
-
+                        <p class="el_button_p_my"> 投票</p>
+                    </el-button>
                 </div>
-
-                <!--右侧小说内容-->
-                <div class="chapter_info_rightdiv_class">
-                    <div class="chapter_info1_class">
-                        <div class="work_name_div_class">
-                            <p class="work_name_p_class">{{chapterInfo.chapter_title}}</p>
-                        </div>
-
-                        <div class="work_info_class">
-                            <div>
-                                <img class="work_info_img1_class" src="../images/shujia-16.png">
-                                <p class="work_info_p1_class">{{worksInfo.work_name}}</p>
-                            </div>
-                            <div>
-                                <img class="work_info_img1_class" src="../images/shujia-16.png">
-                                <p class="work_info_p1_class">{{authorInfo.user_name}}</p>
-                            </div>
-                            <div>
-                                <img class="work_info_img1_class" src="../images/shujia-16.png">
-                                <p class="work_info_p1_class">{{chapterInfo.chapter_word_num}}字</p>
-                            </div>
-                            <div>
-                                <img class="work_info_img1_class" src="../images/shujia-16.png">
-                                <p class="work_info_p1_class">{{chapterInfo.chapter_time}}</p>
-                            </div>
-
-                        </div>
-                        <div class="hrdiv_class2"></div>
- <!--小说内容
-
-
-
-
-
-
-
- -->
-                        <div class="chapter_content_div_class">
-                            <p class="chapter_content_p_class" id="chapter_content_p_id" v-html="chapterInfo.chapter_content">
-                                12-4444444444444444444444--<br>
-                                23234<br>
-
-                            </p>
-                            <div :style=" {'display':( chapterInfo.chapter_content == null ? '':'none')}">
-                                <p>这是VIP章节 需要订阅后才能阅读</p>
-                                <el-button class="bottom_button_class" @click="clicksubscribeMoreChapter()">更多订阅</el-button>
-                                <el-button class="bottom_button_class" type="danger"  @click="clicksubscribeChapter()">订阅该章节</el-button>
-                            </div>
-                        </div>
-
-                        <div class="hrdiv_class2"></div>
-                        <div class="bottom_div_class">
-
-                            <el-button class="bottom_button_class" round id="comment_button">评论章节</el-button>
-                            <el-button class="bottom_button_class" type="danger" round @click="nextchapter()">下一章</el-button>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="tset-div-class">
-
-                </div>
+                <div class="hrdiv_class"></div>
 
             </div>
 
+            <!--右侧小说内容-->
+            <div class="chapter_info_rightdiv_class">
+                <div class="chapter_info1_class">
+                    <div class="work_name_div_class">
+                        <p class="work_name_p_class">{{chapterInfo.chapter_title}}</p>
+                    </div>
+
+                    <div class="work_info_class">
+                        <div>
+                            <img class="work_info_img1_class" src="../images/shujia-16.png">
+                            <p class="work_info_p1_class">{{worksInfo.work_name}}</p>
+                        </div>
+                        <div>
+                            <img class="work_info_img1_class" src="../images/shujia-16.png">
+                            <p class="work_info_p1_class">{{authorInfo.user_name}}</p>
+                        </div>
+                        <div>
+                            <img class="work_info_img1_class" src="../images/shujia-16.png">
+                            <p class="work_info_p1_class">{{chapterInfo.chapter_word_num}}字</p>
+                        </div>
+                        <div>
+                            <img class="work_info_img1_class" src="../images/shujia-16.png">
+                            <p class="work_info_p1_class">{{chapterInfo.chapter_time}}</p>
+                        </div>
+
+                    </div>
+                    <div class="hrdiv_class2"></div>
+                    <!--小说内容
 
 
+
+
+
+
+
+                    -->
+                    <div class="chapter_content_div_class">
+                        <p class="chapter_content_p_class" id="chapter_content_p_id"
+                           v-html="chapterInfo.chapter_content">
+                            12-4444444444444444444444--<br>
+                            23234<br>
+
+                        </p>
+                        <div :style=" {'display':( chapterInfo.chapter_content == null ? '':'none')}">
+                            <p>这是VIP章节 需要订阅后才能阅读</p>
+                            <el-button class="bottom_button_class" @click="clicksubscribeMoreChapter()">更多订阅</el-button>
+                            <el-button class="bottom_button_class" type="danger" @click="clicksubscribeChapter()">
+                                订阅该章节
+                            </el-button>
+                        </div>
+                    </div>
+
+                    <div class="hrdiv_class2"></div>
+                    <div class="bottom_div_class">
+
+                        <el-button class="bottom_button_class" round id="comment_button">评论章节</el-button>
+                        <el-button class="bottom_button_class" type="danger" round @click="nextchapter()">下一章
+                        </el-button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tset-div-class">
+
+            </div>
 
         </div>
+
+
     </div>
+</div>
 
 <!--    打赏模块  -->
-    <div id="dialogForm_reward">
-        <el-dialog title="打赏作品" :visible.sync="dialogFormVisible" width="40%" class="dialog_all">
-            <el-form :model="form">
-                <el-form-item label="作品名：" :label-width="formLabelWidth">
-                    <label><span class="workName">{{form.workName}}</span></label>
-                </el-form-item>
-                <el-form-item label="章节名：" :label-width="formLabelWidth">
-                    <label><span class="chapter_name">{{form.chapterTitle}}</span></label>
-                </el-form-item>
-                <el-form-item label="打赏数量：" :label-width="formLabelWidth">
-                    <el-radio-group  v-model="form.beanNum" @change="changeCoin" class="group_button">
-                        <el-radio-button label=50 class="radio_button">50金豆</el-radio-button>
-                        <el-radio-button label=100 class="radio_button">100金豆</el-radio-button>
-                        <el-radio-button label=200 class="radio_button">200金豆</el-radio-button>
-                        <el-radio-button label=300 class="radio_button">300金豆</el-radio-button>
-                        <el-radio-button label=500 class="radio_button">500金豆</el-radio-button>
-                        <el-radio-button label=1000 class="radio_button">1,000金豆</el-radio-button>
-                        <el-radio-button label=2000 class="radio_button">2,000金豆</el-radio-button>
-                        <el-radio-button label=5000 class="radio_button">5,000金豆</el-radio-button>
-                        <el-radio-button label=10000 class="radio_button">10,000金豆</el-radio-button>
+<div id="dialogForm_reward">
+    <el-dialog title="打赏作品" :visible.sync="dialogFormVisible" width="40%" class="dialog_all">
+        <el-form :model="form">
+            <el-form-item label="作品名：" :label-width="formLabelWidth">
+                <label><span class="workName">{{form.workName}}</span></label>
+            </el-form-item>
+            <el-form-item label="章节名：" :label-width="formLabelWidth">
+                <label><span class="chapter_name">{{form.chapterTitle}}</span></label>
+            </el-form-item>
+            <el-form-item label="打赏数量：" :label-width="formLabelWidth">
+                <el-radio-group v-model="form.beanNum" @change="changeCoin" class="group_button">
+                    <el-radio-button label=50 class="radio_button">50金豆</el-radio-button>
+                    <el-radio-button label=100 class="radio_button">100金豆</el-radio-button>
+                    <el-radio-button label=200 class="radio_button">200金豆</el-radio-button>
+                    <el-radio-button label=300 class="radio_button">300金豆</el-radio-button>
+                    <el-radio-button label=500 class="radio_button">500金豆</el-radio-button>
+                    <el-radio-button label=1000 class="radio_button">1,000金豆</el-radio-button>
+                    <el-radio-button label=2000 class="radio_button">2,000金豆</el-radio-button>
+                    <el-radio-button label=5000 class="radio_button">5,000金豆</el-radio-button>
+                    <el-radio-button label=10000 class="radio_button">10,000金豆</el-radio-button>
 
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="账户余额：" :label-width="formLabelWidth">
-                    <label><span id="balanceBean">{{form.balanceBean}}</span> 金豆</label>
-                    <label ><span class="tips">&nbsp;&nbsp;{{balanceTips}}</span></label>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="账户余额：" :label-width="formLabelWidth">
+                <label><span id="balanceBean">{{form.balanceBean}}</span> 金豆</label>
+                <label><span class="tips">&nbsp;&nbsp;{{balanceTips}}</span></label>
 
-                </el-form-item>
-                <el-form-item label="本次打赏：" :label-width="formLabelWidth">
-                    <label><span class="thisRewardNum"> {{form.beanNum}}</span> 金豆 = <span class="thisRewardNum">{{form.goldCoin}}</span> 金币</label>
-                </el-form-item>
-            </el-form>
+            </el-form-item>
+            <el-form-item label="本次打赏：" :label-width="formLabelWidth">
+                <label><span class="thisRewardNum"> {{form.beanNum}}</span> 金豆 = <span class="thisRewardNum">{{form.goldCoin}}</span>
+                    金币</label>
+            </el-form-item>
+        </el-form>
 
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="rewardWorks">确 定</el-button>
-            </div>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="rewardWorks">确 定</el-button>
+        </div>
 
-        </el-dialog>
+    </el-dialog>
 
 
-    </div>
+</div>
 
 <!--    投票模块 -->
-    <div id="dialogForm_vote">
-        <el-dialog title="投推荐票" :visible.sync="dialogFormVisible" width="40%" class="dialog_all">
-            <el-form :model="form">
-                <el-form-item label="作品名：" :label-width="formLabelWidth">
-                    <label><span class="workName">{{form.workName}}</span></label>
-                </el-form-item>
-                <el-form-item label="章节名：" :label-width="formLabelWidth">
-                    <label><span class="chapter_name">{{form.chapterTitle}}</span></label>
-                </el-form-item>
-                <el-form-item label="投票数量：" :label-width="formLabelWidth">
-                    <el-radio-group  v-model="form.voteNum" @change="changeVote" class="group_button">
-                        <el-radio-button label=1 class="radio_button" border size="mini">1 推荐票</el-radio-button>
-                        <el-radio-button label=2 class="radio_button" border size="mini">2 推荐票</el-radio-button>
-                        <el-radio-button label=3 class="radio_button" border size="mini">3 推荐票</el-radio-button>
-                        <el-radio-button label=4 class="radio_button" border size="mini">4 推荐票</el-radio-button>
-                        <el-radio-button label=5 class="radio_button" border size="mini">5 推荐票</el-radio-button>
-                        <el-radio-button label=6 class="radio_button" border size="mini">6 推荐票</el-radio-button>
-                        <el-radio-button label=7 class="radio_button" border size="mini">7 推荐票</el-radio-button>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="注意：" :label-width="formLabelWidth">
-                    <div class="tips_div">
-                        <label>{{voteTipsFont}}</label>
-                    </div>
-                </el-form-item>
-                <el-form-item label="剩余推荐票：" :label-width="formLabelWidth">
-                    <label><span id="balanceTicket">{{form.balanceTicket}}</span>&nbsp;张推荐票</label>
-                    <label ><span class="tips">&nbsp;&nbsp;{{balanceTips}}</span></label>
+<div id="dialogForm_vote">
+    <el-dialog title="投推荐票" :visible.sync="dialogFormVisible" width="40%" class="dialog_all">
+        <el-form :model="form">
+            <el-form-item label="作品名：" :label-width="formLabelWidth">
+                <label><span class="workName">{{form.workName}}</span></label>
+            </el-form-item>
+            <el-form-item label="章节名：" :label-width="formLabelWidth">
+                <label><span class="chapter_name">{{form.chapterTitle}}</span></label>
+            </el-form-item>
+            <el-form-item label="投票数量：" :label-width="formLabelWidth">
+                <el-radio-group v-model="form.voteNum" @change="changeVote" class="group_button">
+                    <el-radio-button label=1 class="radio_button" border size="mini">1 推荐票</el-radio-button>
+                    <el-radio-button label=2 class="radio_button" border size="mini">2 推荐票</el-radio-button>
+                    <el-radio-button label=3 class="radio_button" border size="mini">3 推荐票</el-radio-button>
+                    <el-radio-button label=4 class="radio_button" border size="mini">4 推荐票</el-radio-button>
+                    <el-radio-button label=5 class="radio_button" border size="mini">5 推荐票</el-radio-button>
+                    <el-radio-button label=6 class="radio_button" border size="mini">6 推荐票</el-radio-button>
+                    <el-radio-button label=7 class="radio_button" border size="mini">7 推荐票</el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="注意：" :label-width="formLabelWidth">
+                <div class="tips_div">
+                    <label>{{voteTipsFont}}</label>
+                </div>
+            </el-form-item>
+            <el-form-item label="剩余推荐票：" :label-width="formLabelWidth">
+                <label><span id="balanceTicket">{{form.balanceTicket}}</span>&nbsp;张推荐票</label>
+                <label><span class="tips">&nbsp;&nbsp;{{balanceTips}}</span></label>
 
-                </el-form-item>
-            </el-form>
+            </el-form-item>
+        </el-form>
 
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="voteWorks">确 定</el-button>
-            </div>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="voteWorks">确 定</el-button>
+        </div>
 
-        </el-dialog>
-    </div>
+    </el-dialog>
+</div>
 
 <!--    举报作品  -->
-    <div id="reportingWorks">
-        <el-dialog title="举报作品" :visible.sync="dialogFormVisible" width="40%" class="el_dialog">
-            <div class="dialog_content">
-                <div class="dialog_content_header">
-                    <div class="dialog_content_header_title">
-                        <label>举报对象:</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="dialog_content_header_content">
-                        <label>举报作品：</label>&nbsp;&nbsp;{{workName}}<br/><br/>
-                        <label>举报章节：</label>&nbsp;&nbsp;{{chapterTitle}}<br/>
-                    </div>
+<div id="reportingWorks">
+    <el-dialog title="举报作品" :visible.sync="dialogFormVisible" width="40%" class="el_dialog">
+        <div class="dialog_content">
+            <div class="dialog_content_header">
+                <div class="dialog_content_header_title">
+                    <label>举报对象:</label>
+                    <br/>
+                    <br/>
                 </div>
-                <div class="dialog_content_hr"><hr></div>
-                <div class="dialog_content_center">
-                    <div class="center_title">
-                        <label>举报原因</label>&nbsp;&nbsp;
-                        <el-button type="text" @click="toReportAnnouncement">？</el-button>
-                    </div>
-                    <div class="center_checkbox_group">
-                        <el-checkbox-group
-                                v-model="checkedList"
-                                :min="1"
-                                :max="3">
-                            <div class="three_checkbox_1">
-                                <el-checkbox label=1 :border="true">政治敏感</el-checkbox>
-                                <el-checkbox label=2 :border="true">淫秽色情</el-checkbox>
-                                <el-checkbox label=3 :border="true">欺诈广告</el-checkbox>
-                            </div>
-                            <div class="three_checkbox_2">
-                                <el-checkbox label=4 :border="true">暴力血腥</el-checkbox>
-                                <el-checkbox label=5 :border="true">低俗恶趣</el-checkbox>
-                                <el-checkbox label=6 :border="true">侵权抄袭</el-checkbox>
-                            </div>
-                            <div class="three_checkbox_3">
-                                <el-checkbox label=7 :border="true">不实谣言</el-checkbox>
-                                <el-checkbox label=8 :border="true">宣传赌博</el-checkbox>
-                                <el-checkbox label=9 :border="true">人身攻击</el-checkbox>
-                            </div>
-                        </el-checkbox-group>
-                    </div>
+                <div class="dialog_content_header_content">
+                    <label>举报作品：</label>&nbsp;&nbsp;{{workName}}<br/><br/>
+                    <label>举报章节：</label>&nbsp;&nbsp;{{chapterTitle}}<br/>
                 </div>
-                <div class="dialog_content_footer">
-                    <label>选择举报原因不得少于一个，以及不得多于三个</label>
+            </div>
+            <div class="dialog_content_hr">
+                <hr>
+            </div>
+            <div class="dialog_content_center">
+                <div class="center_title">
+                    <label>举报原因</label>&nbsp;&nbsp;
+                    <el-button type="text" @click="toReportAnnouncement">？</el-button>
                 </div>
-
+                <div class="center_checkbox_group">
+                    <el-checkbox-group
+                            v-model="checkedList"
+                            :min="1"
+                            :max="3">
+                        <div class="three_checkbox_1">
+                            <el-checkbox label=1 :border="true">政治敏感</el-checkbox>
+                            <el-checkbox label=2 :border="true">淫秽色情</el-checkbox>
+                            <el-checkbox label=3 :border="true">欺诈广告</el-checkbox>
+                        </div>
+                        <div class="three_checkbox_2">
+                            <el-checkbox label=4 :border="true">暴力血腥</el-checkbox>
+                            <el-checkbox label=5 :border="true">低俗恶趣</el-checkbox>
+                            <el-checkbox label=6 :border="true">侵权抄袭</el-checkbox>
+                        </div>
+                        <div class="three_checkbox_3">
+                            <el-checkbox label=7 :border="true">不实谣言</el-checkbox>
+                            <el-checkbox label=8 :border="true">宣传赌博</el-checkbox>
+                            <el-checkbox label=9 :border="true">人身攻击</el-checkbox>
+                        </div>
+                    </el-checkbox-group>
+                </div>
+            </div>
+            <div class="dialog_content_footer">
+                <label>选择举报原因不得少于一个，以及不得多于三个</label>
             </div>
 
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="reportingWorks">确 定</el-button>
-            </div>
+        </div>
 
-        </el-dialog>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="reportingWorks">确 定</el-button>
+        </div>
+
+    </el-dialog>
 
 
-    </div>
+</div>
 
 <!--  评论模块  -->
-    <div id="zhangjie">
+<div id="zhangjie">
 
 
-<!--        <button @click="dialogFormVisible = 'ture'">评论章节</button>-->
+    <!--        <button @click="dialogFormVisible = 'ture'">评论章节</button>-->
 
-        <el-dialog class="dialog_chapter" title="章节评论" :visible.sync="dialogFormVisible">
+    <el-dialog class="dialog_chapter" title="章节评论" :visible.sync="dialogFormVisible">
 
-            <div>
-                <div class="comment_input">
-                    <el-input
-                            id="Remark_information"
-                            name="Remark_information"
-                            type="textarea"
-                            :autosize="{ minRows: 2, maxRows: 4}"
-                            placeholder="请输入评论内容"
-                            v-model="textarea">
-                    </el-input>
-                </div>
-                <div class="comment_input">
-
-
-                    <button class="comment_btn" @click="submit_comment">发表评论</button>
-                </div>
+        <div>
+            <div class="comment_input">
+                <el-input
+                        id="Remark_information"
+                        name="Remark_information"
+                        type="textarea"
+                        :autosize="{ minRows: 2, maxRows: 4}"
+                        placeholder="请输入评论内容"
+                        v-model="textarea"
+                        maxlength="200"
+                        show-word-limit>
+                </el-input>
             </div>
+            <div class="comment_input">
+                <button class="comment_btn" @click="submit_comment">发表评论</button>
+            </div>
+        </div>
 
+        <template v-if=" commentData.length === 0 ">
+                <p>本章节暂无评论，赶快留下你的足迹吧~</p>
+        </template>
+        <template v-else>
             <div class="comment-parent" v-for="comment in commentData">
                 <div class="comment-parent_info">
                     <div class="comment-parent_head">
@@ -467,7 +494,9 @@
                                 type="textarea"
                                 :autosize="{ minRows: 2, maxRows: 4}"
                                 placeholder="请输入回复内容"
-                                v-model="textarea_reply">
+                                v-model="textarea_reply"
+                                maxlength="200"
+                                show-word-limit>
                         </el-input>
                     </div>
                     <div class="comment_input">
@@ -479,7 +508,7 @@
                 <template v-if=" comment.reply_comment_btn2 === '收起' ">
                     <div class="comment-child" v-for="commentChild in commentChildData">
 
-                        <template v-if=" comment.comment_id == commentChild.comment_pid ">
+                        <template v-if=" comment.comment_id == commentChild.comment_aid ">
 
                             <div class="comment-child_info">
                                 <div class="comment-child_head">
@@ -487,7 +516,7 @@
                                                :src="imageURL_header+commentChild.head_portrait+imageURL_suffix"></el-avatar>
                                 </div>
                                 <div class="comment-child_info3">
-                                    <span class="username_child">{{commentChild.user_name}} 回复 {{comment.user_name}}</span><br/>
+                                    <span class="username_child">{{commentChild.user_name}} 回复 {{commentChild.parent_name}}</span><br/>
                                     <span class="comment-time">发表时间:{{commentChild.comment_time}}</span>
 
                                     <button class="reply_comment_btn"
@@ -509,12 +538,14 @@
                                             type="textarea"
                                             :autosize="{ minRows: 2, maxRows: 4}"
                                             placeholder="请输入回复内容"
-                                            v-model="textarea_reply_child">
+                                            v-model="textarea_reply_child"
+                                            maxlength="200"
+                                            show-word-limit>
                                     </el-input>
                                 </div>
                                 <div class="comment_input">
                                     <button class="comment_btn2"
-                                            @click="submit_commentReplyChild(comment.comment_id)">回复评论
+                                            @click="submit_commentReplyChild(commentChild.comment_id,comment.comment_id)">回复评论
                                     </button>
                                 </div>
                             </div>
@@ -524,15 +555,16 @@
                 </template>
                 <hr/>
             </div>
+        </template>
+    </el-dialog>
 
-        </el-dialog>
-
-    </div>
+</div>
 
 
 </body>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
+<script src="../js/index.js"></script>
 <script src="../js/axios.js"></script>
 <script src="../js/readNovelInterface.js"></script>
 <script src="../js/rewardWorks.js"></script>
@@ -555,6 +587,7 @@
         rewardInterface_vm.form.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
         rewardInterface_vm.dialogFormVisible = true;
     }
+
     //投票对话框
     function displayVote() {
         voteWorksInterface_vm.form.workId = readNovelInterface_vm.worksInfo.work_id;
@@ -572,12 +605,15 @@
         reportingWorksInterface_vm.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
         reportingWorksInterface_vm.dialogFormVisible = true;
     }
+
     //评论对话框
     function displayComment() {
-        // reportingWorksInterface_vm.workId = readNovelInterface_vm.worksInfo.work_id;
+
+
         pageMessage_vm.chapter_id = readNovelInterface_vm.chapterInfo.chapter_id;
-        // reportingWorksInterface_vm.workName = readNovelInterface_vm.worksInfo.work_name;
-        // reportingWorksInterface_vm.chapterTitle = readNovelInterface_vm.chapterInfo.chapter_title;
+        pageMessage_vm.getCommentInfo(readNovelInterface_vm.chapterInfo.chapter_id);
+
+
         pageMessage_vm.dialogFormVisible = true;
     }
 

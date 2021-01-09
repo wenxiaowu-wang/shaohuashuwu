@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>互动管理</title>
-
+    <link rel="icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/elementui.css">
     <link rel="stylesheet" href="../css/workbeanchFragment.css">
     <link rel="stylesheet" href="../css/mangagementWorksInterface.css">
@@ -186,9 +186,11 @@
                     <el-dialog title="回复评论" :visible.sync="dialogFormVisible">
                         <el-input
                                 type="textarea"
-                                :rows="2"
-                                placeholder="请输入内容"
-                                v-model="textarea">
+                                :autosize="{ minRows: 2, maxRows: 4}"
+                                placeholder="请输入回复内容"
+                                v-model="textarea"
+                                maxlength="200"
+                                show-word-limit>
                         </el-input>
                         <br>
                         <br>
@@ -206,6 +208,7 @@
 </body>
 <script src="../js/vue.js"></script>
 <script src="../js/elementui.js"></script>
+<script src="../js/index.js"></script>
 <script src="../js/axios.js"></script>
 <script src="../js/interactionManagementInterface.js"></script>
 
