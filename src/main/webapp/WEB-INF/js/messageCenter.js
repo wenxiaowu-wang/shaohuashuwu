@@ -14,22 +14,22 @@ let messageCenterInterface_vm = new Vue({
             displayDiv3:"block", //以块状元素展示
         },
         buttonContext:"删除",
-        pageSize: 2, //每页显示4条数据
+        pageSize: 4, //每页显示4条数据
         currentPage: 1, //初始定位页数
         dynamicCurrentPage1:1, //动态变化的互相关注当前页数
         dynamicCurrentPage2:1, //动态变化的关注当前页数
         dynamicCurrentPage3:1, //动态变化的粉丝当前页数
         totals:{
             //总条目数（总共数据条数）
-            total1:2,   //系统消息的数量
-            total2:2,   //更新消息的数量
-            total3:2    //私信消息的数量
+            total1:0,   //系统消息的数量
+            total2:0,   //更新消息的数量
+            total3:0    //私信消息的数量
         },
         tipTotals:{
             //总提示数目（提示未读信息）
-            tipTotal1:2,    //系统消息的未读数量
-            tipTotal2:1,    //更新消息的未读数量
-            tipTotal3:1,    //私信消息的未读数量
+            tipTotal1:0,    //系统消息的未读数量
+            tipTotal2:0,    //更新消息的未读数量
+            tipTotal3:0,    //私信消息的未读数量
         },
         button_disabled:false,      //清空、全部已读按钮禁用状态
 
@@ -48,127 +48,131 @@ let messageCenterInterface_vm = new Vue({
         imageURL_header:"../images/message/",    //图片文件头
         imageURL_suffix:".jpg",             //图片文件尾
         systemMessageData:[
-            {
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"韶华书屋",    //发送者名字
-                notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
-                notice_title:"有关某某作品的下架通知",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示（是否已读0未读1已读）
-                notice_type:1
-            },{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"韶华书屋",    //发送者名字
-                notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
-                notice_title:"有关某某作品的下架通知",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示（是否已读0未读1已读）
-                notice_type:1
-            }
+            // {
+            //     notice_id:0,        //通知ID
+            //     send_by:0,          //发送者ID
+            //     send_by_name:"韶华书屋",    //发送者名字
+            //     notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
+            //     notice_title:"有关某某作品的下架通知",    //通知标题
+            //     send_time:"2020-10-31 10:45:38",       //通知时间
+            //     notice_tip:0,        //通知提示（是否已读0未读1已读）
+            //     notice_type:1
+            // },{
+            //     notice_id:0,        //通知ID
+            //     send_by:0,          //发送者ID
+            //     send_by_name:"韶华书屋",    //发送者名字
+            //     notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
+            //     notice_title:"有关某某作品的下架通知",    //通知标题
+            //     send_time:"2020-10-31 10:45:38",       //通知时间
+            //     notice_tip:0,        //通知提示（是否已读0未读1已读）
+            //     notice_type:1
+            // }
         ],
         updateMessageData:[
-            {
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"《玄幻之神级帝皇系统》",    //发送者名字
-                notice_content:"更新第一千二百五十一章 蛮妖 王将亲口承认，苏寒为其结拜兄弟。目前两人一起在八臂佛陀门暴揍门主。",  //通知内容
-                notice_title:"青州行走结拜兄弟为八阶蛮妖！！",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示
-                notice_type:2
-            },{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"《云端的王国》",    //发送者名字
-                notice_content:"更新第一千二百五十一章 压迫？ 苏寒重归苏国，一人占群敌，竟带来一位与法相金身相当的八阶蛮妖。",  //通知内容
-                notice_title:"法相金身莅临苏国！！",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:1,        //通知提示
-                notice_type:2
-            }
+            // {
+            //     notice_id:0,        //通知ID
+            //     send_by:0,          //发送者ID
+            //     send_by_name:"《玄幻之神级帝皇系统》",    //发送者名字
+            //     notice_content:"更新第一千二百五十一章 蛮妖 王将亲口承认，苏寒为其结拜兄弟。目前两人一起在八臂佛陀门暴揍门主。",  //通知内容
+            //     notice_title:"青州行走结拜兄弟为八阶蛮妖！！",    //通知标题
+            //     send_time:"2020-10-31 10:45:38",       //通知时间
+            //     notice_tip:0,        //通知提示
+            //     notice_type:2
+            // },{
+            //     notice_id:0,        //通知ID
+            //     send_by:0,          //发送者ID
+            //     send_by_name:"《云端的王国》",    //发送者名字
+            //     notice_content:"更新第一千二百五十一章 压迫？ 苏寒重归苏国，一人占群敌，竟带来一位与法相金身相当的八阶蛮妖。",  //通知内容
+            //     notice_title:"法相金身莅临苏国！！",    //通知标题
+            //     send_time:"2020-10-31 10:45:38",       //通知时间
+            //     notice_tip:1,        //通知提示
+            //     notice_type:2
+            // }
         ],
         chatMessageData:[
-            {
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"王勃",    //发送者名字
-                notice_content:"只要有知心朋友，四海之内不觉遥远。即便在天涯海角，感觉就像近邻一样。",  //通知内容
-                notice_title:"海内存知己，天涯若比邻。",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示
-                notice_type:3
-            },{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"蒲松龄",    //发送者名字
-                notice_content:"天下最愉快的事莫过于能交许多朋友，和朋友在一起很愉快莫过于来自和朋友间的交流、交谈。",  //通知内容
-                notice_title:"天下快意之事莫若友,快友之事莫若谈。",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:1,        //通知提示
-                notice_type:3
-            }
+            // {
+            //     notice_id:0,        //通知ID
+            //     send_by:0,          //发送者ID
+            //     send_by_name:"王勃",    //发送者名字
+            //     notice_content:"只要有知心朋友，四海之内不觉遥远。即便在天涯海角，感觉就像近邻一样。",  //通知内容
+            //     notice_title:"海内存知己，天涯若比邻。",    //通知标题
+            //     send_time:"2020-10-31 10:45:38",       //通知时间
+            //     notice_tip:0,        //通知提示
+            //     notice_type:3
+            // },{
+            //     notice_id:0,        //通知ID
+            //     send_by:0,          //发送者ID
+            //     send_by_name:"蒲松龄",    //发送者名字
+            //     notice_content:"天下最愉快的事莫过于能交许多朋友，和朋友在一起很愉快莫过于来自和朋友间的交流、交谈。",  //通知内容
+            //     notice_title:"天下快意之事莫若友,快友之事莫若谈。",    //通知标题
+            //     send_time:"2020-10-31 10:45:38",       //通知时间
+            //     notice_tip:1,        //通知提示
+            //     notice_type:3
+            // }
         ],
         displayData:{
-            systemMessageData:[{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"韶华书屋",    //发送者名字
-                notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
-                notice_title:"有关某某作品的下架通知",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示（是否已读0未读1已读）
-                notice_type:1
-            },{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"韶华书屋",    //发送者名字
-                notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
-                notice_title:"有关某某作品的下架通知",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示（是否已读0未读1已读）
-                notice_type:1
-            }],
-            updateMessageData:[{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"《玄幻之神级帝皇系统》",    //发送者名字
-                notice_content:"更新第一千二百五十一章 蛮妖 王将亲口承认，苏寒为其结拜兄弟。目前两人一起在八臂佛陀门暴揍门主。",  //通知内容
-                notice_title:"青州行走结拜兄弟为八阶蛮妖！！",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示
-                notice_type:2
-            },{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"《云端的王国》",    //发送者名字
-                notice_content:"更新第一千二百五十一章 压迫？ 苏寒重归苏国，一人占群敌，竟带来一位与法相金身相当的八阶蛮妖。",  //通知内容
-                notice_title:"法相金身莅临苏国！！",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:1,        //通知提示
-                notice_type:2
-            }],
+            systemMessageData:[
+                // {
+                //     notice_id:0,        //通知ID
+                //     send_by:0,          //发送者ID
+                //     send_by_name:"韶华书屋",    //发送者名字
+                //     notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
+                //     notice_title:"有关某某作品的下架通知",    //通知标题
+                //     send_time:"2020-10-31 10:45:38",       //通知时间
+                //     notice_tip:0,        //通知提示（是否已读0未读1已读）
+                //     notice_type:1
+                // },{
+                //     notice_id:0,        //通知ID
+                //     send_by:0,          //发送者ID
+                //     send_by_name:"韶华书屋",    //发送者名字
+                //     notice_content:"您的某某作品涉及违规《韶华书屋作品规定》，现已下架，如有疑问，请联系人工客服",  //通知内容
+                //     notice_title:"有关某某作品的下架通知",    //通知标题
+                //     send_time:"2020-10-31 10:45:38",       //通知时间
+                //     notice_tip:0,        //通知提示（是否已读0未读1已读）
+                //     notice_type:1
+                // }
+            ],
+            updateMessageData:[
+                // {
+                //     notice_id:0,        //通知ID
+                //     send_by:0,          //发送者ID
+                //     send_by_name:"《玄幻之神级帝皇系统》",    //发送者名字
+                //     notice_content:"更新第一千二百五十一章 蛮妖 王将亲口承认，苏寒为其结拜兄弟。目前两人一起在八臂佛陀门暴揍门主。",  //通知内容
+                //     notice_title:"青州行走结拜兄弟为八阶蛮妖！！",    //通知标题
+                //     send_time:"2020-10-31 10:45:38",       //通知时间
+                //     notice_tip:0,        //通知提示
+                //     notice_type:2
+                // },{
+                //     notice_id:0,        //通知ID
+                //     send_by:0,          //发送者ID
+                //     send_by_name:"《云端的王国》",    //发送者名字
+                //     notice_content:"更新第一千二百五十一章 压迫？ 苏寒重归苏国，一人占群敌，竟带来一位与法相金身相当的八阶蛮妖。",  //通知内容
+                //     notice_title:"法相金身莅临苏国！！",    //通知标题
+                //     send_time:"2020-10-31 10:45:38",       //通知时间
+                //     notice_tip:1,        //通知提示
+                //     notice_type:2
+                // }
+            ],
             chatMessageData:[
-                {
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"王勃",    //发送者名字
-                notice_content:"只要有知心朋友，四海之内不觉遥远。即便在天涯海角，感觉就像近邻一样。",  //通知内容
-                notice_title:"海内存知己，天涯若比邻。",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:0,        //通知提示
-                notice_type:3
-            },{
-                notice_id:0,        //通知ID
-                send_by:0,          //发送者ID
-                send_by_name:"蒲松龄",    //发送者名字
-                notice_content:"天下最愉快的事莫过于能交许多朋友，和朋友在一起很愉快莫过于来自和朋友间的交流、交谈。",  //通知内容
-                notice_title:"天下快意之事莫若友,快友之事莫若谈。",    //通知标题
-                send_time:"2020-10-31 10:45:38",       //通知时间
-                notice_tip:1,        //通知提示
-                notice_type:3
-            }
+                // {
+                //     notice_id:0,        //通知ID
+                //     send_by:0,          //发送者ID
+                //     send_by_name:"王勃",    //发送者名字
+                //     notice_content:"只要有知心朋友，四海之内不觉遥远。即便在天涯海角，感觉就像近邻一样。",  //通知内容
+                //     notice_title:"海内存知己，天涯若比邻。",    //通知标题
+                //     send_time:"2020-10-31 10:45:38",       //通知时间
+                //     notice_tip:0,        //通知提示
+                //     notice_type:3
+                // },{
+                //     notice_id:0,        //通知ID
+                //     send_by:0,          //发送者ID
+                //     send_by_name:"蒲松龄",    //发送者名字
+                //     notice_content:"天下最愉快的事莫过于能交许多朋友，和朋友在一起很愉快莫过于来自和朋友间的交流、交谈。",  //通知内容
+                //     notice_title:"天下快意之事莫若友,快友之事莫若谈。",    //通知标题
+                //     send_time:"2020-10-31 10:45:38",       //通知时间
+                //     notice_tip:1,        //通知提示
+                //     notice_type:3
+                // }
             ]
         },
         //轮播图图片名字（图片格式为png）

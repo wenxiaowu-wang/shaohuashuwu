@@ -74,6 +74,7 @@ let remunerationInterface_vm = new Vue({
                 this.header.goldCoin_total_income+"/"+this.header.goldCoin_already_withdraw).then(resp =>{
                 console.log("数据存放成功。");
                 console.log("将进入提现稿酬页面。");
+                // alert(resp.data);
                 //进入提现稿酬界面
                 window.location.assign("../pages/withdrawGoldCoinInterface.html");
             }).catch(error =>{

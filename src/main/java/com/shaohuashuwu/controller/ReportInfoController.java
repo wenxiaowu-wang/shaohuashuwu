@@ -1,7 +1,6 @@
 package com.shaohuashuwu.controller;
 
 import com.shaohuashuwu.service.ReportInfoService;
-import com.shaohuashuwu.service.ReportWholeInfoVoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -64,13 +63,7 @@ public class ReportInfoController {
         Integer user_id = (Integer)modelMap.get("user_id");
         Integer chapter_id = (Integer)modelMap.get("chapter_id");
         Integer work_id = (Integer)modelMap.get("work_id");
-
-        int reportResult = 0;
-        System.out.println("调用处理举报信息模块,checkedList内容如下：");
-        for (int i = 0;i<checkedList.size();i++){
-            System.out.println(checkedList.get(i));
-        }
-        return reportResult;
+        return reportInfoService.reportChapter(user_id,chapter_id,work_id, checkedList.get(0));
     }
 
     @RequestMapping(path = "/toReportingWorks")

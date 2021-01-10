@@ -2,7 +2,10 @@ package com.shaohuashuwu.controller;
 
 
 import com.shaohuashuwu.domain.ChapterInfo;
+import com.shaohuashuwu.domain.NoticeInfo;
 import com.shaohuashuwu.service.ChapterInfoService;
+import com.shaohuashuwu.service.NoticeInfoService;
+import com.shaohuashuwu.service.WorksInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +28,12 @@ public class ChapterInfoController {
 
     @Autowired
     public ChapterInfoService chapterInfoService;
+
+    @Autowired
+    public NoticeInfoService noticeInfoService;
+
+    @Autowired
+    public WorksInfoService worksInfoService;
 
     /**
      * 根据作品id查询最新章节信息
@@ -91,6 +102,22 @@ public class ChapterInfoController {
         Object user_id_o = session.getAttribute("user_id");
         int user_id=Integer.parseInt(String.valueOf(user_id_o));
         int num = chapterInfoService.addchapter_info(chapterInfo,work_id,user_id);
+        //发布成功 发送该作品的更新提示
+        if(num == 1){
+            String work_name = worksInfoService.getworkInfoByWork_id(work_id).getWork_name();
+            NoticeInfo noticeInfo = new NoticeInfo();
+            noticeInfo.setSend_by(work_id);//发送人：作品id
+            noticeInfo.setSend_to(-1);//接收人 -1 表示群体
+            noticeInfo.setNotice_type(2);//通知类型2 表示更新提醒
+            noticeInfo.setNotice_content("《"+work_name+"》 "+chapterInfo.getChapter_title()+" 已更新，快来观看吧！");
+            noticeInfo.setNotice_title("《"+work_name+"》已更新！");
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            noticeInfo.setSend_time(timestamp);
+            noticeInfo.setNotice_tip(1);
+
+            boolean theResult = noticeInfoService.addOrUpdateWorkUpdateNotice(noticeInfo);
+        }
         return num;
     }
 

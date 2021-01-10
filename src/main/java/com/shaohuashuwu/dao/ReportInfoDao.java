@@ -32,8 +32,8 @@ public interface ReportInfoDao {
      * 阿斌
      */
     //插入一条举报信息
-    @Insert("insert into report_info(report_id,user_id,chapter_id,report_reason,report_time,report_remarks)" +
-            "values(#{report_id},#{user_id},#{chapter_id},#{report_reason},#{report_time},#{report_remarks})")
+    @Insert("insert into report_info(report_id,user_id,chapter_id,report_reason,report_time,report_remarks,handle_state)" +
+            "values(#{report_id},#{user_id},#{chapter_id},#{report_reason},#{report_time},#{report_remarks},#{handle_state})")
     public int insertReportInfo(ReportInfo reportInfo);
 
 }

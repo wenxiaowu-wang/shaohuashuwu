@@ -2,6 +2,7 @@ package com.shaohuashuwu.service;
 
 
 import com.shaohuashuwu.domain.ReportInfo;
+import org.springframework.stereotype.Service;
 
 /**
  * 包:com.shaohuashuwu.service
@@ -22,5 +23,8 @@ public interface ReportInfoService {
 
     //保存一条举报信息
     public boolean addReportInfo(ReportInfo reportInfo);
+
+    //举报章节信息
+    public int reportChapter(int user_id,int chapter_id,int work_id,int reason);
 
 }

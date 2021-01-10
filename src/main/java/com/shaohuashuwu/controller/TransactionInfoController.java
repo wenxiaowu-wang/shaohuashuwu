@@ -25,7 +25,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping(path = "/transactionInfoController")
-@SessionAttributes(value = {"user_name","user_id","work_id","work_name","chapter_id","chapter_title"},types = {String.class,Integer.class})
+@SessionAttributes(value = {"user_name","user_id","work_id","work_name","chapter_id","chapter_title","goldCoin_total_income","goldCoin_already_withdraw"},types = {String.class,Integer.class})
 public class TransactionInfoController {
 
     @Autowired

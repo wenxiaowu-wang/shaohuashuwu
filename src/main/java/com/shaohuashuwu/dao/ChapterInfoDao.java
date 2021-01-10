@@ -104,4 +104,5 @@ public interface ChapterInfoDao {
     //根据章节ID获取章节标题名字
     @Select("select distinct chapter_title from chapter_info where chapter_id = #{param1}")
     public String selectChapterTitleByChapterId(int chapter_id);
+
 }
