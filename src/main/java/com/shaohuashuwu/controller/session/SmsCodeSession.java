@@ -54,8 +54,8 @@ public class SmsCodeSession {
 
         String TemplateCode = "SMS_205459436";
 
-//        SendSms loginSend = new SendSms();
-//        loginSend.Send(phone_number,code,TemplateCode);
+        SendSms loginSend = new SendSms();
+        loginSend.Send(phone_number,code,TemplateCode);
 
         Calendar beforeTime = Calendar.getInstance();
         beforeTime.add(Calendar.MINUTE, 5);
@@ -101,8 +101,8 @@ public class SmsCodeSession {
 
         String TemplateCode = "SMS_204290356";
 
-        //SendSms registerSend = new SendSms();
-        //registerSend.Send(phone_number,code,TemplateCode);
+        SendSms registerSend = new SendSms();
+        registerSend.Send(phone_number,code,TemplateCode);
 
         Calendar beforeTime = Calendar.getInstance();
         beforeTime.add(Calendar.MINUTE, 5);

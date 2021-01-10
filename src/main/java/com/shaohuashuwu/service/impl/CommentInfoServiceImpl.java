@@ -29,6 +29,12 @@ public class CommentInfoServiceImpl implements CommentInfoService {
     public Boolean addCommentInfo(int user_id, Timestamp comment_time, String comment_content, int work_id, int comment_pid,int comment_aid) {
 
         boolean addResult = false;
+        System.out.println(user_id);
+        System.out.println(comment_time);
+        System.out.println(comment_content);
+        System.out.println(work_id);
+        System.out.println(comment_pid);
+        System.out.println(comment_aid);
         commentInfo = new CommentInfo(user_id, comment_time, comment_content, work_id, comment_pid,comment_aid);
 
         int i = 0;

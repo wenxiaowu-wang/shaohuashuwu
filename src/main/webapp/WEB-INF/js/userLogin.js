@@ -211,11 +211,9 @@ new Vue({
             window.location.assign("../pages/usersRegistrationInterface.html");
         },
         goToYinSi(){
-
             window.location.assign("../pages/privacyPolicy.html");
         },
         goToXieYi(){
-
             window.location.assign("../pages/userAgreement.html");
         }
 

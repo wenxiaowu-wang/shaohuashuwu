@@ -107,16 +107,10 @@ let changeAdminPasswordInterface_vm = new Vue({
                 type: 'warning'
             }).then(() => {
                 //执行操作
-                this.$message({
-                    type:'success',
-                    message:'修改成功，请妥善保管新的密码。'
-                });
+
             }).catch(() => {
                 //执行操作
-                this.$message({
-                    type:'success',
-                    message:'修改成功，请妥善保管新的密码。'
-                });
+
             });
             console.log("获取管理员信息失败！"+error);
         });

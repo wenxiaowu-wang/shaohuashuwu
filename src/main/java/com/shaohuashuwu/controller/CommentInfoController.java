@@ -62,9 +62,7 @@ public class CommentInfoController {
     public Boolean addCommentInfo(@PathVariable(value = "user_id")Integer user_id,@PathVariable(value = "comment_content")String comment_content,@PathVariable(value = "work_id")Integer work_id,@PathVariable(value = "id")Integer id,@PathVariable(value = "aid")Integer aid){
 
         boolean addResult = false;
-
         Timestamp timestamp=new Timestamp(new Date().getTime());
-
         addResult = commentInfoService.addCommentInfo(user_id,timestamp,comment_content,work_id,id,aid);
         return addResult;
     }
