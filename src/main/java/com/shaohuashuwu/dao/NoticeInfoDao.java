@@ -18,12 +18,25 @@ import java.util.List;
 public interface NoticeInfoDao {
 
     //获取该用户所有的通知信息
-    @Select("SELECT DISTINCT notice_info.notice_id AS notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_state_info.read_state AS notice_tip \n" +
-            "FROM notice_info,bookshelf_info,works_info,attention_info,notice_state_info \n" +
-            "WHERE notice_info.notice_id = notice_state_info.notice_id AND \n" +
-            "(send_to = viewer_id AND viewer_id = #{param1} AND delete_state = 0) OR \n" +
-            "(notice_type = 2 AND send_by = bookshelf_info.work_id AND bookshelf_info.user_id = #{param1} AND viewer_id = #{param1} AND delete_state = 0) OR\n" +
-            "(notice_type = 2 AND notice_type = 2 AND send_by = works_info.work_id AND works_info.user_id = attention_info.author_id AND attention_info.reader_id = #{param1} AND viewer_id = #{param1} AND delete_state = 0) ORDER BY read_state ASC,send_time DESC")
+//    @Select("SELECT DISTINCT notice_info.notice_id AS notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_state_info.read_state AS notice_tip \n" +
+//            "FROM notice_info,bookshelf_info,works_info,attention_info,notice_state_info \n" +
+//            "WHERE notice_info.notice_id = notice_state_info.notice_id AND \n" +
+//            "(send_to = viewer_id AND viewer_id = #{param1} AND delete_state = 0) OR \n" +
+//            "(notice_type = 2 AND send_by = bookshelf_info.work_id AND bookshelf_info.user_id = #{param1} AND viewer_id = #{param1} AND delete_state = 0) OR\n" +
+//            "(notice_type = 2 AND notice_type = 2 AND send_by = works_info.work_id AND works_info.user_id = attention_info.author_id AND attention_info.reader_id = #{param1} AND viewer_id = #{param1} AND delete_state = 0) ORDER BY read_state ASC,send_time DESC")
+
+    //获取该用户所有的通知信息
+    @Select("(SELECT DISTINCT notice_info.notice_id AS notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_state_info.read_state AS notice_tip \n" +
+            "FROM notice_info,notice_state_info WHERE notice_info.notice_id = notice_state_info.notice_id AND viewer_id = send_to AND notice_type = 1 AND send_by = 0 AND delete_state = 0 AND send_to = #{param1})\n" +
+            "UNION\n" +
+            "(SELECT DISTINCT notice_info.notice_id AS notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_state_info.read_state AS notice_tip\n" +
+            "FROM notice_info,notice_state_info WHERE notice_info.notice_id = notice_state_info.notice_id AND notice_info.notice_type = 2 AND notice_info.send_by IN(\n" +
+            "SELECT DISTINCT works_info.work_id AS work_id FROM works_info,attention_info WHERE attention_info.author_id = works_info.user_id AND attention_info.reader_id = #{param1}\n" +
+            "UNION\n" +
+            "SELECT DISTINCT bookshelf_info.work_id AS work_id FROM bookshelf_info WHERE bookshelf_info.user_id = #{param1})AND delete_state = 0)\n" +
+            "UNION\n" +
+            "(SELECT DISTINCT notice_info.notice_id AS notice_id,send_by,send_to,notice_type,notice_content,notice_title,send_time,notice_state_info.read_state AS notice_tip\n" +
+            "FROM notice_info,notice_state_info WHERE notice_info.notice_id = notice_state_info.notice_id AND viewer_id = notice_info.send_to AND notice_state_info.delete_state = 0 AND notice_info.notice_type = 3 AND notice_info.send_to = #{param1})")
     @Results(id = "noticeInfo",value = {
             @Result(id = true,column = "notice_id",property = "notice_id"),
             @Result(column = "send_by",property = "send_by"),

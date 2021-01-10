@@ -69,7 +69,7 @@ let changeAdminPasswordInterface_vm = new Vue({
                         //关闭当前界面
                         window.opener=null;
                         // window.open('','_self');
-                        window.location.assign("../pages/handleWorksInterface.html");
+                        window.location.assign("../pages/handlingReportInfoInterface.html");
                         window.close();
                         break;
                     }case 2:{

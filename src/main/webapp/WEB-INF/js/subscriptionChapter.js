@@ -98,7 +98,7 @@ new Vue({
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(() => {
-                        axios.post("/shaohuashuwu/transactionInfoController/subscribeChapterGUN/"+"/"+this.user_id+"/"+this.checkedChapter+"/"+this.work_id).then(resp => {
+                        axios.post("/shaohuashuwu/transactionInfoController/subscribeChapterGUN/"+this.user_id+"/"+this.checkedChapter+"/"+this.work_id).then(resp => {
                             if (resp.data){
                                 alert("订阅成功！");
                                 window.location.assign("../pages/subscribeToNovelsInterface.html");

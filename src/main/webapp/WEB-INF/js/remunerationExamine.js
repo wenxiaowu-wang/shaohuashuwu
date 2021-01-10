@@ -48,6 +48,8 @@ let remunerationInterface_vm = new Vue({
         unit_display:"金币(个)",      //交易单位
         consumer_tip:"打赏用户", //消费者提示
 
+        loading: true,  //加载显示
+
         tableData_display:[{
             work_name: '斗破苍穹后传之大主宰',
             chapter_title: '第五百二十一章：陨落的天才',
@@ -291,6 +293,8 @@ let remunerationInterface_vm = new Vue({
                 });
                 this.header.goldCoin_already_withdraw = total_already;
                 this.header.goldCoin_able_withdraw = this.header.goldCoin_total_income - this.header.goldCoin_already_withdraw;
+
+                this.loading = false;//加载提示显示关闭
                 console.log("统计已提现金币成功。");
             }).catch(error =>{
                 this.$confirm('网络或系统原因，获取界面相关信息失败！', '提示', {
@@ -299,9 +303,10 @@ let remunerationInterface_vm = new Vue({
                     type: 'warning'
                 }).then(() => {
                     //执行操作
-
+                    this.loading = false;//加载提示显示关闭
                 }).catch(() => {
                     //执行操作
+                    this.loading = false;//加载提示显示关闭
                 });
                 console.log("统计已提现金币失败。");
             })
@@ -311,6 +316,7 @@ let remunerationInterface_vm = new Vue({
             * 注意：总收入以及已提现金币数在前端统计即可
             */
         }).catch(error =>{
+            this.loading = false;//加载提示显示关闭
             console.log("装配交易信息失败。");
         });
     },

@@ -36,6 +36,15 @@ public class TransactionInfoController {
      * 郝振威
      * */
 
+    @ResponseBody
+    @RequestMapping(path = "/subscribeAChapterGUN/{userId}/{subBeanNum}/{chapterId}/{addBeanNum}/{work_id}")
+    public boolean subscribeAChapterGUN(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "subBeanNum") Integer subBeanNum,@PathVariable(value = "chapterId") Integer chapterId,@PathVariable(value = "addBeanNum") Integer addBeanNum,@PathVariable(value = "work_id") Integer work_id) throws Exception {
+        boolean subsResult ;
+        subsResult = transactionInfoService.subscribeAChapterGUN(userId, subBeanNum, chapterId, addBeanNum,work_id);
+        return subsResult;
+    }
+
+
     //多个订阅单个章节H(回滚)
     @ResponseBody
     @RequestMapping(value = "/subscribeChapterGUN/{userId}/{chapterId}/{work_id}")

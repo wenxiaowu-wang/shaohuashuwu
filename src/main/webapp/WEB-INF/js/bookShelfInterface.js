@@ -215,7 +215,7 @@ new Vue({
             console.log("获取信息失败！" + error);
             this.$message({
                 type: 'error',
-                message: '获取信息失败！'
+                message: '网络异常！'
             });
         });
 

@@ -181,6 +181,9 @@
                 </div>
                 <div class="center_table">
                     <el-table
+                            v-loading="loading"
+                            element-loading-text="拼命加载中"
+                            element-loading-spinner="el-icon-loading"
                             :data="tableData_display"
                             style="width: 98%"
                             height="450"

@@ -95,7 +95,7 @@ new Vue( {
                 this.$message({
                     type: 'success',
                     message: '您已经退出当前账号!',
-                    window:location.assign("../pages/novelRankingInterface.html"),
+                    window:location.assign("../pages/UserLogin.html"),
                 });
             }).catch(() => {
                 this.$message({

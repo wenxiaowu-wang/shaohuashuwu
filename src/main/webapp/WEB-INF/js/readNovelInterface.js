@@ -269,7 +269,7 @@ let readNovelInterface_vm = new Vue({
             var chapter_id;
 
             for(var i = 0;i< chaptertatol ;i++){
-                if(this.catalogInfoVoList[i].chapter_id == chapter_id_before){
+                if(this.catalogInfoVoList[i].chapter_id === chapter_id_before){
                     chapter_id_num = 1+i;
                     break;
                 }else {
@@ -309,7 +309,7 @@ let readNovelInterface_vm = new Vue({
                     }).then(() => {
                         //订阅章节事务回滚处理！
                         axios.get("/shaohuashuwu/transactionInfoController/subscribeAChapterGUN/" +
-                            this.userInfo.user_id + "/" + data2 + "/" + this.chapterInfo.chapter_id + "/" + data3).then(resp => {
+                            this.userInfo.user_id + "/" + data2 + "/" + this.chapterInfo.chapter_id + "/" + data3+"/"+this.worksInfo.work_id).then(resp => {
                             if (resp.data === true) {
                                 this.$message({
                                     type: 'success',

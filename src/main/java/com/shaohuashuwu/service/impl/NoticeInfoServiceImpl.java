@@ -100,9 +100,10 @@ public class NoticeInfoServiceImpl implements NoticeInfoService {
             //表示获取到消息ID，即表中已有该作品的更新通知记录(若表中没有该作品的更新通知记录，接收值为-1)
             noticeInfo.setNotice_id(getNoticeId);   //补充传入参数的消息ID,因为若没有主键或者主索引，无法使用更新或插入函数。
         }
-        if (noticeInfoDao.insertOrUpdateOneNoticeInfo(noticeInfo) != 0){
-            //表示添加或更新成功
+        if (noticeInfoDao.insertOrUpdateOneNoticeInfo(noticeInfo) != 0 && noticeStateInfoDao.insertOrUpdateNoticeStateInfoByWorkId(noticeInfo.getSend_by()) != -1){
+            //表示添加或更新成功 （通知信息表和通知状态信息表）
             theResult = true;
+
         }
         return theResult;
     }
