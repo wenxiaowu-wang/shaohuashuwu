@@ -36,24 +36,14 @@ public class TransactionInfoController {
      * 郝振威
      * */
 
-
-    @ResponseBody
-    @RequestMapping(path = "/subscribeAChapterGUN/{userId}/{subBeanNum}/{chapterId}/{addBeanNum}")
-    public boolean subscribeAChapterGUN(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "subBeanNum") Integer subBeanNum,@PathVariable(value = "chapterId") Integer chapterId,@PathVariable(value = "addBeanNum") Integer addBeanNum) throws Exception {
-        boolean subsResult ;
-        subsResult = transactionInfoService.subscribeAChapterGUN(userId, subBeanNum, chapterId, addBeanNum);
-        return subsResult;
-    }
-
-
     //多个订阅单个章节H(回滚)
     @ResponseBody
-    @RequestMapping(value = "/subscribeChapterGUN/{userId}/{chapterId}")
-    public Boolean subscribeChapterGUN(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "chapterId") List<Integer> chapterId)  {
+    @RequestMapping(value = "/subscribeChapterGUN/{userId}/{chapterId}/{work_id}")
+    public Boolean subscribeChapterGUN(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "chapterId") List<Integer> chapterId,@PathVariable(value = "work_id") Integer work_id)  {
         boolean subsResult = true ;
 
         for (int id : chapterId) {
-            subsResult = transactionInfoService.subscribeAChapterGUN(userId, -10, id, 10);
+            subsResult = transactionInfoService.subscribeAChapterGUN(userId, -10, id, 10,work_id);
         }
         return subsResult;
     }

@@ -36,6 +36,8 @@ public interface TransactionInfoDao {
     *
     *
     * */
+    @Update("UPDATE works_info  SET work_subscribe_num = work_subscribe_num + #{param1} WHERE work_id = #{param2}")
+    public boolean updateWorkSubscribeNumByWorkId(int num,int work_id);
 
     /**
      * 阿斌

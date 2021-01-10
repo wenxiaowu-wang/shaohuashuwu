@@ -3,6 +3,7 @@ new Vue({
     data: {
 
         work_name: '',
+        work_id: '',
         user_id: '',
         user_name: '',
         gold_bean_num: '',//账户剩余金豆数
@@ -97,7 +98,7 @@ new Vue({
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(() => {
-                        axios.post("/shaohuashuwu/transactionInfoController/subscribeChapterGUN/"+"/"+this.user_id+"/"+this.checkedChapter).then(resp => {
+                        axios.post("/shaohuashuwu/transactionInfoController/subscribeChapterGUN/"+"/"+this.user_id+"/"+this.checkedChapter+"/"+this.work_id).then(resp => {
                             if (resp.data){
                                 alert("订阅成功！");
                                 window.location.assign("../pages/subscribeToNovelsInterface.html");
@@ -158,6 +159,7 @@ new Vue({
                 axios.get("/shaohuashuwu/worksInfoController/getWorkIdByChapterId/" +
                     chapter_id).then(response => {
                     let work_id = response.data;
+                    this.work_id = response.data;
                     //获取作品未订阅的作品
                     axios.get("/shaohuashuwu/chapterInfoController/getChapterInfoByUserIdWorkId/" +
                         work_id + "/" + user_id).then(resp3 => {

@@ -128,9 +128,20 @@ new Vue({
             window.location.assign("../pages/readingHistoryInterface.html");
         },
 
-        goToInterface(work_id){
 
-        }
+
+    //点击作品时按钮
+        goToInterface(work_id){
+        var _this = this;
+        axios.post('/shaohuashuwu/worksInfoController/addWork_idSession?work_id='+work_id)
+            .then(function (response) {
+                window.location.assign("../pages/novelDetailsInterface.html");
+            })
+            .catch(function (error){
+                console.log(error);
+                alert("相应失败");
+            })
+},
 
 
     },

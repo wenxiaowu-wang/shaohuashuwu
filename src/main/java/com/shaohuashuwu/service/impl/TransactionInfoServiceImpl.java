@@ -47,7 +47,7 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
     //单个订阅章节（事务回滚）
     @Override
     @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
-    public boolean subscribeAChapterGUN(int userId,int subBeanNum,int chapterId,int addBeanNum) {
+    public boolean subscribeAChapterGUN(int userId,int subBeanNum,int chapterId,int addBeanNum,int work_id) {
 
         boolean Result = false;
 
@@ -64,6 +64,11 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
         boolean addAuthorBeanNum = false;
         if (userInfoDao.updateGoldBeanNumByUserId(authorID, addBeanNum) != (0)) {
             addAuthorBeanNum = true;
+        }
+        //增加作品表的订阅数
+        boolean addWorkSubscribeNum = false;
+        if(transactionInfoDao.updateWorkSubscribeNumByWorkId(1,work_id)){
+            addWorkSubscribeNum = true;
         }
 
         //将订阅记录存到交易记录表
@@ -86,7 +91,7 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
         }
 
 
-        if(subUserBeanNum&&addAuthorBeanNum&&saveResult){
+        if(subUserBeanNum&&addAuthorBeanNum&&saveResult&&addWorkSubscribeNum){
             Result = true;
         }
 
@@ -131,6 +136,7 @@ public class TransactionInfoServiceImpl implements TransactionInfoService {
         if (/*扣除消费用户金豆数，增加目标用户的金币数*/
                 userInfoDao.updateGoldBeanNumByUserId(tipInfo.getConsumer_id(),tipInfo.getTransaction_quantity() * (-1)) != 0
                         && userInfoDao.updateGoldCoinNumByUserId(author_id,tipInfo.getTransaction_quantity()/10) != 0
+                        && worksInfoDao.updateWorkTipNumByWorkId(work_id,tipInfo.getTransaction_quantity()) != 0
                         && transactionInfoDao.insertTransactionInfo(tipInfo)!=(0)){
             tipResult = true;
         }

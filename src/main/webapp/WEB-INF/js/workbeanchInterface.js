@@ -37,6 +37,21 @@ new Vue({
                 .then(function (response){
                     _this.worksInfoList = response.data;
                     console.log("作品信息"+JSON.stringify(_this.worksInfoList));
+                    console.log("开始循环--------------");
+                    for( var i = 0 ;i<_this.worksInfoList.length;i++){
+                        console.log("循环");
+                        _this.worknull = 1;
+                        /*将1或2转为连载或完结*/
+                        if( _this.worksInfoList[i].work_serial_state == 1){
+                            _this.worksInfoList[i].work_serial_state = "连载";
+                        }
+                        else if(_this.worksInfoList[i].work_serial_state == 2){
+                            _this.worksInfoList[i].work_serial_state = "完结";
+                        }
+                        else if(_this.worksInfoList[i].work_serial_state == 3){
+                            _this.worksInfoList[i].work_serial_state = "下架";
+                        }
+                    }
                 })
                 .catch(function (error){
                     console.log(error);

@@ -242,5 +242,9 @@ public interface WorksInfoDao {
     @Update("update works_info set work_vote_num = work_vote_num + (#{param2}) where work_id = #{param1}")
     public int updateWorkVoteNumByWorkId(int work_id,int voteNum);
 
+    //根据作品id更新打赏数量
+    @Update("update works_info set work_tip_num = work_tip_num + (#{param2}) where work_id = #{param1}")
+    public int updateWorkTipNumByWorkId(int work_id,int tipNum);
+
 }
 

@@ -95,6 +95,7 @@ new Vue({
             //设置当前页数
             this.adminSelectInfoVo.works_page = val;
 
+            console.log("当前页数"+JSON.stringify(this.adminSelectInfoVo.works_page))
             /**
              * 提交表单，获取举报信息
              * */

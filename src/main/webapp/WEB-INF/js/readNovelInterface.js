@@ -132,8 +132,11 @@ let readNovelInterface_vm = new Vue({
                     _this.chapterInfo = response.data;
 
 
-                    _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/。/g, "。<br/>"+"&nbsp;"+"&nbsp;")
-                    _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/”/g, "“<br/>"+"&nbsp;"+"&nbsp;")
+                    if(_this.chapterInfo.chapter_content != null){
+                        _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/。/g, "。<br/>"+"&nbsp;"+"&nbsp;")
+                        _this.chapterInfo.chapter_content = _this.chapterInfo.chapter_content.replace(/”/g, "“<br/>"+"&nbsp;"+"&nbsp;")
+
+                    }
 
                 })
                 .catch(function (error){

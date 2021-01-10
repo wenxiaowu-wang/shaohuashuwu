@@ -210,7 +210,7 @@ public class WorkWholeInfoVoServiceImpl implements WorkWholeInfoVoService {
         workWholeInfoVoList = new ArrayList<WorkWholeInfoVo>();
         //获取用户管兴趣的标签
         userinterestInfo = userInterestInfoDao.selectUserinterestInfoByUser_id(user_id);
-        System.out.println("用户兴趣标签-------------------"+userinterestInfo);
+        System.out.println("用户兴趣标签++++++++++++++++++"+userinterestInfo);
         worksInfoList = worksInfoDao.selectworkInfoBywork_main_label1(userinterestInfo);
         worksInfoList.addAll(worksInfoDao.selectworkInfoBywork_main_label2(userinterestInfo));
         //获取的作者作品未空，和不为空

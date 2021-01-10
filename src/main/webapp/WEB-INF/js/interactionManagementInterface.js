@@ -19,31 +19,7 @@ new Vue({
                 work_name: '作品23'
             },],
 
-            commentData: [{
-
-                user_id: '测试1',
-                user_name: '测试1',
-                comment_time: '测试1',
-                comment_content: '测试评论内容1',
-                comment_id: '1',
-
-            }, {
-
-                user_id: '测试2',
-                user_name: '测试2',
-                comment_time: '测试2',
-                comment_content: '测试评论内容2',
-                comment_id: '2',
-
-            }, {
-
-                user_id: '测试3',
-                user_name: '测试3',
-                comment_time: '测试3',
-                comment_content: '测试评论内容3',
-                comment_id: '3',
-
-            },],
+            commentData: [],
 
         }
     },

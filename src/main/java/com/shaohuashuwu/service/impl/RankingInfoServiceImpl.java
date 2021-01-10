@@ -55,8 +55,8 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
             if(rankingInputInfoVo.getGetneednum() == 10){
                 //总
                 if(rankingInputInfoVo.getTime_type() == 1){
-                    System.out.println("10总："+rankingInfoVoDao.selectCollectionRankingInfo(rankingInputInfoVo).subList(0,2));
-                    return rankingInfoVoDao.selectCollectionRankingInfo(rankingInputInfoVo).subList(0,2);
+                    System.out.println("10总："+rankingInfoVoDao.selectCollectionRankingInfo(rankingInputInfoVo).subList(0,10));
+                    return rankingInfoVoDao.selectCollectionRankingInfo(rankingInputInfoVo).subList(0,10);
                 }
                 //月
                 else if (rankingInputInfoVo.getTime_type() == 2){
@@ -66,17 +66,17 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        System.out.println("10月："+rankingInfoVoList.subList(0,2));
-                        return rankingInfoVoList.subList(0,2);
+                        System.out.println("10月："+rankingInfoVoList.subList(0,10));
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        System.out.println("10月："+rankingInfoVoList.subList(0,2));
-                        return rankingInfoVoList.subList(0,2);
+                        System.out.println("10月："+rankingInfoVoList.subList(0,10));
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
                 //日
@@ -87,17 +87,17 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
 
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        System.out.println("10月："+rankingInfoVoList.subList(0,2));
-                        return rankingInfoVoList.subList(0,2);
+                        System.out.println("10月："+rankingInfoVoList.subList(0,10));
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        System.out.println("10月："+rankingInfoVoList.subList(0,2));
-                        return rankingInfoVoList.subList(0,2);
+                        System.out.println("10月："+rankingInfoVoList.subList(0,10));
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
             }
@@ -153,7 +153,7 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
             if(rankingInputInfoVo.getGetneednum() == 10){
                 //总
                 if(rankingInputInfoVo.getTime_type() == 1){
-                    return rankingInfoVoDao.selectrecommendRankingInfo(rankingInputInfoVo).subList(0,2);
+                    return rankingInfoVoDao.selectrecommendRankingInfo(rankingInputInfoVo).subList(0,10);
                 }
                 //月
                 else if (rankingInputInfoVo.getTime_type() == 2){
@@ -162,15 +162,15 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
                 //日
@@ -180,15 +180,15 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
             }
@@ -243,7 +243,7 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
             if(rankingInputInfoVo.getGetneednum() == 10){
                 //总
                 if(rankingInputInfoVo.getTime_type() == 1){
-                    return rankingInfoVoDao.selectsubscribeRankingInfo(rankingInputInfoVo).subList(0,2);
+                    return rankingInfoVoDao.selectsubscribeRankingInfo(rankingInputInfoVo).subList(0,10);
                 }
                 //月
                 else if (rankingInputInfoVo.getTime_type() == 2){
@@ -252,15 +252,15 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
                 //日
@@ -270,15 +270,16 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        return rankingInfoVoList.subList(0,2);
+                        System.out.println("订阅榜+++++++++++++++++++"+rankingInfoVoList.subList(0,10));
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
             }
@@ -332,7 +333,7 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
             if(rankingInputInfoVo.getGetneednum() == 10){
                 //总
                 if(rankingInputInfoVo.getTime_type() == 1){
-                    return rankingInfoVoDao.selectrewardRankingInfo(rankingInputInfoVo).subList(0,2);
+                    return rankingInfoVoDao.selectrewardRankingInfo(rankingInputInfoVo).subList(0,10);
                 }
                 //月
                 else if (rankingInputInfoVo.getTime_type() == 2){
@@ -341,15 +342,15 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
                 //日
@@ -359,15 +360,15 @@ public class RankingInfoServiceImpl implements RankingInfoVoService {
                         rankingInputInfoVo.setTime_type(1);
                         rankingInputInfoVo.setTransaction_time(null);
                         rankingInfoVos = getRankingInfo(rankingInputInfoVo);
-                        for(int i = 0;i<2;i++){
+                        for(int i = 0;i<10;i++){
                             rankingInfoVos.get(i).setSumnum(0);
                         }
                         rankingInfoVoList.addAll(rankingInfoVos);
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
 
                     }
                     else {
-                        return rankingInfoVoList.subList(0,2);
+                        return rankingInfoVoList.subList(0,10);
                     }
                 }
             }
