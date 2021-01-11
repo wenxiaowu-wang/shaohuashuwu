@@ -168,18 +168,10 @@ let attentionInterface_vm = new Vue({
         },
         sendLetter(){
             if(this.privateLetter.title.length < 2 || this.privateLetter.content.length < 10){
-                // this.$message({
-                //     type:'error',
-                //     message:'标题不少于2个字，内容不少于10个字'
-                // });
                 this.$message({
                     type:'error',
-                    message:'网络或其它原因，信件发送失败'
+                    message:'标题不少于2个字，内容不少于10个字'
                 });
-                // this.$message({
-                //     type:'success',
-                //     message:'信件发送成功！'
-                // });
                 return ;
             }
             this.$confirm('是否发送私信?', '提示', {

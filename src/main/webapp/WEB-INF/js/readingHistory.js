@@ -24,7 +24,26 @@ new Vue({
     },
 
     methods: {
-
+//跳转到首页
+        backHomePage(){
+            window.location.assign("../pages/userMainInterface.html");
+        },
+        handleSelect(key, keyPath) {
+            console.log("当前导航在:(key,keyPath)"+key, keyPath);
+            switch (key){
+                case "1":window.location.assign("../pages/myHomePage.html");break;
+                case "2":{
+                    this.$message({
+                        type:'info',
+                        message:'您已经在【我的书架】界面，不必跳转。'
+                    });
+                    break;
+                }
+                case "3":window.location.assign("../pages/messageCenterInterface.html");break;
+                case "4":window.location.assign("../pages/personalAccountInterface.html");break;
+                default:break;
+            }
+        },
         /*时间戳类型转换*/
         timestampToTime(timestamp) {
             var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000

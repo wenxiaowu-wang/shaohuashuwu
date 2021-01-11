@@ -5,6 +5,7 @@
     <title>阅读历史</title>
     <link rel="icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/elementui.css">
+    <link rel="stylesheet" href="../css/theme-chalk.css">
     <link rel="stylesheet" href="../css/bookShelf.css">
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/basic.min.css"/>
     <link rel="stylesheet" href="http://rcode.zongheng.com/v2018/css/home.min.css"/>
@@ -15,7 +16,7 @@
     <div class="bookshelf_top">
         <div class="top_img"></div>
         <div class="top_content">
-            <div class="top_tips">{{topTips}}</div>
+            <div class="top_tips"><el-button type="text" icon="el-icon-back" @click="backHomePage">返回首页</el-button></div>
             <div class="top_menu">
                 <el-menu
                         :default-active="activeIndex"

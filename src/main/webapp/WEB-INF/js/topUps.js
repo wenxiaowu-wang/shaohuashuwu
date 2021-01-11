@@ -81,6 +81,8 @@ let topUpDialogForm_vm = new Vue({
                         type:"success",
                         message:"充值成功！"
                     });
+                    //重定向本界面
+                    window.location.assign("../pages/personalAccountInterface.html");
                 }else{
                     this.paymentCheck = "";
                     this.$message({
